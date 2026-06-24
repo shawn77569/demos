@@ -3,8 +3,11 @@
 放置各種純前端的小作品、工具與文件。
  
 <br>
-[![前往作品集首頁](https://img.shields.io/badge/🎨_點我前往作品集首頁-A84838?style=for-the-badge&labelColor=2A2620)](https://shawn77569.github.io/demos/)
- 
+<p align="center">
+  <a href="https://shawn77569.github.io/demos/">
+    <img src="https://img.shields.io/badge/%E9%BB%9E%E6%88%91%E5%89%8D%E5%BE%80%E4%BD%9C%E5%93%81%E9%9B%86%E9%A6%96%E9%A0%81-A84838?style=for-the-badge&labelColor=2A2620" alt="前往作品集首頁" />
+  </a>
+</p>
 <br>
 ---
  
