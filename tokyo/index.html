@@ -1,1 +1,1449 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="東京 5 日行程 2026 年 12 月 12-16 日">
+<title>東京 5 日行程 · 2026 December</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAF7;
+    --card: #FFFFFF;
+    --ink: #161618;
+    --ink-soft: #4B4B52;
+    --ink-mute: #8A8A93;
+    --line: #E5E2DC;
+    --navy: #0E2348;
+    --navy-soft: #2E4A7E;
+    --gold: #B68A41;
+    --gold-soft: #E8D5A8;
+    --jubilee: #5A8FBF;
+    --warm: #D4623A;
+    --green: #4A7C5F;
+    --shadow: 0 1px 3px rgba(14, 35, 72, 0.06);
+  }
+  
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  html { scroll-behavior: smooth; }
+  
+  body {
+    font-family: "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.65;
+    font-weight: 400;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  
+  .container {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  
+  /* HERO */
+  .hero {
+    padding: 64px 0 48px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 48px;
+  }
+  
+  .hero-eyebrow {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  
+  .hero-title {
+    font-family: "Noto Serif JP", serif;
+    font-size: clamp(40px, 6vw, 64px);
+    line-height: 1.05;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  
+  .hero-title span {
+    color: var(--gold);
+  }
+  
+  .hero-subtitle {
+    font-size: 18px;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+    font-weight: 300;
+  }
+  
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 24px;
+    padding: 24px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .meta-label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 6px;
+  }
+  
+  .meta-value {
+    font-family: "Noto Serif JP", serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  
+  /* NAV */
+  .day-nav {
+    position: sticky;
+    top: 0;
+    background: rgba(250, 250, 247, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    padding: 16px 0;
+    margin-bottom: 48px;
+    z-index: 100;
+  }
+  
+  .day-nav-list {
+    list-style: none;
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .day-nav-list a {
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .day-nav-list a:hover {
+    background: var(--navy);
+    color: white;
+  }
+  
+  .day-nav-list a span {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    color: var(--gold);
+    transition: color 0.2s;
+  }
+  
+  .day-nav-list a:hover span {
+    color: var(--gold-soft);
+  }
+  
+  /* SECTION TITLES */
+  .section-title {
+    font-family: "Noto Serif JP", serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 64px 0 24px;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+  }
+  
+  .section-title-num {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 14px;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    font-weight: 500;
+  }
+  
+  /* DAY HEADER */
+  .day {
+    margin-bottom: 64px;
+    scroll-margin-top: 80px;
+  }
+  
+  .day-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 32px;
+    align-items: end;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--navy);
+    margin-bottom: 32px;
+  }
+  
+  .day-number {
+    font-family: "Noto Serif JP", serif;
+    font-size: 96px;
+    line-height: 1;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: -0.05em;
+  }
+  
+  .day-meta {
+    padding-bottom: 12px;
+  }
+  
+  .day-jp {
+    font-family: "Noto Serif JP", serif;
+    font-size: 14px;
+    color: var(--gold);
+    letter-spacing: 0.3em;
+    margin-bottom: 4px;
+  }
+  
+  .day-title {
+    font-family: "Noto Serif JP", serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  
+  .day-date {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+  
+  .day-tagline {
+    font-style: italic;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+    padding-left: 16px;
+    border-left: 3px solid var(--gold);
+    font-size: 15px;
+  }
+  
+  /* TIMELINE */
+  .timeline {
+    display: grid;
+    gap: 12px;
+  }
+  
+  .time-block {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 24px;
+    padding: 16px 20px;
+    background: var(--card);
+    border-radius: 6px;
+    border-left: 3px solid var(--line);
+    box-shadow: var(--shadow);
+    transition: all 0.2s;
+  }
+  
+  .time-block:hover {
+    border-left-color: var(--gold);
+    transform: translateX(2px);
+  }
+  
+  .time-block.highlight {
+    border-left-color: var(--warm);
+    background: linear-gradient(to right, #FFF8F0 0%, var(--card) 30%);
+  }
+  
+  .time-block.critical {
+    border-left-color: var(--navy);
+    background: linear-gradient(to right, #F0F4FA 0%, var(--card) 30%);
+  }
+  
+  .time {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--navy);
+    letter-spacing: 0.05em;
+    padding-top: 2px;
+  }
+  
+  .activity {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
+  .activity-title {
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  
+  .activity-detail {
+    color: var(--ink-soft);
+    font-size: 13px;
+  }
+  
+  .activity-tag {
+    display: inline-block;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-left: 6px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    vertical-align: middle;
+  }
+  
+  .tag-must { background: var(--warm); color: white; }
+  .tag-book { background: var(--navy); color: white; }
+  .tag-food { background: var(--green); color: white; }
+  .tag-photo { background: var(--gold); color: white; }
+  
+  /* DAY NOTES */
+  .day-notes {
+    margin-top: 24px;
+    padding: 20px 24px;
+    background: rgba(14, 35, 72, 0.03);
+    border-radius: 6px;
+    border-left: 3px solid var(--navy);
+  }
+  
+  .day-notes-title {
+    font-family: "Noto Serif JP", serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+  }
+  
+  .day-notes ul {
+    list-style: none;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  
+  .day-notes li {
+    padding: 4px 0 4px 16px;
+    position: relative;
+  }
+  
+  .day-notes li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+  }
+  
+  /* TABLE */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+  
+  th {
+    background: var(--navy);
+    color: white;
+    text-align: left;
+    padding: 12px 16px;
+    font-family: "Noto Serif JP", serif;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+  }
+  
+  td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink-soft);
+  }
+  
+  td strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  
+  tr:last-child td { border-bottom: none; }
+  
+  tr.total td {
+    background: rgba(182, 138, 65, 0.08);
+    font-weight: 600;
+    color: var(--ink);
+  }
+  
+  /* CHECKLIST */
+  .checklist {
+    background: var(--card);
+    border-radius: 6px;
+    padding: 28px 32px;
+    box-shadow: var(--shadow);
+    margin-bottom: 24px;
+  }
+  
+  .checklist-item {
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: center;
+  }
+  
+  .checklist-item:last-child { border-bottom: none; }
+  
+  .check-box {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--ink-mute);
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .check-box:hover {
+    border-color: var(--gold);
+  }
+  
+  .check-box.done {
+    background: var(--gold);
+    border-color: var(--gold);
+    position: relative;
+  }
+  
+  .check-box.done::after {
+    content: "✓";
+    position: absolute;
+    color: white;
+    font-size: 14px;
+    top: -2px;
+    left: 2px;
+    font-weight: 700;
+  }
+  
+  .check-text {
+    font-size: 14px;
+    color: var(--ink);
+  }
+  
+  .check-text strong {
+    color: var(--navy);
+  }
+  
+  .check-when {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    color: var(--ink-mute);
+    text-align: right;
+  }
+  
+  .check-priority {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-left: 8px;
+    text-transform: uppercase;
+  }
+  
+  .pri-urgent { background: var(--warm); color: white; }
+  .pri-high { background: var(--navy); color: white; }
+  .pri-med { background: var(--gold-soft); color: var(--navy); }
+  
+  /* CARDS */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  
+  .info-card {
+    background: var(--card);
+    padding: 20px 24px;
+    border-radius: 6px;
+    border-top: 3px solid var(--gold);
+    box-shadow: var(--shadow);
+  }
+  
+  .info-card-title {
+    font-family: "Noto Serif JP", serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+  
+  .info-card-body {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  
+  .info-card-body strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  
+  /* FOOTER */
+  footer {
+    margin-top: 96px;
+    padding: 32px 0;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    color: var(--ink-mute);
+    font-size: 12px;
+    font-family: "JetBrains Mono", monospace;
+    letter-spacing: 0.1em;
+  }
+  
+  /* PRINT */
+  @media print {
+    body { background: white; font-size: 11px; }
+    .day-nav { display: none; }
+    .day { page-break-inside: avoid; }
+    .time-block { box-shadow: none; border: 1px solid var(--line); }
+    .hero { padding: 24px 0; }
+  }
+  
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .container { padding: 0 16px; }
+    .hero { padding: 40px 0 32px; }
+    .hero-title { font-size: 36px; }
+    .day-header { grid-template-columns: 1fr; gap: 8px; }
+    .day-number { font-size: 64px; }
+    .day-title { font-size: 20px; }
+    .time-block {
+      grid-template-columns: 60px 1fr;
+      gap: 12px;
+      padding: 12px 16px;
+    }
+    .time { font-size: 12px; }
+    .activity { font-size: 13px; }
+    .day-nav-list { gap: 0; }
+    .day-nav-list a { padding: 6px 8px; font-size: 12px; }
+    table { font-size: 12px; }
+    th, td { padding: 8px 10px; }
+    .section-title { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
 
+<header class="hero">
+  <div class="container">
+    <div class="hero-eyebrow">TOKYO · 5 DAYS · 2026 WINTER</div>
+    <h1 class="hero-title">東京 5 日<br><span>東京で五日間。</span></h1>
+    <p class="hero-subtitle">迪士尼 25 週年・吉卜力・卡丁車・排球少年原畫展・teamLab</p>
+    
+    <div class="hero-meta">
+      <div class="meta-item">
+        <span class="meta-label">Dates</span>
+        <span class="meta-value">12/12 — 12/16</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Hotel</span>
+        <span class="meta-value">新宿區 × 3 / Land Hotel × 1</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Party</span>
+        <span class="meta-value">2 名（友人同行）</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Budget</span>
+        <span class="meta-value">每人約 4.4-5 萬 TWD</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="day-nav">
+  <div class="container">
+    <ul class="day-nav-list">
+      <li><a href="#day1"><span>D1</span>抵達 + 新宿</a></li>
+      <li><a href="#day2"><span>D2</span>TDS 25 週年</a></li>
+      <li><a href="#day3"><span>D3</span>TDL + Pooh</a></li>
+      <li><a href="#day4"><span>D4</span>卡丁車 + 排球少年</a></li>
+      <li><a href="#day5"><span>D5</span>吉卜力 + teamLab</a></li>
+      <li><a href="#checklist"><span>✓</span>Checklist</a></li>
+      <li><a href="#budget"><span>¥</span>預算</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="container">
+
+<!-- ========== DAY 1 ========== -->
+<section class="day" id="day1">
+  <div class="day-header">
+    <div class="day-number">01</div>
+    <div class="day-meta">
+      <div class="day-jp">第一日 · ARRIVAL</div>
+      <h2 class="day-title">抵達日：機場 → 新宿 → Disney Store</h2>
+      <div class="day-date">12.12 SAT / Weather: ~10°C</div>
+    </div>
+  </div>
+  <p class="day-tagline">輕量抵達日。把行李放下、看個 Disney Store、吃頓正經晚餐，早睡。</p>
+  
+  <div class="timeline">
+    <div class="time-block">
+      <div class="time">09:00</div>
+      <div class="activity">
+        <div class="activity-title">桃園機場起飛</div>
+        <div class="activity-detail">飛行時間約 3-3.5 小時</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">13:00</div>
+      <div class="activity">
+        <div class="activity-title">抵達日本（羽田 HND 或成田 NRT）</div>
+        <div class="activity-detail">過海關 + 取行李約 1 小時</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">14:00</div>
+      <div class="activity">
+        <div class="activity-title">機場 → 新宿</div>
+        <div class="activity-detail">羽田：京急/Limousine 巴士約 40 分｜成田：NEX 約 90 分</div>
+      </div>
+    </div>
+    <div class="time-block critical">
+      <div class="time">15:30</div>
+      <div class="activity">
+        <div class="activity-title">Check-in 新宿區飯店<span class="activity-tag tag-book">已預約</span></div>
+        <div class="activity-detail">推薦：京王 Plaza Hotel / Hilton Tokyo / Citadines 新宿</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">16:30</div>
+      <div class="activity">
+        <div class="activity-title">Disney FLAGSHIP TOKYO 新宿</div>
+        <div class="activity-detail">3 樓構成旗艦店，新宿三丁目站徒歩 3 分。預估停留 1 小時</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">18:00</div>
+      <div class="activity">
+        <div class="activity-title">新宿三丁目晚餐<span class="activity-tag tag-food">FOOD</span></div>
+        <div class="activity-detail">選一：博多もつ鍋やま中（內臟鍋）／燒肉トラジ（高級燒肉）／一風堂 西新宿</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">19:30</div>
+      <div class="activity">
+        <div class="activity-title">新宿東口 イルミネーション + 思い出橫丁<span class="activity-tag tag-photo">PHOTO</span></div>
+        <div class="activity-detail">免費景點，散步 1 小時內</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">21:00</div>
+      <div class="activity">
+        <div class="activity-title">回飯店休息</div>
+        <div class="activity-detail">明天 Disney 要 8:00 出門，務必早睡</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="day-notes">
+    <div class="day-notes-title">Day 1 注意事項</div>
+    <ul>
+      <li>下飛機後身體會累，不要安排太重的行程</li>
+      <li>Disney Store 是「順道逛 1 小時」的點，不要當主要目的地</li>
+      <li>確認明天 TDS 票券、Land Hotel 預約代碼隨身可查</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== DAY 2 ========== -->
+<section class="day" id="day2">
+  <div class="day-header">
+    <div class="day-number">02</div>
+    <div class="day-meta">
+      <div class="day-jp">第二日 · DISNEYSEA 25TH</div>
+      <h2 class="day-title">TDS 25 週年沉浸日 → 入住愛麗絲房</h2>
+      <div class="day-date">12.13 SUN / TDS + Land Hotel</div>
+    </div>
+  </div>
+  <p class="day-tagline">25 週年的水上秀、舞台秀、環境光影秀三場都要看。週日人潮多，Premier Access 必買。</p>
+  
+  <div class="timeline">
+    <div class="time-block">
+      <div class="time">07:00</div>
+      <div class="activity">
+        <div class="activity-title">起床 + 飯店 check out</div>
+        <div class="activity-detail">只帶過夜小包，行李寄飯店或 Welcome Center 送 Land Hotel</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">08:00</div>
+      <div class="activity">
+        <div class="activity-title">新宿 → 舞濱</div>
+        <div class="activity-detail">JR 中央線 → 東京 → 京葉線 → 舞濱，約 35 分</div>
+      </div>
+    </div>
+    <div class="time-block critical">
+      <div class="time">08:45</div>
+      <div class="activity">
+        <div class="activity-title">舞濱站 Welcome Center 寄行李至 Land Hotel</div>
+        <div class="activity-detail">免費，下午 3 點後到房，由 Disney 配送</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">09:00</div>
+      <div class="activity">
+        <div class="activity-title">TDS 一般入園</div>
+        <div class="activity-detail">第一天沒 Happy Entry，注意保持精力</div>
+      </div>
+    </div>
+    <div class="time-block highlight">
+      <div class="time">09:15</div>
+      <div class="activity">
+        <div class="activity-title">熱門設施衝刺<span class="activity-tag tag-must">PREMIER</span></div>
+        <div class="activity-detail">Soaring → Tower of Terror → Toy Story Mania（建議買 Premier Access）</div>
+      </div>
+    </div>
+    <div class="time-block highlight">
+      <div class="time">12:00</div>
+      <div class="activity">
+        <div class="activity-title">Sparkling Jubilee Celebration<span class="activity-tag tag-must">25TH</span></div>
+        <div class="activity-detail">25 週年水上秀，地中海港灣，15 分鐘。提早 30 分佔位</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">12:30</div>
+      <div class="activity">
+        <div class="activity-title">午餐<span class="activity-tag tag-food">FOOD</span></div>
+        <div class="activity-detail">Cape Cod Cook-Off（達菲秀餐廳）／Zambini Brothers／快餐</div>
+      </div>
+    </div>
+    <div class="time-block highlight">
+      <div class="time">14:00</div>
+      <div class="activity">
+        <div class="activity-title">Dance the Globe!<span class="activity-tag tag-must">25TH</span></div>
+        <div class="activity-detail">美國海濱舞台秀，米拉貝爾 TDS 初登場</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">14:45</div>
+      <div class="activity">
+        <div class="activity-title">Mermaid Lagoon + Indiana Jones + Raging Spirits</div>
+        <div class="activity-detail">Mermaid Lagoon 是室內區，可避寒</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">17:00</div>
+      <div class="activity">
+        <div class="activity-title">Mediterranean Harbor 夕景拍照<span class="activity-tag tag-photo">PHOTO</span></div>
+        <div class="activity-detail">25 週年裝飾 + Miracosta 背景</div>
+      </div>
+    </div>
+    <div class="time-block critical">
+      <div class="time">18:00</div>
+      <div class="activity">
+        <div class="activity-title">晚餐 Magellan's<span class="activity-tag tag-book">需預約</span></div>
+        <div class="activity-detail">TDS 唯一在火山內部的高級餐廳，1 個月前預約</div>
+      </div>
+    </div>
+    <div class="time-block highlight">
+      <div class="time">19:30</div>
+      <div class="activity">
+        <div class="activity-title">Sparkling Jubilee Night<span class="activity-tag tag-must">25TH</span></div>
+        <div class="activity-detail">25 週年環境光影秀，5 分鐘</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">19:45</div>
+      <div class="activity">
+        <div class="activity-title">25 週年限定周邊購物</div>
+        <div class="activity-detail">Jubilee Badge、Jubilee Blue 服裝、限定零食</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">21:00</div>
+      <div class="activity">
+        <div class="activity-title">TDS 閉園 → Disney Resort Line</div>
+        <div class="activity-detail">5 分鐘到舞濱站 → 走 1 分到 Land Hotel</div>
+      </div>
+    </div>
+    <div class="time-block critical">
+      <div class="time">22:00</div>
+      <div class="activity">
+        <div class="activity-title">進愛麗絲房 ⭐<span class="activity-tag tag-photo">PHOTO</span></div>
+        <div class="activity-detail">拍房間照、洗澡、準備明天 Happy Entry</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="day-notes">
+    <div class="day-notes-title">Day 2 注意事項</div>
+    <ul>
+      <li>週日 TDS 比平日多 30-40% 人潮，Premier Access 必買（每人 4,500-7,000 円）</li>
+      <li>25 週年三場秀的場次表，當天在 Disney 官方 App 查</li>
+      <li>Magellan's 必須提前 1 個月透過 Disney 官網或 App 預約</li>
+      <li>Land Hotel Happy Entry 是給「住宿日隔天」用 = 明天去 TDL</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== DAY 3 ========== -->
+<section class="day" id="day3">
+  <div class="day-header">
+    <div class="day-number">03</div>
+    <div class="day-meta">
+      <div class="day-jp">第三日 · DISNEYLAND + POOH</div>
+      <h2 class="day-title">TDL Happy Entry → Pooh 朝聖 + 聖誕高潮</h2>
+      <div class="day-date">12.14 MON / TDL + 回新宿</div>
+    </div>
+  </div>
+  <p class="day-tagline">Happy Entry 衝 Pooh's Hunny Hunt 是這天的 highlight。9:00-9:25 衝刺，省 60-90 分鐘排隊時間。</p>
+  
+  <div class="timeline">
+    <div class="time-block">
+      <div class="time">06:30</div>
+      <div class="activity">
+        <div class="activity-title">起床</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">07:00</div>
+      <div class="activity">
+        <div class="activity-title">Sherwood Garden 自助早餐<span class="activity-tag tag-food">FOOD</span></div>
+        <div class="activity-detail">5,500 円/人，看花園從夜景變晨景</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">08:30</div>
+      <div class="activity">
+        <div class="activity-title">退房 + 行李寄飯店或 Welcome Center 送回新宿</div>
+        <div class="activity-detail">Disney 行李傳送服務免費</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">08:45</div>
+      <div class="activity">
+        <div class="activity-title">走到 TDL 入口</div>
+        <div class="activity-detail">徒歩 1 分</div>
+      </div>
+    </div>
+    <div class="time-block highlight">
+      <div class="time">09:00</div>
+      <div class="activity">
+        <div class="activity-title">Happy Entry → 直奔 Pooh's Hunny Hunt ⭐⭐⭐<span class="activity-tag tag-must">CORE</span></div>
+        <div class="activity-detail">這時候一般客還在排 90+ 分。最重要的時刻，準時抵達入口</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">09:30</div>
+      <div class="activity">
+        <div class="activity-title">熱門設施：Splash Mountain → Big Thunder → Space Mountain → Star Tours</div>
+        <div class="activity-detail">利用早晨人潮少快速清掉熱門</div>
+      </div>
+    </div>
+    <div class="time-block critical">
+      <div class="time">12:00</div>
+      <div class="activity">
+        <div class="activity-title">Queen of Hearts Banquet Hall（愛麗絲主題餐廳）<span class="activity-tag tag-book">需預約</span></div>
+        <div class="activity-detail">呼應昨晚的愛麗絲房，儀式感最強</div>
+      </div>
+    </div>
+    <div class="time-block highlight">
+      <div class="time">13:00</div>
+      <div class="activity">
+        <div class="activity-title">Toys' Wondrous Christmas! 巡遊<span class="activity-tag tag-must">12月限定</span></div>
+        <div class="activity-detail">2025 年新登場 10 年來首度新聖誕巡遊，45 分鐘</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">14:00</div>
+      <div class="activity">
+        <div class="activity-title">Country Bear Jingle Bell Jamboree + Haunted Mansion Holiday Nightmare</div>
+        <div class="activity-detail">18 隻熊聖誕音樂秀 + 《聖誕夜驚魂》主題改裝鬼屋</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">15:30</div>
+      <div class="activity">
+        <div class="activity-title">Mickey's PhilharMagic + 拍照 + 購物</div>
+        <div class="activity-detail">4D 體驗劇場 + 商店街採購紀念品</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">17:00</div>
+      <div class="activity">
+        <div class="activity-title">World Bazaar 巨大聖誕樹 + 城堡前合影<span class="activity-tag tag-photo">PHOTO</span></div>
+        <div class="activity-detail">15m 高聖誕樹是 12 月限定</div>
+      </div>
+    </div>
+    <div class="time-block critical">
+      <div class="time">17:30</div>
+      <div class="activity">
+        <div class="activity-title">Crystal Palace Restaurant 米奇 buffet<span class="activity-tag tag-book">需預約</span></div>
+        <div class="activity-detail">米奇與好友 buffet，氣氛經典</div>
+      </div>
+    </div>
+    <div class="time-block highlight">
+      <div class="time">18:30</div>
+      <div class="activity">
+        <div class="activity-title">Reach for the Stars 城堡投影秀</div>
+        <div class="activity-detail">城堡投影含漫威 + 米奇等</div>
+      </div>
+    </div>
+    <div class="time-block highlight">
+      <div class="time">19:00</div>
+      <div class="activity">
+        <div class="activity-title">Electrical Parade 聖誕版巡遊</div>
+        <div class="activity-detail">夜間經典巡遊改聖誕主題</div>
+      </div>
+    </div>
+    <div class="time-block highlight">
+      <div class="time">20:00</div>
+      <div class="activity">
+        <div class="activity-title">Starbright Christmas 煙火</div>
+        <div class="activity-detail">配聖誕歌曲的夜空煙火</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">21:00</div>
+      <div class="activity">
+        <div class="activity-title">閉園 → JR 回新宿</div>
+        <div class="activity-detail">舞濱 → 東京 → 新宿，約 45 分</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="day-notes">
+    <div class="day-notes-title">Day 3 注意事項</div>
+    <ul>
+      <li>Pooh 衝刺必須在 09:00 進園後立即直奔，這 25 分鐘決定省下 1-2 小時</li>
+      <li>中午吃愛麗絲主題餐廳呼應前晚房間，儀式感最強</li>
+      <li>12 月限定 4 個聖誕節目（巡遊 + Country Bear + Haunted Mansion + 城堡投影）全部要看</li>
+      <li>晚上煙火結束後人潮全衝出口，可故意拖到 21:15 再走</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== DAY 4 ========== -->
+<section class="day" id="day4">
+  <div class="day-header">
+    <div class="day-number">04</div>
+    <div class="day-meta">
+      <div class="day-jp">第四日 · GO-KART + HAIKYU + ILLUMI</div>
+      <h2 class="day-title">卡丁車 + 排球少年原畫展 + 12 月限定燈飾</h2>
+      <div class="day-date">12.15 TUE / 原宿 → 表參道 → 六本木</div>
+    </div>
+  </div>
+  <p class="day-tagline">卡丁車是這天的主秀。跟前兩天「觀光式 Disney」是完全不同的「主動駕馭」體驗，平衡感剛好。</p>
+  
+  <div class="timeline">
+    <div class="time-block">
+      <div class="time">08:30</div>
+      <div class="activity">
+        <div class="activity-title">起床 + 早餐</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">09:30</div>
+      <div class="activity">
+        <div class="activity-title">新宿 → 原宿</div>
+        <div class="activity-detail">山手線約 5 分</div>
+      </div>
+    </div>
+    <div class="time-block critical">
+      <div class="time">10:00</div>
+      <div class="activity">
+        <div class="activity-title">Monster Kart 原宿店報到<span class="activity-tag tag-book">已預約</span></div>
+        <div class="activity-detail">出示：駕照（兩人）+ 日譯本（兩人）+ 護照（兩人）</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">10:15</div>
+      <div class="activity">
+        <div class="activity-title">安全說明 + cosplay 換裝 + 車輛操作教學</div>
+        <div class="activity-detail">服裝由業者提供，可選原創角色（瑪利歐風、忍者、寶可夢等）</div>
+      </div>
+    </div>
+    <div class="time-block highlight">
+      <div class="time">10:30</div>
+      <div class="activity">
+        <div class="activity-title">卡丁車 90 分鐘 Tour 出發 ⭐⭐⭐<span class="activity-tag tag-must">CORE</span></div>
+        <div class="activity-detail">原宿 → 渋谷スクランブル → 都廳前（新宿）→ 表參道 → 原宿。三個拍照停車點</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">12:00</div>
+      <div class="activity">
+        <div class="activity-title">結束、換回原裝、領取拍照</div>
+        <div class="activity-detail">業者會提供拍照紀念品（電子檔）</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">12:30</div>
+      <div class="activity">
+        <div class="activity-title">原宿/表參道午餐<span class="activity-tag tag-food">FOOD</span></div>
+        <div class="activity-detail">Eggs'n Things 表參道（夏威夷風）／Maisen 青山本店（炸豬排名店）</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">14:00</div>
+      <div class="activity">
+        <div class="activity-title">表參道散步（壓縮版）</div>
+        <div class="activity-detail">GBL MIYASHITA PARK（吉卜力高端店）+ 表參道けやき並木 illumination 樹（白天看）</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">15:00</div>
+      <div class="activity">
+        <div class="activity-title">表參道 → 六本木</div>
+        <div class="activity-detail">地鐵約 5 分</div>
+      </div>
+    </div>
+    <div class="time-block critical">
+      <div class="time">15:30</div>
+      <div class="activity">
+        <div class="activity-title">古舘春一 ハイキュー!!展 挑戰者たち ⭐⭐⭐<span class="activity-tag tag-must">CORE</span></div>
+        <div class="activity-detail">森塔 52F 森アーツセンターギャラリー。原稿 + 新規描き下ろし</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">18:00</div>
+      <div class="activity">
+        <div class="activity-title">展覽結束 + 六本木一帶閒逛</div>
+        <div class="activity-detail">換場 buffer，可上 52F 觀景或下樓</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">19:00</div>
+      <div class="activity">
+        <div class="activity-title">六本木晚餐<span class="activity-tag tag-food">FOOD</span></div>
+        <div class="activity-detail">權八（CNN 報過的日式居酒屋）／燒肉ジャンボ（和牛燒肉，需預約）</div>
+      </div>
+    </div>
+    <div class="time-block highlight">
+      <div class="time">20:30</div>
+      <div class="activity">
+        <div class="activity-title">六本木 Hills けやき坂 Illumination<span class="activity-tag tag-photo">PHOTO</span></div>
+        <div class="activity-detail">藍白聖誕燈 + 東京塔背景，東京最強拍照點之一</div>
+      </div>
+    </div>
+    <div class="time-block highlight">
+      <div class="time">21:00</div>
+      <div class="activity">
+        <div class="activity-title">東京ミッドタウン → 東京クリスマスマーケット 日比谷公園<span class="activity-tag tag-photo">PHOTO</span></div>
+        <div class="activity-detail">歐洲風聖誕市集，熱紅酒 + 香腸攤位</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">22:00</div>
+      <div class="activity">
+        <div class="activity-title">回飯店</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="day-notes">
+    <div class="day-notes-title">Day 4 注意事項</div>
+    <ul>
+      <li>12 月卡丁車超冷，業者通常提供禦寒裝備（連身羽絨/手套/圍巾），上車前確認</li>
+      <li>合身衣物為佳，不可穿太鬆飄裙裝。建議羽絨外套 + 牛仔褲 + 運動鞋</li>
+      <li>排球少年展閉館 20:00，最晚 19:30 進場（最後入場通常 30 分前）</li>
+      <li>東京クリスマスマーケット 在 11/底-12/25 期間，部分區域要票</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== DAY 5 ========== -->
+<section class="day" id="day5">
+  <div class="day-header">
+    <div class="day-number">05</div>
+    <div class="day-meta">
+      <div class="day-jp">第五日 · GHIBLI + TEAMLAB</div>
+      <h2 class="day-title">吉卜力美術館 + teamLab Planets + 返程</h2>
+      <div class="day-date">12.16 WED / 三鷹 → 豐洲 → 機場</div>
+    </div>
+  </div>
+  <p class="day-tagline">密度最高的一天。前提：晚班回程 18:00+ 起飛。如機票時間更早，必須擇一砍掉吉卜力或 teamLab。</p>
+  
+  <div class="timeline">
+    <div class="time-block">
+      <div class="time">07:00</div>
+      <div class="activity">
+        <div class="activity-title">起床 + 退房</div>
+        <div class="activity-detail">行李寄飯店或東京站投幣置物櫃</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">07:30</div>
+      <div class="activity">
+        <div class="activity-title">早餐</div>
+        <div class="activity-detail">飯店或便利商店</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">08:30</div>
+      <div class="activity">
+        <div class="activity-title">新宿 → 三鷹</div>
+        <div class="activity-detail">JR 中央線快速約 15 分</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">09:30</div>
+      <div class="activity">
+        <div class="activity-title">抵 三鷹站南口</div>
+        <div class="activity-detail">步行 15 分至吉卜力美術館，或接駁巴士 5 分</div>
+      </div>
+    </div>
+    <div class="time-block critical">
+      <div class="time">10:00</div>
+      <div class="activity">
+        <div class="activity-title">吉卜力美術館入場 ⭐⭐⭐<span class="activity-tag tag-must">CORE</span></div>
+        <div class="activity-detail">鎖 10:00 slot。11/10 11:00 JST 開搶。館內全面禁拍</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">12:00</div>
+      <div class="activity">
+        <div class="activity-title">離館 → 步行穿過井之頭公園 → 吉祥寺</div>
+        <div class="activity-detail">公園散步約 25 分</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">12:30</div>
+      <div class="activity">
+        <div class="activity-title">吉祥寺午餐（30 分內快速吃完）<span class="activity-tag tag-food">FOOD</span></div>
+        <div class="activity-detail">SATOU 松阪牛炸肉餅 280 円（外帶最快）／武蔵野アブラ學會（油そば）</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">13:00</div>
+      <div class="activity">
+        <div class="activity-title">吉祥寺 → 中央線 → 東京 → 豐洲</div>
+        <div class="activity-detail">約 45 分</div>
+      </div>
+    </div>
+    <div class="time-block critical">
+      <div class="time">14:00</div>
+      <div class="activity">
+        <div class="activity-title">teamLab Planets 豐洲 ⭐⭐<span class="activity-tag tag-must">CORE</span></div>
+        <div class="activity-detail">預約 14:00 場。豐洲站徒步 1 分。場內約 2 小時</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">16:00</div>
+      <div class="activity">
+        <div class="activity-title">出館</div>
+        <div class="activity-detail">如果時間還夠，可順道逛豐洲千客萬來</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">16:30</div>
+      <div class="activity">
+        <div class="activity-title">豐洲 → 機場</div>
+        <div class="activity-detail">羽田：豐洲 → 京急蒲田 → 羽田 約 40 分｜成田：豐洲 → 東京 → NEX 約 90 分</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">17:30</div>
+      <div class="activity">
+        <div class="activity-title">機場 check-in</div>
+        <div class="activity-detail">免稅店、最後伴手禮採購</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time">19:00</div>
+      <div class="activity">
+        <div class="activity-title">起飛 → 桃園</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="day-notes">
+    <div class="day-notes-title">Day 5 注意事項</div>
+    <ul>
+      <li>密度最高的一天，所有票券必須事前訂好</li>
+      <li>11/10 11:00 JST 搶吉卜力 10:00 場 = 不能晚</li>
+      <li>12/1 訂 teamLab 14:00 場 = 跟吉卜力銜接緊</li>
+      <li>機票如果是早班/午班，必須擇一砍掉吉卜力或 teamLab</li>
+      <li>強烈建議用羽田機場（接續最短）</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== CHECKLIST ========== -->
+<section id="checklist">
+  <h2 class="section-title">
+    <span class="section-title-num">06</span>
+    Booking Checklist
+  </h2>
+  <p class="day-tagline">依緊急度排序。最高優先：駕照日譯本（兩人都要）+ Land Hotel 愛麗絲房（8/13 11:00 JST 搶）+ 吉卜力美術館（11/10 10:00 JST 搶）。</p>
+  
+  <div class="checklist">
+    <div class="checklist-item">
+      <div class="check-box"></div>
+      <div class="check-text">
+        <strong>線上申請駕照日譯本（兩人都要）</strong>
+        <span class="check-priority pri-urgent">立即</span><br>
+        <span style="color: var(--ink-mute); font-size: 12px;">監理服務網線上申辦 100 元，7-12 工作天郵寄</span>
+      </div>
+      <div class="check-when">NOW</div>
+    </div>
+    <div class="checklist-item">
+      <div class="check-box"></div>
+      <div class="check-text">
+        <strong>跟朋友確認 12/12-16 日期</strong>
+        <span class="check-priority pri-urgent">立即</span>
+      </div>
+      <div class="check-when">本週</div>
+    </div>
+    <div class="checklist-item">
+      <div class="check-box"></div>
+      <div class="check-text">
+        <strong>訂機票（HND/NRT 比價）</strong>
+        <span class="check-priority pri-high">高</span><br>
+        <span style="color: var(--ink-mute); font-size: 12px;">提前 4-5 個月通常最便宜</span>
+      </div>
+      <div class="check-when">6-7 月</div>
+    </div>
+    <div class="checklist-item">
+      <div class="check-box"></div>
+      <div class="check-text">
+        <strong>訂新宿區飯店 3 晚</strong>
+        <span class="check-priority pri-high">高</span><br>
+        <span style="color: var(--ink-mute); font-size: 12px;">選免費取消房型，靈活</span>
+      </div>
+      <div class="check-when">6-7 月</div>
+    </div>
+    <div class="checklist-item">
+      <div class="check-box"></div>
+      <div class="check-text">
+        <strong>搶 Land Hotel 愛麗絲房（12/13 入住）</strong>
+        <span class="check-priority pri-urgent">極高</span><br>
+        <span style="color: var(--ink-mute); font-size: 12px;">入住日 4 個月前同日 11:00 JST</span>
+      </div>
+      <div class="check-when">8/13 (四)</div>
+    </div>
+    <div class="checklist-item">
+      <div class="check-box"></div>
+      <div class="check-text">
+        <strong>監控排球少年展票券發布</strong>
+        <span class="check-priority pri-high">高</span><br>
+        <span style="color: var(--ink-mute); font-size: 12px;">夏天會公開，先行抽選中籤率最高</span>
+      </div>
+      <div class="check-when">8-9 月</div>
+    </div>
+    <div class="checklist-item">
+      <div class="check-box"></div>
+      <div class="check-text">
+        <strong>訂 Disney 2 日 Passport</strong>
+        <span class="check-priority pri-med">中</span><br>
+        <span style="color: var(--ink-mute); font-size: 12px;">入園日 60-90 天前可訂</span>
+      </div>
+      <div class="check-when">9-10 月</div>
+    </div>
+    <div class="checklist-item">
+      <div class="check-box"></div>
+      <div class="check-text">
+        <strong>搶吉卜力美術館 12/16 票</strong>
+        <span class="check-priority pri-urgent">極高</span><br>
+        <span style="color: var(--ink-mute); font-size: 12px;">Lawson Ticket。鎖 10:00 場</span>
+      </div>
+      <div class="check-when">11/10 (二) 10:00 JST</div>
+    </div>
+    <div class="checklist-item">
+      <div class="check-box"></div>
+      <div class="check-text">
+        <strong>訂 Disney 餐廳</strong>
+        <span class="check-priority pri-high">高</span><br>
+        <span style="color: var(--ink-mute); font-size: 12px;">Magellan's / Crystal Palace / Queen of Hearts，30 天前</span>
+      </div>
+      <div class="check-when">11/13 (五)</div>
+    </div>
+    <div class="checklist-item">
+      <div class="check-box"></div>
+      <div class="check-text">
+        <strong>訂卡丁車 12/15 場次</strong>
+        <span class="check-priority pri-med">中</span><br>
+        <span style="color: var(--ink-mute); font-size: 12px;">Monster Kart 渋谷/原宿店 90 分鐘 tour</span>
+      </div>
+      <div class="check-when">11 月底</div>
+    </div>
+    <div class="checklist-item">
+      <div class="check-box"></div>
+      <div class="check-text">
+        <strong>訂 teamLab Planets 12/16 14:00 場</strong>
+        <span class="check-priority pri-med">中</span>
+      </div>
+      <div class="check-when">12 月初</div>
+    </div>
+    <div class="checklist-item">
+      <div class="check-box"></div>
+      <div class="check-text">
+        <strong>訂熱門市區餐廳</strong>
+        <span class="check-priority pri-med">中</span><br>
+        <span style="color: var(--ink-mute); font-size: 12px;">權八、燒肉ジャンボ、挽肉と米等</span>
+      </div>
+      <div class="check-when">行前 1 週</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== BUDGET ========== -->
+<section id="budget">
+  <h2 class="section-title">
+    <span class="section-title-num">07</span>
+    Budget Breakdown
+  </h2>
+  <p class="day-tagline">兩人合計 / 每人估算。匯率以 1 JPY = 0.20 TWD 為基準。</p>
+  
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 50%;">項目</th>
+        <th style="text-align: right;">兩人合計 (¥)</th>
+        <th style="text-align: right;">每人 (TWD)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>機票（HND 估算）</strong></td><td style="text-align: right;">-</td><td style="text-align: right;">12,000-18,000</td></tr>
+      <tr><td>新宿飯店 3 晚（雙人房）</td><td style="text-align: right;">75,000</td><td style="text-align: right;">7,500</td></tr>
+      <tr><td>Land Hotel 愛麗絲房 1 晚</td><td style="text-align: right;">70,000</td><td style="text-align: right;">7,000</td></tr>
+      <tr><td>Disney 2 日 Passport</td><td style="text-align: right;">38,000</td><td style="text-align: right;">3,800</td></tr>
+      <tr><td>Disney 餐飲 + 飯店早餐</td><td style="text-align: right;">30,000</td><td style="text-align: right;">3,000</td></tr>
+      <tr><td>Disney Premier Access</td><td style="text-align: right;">9,000</td><td style="text-align: right;">900</td></tr>
+      <tr><td>Disney 周邊紀念品</td><td style="text-align: right;">15,000</td><td style="text-align: right;">1,500</td></tr>
+      <tr><td><strong>卡丁車 90 分鐘 × 2 人</strong></td><td style="text-align: right;">17,000</td><td style="text-align: right;">1,700</td></tr>
+      <tr><td>吉卜力 + 排球少年展</td><td style="text-align: right;">7,000</td><td style="text-align: right;">700</td></tr>
+      <tr><td>teamLab Planets</td><td style="text-align: right;">7,600</td><td style="text-align: right;">760</td></tr>
+      <tr><td>市區餐飲（3 天）</td><td style="text-align: right;">24,000</td><td style="text-align: right;">2,400</td></tr>
+      <tr><td>イルミネーション + 雜支</td><td style="text-align: right;">15,000</td><td style="text-align: right;">1,500</td></tr>
+      <tr><td>交通（市區 + 機場）</td><td style="text-align: right;">12,000</td><td style="text-align: right;">1,200</td></tr>
+      <tr class="total"><td><strong>總計（不含機票）</strong></td><td style="text-align: right;"><strong>約 320,000 円</strong></td><td style="text-align: right;"><strong>約 32,000 TWD</strong></td></tr>
+      <tr class="total"><td><strong>總計（含機票）</strong></td><td style="text-align: right;">-</td><td style="text-align: right;"><strong>約 44,000-50,000 TWD</strong></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ========== INFO CARDS ========== -->
+<section>
+  <h2 class="section-title">
+    <span class="section-title-num">08</span>
+    Key Information
+  </h2>
+  
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="info-card-title">天氣</div>
+      <div class="info-card-body">
+        12 月東京平均：<strong>白天 8-12°C、夜間 3-5°C</strong>。下雨機率約 20%。建議羽絨外套 + 防風層 + 厚襪。卡丁車當天要保暖到極致。
+      </div>
+    </div>
+    
+    <div class="info-card">
+      <div class="info-card-title">交通</div>
+      <div class="info-card-body">
+        建議買 <strong>Suica/Pasmo 卡</strong>（IC 卡，可儲值）。Disney 來回用 JR，市區用地鐵 + 山手線。羽田/成田機場到新宿用 Limousine 巴士最省心。
+      </div>
+    </div>
+    
+    <div class="info-card">
+      <div class="info-card-title">緊急聯絡</div>
+      <div class="info-card-body">
+        <strong>警察 110 / 救護車 119</strong><br>
+        台北駐日經濟文化代表處：03-3280-7811<br>
+        旅外國人急難救助專線：011-800-0885-0885
+      </div>
+    </div>
+    
+    <div class="info-card">
+      <div class="info-card-title">必備證件</div>
+      <div class="info-card-body">
+        護照（效期 6 個月以上）+ <strong>台灣駕照正本 + 日譯本</strong>（卡丁車用）+ 信用卡 × 2（一張當備用）+ 旅平險證明
+      </div>
+    </div>
+    
+    <div class="info-card">
+      <div class="info-card-title">App 推薦</div>
+      <div class="info-card-body">
+        <strong>Tokyo Disney Resort 官方</strong>（必裝，含 Premier Access 購買）<br>
+        Google Maps / Yahoo! 乘換案內（交通）<br>
+        Klook / KKday（票券）
+      </div>
+    </div>
+    
+    <div class="info-card">
+      <div class="info-card-title">匯兌 & 付款</div>
+      <div class="info-card-body">
+        日本現金使用率比想像低。<strong>信用卡 + Suica 卡夠用 80%+</strong>。可帶 30,000-50,000 円現金備用。Apple Pay / Google Pay 大多店家支援。
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    LAST UPDATED · 2026.06.23 · TOKYO 5 DAYS WINTER ITINERARY
+  </div>
+</footer>
+
+<script>
+  // Checkbox toggle
+  document.querySelectorAll('.check-box').forEach(box => {
+    box.addEventListener('click', function() {
+      this.classList.toggle('done');
+      // Save to localStorage to persist
+      const items = document.querySelectorAll('.check-box');
+      const state = Array.from(items).map(b => b.classList.contains('done'));
+      try {
+        localStorage.setItem('tokyo-checklist', JSON.stringify(state));
+      } catch (e) {}
+    });
+  });
+  
+  // Restore on load
+  try {
+    const saved = localStorage.getItem('tokyo-checklist');
+    if (saved) {
+      const state = JSON.parse(saved);
+      document.querySelectorAll('.check-box').forEach((box, i) => {
+        if (state[i]) box.classList.add('done');
+      });
+    }
+  } catch (e) {}
+</script>
+
+</body>
+</html>
