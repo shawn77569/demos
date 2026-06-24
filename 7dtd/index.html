@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>七日殺 3.0 Dead Hot Summer｜五人小隊完整攻略</title>
+<style>
+  /* ===== Reset & Base ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    /* 淺色「生存手冊」主題 */
+    --bg: #f5f0e4;             /* 米黃紙感背景 */
+    --bg-elevated: #ede6d3;    /* 側欄、稍深一階 */
+    --bg-card: #ffffff;        /* 卡片白 */
+    --bg-card-hover: #fbf8f0;
+    --border: #d9d1bd;
+    --border-strong: #b8ad94;
+    --text: #2a2620;
+    --text-muted: #5a534a;
+    --text-dim: #8a8270;
+    --blood: #a8281e;          /* 印刷紅 */
+    --blood-bright: #c8362a;
+    --rust: #a25a1f;
+    --moss: #5b7a3a;
+    --bone: #1a1612;           /* 在淺色版用最深色作標題 */
+
+    /* 五大屬性樹色彩（淺色背景上調暗以提升對比度） */
+    --perception: #2c6da3;
+    --strength:   #b03d22;
+    --fortitude:  #4a7035;
+    --agility:    #6e4990;
+    --intellect:  #a37a14;
+
+    --sidebar-w: 280px;
+    --max-w: 980px;
+
+    --font-zh: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "蘋方-繁", "微軟正黑體", sans-serif;
+    --font-mono: "JetBrains Mono", "Fira Code", Consolas, monospace;
+  }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 20px; }
+  body {
+    font-family: var(--font-zh);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* 紙張紋理 */
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    background-image:
+      radial-gradient(at 20% 0%, rgba(168, 40, 30, 0.04) 0px, transparent 50%),
+      radial-gradient(at 80% 100%, rgba(44, 109, 163, 0.03) 0px, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* ===== Layout ===== */
+  .layout {
+    display: grid;
+    grid-template-columns: var(--sidebar-w) 1fr;
+    min-height: 100vh;
+  }
+
+  /* ===== Sidebar (TOC) ===== */
+  .sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    background: var(--bg-elevated);
+    border-right: 1px solid var(--border);
+    padding: 28px 20px;
+    overflow-y: auto;
+  }
+  .sidebar-header {
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 18px;
+  }
+  .sidebar-logo {
+    font-size: 13px;
+    color: var(--blood-bright);
+    letter-spacing: 0.15em;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .sidebar-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--bone);
+    line-height: 1.4;
+  }
+  .sidebar-sub {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 6px;
+    font-family: var(--font-mono);
+  }
+
+  .toc-list {
+    list-style: none;
+  }
+  .toc-item > a {
+    display: block;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+  }
+  .toc-item > a:hover {
+    color: var(--text);
+    background: var(--bg-card);
+    border-left-color: var(--blood);
+  }
+  .toc-item.active > a {
+    color: var(--blood-bright);
+    background: var(--bg-card);
+    border-left-color: var(--blood-bright);
+  }
+  .toc-sub {
+    list-style: none;
+    padding-left: 16px;
+    margin: 2px 0 6px;
+    border-left: 1px solid var(--border);
+    margin-left: 14px;
+  }
+  .toc-sub a {
+    display: block;
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 4px 10px;
+    font-size: 12.5px;
+    line-height: 1.5;
+    transition: color 0.15s;
+  }
+  .toc-sub a:hover { color: var(--text); }
+
+  /* ===== Main Content ===== */
+  .main {
+    padding: 0;
+    min-width: 0;
+  }
+  .content-wrap {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 60px 48px 100px;
+  }
+
+  /* ===== Hero ===== */
+  .hero {
+    margin-bottom: 60px;
+    padding: 40px 0 30px;
+    border-bottom: 2px solid var(--border);
+    position: relative;
+  }
+  .hero::before {
+    content: "🧟";
+    font-size: 80px;
+    position: absolute;
+    top: -10px;
+    right: 0;
+    opacity: 0.2;
+    transform: rotate(-8deg);
+    filter: grayscale(0.4);
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--blood-bright);
+    background: rgba(193, 53, 46, 0.1);
+    border: 1px solid rgba(193, 53, 46, 0.3);
+    padding: 4px 12px;
+    border-radius: 3px;
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+  .hero h1 {
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--bone);
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .hero h1 .accent { color: var(--blood-bright); }
+  .hero-sub {
+    font-size: 18px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    font-size: 13px;
+    color: var(--text-dim);
+    font-family: var(--font-mono);
+  }
+  .hero-meta span::before {
+    content: "▸ ";
+    color: var(--blood);
+  }
+
+  /* ===== Sections ===== */
+  section { margin-bottom: 56px; scroll-margin-top: 20px; }
+  h2 {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--bone);
+    margin: 0 0 8px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-strong);
+    position: relative;
+    letter-spacing: -0.01em;
+  }
+  h2::before {
+    content: "";
+    position: absolute;
+    bottom: -1px; left: 0;
+    width: 60px; height: 3px;
+    background: var(--blood);
+  }
+  h3 {
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 36px 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  h3 .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px; height: 32px;
+    background: var(--blood);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 800;
+    border-radius: 4px;
+  }
+  h4 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 24px 0 10px;
+  }
+  p { margin-bottom: 14px; color: var(--text); }
+  p + p { margin-top: -2px; }
+
+  strong { color: var(--bone); font-weight: 700; }
+  em { color: var(--rust); font-style: normal; font-weight: 600; }
+
+  /* ===== Source 標註 ===== */
+  .source {
+    display: block;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    background: rgba(184, 173, 148, 0.15);
+    border-left: 2px solid var(--border-strong);
+    padding: 6px 12px;
+    margin: 12px 0 18px;
+    border-radius: 0 3px 3px 0;
+    line-height: 1.6;
+  }
+  .source-label {
+    color: var(--blood);
+    font-weight: 700;
+    margin-right: 4px;
+  }
+
+  /* ===== Tables ===== */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-card);
+    font-size: 14.5px;
+  }
+  th {
+    background: var(--bg-elevated);
+    color: var(--bone);
+    font-weight: 700;
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 2px solid var(--border-strong);
+    font-size: 13.5px;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+  td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: top;
+    line-height: 1.7;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--bg-card-hover); }
+  td:first-child {
+    font-weight: 600;
+    color: var(--bone);
+    width: 25%;
+    min-width: 140px;
+  }
+
+  /* ===== Lists ===== */
+  ul, ol { margin: 10px 0 20px; padding-left: 22px; }
+  li { margin-bottom: 8px; color: var(--text); }
+  li::marker { color: var(--blood); }
+
+  /* ===== Attribute Tree Cards ===== */
+  .attr-tree {
+    margin: 28px 0;
+    background: var(--bg-card);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--attr-color);
+    padding: 24px 28px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .attr-tree::before {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, var(--attr-color) 0%, transparent 70%);
+    opacity: 0.08;
+    pointer-events: none;
+  }
+  .attr-tree[data-attr="perception"] { --attr-color: var(--perception); }
+  .attr-tree[data-attr="strength"]   { --attr-color: var(--strength); }
+  .attr-tree[data-attr="fortitude"]  { --attr-color: var(--fortitude); }
+  .attr-tree[data-attr="agility"]    { --attr-color: var(--agility); }
+  .attr-tree[data-attr="intellect"]  { --attr-color: var(--intellect); }
+
+  .attr-tree h3 {
+    margin-top: 0;
+    color: var(--attr-color);
+    font-size: 22px;
+  }
+  .attr-tree h3 .icon {
+    font-size: 26px;
+  }
+  .attr-tree h3 .en {
+    font-size: 13px;
+    color: var(--text-dim);
+    font-weight: 500;
+    font-style: italic;
+    margin-left: auto;
+    letter-spacing: 0.05em;
+  }
+  .attr-tree .intro {
+    color: var(--text-muted);
+    margin-bottom: 14px;
+    font-size: 14.5px;
+  }
+  .attr-tree table {
+    background: rgba(217, 209, 189, 0.25);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .attr-tree th {
+    background: rgba(184, 173, 148, 0.35);
+  }
+
+  /* ===== Tips Cards (撇步) ===== */
+  .tip {
+    background: var(--bg-card);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    border-left: 3px solid var(--rust);
+    font-size: 14.5px;
+    line-height: 1.7;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  }
+  .tip strong:first-child {
+    color: var(--rust);
+  }
+
+  /* ===== Highlight Box ===== */
+  .highlight {
+    background: linear-gradient(135deg, rgba(168, 40, 30, 0.06), rgba(168, 40, 30, 0.02));
+    border: 1px solid rgba(168, 40, 30, 0.25);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-size: 15px;
+  }
+  .highlight strong { color: var(--blood); }
+
+  /* ===== Update Cards ===== */
+  .update-card {
+    background: var(--bg-card);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+    margin: 16px 0;
+    transition: border-color 0.2s;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  }
+  .update-card:hover { border-color: var(--border-strong); }
+  .update-card h4 {
+    margin-top: 0;
+    color: var(--blood-bright);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .update-card h4 .badge {
+    background: var(--blood);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ===== Subsection Header ===== */
+  .subsection-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 28px 0 12px;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--bone);
+  }
+  .subsection-header .icon { font-size: 24px; }
+
+  /* ===== Footer ===== */
+  .footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.8;
+  }
+  .footer-title {
+    color: var(--text-muted);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  /* ===== Back to top ===== */
+  .back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 44px;
+    height: 44px;
+    background: var(--blood);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s, transform 0.2s;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  }
+  .back-to-top.visible {
+    opacity: 0.85;
+    pointer-events: auto;
+  }
+  .back-to-top:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+
+  /* ===== Mobile menu ===== */
+  .mobile-toggle {
+    display: none;
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 200;
+    background: var(--blood);
+    color: #fff;
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 6px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 1024px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 85%;
+      max-width: 320px;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      z-index: 150;
+      box-shadow: 4px 0 20px rgba(0,0,0,0.5);
+    }
+    .sidebar.open { transform: translateX(0); }
+    .mobile-toggle { display: flex; align-items: center; justify-content: center; }
+    .content-wrap { padding: 70px 24px 80px; }
+    .hero h1 { font-size: 32px; }
+    .hero-sub { font-size: 16px; }
+  }
+
+  @media (max-width: 600px) {
+    body { font-size: 15px; }
+    .content-wrap { padding: 66px 16px 60px; }
+    .hero { padding: 24px 0 20px; margin-bottom: 36px; }
+    .hero h1 { font-size: 26px; }
+    .hero-sub { font-size: 15px; }
+    .hero::before { font-size: 60px; }
+    h2 { font-size: 23px; }
+    h3 { font-size: 18px; }
+    h4 { font-size: 16px; }
+    section { margin-bottom: 40px; }
+    .attr-tree { padding: 18px 16px; }
+    .attr-tree h3 { flex-wrap: wrap; }
+    .attr-tree h3 .en { width: 100%; margin-left: 0; }
+    th, td { padding: 10px 12px; font-size: 13.5px; }
+    td:first-child { min-width: 100px; width: 30%; }
+    .source { font-size: 12px; }
+    .back-to-top { right: 16px; bottom: 16px; width: 40px; height: 40px; }
+  }
+
+  /* Overlay for mobile menu */
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 140;
+  }
+  .overlay.visible { display: block; }
+
+  /* 內容裡的 emoji 大小微調 */
+  h3 .em { font-size: 1.1em; }
+</style>
+</head>
+<body>
+
+<button class="mobile-toggle" id="mobileToggle" aria-label="開啟選單">☰</button>
+<div class="overlay" id="overlay"></div>
+
+<div class="layout">
+
+  <!-- ===== Sidebar ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">7 DAYS TO DIE 3.0</div>
+      <div class="sidebar-title">Dead Hot Summer<br>五人小隊完整攻略</div>
+      <div class="sidebar-sub">v4 · 2026/06/15</div>
+    </div>
+    <nav>
+      <ul class="toc-list" id="tocList">
+        <li class="toc-item"><a href="#section-1">一、3.0 版本重大更新</a>
+          <ul class="toc-sub">
+            <li><a href="#u-1">① 物品品質加成系統</a></li>
+            <li><a href="#u-2">② 合成站</a></li>
+            <li><a href="#u-3">③ 150 項沙盒自訂</a></li>
+          </ul>
+        </li>
+        <li class="toc-item"><a href="#section-2">二、技能系統：五大屬性樹</a>
+          <ul class="toc-sub">
+            <li><a href="#perception">🔭 感知 Perception</a></li>
+            <li><a href="#strength">💪 力量 Strength</a></li>
+            <li><a href="#fortitude">🛡️ 耐力 Fortitude</a></li>
+            <li><a href="#agility">🥷 敏捷 Agility</a></li>
+            <li><a href="#intellect">🔧 智力 Intellect</a></li>
+            <li><a href="#general-perks">通用 Perk 欄位</a></li>
+          </ul>
+        </li>
+        <li class="toc-item"><a href="#section-3">三、遊戲系統解析</a>
+          <ul class="toc-sub">
+            <li><a href="#sys-1">🫀 基礎生存</a></li>
+            <li><a href="#sys-2">⚒️ 製造系統</a></li>
+            <li><a href="#sys-3">⛏️ 採礦系統</a></li>
+            <li><a href="#sys-4">🏗️ 建築系統</a></li>
+            <li><a href="#sys-5">🌡️ 熱力圖</a></li>
+            <li><a href="#sys-6">🔴 血月系統</a></li>
+            <li><a href="#sys-7">🏪 商人與任務</a></li>
+            <li><a href="#sys-8">🗺️ POI 與生態系</a></li>
+            <li><a href="#sys-9">⚡ 電氣與陷阱</a></li>
+            <li><a href="#sys-10">🚗 載具系統</a></li>
+          </ul>
+        </li>
+        <li class="toc-item"><a href="#section-4">四、死亡與風險管理</a></li>
+        <li class="toc-item"><a href="#section-5">五、常見新手誤區</a></li>
+        <li class="toc-item"><a href="#section-6">六、偏門撇步與冷知識</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- ===== Main ===== -->
+  <main class="main">
+    <div class="content-wrap">
+
+      <!-- Hero -->
+      <header class="hero">
+        <span class="hero-tag">EXPERIMENTAL · 2026/06/15</span>
+        <h1>七日殺 3.0 <span class="accent">Dead Hot Summer</span></h1>
+        <p class="hero-sub">五人小隊完整攻略：技能系統 × 遊戲解析 × 偏門撇步</p>
+        <div class="hero-meta">
+          <span>版本：3.0 Experimental（2026/6/15）</span>
+          <span>Stable 預計 2026/6/29</span>
+          <span>來源：fandom / wiki.gg / 官方 Release Notes</span>
+        </div>
+      </header>
+
+      <!-- ===== 一、3.0 版本重大更新 ===== -->
+      <section id="section-1">
+        <h2>一、3.0 版本重大更新說明</h2>
+        <p class="source"><span class="source-label">📌 資料來源：</span>7daystodie.com 官方 V3.0 Release Notes（2026/6/11）+ PCGamesN + 7d2d.net</p>
+        <p>3.0「Dead Hot Summer」版本是遊戲自 1.0 正式版以來最大的系統性更新。Experimental 版已於 2026/6/15 在 Steam 上線，正式 Stable 版預計 2026/6/29 推出（含 PC 和主機版）。</p>
+
+        <div class="update-card" id="u-1">
+          <h4>① 物品品質加成系統 <span class="badge">Item Magnitude</span></h4>
+          <p>武器、工具和工作台模組現在可以搜刮到附有特殊加成的變體，例如散彈槍可能有「射程延伸」、開山刀可能有「傷害提升」，以橘色星號（★）標示並搭配青色百分比數值。商人也販售附有 Magnitude 加成的強化裝備。</p>
+          <p class="source"><span class="source-label">📌 資料來源：</span>7daystodie.com 官方 Release Notes + 7daystodiemods.com V3.0 說明</p>
+        </div>
+
+        <div class="update-card" id="u-2">
+          <h4>② 合成站 <span class="badge">Combine Station</span></h4>
+          <p>全新工作台，允許將同類物品合併，把低品質物品的 Magnitude 加成轉移至高品質物品上，最高的加成百分比將被保留。同時也提供裝備修理的替代方案。</p>
+          <p class="source"><span class="source-label">📌 資料來源：</span>7daystodiemods.com V3.0 Experimental is Out on Steam</p>
+        </div>
+
+        <div class="update-card" id="u-3">
+          <h4>③ 150 項沙盒自訂選項 <span class="badge">Sandbox System</span></h4>
+          <p>引入 150 項沙盒設定，可細調殭屍血量與速度、日夜及血月行為、地圖敵人密度、商人補貨頻率、裝備耐久損耗等，並附有 11 種官方預設模式可供選擇。</p>
+          <p class="source"><span class="source-label">📌 資料來源：</span>7daystodie.com 官方 Release Notes + PCGamesN 報導</p>
+        </div>
+      </section>
+
+      <!-- ===== 二、技能系統 ===== -->
+      <section id="section-2">
+        <h2>二、技能系統：五大屬性樹玩法解析</h2>
+        <p class="source"><span class="source-label">📌 資料來源：</span>官方 Wiki fandom.com/wiki/Perks + wiki.gg/wiki/Perks + xgamingserver.com Perks Guide + holy.gg Skill Tree Guide + bisecthosting.com Perks Guide</p>
+        <p>技能點可自由分配到五大屬性任何一棵樹上，沒有固定職業的限制。每棵樹有各自主打的武器類型、玩法風格和配套 Perk。以下介紹每棵樹的核心感覺，幫助你在開局前找到符合自己個性的方向。</p>
+
+        <div class="highlight">
+          <strong>通用規則：</strong>屬性等級決定你能解鎖哪些 Perk 的上限；Perk 等級提升找到對應雜誌書本的機率（最高 +1000%）；技能點分散多棵樹會讓每棵樹都找不到對應的書本。
+        </div>
+
+        <!-- 感知 -->
+        <div class="attr-tree" data-attr="perception" id="perception">
+          <h3><span class="icon">🔭</span> 感知 Perception <span class="en">Sharp eyes, sharp shots</span></h3>
+          <p class="intro">感知樹代表你對環境的敏銳程度。提升感知屬性會直接提高步槍、矛和爆破武器的頭部命中傷害（Lv.1 起頭部命中傷害 +200%，之後每級持續提升）。</p>
+          <div class="table-wrap"><table>
+            <tr><td>核心武器</td><td>步槍（長程精準）、矛（中程投擲）、爆破物（炸彈、榴彈）</td></tr>
+            <tr><td>玩法感覺</td><td>你是站在遠處冷靜觀察再出手的人。能在殭屍發現你之前就解決牠，掃 POI 時傾向先從外部清除威脅，再進入搜刮。搭配潛行可以在大部分情況下安靜完成整棟建築。</td></tr>
+            <tr><td>配套 Perk</td><td>Dead Eye（狙擊步槍傷害）、Spear Hunter（矛術）、Demolitions Expert（爆破）、Lock Picking（開鎖，現已移至通用欄位）</td></tr>
+            <tr><td>配套書本</td><td>步槍類雜誌讓你可以製作並升級更好的步槍；爆破物類雜誌解鎖製作爆裂物的配方</td></tr>
+            <tr><td>適合的人</td><td>喜歡遠距離清場、不喜歡近身肉搏、享受「一槍一命」成就感的玩家。對地圖探索有熱情，願意在掃點前先研究建築結構的人。</td></tr>
+            <tr><td>搭配另一棵樹</td><td>和敏捷（Agility）搭配效果很好：潛行 Perk 讓你的步槍偷襲傷害更高，跑酷讓你更容易到達制高點</td></tr>
+          </table></div>
+        </div>
+
+        <!-- 力量 -->
+        <div class="attr-tree" data-attr="strength" id="strength">
+          <h3><span class="icon">💪</span> 力量 Strength <span class="en">Raw power and resource domination</span></h3>
+          <p class="intro">力量樹是最直接的屬性：能打、能扛、能挖。提升力量屬性會增加散彈槍、棍棒和大錘的頭部命中傷害，同時解鎖採礦和負重相關的 Perk。這棵樹被廣泛認為是對所有玩法風格都最友善的入門選擇。</p>
+          <div class="table-wrap"><table>
+            <tr><td>核心武器</td><td>散彈槍（近距離群體清除）、棍棒（耐久好的初期近戰）、大錘（高傷害、長攻擊範圍）</td></tr>
+            <tr><td>玩法感覺</td><td>你是那個扛著大錘走進殭屍群、或者拿著散彈槍守住走廊的人。同時也是隊伍裡挖礦最快、扛最多東西的人。不需要複雜策略，直接走進去是這棵樹的核心哲學。</td></tr>
+            <tr><td>配套 Perk</td><td>Miner 69er + Mother Lode（採礦雙核心）、Pack Mule（背包擴充）、Pummel Pete（棍棒強化）、Skull Crusher（大錘強化）、Boomstick（散彈槍強化）</td></tr>
+            <tr><td>配套書本</td><td>採礦工具類、棍棒類、散彈槍類雜誌；挖礦相關的書本系列（Art of Mining）對採集者尤其有用</td></tr>
+            <tr><td>適合的人</td><td>喜歡直接近戰、不想太費心思研究戰略的玩家。在團隊中願意負責資源採集和基地建材的人。偏好「我就直接衝進去」風格。</td></tr>
+            <tr><td>搭配另一棵樹</td><td>和耐力（Fortitude）搭配形成超強坦克：力量負責傷害輸出，耐力提供生存能力和重裝護甲加成，讓你幾乎刀槍不入</td></tr>
+          </table></div>
+        </div>
+
+        <!-- 耐力 -->
+        <div class="attr-tree" data-attr="fortitude" id="fortitude">
+          <h3><span class="icon">🛡️</span> 耐力 Fortitude <span class="en">Survive anything, feel nothing</span></h3>
+          <p class="intro">耐力樹是遊戲中最強調「生存能力」的屬性。提升耐力屬性會增加拳頭和機槍的頭部命中傷害，但耐力真正的核心在於 Perk：自動回血、無視傷害、扛得住任何攻擊。</p>
+          <div class="table-wrap"><table>
+            <tr><td>核心武器</td><td>拳頭（格鬥流）、機槍(突擊流)；但耐力最重要的輸出不是武器，而是「我死不了」的能力</td></tr>
+            <tr><td>玩法感覺</td><td>你是那個在血月中站在最前線，殭屍打你你不動的人。Healing Factor Perk 讓你在戰鬥中自動回血，Pain Tolerance 降低所有傷害，搭配重裝護甲你幾乎是行走的碉堡。</td></tr>
+            <tr><td>配套 Perk</td><td>Healing Factor（戰鬥自動回血）、Rule 1: Cardio（衝刺體力回復）、Pain Tolerance（降低受傷）、The Huntsman（狩獵加成）、Iron Gut（延長 Buff 持續時間）</td></tr>
+            <tr><td>配套書本</td><td>重裝護甲雜誌（解鎖重型護甲製造）、機槍類雜誌、急救類雜誌（讓醫療物品效果更好）</td></tr>
+            <tr><td>適合的人</td><td>喜歡當坦克、把隊友往身後藏的玩家。享受「怎麼打都不死」的安全感。在多人遊戲中擔任主要仇恨吸引者。</td></tr>
+            <tr><td>搭配另一棵樹</td><td>和力量（Strength）組合是最傳統的「超重型近戰」搭配，讓你在攻擊力和防禦力上同時達到頂峰</td></tr>
+          </table></div>
+        </div>
+
+        <!-- 敏捷 -->
+        <div class="attr-tree" data-attr="agility" id="agility">
+          <h3><span class="icon">🥷</span> 敏捷 Agility <span class="en">Fast, silent, deadly</span></h3>
+          <p class="intro">敏捷樹是關於速度、精準和潛行的屬性。提升敏捷屬性會增加弓、手槍和刀的頭部命中傷害。這棵樹適合享受「在敵人發現你之前就消滅牠」快感的玩家。</p>
+          <div class="table-wrap"><table>
+            <tr><td>核心武器</td><td>弓（安靜、高偷襲傷害）、手槍（快速出手）、衝鋒槍（連射近距離）、刀（偷襲傷害最高的近戰）</td></tr>
+            <tr><td>玩法感覺</td><td>你是全隊移動最快、能翻越最高障礙物的人。掃 POI 時可以安靜繞過大部分殭屍，或者在潛行中一刀解決單個目標。機動性讓你可以在血月中快速補位，填補隊友防線的漏洞。</td></tr>
+            <tr><td>配套 Perk</td><td>Parkour（跑酷，提升攀爬高度）、Hidden Strike（偷襲傷害倍率）、From the Shadows（夜間潛行強化）、Run and Gun（移動中精準射擊）、Archery（弓術）、Gunslinger（手槍強化）</td></tr>
+            <tr><td>配套書本</td><td>刀械類、手槍類、弓箭類、衝鋒槍類雜誌；The Night Stalker 書本系列（1-8 冊）可進一步強化潛行能力</td></tr>
+            <tr><td>適合的人</td><td>享受精確操作和潛行玩法的玩家。不喜歡硬碰硬，偏好「繞道解決問題」。喜歡在多人遊戲中擔任前哨偵察和快速補位角色。</td></tr>
+            <tr><td>搭配另一棵樹</td><td>和感知（Perception）搭配是高機動遠距狙擊流：跑酷快速佔領制高點，步槍一擊必殺</td></tr>
+          </table></div>
+        </div>
+
+        <!-- 智力 -->
+        <div class="attr-tree" data-attr="intellect" id="intellect">
+          <h3><span class="icon">🔧</span> 智力 Intellect <span class="en">Outsmart the apocalypse</span></h3>
+          <p class="intro">智力樹是最「文明建設」感的屬性。提升智力屬性會增加電擊棒和機器人砲塔的頭部命中傷害，但智力真正的力量在於其 Perk 能讓你在遊戲的經濟、製造和自動化防禦層面遠超其他玩家。</p>
+          <div class="table-wrap"><table>
+            <tr><td>核心武器</td><td>電擊棒（Stun Baton，近戰控制）、機器人砲塔（自動化遠程攻擊）；3.0 新增 M60 機槍砲塔是智力系玩家的後期玩具</td></tr>
+            <tr><td>玩法感覺</td><td>你不是用自己的身體去面對殭屍，而是用陷阱、電網和砲塔讓殭屍替你死。在商人那邊你拿到最好的折扣和任務獎勵，電路布線和自動化防禦是你的主要貢獻。血月時你坐在後台按開關，殭屍走入你設計好的死亡走廊。</td></tr>
+            <tr><td>配套 Perk</td><td>Advanced Engineering（電網、陷阱製造）、Better Barter（商人折扣和秘密倉庫）、Grease Monkey（載具製造）、The Daring Adventurer（任務獎勵品質）、Charismatic Nature（給附近隊友戰鬥加成，是遊戲中唯一的團隊支援 Perk）</td></tr>
+            <tr><td>配套書本</td><td>科技類、電子類、載具類雜誌；工作站製造必須靠 Forge Ahead 書本系列解鎖</td></tr>
+            <tr><td>適合的人</td><td>享受建造和設計的玩家。在多人中喜歡擔任後勤、跑商、蓋基地的角色。對電路設計、陷阱擺放感興趣，喜歡「讓環境替我打架」的人。</td></tr>
+            <tr><td>搭配另一棵樹</td><td>智力和任何其他樹都能互補，因為它主要強化非戰鬥能力。若想加強個人戰鬥力，可以再點幾級感知或耐力</td></tr>
+          </table></div>
+        </div>
+
+        <h3 id="general-perks">通用 Perk 欄位（General Perks）</h3>
+        <p class="source"><span class="source-label">📌 資料來源：</span>官方 Wiki fandom.com/wiki/Perks（「General Perks tab added in Update 2.0」）</p>
+        <p>2.0 版本新增了「通用 Perk 欄位」，包含不綁定任何屬性的 Perk，任何玩家都可以花技能點解鎖，不需要先升屬性等級。這裡有一些原本在特定屬性樹下的 Perk，包含 Lucky Looter（搜刮加成）、Heavy Armor（重裝護甲）、Master Chef（烹飪）、Living Off The Land（農業）等。無論你選哪棵主樹，都可以從通用欄位投資幾個對所有人有用的 Perk。</p>
+      </section>
+
+      <!-- ===== 三、遊戲系統解析 ===== -->
+      <section id="section-3">
+        <h2>三、遊戲系統解析</h2>
+        <p class="source"><span class="source-label">📌 資料來源：</span>官方 Wiki（fandom.com + wiki.gg）｜xgamingserver.com｜wiki.7d2d.net</p>
+        <p>本章針對七日殺的各大核心系統進行解析，幫助剛入門的隊員快速理解遊戲運作邏輯。所有資訊均來自官方 Wiki 或可靠社群文件。</p>
+
+        <h3 id="sys-1"><span class="icon">🫀</span> 系統一：基礎生存（食物・水・體力）</h3>
+        <p class="source"><span class="source-label">📌 資料來源：</span>官方 Wiki fandom.com/wiki/Game_Mechanics + wiki.7d2d.net Farming & Cooking Guide</p>
+        <p>七日殺的生存系統圍繞三個核心數值運作：生命值（HP）、食物值（Food）、水分值（Hydration）。任何一個歸零都會開始扣血。</p>
+        <div class="table-wrap"><table>
+          <tr><td>食物值（Food）</td><td>隨時間自然降低，降至 0 時開始扣血。建議烤肉或燉湯補充，避免生食（有食物中毒風險）。長期可種植農場維持供應。</td></tr>
+          <tr><td>水分值（Hydration）</td><td>降至 0 時同樣開始扣血。初期用罐子裝渾水後在篝火上煮沸成乾淨水飲用；中後期可建造露水收集器（Dew Collector）維持穩定供水。</td></tr>
+          <tr><td>體力值（Stamina）</td><td>用於跑步、戰鬥和採集，可自然回復。耗盡後移動變慢、攻擊力下降。食物和特定藥水可加快回復速度。</td></tr>
+          <tr><td>氣味系統（Smell）</td><td>2.5 版本引入。進食後向外散發氣味，殭屍可偵測並追蹤。戶外最大偵測半徑 100 公尺，在室內只有戶外的 20%。</td></tr>
+        </table></div>
+
+        <h3 id="sys-2"><span class="icon">⚒️</span> 系統二：製造系統（Crafting & Workstations）</h3>
+        <p class="source"><span class="source-label">📌 資料來源：</span>官方 Wiki fandom.com/wiki/Crafting + wiki.7d2d.net</p>
+        <p>製造是遊戲的核心支柱之一。玩家可在背包介面直接製造基礎物品，更複雜的配方則需要特定工作站。所有工作站的解鎖都依靠閱讀「Forge Ahead」系列雜誌。</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>工作站</th><th>主要功能</th></tr></thead>
+          <tr><td>篝火（Campfire）</td><td>烹煮食物、煮沸飲水、基礎藥品製造</td></tr>
+          <tr><td>鍛造爐（Forge）</td><td>冶煉金屬、製作鍛鐵/鍛鋼、子彈零件</td></tr>
+          <tr><td>工作台（Workbench）</td><td>製作武器、載具零件、建築材料</td></tr>
+          <tr><td>水泥攪拌機（Cement Mixer）</td><td>製作混凝土混合物，升級建築方塊</td></tr>
+          <tr><td>化學站（Chemistry Station）</td><td>製作急救包、火藥、汽油（效率是背包製作的兩倍）</td></tr>
+          <tr><td>合成站（Combine Station）</td><td>3.0 新增：合併 Magnitude 加成、裝備修理替代方案</td></tr>
+        </table></div>
+
+        <h3 id="sys-3"><span class="icon">⛏️</span> 系統三：採礦系統（Mining）</h3>
+        <p class="source"><span class="source-label">📌 資料來源：</span>官方 Wiki fandom.com/wiki/Mining + xgamingserver.com</p>
+        <p>採礦是取得建材、製造材料和彈藥原料的核心途徑。不同工具適合不同材質，使用錯誤工具會大幅降低效率。</p>
+        <div class="table-wrap"><table>
+          <tr><td>石頭 / 礦石類</td><td>石斧（初期）、鐵鎬、鋼鎬或電鑽（Auger）。電鑽效率最高但需汽油。</td></tr>
+          <tr><td>土壤 / 沙地 / 礫石</td><td>鐵鍬或電鑽。注意：鐵鍬不能用於石頭和礦石。</td></tr>
+          <tr><td>木材</td><td>石斧或電鋸（Chainsaw）。</td></tr>
+          <tr><td>地下採礦注意</td><td>大面積挖空可能導致地面塌陷。建議保留支撐柱防止崩塌。</td></tr>
+        </table></div>
+
+        <h3 id="sys-4"><span class="icon">🏗️</span> 系統四：建築系統（Base Building）</h3>
+        <p class="source"><span class="source-label">📌 資料來源：</span>官方 wiki.gg/wiki/Building_Structures + xgamingserver.com（引用官方 Wiki 數據）</p>
+        <p>七日殺採用體素（Voxel）物理引擎，所有方塊都受物理和重力影響。方塊的結構完整性決定了基地能承受多少殭屍攻擊。</p>
+        <h4>五階方塊升級路徑</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>升級階段</th><th>材料需求</th><th>HP（每塊）</th></tr></thead>
+          <tr><td>木框（Building Block）</td><td>木材 × 8</td><td>250</td></tr>
+          <tr><td>木頭方塊（Wood Block）</td><td>→ 木材 × 8</td><td>~400</td></tr>
+          <tr><td>卵石方塊（Cobblestone）</td><td>→ 卵石石頭 × 10</td><td>3,000</td></tr>
+          <tr><td>混凝土方塊（Concrete）</td><td>→ 混凝土混合物 × 10</td><td>5,000</td></tr>
+          <tr><td>鋼鐵方塊（Steel Block）</td><td>→ 鍛鋼 × 10</td><td>10,000</td></tr>
+        </table></div>
+        <p>鋼鐵方塊耗材昂貴，建議集中用在殭屍直接衝擊的位置，其他部分用混凝土節省資源。水平延伸的方塊有承載上限，加入向下延伸的支撐柱可改為垂直支撐，永不崩塌。</p>
+
+        <h3 id="sys-5"><span class="icon">🌡️</span> 系統五：熱力圖（Heatmap）</h3>
+        <p class="source"><span class="source-label">📌 資料來源：</span>官方 Wiki fandom.com/wiki/Heatmap + fandom.com/wiki/Game_Mechanics</p>
+        <p>熱力圖（Heatmap）控制殭屍在你的活動區域周圍隨機生成的機制，代表特定區域的「活動強度指數」。活動越頻繁，殭屍越容易生成。</p>
+        <div class="table-wrap"><table>
+          <tr><td>什麼會提升熱力</td><td>槍械、爆炸物、篝火/鍛造爐/火把，以及採伐樹木、採礦挖地。連開門、跳躍、長時間停留也會少量提升熱力。</td></tr>
+          <tr><td>尖叫者（Screamer）</td><td>熱力夠高時會生成尖叫者殭屍，若牠發現玩家，會尖叫呼叫更多殭屍。快速消滅牠是優先事項。</td></tr>
+          <tr><td>血月期間</td><td>血月不觸發熱力圖事件，可盡情使用槍械和爆炸物。</td></tr>
+          <tr><td>如何管理</td><td>將工作站放在封閉房間內、避免在基地大量使用槍械（血月除外）。</td></tr>
+        </table></div>
+
+        <h3 id="sys-6"><span class="icon">🔴</span> 系統六：血月系統（Blood Moon Horde）</h3>
+        <p class="source"><span class="source-label">📌 資料來源：</span>官方 Wiki fandom.com/wiki/Blood_Moon_Horde</p>
+        <p>七日殺的遊戲名稱來自這個每七天發生一次的血月事件。血月是遊戲最核心的防守考驗。</p>
+        <div class="table-wrap"><table>
+          <tr><td>觸發時機（預設）</td><td>每 7 天一次，可在 Sandbox 設定中調整頻率或停用。當天 08:00 HUD 中的日期數字會變紅色作為預警。</td></tr>
+          <tr><td>血月流程</td><td>18:00 天空開始變紅 → 22:00 殭屍開始大批湧現 → 波浪式持續出現 → 04:00 血月結束。</td></tr>
+          <tr><td>殭屍 GPS 機制</td><td>血月期間殭屍確切知道所有玩家位置，無法靠潛行或障礙物迷惑。牠們會主動攀爬、挖掘到達你。</td></tr>
+          <tr><td>多人模式注意</td><td>每個玩家的存在都增加殭屍數量。某個玩家死亡後，追逐該玩家的殭屍會消失。血月固定在 04:00 結束，不一定要打完所有殭屍。</td></tr>
+        </table></div>
+
+        <h3 id="sys-7"><span class="icon">🏪</span> 系統七：商人與任務系統（Traders & Quests）</h3>
+        <p class="source"><span class="source-label">📌 資料來源：</span>官方 Wiki wiki.gg/wiki/Traders + fandom.com/wiki/Quests + xgamingserver.com</p>
+        <p>商人是推動遊戲進程最快的途徑，也是取得高品質裝備和 Duke 代幣（遊戲貨幣）的穩定來源。</p>
+        <div class="table-wrap"><table>
+          <tr><td>商人種類</td><td>遊戲中有 5 位商人，各自專精不同類型商品。每個地圖放置 5 位商人，分布於各生態系。</td></tr>
+          <tr><td>營業時間</td><td>04:05 至 21:50（遊戲內時間）。商人基地在血月期間也是安全避難所，殭屍無法進入。</td></tr>
+          <tr><td>任務分級</td><td>任務分為第 1–6 等，完成足夠多的任務可解鎖更高等級。1.0 後進度不再綁定特定商人，與任何商人完成任務都計入同一進度。</td></tr>
+          <tr><td>任務類型</td><td>掃蕩（Clear）、取物（Fetch）、恢復電力、埋藏補給等。任務地點都在 POI 建築內，接取後 POI 會重置（殭屍和箱子全部恢復）。</td></tr>
+          <tr><td>多人任務共享</td><td>可與隊友共享任務，全隊一起完成，每人各自領取自己的獎勵。</td></tr>
+          <tr><td>重要提醒</td><td><strong>不要把家建在 POI 建築裡！</strong>接取商人任務會將 POI 重置，你放置的所有物品和存儲都會消失。</td></tr>
+        </table></div>
+
+        <h3 id="sys-8"><span class="icon">🗺️</span> 系統八：POI 地標與生態系（POIs & Biomes）</h3>
+        <p class="source"><span class="source-label">📌 資料來源：</span>官方 Wiki fandom.com/wiki/Point_of_Interest + wiki.gg/wiki/Biome + xgamingserver.com Biomes Guide</p>
+        <h4>地標系統（Points of Interest / POI）</h4>
+        <p>POI 是遊戲中的各種建築地標，分為 0–5 星等（以骷髏頭標示難度）。等級越高危險越高，但搜刮品質也更好。各地標搜刮到的物品種類很有規律——多探索幾次就能大致掌握哪裡找什麼。</p>
+        <h4>五大生態系（Biomes）</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>生態系</th><th>難度</th><th>特色資源</th><th>環境危險</th></tr></thead>
+          <tr><td>松林（Pine Forest）</td><td>⭐ 初級</td><td>木材、石頭、棉花、基礎礦石</td><td>無特殊環境危害，氣溫舒適</td></tr>
+          <tr><td>沙漠（Desert）</td><td>⭐⭐ 中初</td><td>油頁岩（汽油原料）、沙石</td><td>日間過熱（Overheating）→ 中暑，需備水和防熱裝備</td></tr>
+          <tr><td>積雪森林（Snow Forest）</td><td>⭐⭐ 中初</td><td>豐富野生動物（肉類 / 皮革）</td><td>低溫 → 凍傷，需穿保暖裝備</td></tr>
+          <tr><td>焦土森林（Burnt Forest）</td><td>⭐⭐⭐ 中級</td><td>廢金屬、建材</td><td>焦土殭屍可點火燃燒玩家</td></tr>
+          <tr><td>荒地（Wasteland）</td><td>⭐⭐⭐⭐⭐ 高級</td><td>最高品質搜刮、廢鐵</td><td>輻射殭屍、高密度群組，散布地雷</td></tr>
+        </table></div>
+
+        <h3 id="sys-9"><span class="icon">⚡</span> 系統九：電氣與陷阱系統（Electricity & Traps）</h3>
+        <p class="source"><span class="source-label">📌 資料來源：</span>官方 Wiki fandom.com + 7daystodie.com 官方功能描述</p>
+        <p>電氣系統是最複雜也最強大的血月防禦工具。電力從電力來源流經線路，觸發各種陷阱和設備。建議由一個人負責全基地的電路布線，血月前應充分測試。</p>
+        <div class="table-wrap"><table>
+          <tr><td>電力來源</td><td>發電機（需汽油）、太陽能電池板（白天自動）、電池組（儲存電力供夜間）</td></tr>
+          <tr><td>切換開關</td><td>手動開關、定時器、動作感應器、三角感應器、壓力板等，實現自動化觸發</td></tr>
+          <tr><td>主要陷阱</td><td>電刺網、旋轉鋸、彈射器（毒鏢）、自動砲塔、地雷。3.0 新增 M60 機槍砲塔（7.62mm）</td></tr>
+        </table></div>
+
+        <h3 id="sys-10"><span class="icon">🚗</span> 系統十：載具系統（Vehicles）</h3>
+        <p class="source"><span class="source-label">📌 資料來源：</span>7daystodie.com 官方網站 + 官方 Wiki fandom.com</p>
+        <p>載具是中後期探索的核心裝備，大幅縮短往返 POI、商人和礦場的時間。載具需要收集零件、學習配方（透過雜誌或商人）後才能製造。遊戲中共有五種載具，從腳踏車到旋翼機，速度、載量、製作難度各有不同，值得自行探索每一種的特性。</p>
+      </section>
+
+      <!-- ===== 四、死亡與風險管理 ===== -->
+      <section id="section-4">
+        <h2>四、死亡與風險管理</h2>
+        <p class="source"><span class="source-label">📌 資料來源：</span>官方 Wiki fandom.com/wiki/Death + fandom.com/wiki/Bedroll + Steam 社群討論 + eneba.com 新手攻略 + scalacube.com Bedroll Guide</p>
+        <p>死亡在七日殺中是家常便飯，理解死亡的機制能讓你在最糟的情況下也能快速恢復，而不是從頭開始。</p>
+
+        <h3><span class="num">①</span>死亡後會發生什麼</h3>
+        <p class="source"><span class="source-label">📌 資料來源：</span>官方 Wiki fandom.com/wiki/Death</p>
+        <p>根據官方 Wiki 的記載，死亡時發生以下事情：</p>
+        <ul>
+          <li>角色以 90% 生命值、食物和水分重生，所有負面狀態（Debuff）同時清除</li>
+          <li>累積 XP 債務（Experience Debt），顯示為紅色的 XP 條——需要繼續遊玩才能還清，還清前 XP 獲取效率稍降</li>
+          <li>背包中的物品掉落在原地形成「死亡背包」，地圖上出現一個臨時標記指示位置</li>
+          <li>可以選擇「在床旁重生」、「在床附近重生」或「在背包旁重生」（如有設置床鋪）</li>
+        </ul>
+        <div class="highlight">
+          <strong>重要：</strong>3.0 的 Sandbox 設定讓你可以自訂「死亡時掉落什麼」——預設只掉背包，工具列和穿戴的裝備保留。這個設定可在開局前與隊友討論並調整。
+        </div>
+
+        <h3><span class="num">②</span>床鋪（Bedroll）——最重要的初期物品</h3>
+        <p class="source"><span class="source-label">📌 資料來源：</span>官方 Wiki fandom.com/wiki/Bedroll + scalacube.com Bedroll Guide</p>
+        <p>根據官方 Wiki，床鋪（Bedroll）的作用是設定重生點，並且在 31×31 公尺的區域內阻止殭屍生成——這讓它同時是「保命工具」和「區域清空工具」。</p>
+        <ul>
+          <li>材料極少（10 根植物纖維），應該是遊戲開始後第一件製作的物品</li>
+          <li>放置床鋪後，這個位置的 31×31 公尺範圍內不會再有殭屍生成（只影響隨機生成，不影響已在附近的殭屍）</li>
+          <li>沒有放置床鋪就死亡的話，重生點是地圖上的隨機位置，可能距離基地非常遠</li>
+          <li>床鋪被破壞後即失效，在重新部署前你只能隨機重生</li>
+        </ul>
+        <div class="tip">
+          <strong>🛏️ 床鋪不是用來睡覺的　</strong>根據官方 Wiki 和 Steam 社群確認：七日殺不能讓時間快轉——你不能「睡覺跳過夜晚」。床鋪純粹是重生點標記工具。夜晚時間請在室內製造和整理物品，等待天亮。
+        </div>
+
+        <h3><span class="num">③</span>死亡背包的回收</h3>
+        <p class="source"><span class="source-label">📌 資料來源：</span>官方 Wiki fandom.com/wiki/Death + Steam 社群討論（7daystodie discussions）</p>
+        <p>死亡後回收背包是讓大部分新玩家踩坑的環節，有幾件事需要特別注意：</p>
+        <ul>
+          <li><strong>最重要　</strong>死亡後地圖上的背包標記只標示「最後一個掉落的背包」。如果你之後又死了，標記會移動到新的背包位置，但舊背包通常仍在原地。</li>
+          <li><strong>立刻做　</strong>死亡後立刻打開地圖，手動在背包圖示旁邊放置一個永久地圖標記——不要只依賴自動標記，因為再次死亡後自動標記會消失。</li>
+          <li><strong>注意　</strong>在回去拿背包的路上盡量保守——再次死亡不只會讓你掉第二個背包，還可能找不回第一個。</li>
+          <li><strong>時限　</strong>背包不會立刻消失，但具體時限沒有官方文件明確記載，Steam 社群普遍反映需要在相對短的時間內取回。</li>
+        </ul>
+        <div class="tip">
+          <strong>📦 在掃點路上放臨時儲存箱　</strong>根據 Steam 社群玩家的實戰建議：在進行長途搜刮任務時，定期把重要物品放入你在路上建造的臨時儲存箱（6 塊木板即可製作），並在地圖上標記位置。就算你死亡，箱子裡的東西不會遺失，讓你的損失降到最低。
+        </div>
+
+        <h3><span class="num">④</span>什麼時候最容易意外死亡</h3>
+        <p class="source"><span class="source-label">📌 資料來源：</span>Steam 社群指南：「7 years of 7 days to die: The unofficial game manual」+ eneba.com 新手攻略</p>
+        <p>根據 Steam 社群玩家的長期遊玩心得，以下幾種情況是新手最常意外死亡的時機——了解它們可以讓你更有意識地避免：</p>
+        <ul>
+          <li><strong>夜間在外面：</strong>夜晚的殭屍移動速度大幅加快，攻擊力也更強。21:00 後盡量回到安全的室內。</li>
+          <li><strong>路邊的野豬和野狼：</strong>動物的攻擊力常常被新手低估，尤其是成群的狼。不要因為「只是野生動物」就掉以輕心。</li>
+          <li><strong>掉落傷害：</strong>七日殺的墜落傷害非常真實，從三格高度以上落下就開始扣血，骨折狀態會大幅降低移動速度。</li>
+          <li><strong>高等 POI 的最後一個房間：</strong>每個 POI 都有一個「最終觸發室」，進入後無論你多安靜都會立刻喚醒殭屍。沒有準備的情況下不要隨便進入陌生的高等 POI。</li>
+          <li><strong>不知道自己在哪裡生態系：</strong>進入沙漠或積雪森林而沒有對應的防護，環境傷害（過熱/凍傷）是緩慢但致命的。</li>
+          <li><strong>血月前沒有回家：</strong>22:00 血月開始時你如果還在外面，殭屍會直接追蹤你的位置，而且速度比夜間普通殭屍更快更兇。</li>
+        </ul>
+      </section>
+
+      <!-- ===== 五、常見新手誤區 ===== -->
+      <section id="section-5">
+        <h2>五、常見新手誤區</h2>
+        <p class="source"><span class="source-label">📌 資料來源：</span>官方 Wiki fandom.com（多條目）+ ggservers.com 新手攻略 + Steam 社群指南 + eneba.com + 4netplayers.com 新手指南</p>
+        <p>以下是新手最常走進的「坑」，不是遊戲刻意隱藏的秘密，而是機制沒有說清楚導致的誤解。了解後你不會失去任何探索的驚喜，但會省下大量不必要的挫敗感。</p>
+
+        <div class="subsection-header"><span class="icon">🏠</span>關於基地與建築</div>
+
+        <div class="tip"><strong>🏠 把家建在 POI 建築裡　</strong>這是最常見的新手誤區。如果你把基地建在一棟 POI 建築內，之後商人給你一個「清掃這棟建築」的任務，任務啟動後整棟建築會重置——你放置的一切（箱子、裝備、建設）全部消失。請在空曠地自建基地，把 POI 留給搜刮。（來源：xgamingserver.com Base Locations Guide + 官方 wiki.gg/wiki/Traders）</div>
+
+        <div class="tip"><strong>🌙 不知道殭屍白天和夜晚的差異　</strong>根據 Wikipedia 和官方 Wiki 的記載：殭屍在白天移動速度慢、攻擊性低，日落後（特別是 21:00 後）變為「狂暴模式」——移動速度大幅提升、偵測範圍擴大、攻擊力更強。新手常在白天掃點，但因為太晚才回家，在夜間遭遇同樣的殭屍卻完全打不過。有意識地在日落前做好撤退計劃。（來源：Wikipedia 7 Days to Die 條目 + 官方 Wiki）</div>
+
+        <div class="tip"><strong>🔫 一開始就把子彈全部打光　</strong>根據 ggservers.com 和多個社群攻略：初期子彈非常珍貴，製作需要多種礦物原料和工作站。很多新手因為一開始就大量使用槍械，很快就彈盡糧絕。初期盡量用近戰武器和弓箭，槍械留到你建立了穩定的子彈製造路線後再大量使用。（來源：ggservers.com Tips + eneba.com 新手指南）</div>
+
+        <div class="tip"><strong>🛏️ 忘記放床鋪就出門探索　</strong>根據官方 Wiki Bedroll 條目：沒有床鋪而死亡後，重生點是地圖上的隨機位置，可能和你的基地相距甚遠。每次進入新地點探索前，都應該確認你的床鋪已經妥善放置在基地內。（來源：官方 Wiki fandom.com/wiki/Bedroll）</div>
+
+        <div class="tip"><strong>⛏️ 用錯工具採集　</strong>根據官方 Wiki Mining 條目：鐵鍬只能用於土壤、沙地和礫石，對石頭和礦石完全沒有效率；石斧適合砍木頭，不適合挖礦。用錯工具不只是慢，而且會大量消耗工具耐久卻幾乎沒有產出。確認使用對應工具。（來源：官方 Wiki fandom.com/wiki/Mining）</div>
+
+        <div class="subsection-header"><span class="icon">📊</span>關於技能與成長</div>
+
+        <div class="tip"><strong>📊 把技能點分散到所有屬性樹　</strong>根據官方 Wiki 和 xgamingserver.com 的說明：分散技能點不只讓你每棵樹都不夠強，還會降低你找到對應書本的機率（因為書本掉落受 Perk 等級影響）。初期選定 1–2 棵主力樹，讓你的書本循環和技能點都集中在同一個方向。（來源：官方 Wiki fandom.com/wiki/Perks + xgamingserver.com）</div>
+
+        <div class="tip"><strong>📚 不知道技能點可以重置　</strong>根據 ggservers.com 攻略指南：如果你後悔技能點的分配，可以向商人購買「Grandpa's Forgit'n Elixir」藥水（需要 Duke 代幣）來重置所有技能點。這讓你在中期發現自己的真正喜好後仍有機會調整。所以早期不需要太焦慮技能點的每一個決定。（來源：ggservers.com Tips Guide）</div>
+
+        <div class="tip"><strong>📖 讀完書本後繼續把它留著　</strong>根據 ggservers.com 的說明：已讀過的書本（圖示上有開書標記）再次閱讀只能獲得極少的 XP，對技能毫無幫助。建議賣給商人換 Duke 代幣，或用來以物易物交換其他資源。（來源：ggservers.com Tips Guide）</div>
+
+        <div class="subsection-header"><span class="icon">🔴</span>關於血月與戰鬥</div>
+
+        <div class="tip"><strong>🔴 以為血月前必須把所有殭屍打完　</strong>根據官方 Wiki Blood_Moon_Horde 條目：血月固定在遊戲內時間 04:00 結束，剩餘的殭屍會立刻恢復正常行為。你不需要殺光所有殭屍，只需要熬過到 04:00。在基地堅守比在外面追殺殭屍安全得多。（來源：官方 Wiki fandom.com/wiki/Blood_Moon_Horde）</div>
+
+        <div class="tip"><strong>🏗️ 忘記在血月前測試陷阱　</strong>根據 supercraft.host 合作攻略：很多小隊在第一次血月才發現電刺網沒有連好電、地雷沒有正確觸發。建議在血月前至少一個遊戲日，實際測試整個防禦系統能否正常運作。（來源：supercraft.host 合作攻略）</div>
+
+        <div class="tip"><strong>🔇 忽視聲音給的警告資訊　</strong>根據官方 Wiki Game_Mechanics 條目：殭屍同時具備視覺、聽覺和嗅覺，玩家在遊戲中的各種行動都會產生聲音。遊戲的音效設計是有意義的——如果你聽到殭屍開始進入活躍狀態的聲音、或者尖叫者的叫聲，這是系統給你的提示，不是背景音效。開啟音效並善加利用。（來源：官方 Wiki fandom.com/wiki/Game_Mechanics）</div>
+      </section>
+
+      <!-- ===== 六、偏門撇步與冷知識 ===== -->
+      <section id="section-6">
+        <h2>六、偏門撇步與冷知識</h2>
+        <p class="source"><span class="source-label">📌 資料來源：</span>官方 Wiki fandom.com（多條目）+ ggservers.com + gamerant.com + Steam 社群攻略</p>
+        <p>以下是官方文件有記載但大部分玩家不會注意到的小知識，不影響遊戲核心體驗，但能讓你在探索時多幾個「啊！原來如此」的瞬間。</p>
+
+        <div class="subsection-header"><span class="icon">⚔️</span>戰鬥篇</div>
+        <p class="source"><span class="source-label">📌 資料來源：</span>官方 Wiki fandom.com/wiki/Stealth_System + fandom.com/wiki/Item_Stat_Modifiers + bisecthosting.com Perks Guide + steamcommunity.com Complete Builds Guide</p>
+
+        <div class="tip"><strong>🔪 刀的偷襲傷害是所有武器最高的　</strong>潛行偷襲的基礎傷害倍率是 1.5×，升滿 Hidden Strike Perk 可達 4×。但刀這個武器類別本身額外享有 4× 的特殊加成，所以刀的偷襲最高可達 8× 傷害。如果你想在掃點時安靜清場，刀是最好的工具。</div>
+
+        <div class="tip"><strong>🏹 弓和弩也有特殊偷襲加成　</strong>官方 Wiki 記載弓和弩在偷襲時享有額外的 2× 武器類別加成，加上 Hidden Strike 的最高 4× 倍率，弓偷襲最高可達 6× 傷害。早期用弓+潛行掃點效率非常高，甚至不需要點任何 Perk。</div>
+
+        <div class="tip"><strong>💥 擊倒的殭屍受到 3 倍傷害　</strong>被擊倒或擊暈（Stunned）的殭屍受到 3 倍傷害。這意味著不需要浪費子彈——直接上前對準頭部補一刀，效果比射擊更好。殭屍有短暫的擊暈抵抗時間，並不是無限可以利用。</div>
+
+        <div class="tip"><strong>🦵 射腿讓殭屍永久減速　</strong>散彈槍打殭屍的腿部可以 100% 觸發殘廢（Cripple）效果，讓殭屍移動速度降低 30%，持續 5 分鐘，且這個 Debuff 無法在持續時間內刷新。面對快速奔跑的殭屍，先來一槍打腿是個好策略。</div>
+
+        <div class="tip"><strong>🪓 大錘不能偷襲　</strong>大錘這個武器類別不受偷襲傷害加成影響——你蹲著用大錘打一個沒注意到你的殭屍，傷害和站著打一樣。換言之，大錘系玩家完全不用費心潛行。</div>
+
+        <div class="tip"><strong>🔢 每個武器模組都額外增加 10% 基礎傷害　</strong>根據官方 Wiki Item_Stat_Modifiers 頁面：每安裝一個模組（Mod），不論該模組的功能是什麼，武器的基礎傷害都會額外增加 10%。因此盡量幫武器裝滿模組，即使模組功能不直接加傷害也值得。</div>
+
+        <div class="tip"><strong>🚘 路邊廢棄車可以誘導殭屍爆炸　</strong>根據官方 Wiki 記載，路邊所有的轎車（Sedan）類型都是爆炸性的，可被任何「傷害方塊的爆炸」引爆，包含火箭、TNT，甚至是電鑽（Auger）！你可以把殭屍群引到一輛車旁再引爆它。但子彈成本有時比直接打死殭屍還高，要評估是否划算。</div>
+
+        <div class="tip"><strong>🧲 POI 最後一個房間一定會觸發殭屍　</strong>根據 GameRant 的潛行機制分析：每個 POI 在最終獎勵房間都設有潛行觸發器，無論你多安靜地進入，都會立刻喚醒幾個殭屍。不要誤以為你成功潛行過關了——做好迎戰準備。</div>
+
+        <div class="subsection-header"><span class="icon">🎒</span>搜刮 & 採集篇</div>
+        <p class="source"><span class="source-label">📌 資料來源：</span>官方 Wiki fandom.com/wiki/Bird_Nest + fandom.com/wiki/Wrench + fandom.com/wiki/Looting + ggservers.com Tips</p>
+
+        <div class="tip"><strong>📬 信箱和報紙箱是書本的隱藏寶礦　</strong>根據 ggservers.com 攻略指南：散落在城鎮街道上的信箱（Mailbox）和報紙箱（Newspaper Box），是搜集工藝技能雜誌（Skill Magazines）的高效途徑，大部分玩家都會忽略這兩種容器。進城後記得把街道上的信箱都翻一遍。</div>
+
+        <div class="tip"><strong>🪺 鳥巢要「採集」不要只是「搜刮」　</strong>根據官方 Wiki：鳥巢可以用兩種方式取得資源。先開啟搜刮拿雞蛋和羽毛，但如果你先把全部內容物取走，鳥巢就會自動消失，就無法再用工具額外採集（布料、羽毛、植物纖維）了。建議先用工具採集，再搜刮。</div>
+
+        <div class="tip"><strong>🔧 扳手是搜刮機械零件的關鍵工具　</strong>根據官方 Wiki 扳手（Wrench）條目：扳手是一種拆解工具，可以從廢棄車輛、空調、自動販賣機、瓦斯泵、購物推車、辦公椅、文件櫃等物品上拆解出普通摧毀取不到的資源。早期找到一把扳手會大幅提升資源的豐富度。</div>
+
+        <div class="tip"><strong>🏆 最高品質搜刮看的是整隊裡最高的 Loot Stage　</strong>根據官方 Wiki Looting 條目：在多人模式下，開箱時計算的是隊伍中「最高的 Loot Stage（搜刮等級）」，不是你自己的。因此讓搜刮 Perk 點得最高的隊員去開最重要的箱子，全隊都能受益。</div>
+
+        <div class="tip"><strong>🗓️ 接任務前先進去搜刮一次　</strong>根據 ggservers.com 攻略指南：先進入 POI 搜刮所有箱子，再去商人接取同一個 POI 的任務。任務啟動後，POI 會重置（殭屍和箱子全部恢復）——等於你可以搜刮兩次。這在低等 POI 上效果最明顯。</div>
+
+        <div class="subsection-header"><span class="icon">🏠</span>建築 & 基地篇</div>
+        <p class="source"><span class="source-label">📌 資料來源：</span>官方 Wiki fandom.com/wiki/Beginners_Guide + fandom.com/wiki/Blood_Moon_Horde + ggservers.com Tips + xgamingserver.com</p>
+
+        <div class="tip"><strong>📦 木框（Building Block）是萬能的臨時工具　</strong>根據 ggservers.com 攻略指南：永遠在快捷欄放幾個木框。需要到高處時疊幾個方塊當梯子；面對殭屍時用方塊擋住衝刺路線；採礦時放置方塊當支撐柱防止塌陷。木框也可以用 E 鍵取回，不會消耗資源。</div>
+
+        <div class="tip"><strong>🔄 木框可以變形　</strong>根據 ggservers.com 攻略指南：放置的木框不只有正方體一種形狀。在 PC 上長按 R 鍵，可以切換成斜面、樓梯、楔形等多種形狀，對建造坡道或更精細的建築非常有用。</div>
+
+        <div class="tip"><strong>🏥 商人基地是最安全的血月避難所　</strong>根據官方 Wiki 商人條目：商人基地周圍是不可破壞的建築，且殭屍無法進入。如果在 22:00 前趕到商人基地並進入，可以在裡面安全度過整個血月。這不算主流打法但緊急時刻很有用。</div>
+
+        <div class="tip"><strong>🌙 血月結束的確切時間是 04:00　</strong>根據官方 Wiki Blood Moon Horde 條目：血月固定在遊戲內時間 04:00 結束。剩餘的殭屍會立刻恢復正常。因此血月夜不一定要把殭屍全部殺光，撐到 04:00 就安全了。</div>
+
+        <div class="tip"><strong>🧟 壕溝是最省資源的早期防禦　</strong>根據官方 Wiki 建築指南：在基地周圍挖一圈至少 3 格深的壕溝（Moat）可以讓殭屍掉落其中，落入壕溝的殭屍行動受限且容易被爆頭清除。這比建電網更省初期資源，是簡單又有效的早期防禦手法。</div>
+
+        <div class="subsection-header"><span class="icon">📊</span>隱藏數值與冷知識篇</div>
+        <p class="source"><span class="source-label">📌 資料來源：</span>官方 Wiki fandom.com/wiki/Game_Mechanics + fandom.com/wiki/Item_Stat_Modifiers</p>
+
+        <div class="tip"><strong>💨 有一個你看不到的隱藏屬性「速度」　</strong>根據官方 Wiki Game_Mechanics 條目：角色有一個隱藏屬性叫「速度（Speed）」，決定你移動的快慢。速度最高只能到 100%，但可以被骨折等傷勢拉低。穿著太重的護甲或攜帶過多物品也可能影響移動。</div>
+
+        <div class="tip"><strong>🎲 物品的實際耐久是由 RNG 決定的　</strong>根據官方 Wiki Item_Stat_Modifiers 條目：每件武器和工具的耐久度（Durability）都由一個隱藏的 RNG 值決定，即使是同品質的物品，耐久度也可能有差異。這是為什麼同樣是品質 6 的武器，耐久可能和別人的不完全相同。</div>
+
+        <div class="tip"><strong>🎯 在隊伍介面可以追蹤隊友位置　</strong>根據官方 Wiki Game_Mechanics 條目：在地圖介面追蹤隊友後，可以即時看到他們在地圖上的確切位置和面對的方向，且位置是即時更新的。五人隊伍在掃點分頭行動時，不需要語音就能掌握彼此動向。</div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-title">本文件整理自以下官方及可靠社群資料來源</div>
+        <div>7daystodie.com 官方 Release Notes　｜　fandom.com 官方 Wiki　｜　wiki.gg 官方 Wiki　｜　PCGamesN</div>
+        <div>7d2d.net　｜　supercraft.host　｜　xgamingserver.com　｜　ggservers.com　｜　holy.gg</div>
+        <div>gamerant.com　｜　eneba.com　｜　4netplayers.com　｜　scalacube.com　｜　bisecthosting.com</div>
+      </footer>
+
+    </div>
+  </main>
+</div>
+
+<button class="back-to-top" id="backToTop" aria-label="回到頂部">↑</button>
+
+<script>
+  // Mobile menu toggle
+  const sidebar = document.getElementById('sidebar');
+  const toggle = document.getElementById('mobileToggle');
+  const overlay = document.getElementById('overlay');
+
+  toggle.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('visible');
+  });
+  overlay.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('visible');
+  });
+
+  // Close mobile menu on link click
+  sidebar.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      if (window.innerWidth <= 1024) {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('visible');
+      }
+    });
+  });
+
+  // Back to top
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) backToTop.classList.add('visible');
+    else backToTop.classList.remove('visible');
+  });
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Active TOC highlighting via IntersectionObserver
+  const sections = document.querySelectorAll('section[id]');
+  const tocLinks = document.querySelectorAll('#tocList .toc-item > a');
+  const linkMap = new Map();
+  tocLinks.forEach(link => {
+    const id = link.getAttribute('href').slice(1);
+    linkMap.set(id, link.parentElement);
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        // Clear all active
+        document.querySelectorAll('.toc-item.active').forEach(el => el.classList.remove('active'));
+        // Set new active
+        const target = linkMap.get(id);
+        if (target) target.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
