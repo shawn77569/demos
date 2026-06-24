@@ -1,1 +1,1864 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="AI 硬體研究趨勢：NSF 科研計畫資料庫分析（2018-2025）">
+<title>AI 硬體研究趨勢：NSF 科研計畫資料庫分析</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    /* demos 米黃紙感主題 */
+    --bg: #FAF7F0;
+    --bg-card: #FFFFFF;
+    --bg-card-soft: #FCFAF3;
+    --text: #1F1C18;
+    --text-muted: #5A534A;
+    --text-dim: #8A8270;
+    --border: #E0D8C4;
+    --border-strong: #C4B896;
+    --accent: #A84838;
+    --accent-light: #D9614F;
+    --accent-soft: #F4E4DF;
 
+    /* 五維分析配色 */
+    --color-A: #C26A4A;  /* 技術路線 - 橘紅 */
+    --color-B: #2E5C8A;  /* 研究層次 - 藍 */
+    --color-C: #6B8E4E;  /* 計算階段 - 綠 */
+    --color-D: #8B6BB1;  /* 部署環境 - 紫 */
+    --color-E: #C9A227;  /* 應用領域 - 金 */
+
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+    --font: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    --font-mono: "JetBrains Mono", "SF Mono", Consolas, monospace;
+
+    --sidebar-w: 240px;
+    --max-w: 880px;
+  }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 20px; }
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    font-size: 15.5px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    background-image:
+      radial-gradient(at 10% 0%, rgba(168, 72, 56, 0.03) 0px, transparent 50%),
+      radial-gradient(at 90% 100%, rgba(46, 92, 138, 0.02) 0px, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* ===== Layout ===== */
+  .layout {
+    display: grid;
+    grid-template-columns: var(--sidebar-w) 1fr;
+    min-height: 100vh;
+  }
+
+  /* ===== Sidebar ===== */
+  .sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    background: var(--bg-card-soft);
+    border-right: 1px solid var(--border);
+    padding: 28px 18px;
+    overflow-y: auto;
+    font-size: 13.5px;
+  }
+  .sidebar-header {
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 14px;
+  }
+  .sidebar-eyebrow {
+    font-size: 10.5px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .sidebar-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .toc { list-style: none; }
+  .toc li { margin-bottom: 2px; }
+  .toc a {
+    display: block;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+    font-weight: 500;
+  }
+  .toc a:hover {
+    color: var(--text);
+    background: var(--bg-card);
+    border-left-color: var(--accent);
+  }
+  .toc li.active > a {
+    color: var(--accent);
+    background: var(--bg-card);
+    border-left-color: var(--accent);
+    font-weight: 700;
+  }
+  .toc-sub {
+    list-style: none;
+    padding-left: 14px;
+    margin: 2px 0 6px;
+    border-left: 1px solid var(--border);
+    margin-left: 12px;
+  }
+  .toc-sub a {
+    padding: 3px 10px;
+    font-size: 12.5px;
+    color: var(--text-dim);
+  }
+
+  /* ===== Main Content ===== */
+  .main { min-width: 0; }
+  .content {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 70px 40px 100px;
+  }
+
+  /* ===== Hero ===== */
+  .hero {
+    margin-bottom: 60px;
+    padding-bottom: 36px;
+    border-bottom: 2px solid var(--border);
+    position: relative;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 80px; height: 3px;
+    background: var(--accent);
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1px solid rgba(168, 72, 56, 0.2);
+    padding: 4px 12px;
+    border-radius: 3px;
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+  .hero h1 {
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+  .hero-sub {
+    font-size: 17px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    font-size: 13px;
+    color: var(--text-dim);
+    font-family: var(--font-mono);
+  }
+  .hero-meta span::before {
+    content: "▸ ";
+    color: var(--accent);
+  }
+
+  /* ===== Abstract ===== */
+  .abstract {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 4px;
+    padding: 22px 28px;
+    margin: 32px 0;
+    font-size: 16px;
+    line-height: 1.8;
+  }
+  .abstract strong { color: var(--accent); font-weight: 700; }
+
+  /* ===== Sections ===== */
+  section {
+    margin-bottom: 56px;
+    scroll-margin-top: 20px;
+  }
+  h2 {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--text);
+    margin: 0 0 8px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-strong);
+    position: relative;
+    letter-spacing: -0.01em;
+  }
+  h2::before {
+    content: "";
+    position: absolute;
+    bottom: -1px; left: 0;
+    width: 60px; height: 3px;
+    background: var(--accent);
+  }
+  h3 {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 32px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  h3 .dim-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px; height: 28px;
+    color: white;
+    font-size: 13px;
+    font-weight: 800;
+    border-radius: 4px;
+  }
+  h3.dim-A .dim-badge { background: var(--color-A); }
+  h3.dim-B .dim-badge { background: var(--color-B); }
+  h3.dim-C .dim-badge { background: var(--color-C); }
+  h3.dim-D .dim-badge { background: var(--color-D); }
+  h3.dim-E .dim-badge { background: var(--color-E); }
+
+  h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 24px 0 10px;
+  }
+
+  p { margin-bottom: 14px; color: var(--text); }
+  p + p { margin-top: -2px; }
+
+  strong { color: var(--accent); font-weight: 700; }
+  em { color: var(--text-muted); font-style: normal; font-weight: 600; }
+
+  /* ===== Key Stats / Callout Numbers ===== */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin: 20px 0 28px;
+  }
+  .stat {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow-sm);
+  }
+  .stat-num {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1.1;
+    font-family: var(--font-mono);
+    letter-spacing: -0.02em;
+  }
+  .stat-label {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    margin-top: 6px;
+    font-weight: 500;
+  }
+  .stat-sub {
+    font-size: 12.5px;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  /* ===== Chart Containers ===== */
+  .chart-wrap {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 22px 24px;
+    margin: 22px 0;
+    box-shadow: var(--shadow-sm);
+  }
+  .chart-title {
+    font-size: 15.5px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .chart-sub {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-bottom: 14px;
+  }
+  .chart-canvas-wrap {
+    position: relative;
+    width: 100%;
+    height: 320px;
+  }
+  .chart-canvas-wrap.tall { height: 380px; }
+
+  /* ===== Tables ===== */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 18px 0 26px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    box-shadow: var(--shadow-sm);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th {
+    background: var(--bg-card-soft);
+    color: var(--text);
+    font-weight: 700;
+    text-align: left;
+    padding: 11px 14px;
+    border-bottom: 2px solid var(--border-strong);
+    font-size: 12.5px;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+  td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: top;
+    line-height: 1.65;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--bg-card-soft); }
+  td.code {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  td.cat {
+    font-weight: 600;
+    color: var(--accent);
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  /* ===== Five-Dimension Framework Table ===== */
+  .framework-table {
+    margin: 24px 0;
+  }
+  .framework-table table { font-size: 13.5px; }
+  .framework-table th {
+    text-align: center;
+    color: white;
+    font-size: 13px;
+    padding: 10px 8px;
+  }
+  .framework-table th:nth-child(1) { background: var(--color-A); }
+  .framework-table th:nth-child(2) { background: var(--color-B); }
+  .framework-table th:nth-child(3) { background: var(--color-C); }
+  .framework-table th:nth-child(4) { background: var(--color-D); }
+  .framework-table th:nth-child(5) { background: var(--color-E); }
+  .framework-table td {
+    text-align: center;
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+
+  /* ===== Heatmap ===== */
+  .heatmap {
+    margin: 24px 0;
+    overflow-x: auto;
+  }
+  .heatmap-grid {
+    display: grid;
+    grid-template-columns: 140px repeat(7, 1fr);
+    gap: 2px;
+    min-width: 600px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    box-shadow: var(--shadow-sm);
+  }
+  .heatmap-cell {
+    padding: 10px 8px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 3px;
+  }
+  .heatmap-cell.label-y {
+    background: transparent;
+    color: var(--text-muted);
+    font-weight: 700;
+    text-align: right;
+    padding-right: 12px;
+    font-size: 12.5px;
+  }
+  .heatmap-cell.label-x {
+    background: transparent;
+    color: var(--text-muted);
+    font-weight: 700;
+    font-size: 11px;
+    padding: 6px 4px;
+    line-height: 1.3;
+  }
+  .heatmap-cell.empty { background: #F2EEDF; color: var(--text-dim); }
+  .heatmap-cell.low { background: rgba(168, 72, 56, 0.15); color: var(--text); }
+  .heatmap-cell.mid { background: rgba(168, 72, 56, 0.4); color: var(--text); }
+  .heatmap-cell.high { background: rgba(168, 72, 56, 0.65); color: white; }
+  .heatmap-cell.max { background: var(--accent); color: white; }
+
+  /* ===== Insight Box ===== */
+  .insight {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin: 18px 0;
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+  .insight-label {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ===== Conclusion Card ===== */
+  .conclusion-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 22px 26px;
+    margin: 16px 0;
+    box-shadow: var(--shadow-sm);
+  }
+  .conclusion-card h4 {
+    color: var(--accent);
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 17px;
+  }
+  .conclusion-card .sub-label {
+    font-size: 13px;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  /* ===== Lists ===== */
+  ul, ol { margin: 10px 0 18px; padding-left: 24px; }
+  li { margin-bottom: 6px; color: var(--text); }
+  li::marker { color: var(--accent); }
+
+  /* ===== Methodology Flow ===== */
+  .flow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin: 20px 0 26px;
+  }
+  .flow-step {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+  }
+  .flow-step-num {
+    font-size: 12.5px;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+  .flow-step-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .flow-step-stat {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    margin-top: 8px;
+  }
+  .flow-step-desc {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+
+  /* ===== Footer ===== */
+  .footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.8;
+  }
+  .footer-title {
+    color: var(--text-muted);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  /* ===== Mobile ===== */
+  .mobile-toggle {
+    display: none;
+    position: fixed;
+    top: 14px;
+    right: 14px;
+    z-index: 200;
+    background: var(--accent);
+    color: white;
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+  }
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 140;
+  }
+  .overlay.visible { display: block; }
+
+  @media (max-width: 1024px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 80%;
+      max-width: 280px;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      z-index: 150;
+      box-shadow: 4px 0 16px rgba(0,0,0,0.2);
+    }
+    .sidebar.open { transform: translateX(0); }
+    .mobile-toggle { display: flex; align-items: center; justify-content: center; }
+    .content { padding: 60px 22px 80px; }
+    .hero h1 { font-size: 28px; }
+    .hero-sub { font-size: 15px; }
+  }
+
+  @media (max-width: 600px) {
+    body { font-size: 14.5px; }
+    .content { padding: 55px 16px 60px; }
+    .hero { margin-bottom: 40px; }
+    .hero h1 { font-size: 24px; }
+    .hero-sub { font-size: 14px; }
+    h2 { font-size: 22px; }
+    h3 { font-size: 17px; }
+    h4 { font-size: 15px; }
+    section { margin-bottom: 40px; }
+    .chart-canvas-wrap { height: 260px; }
+    .chart-canvas-wrap.tall { height: 320px; }
+    .stat-num { font-size: 26px; }
+    th, td { padding: 9px 10px; font-size: 12.5px; }
+    .abstract { padding: 16px 18px; font-size: 14.5px; }
+  }
+</style>
+</head>
+<body>
+
+<button class="mobile-toggle" id="mobileToggle" aria-label="開啟選單">☰</button>
+<div class="overlay" id="overlay"></div>
+
+<div class="layout">
+
+  <!-- ===== Sidebar ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-eyebrow">RESEARCH NOTE</div>
+      <div class="sidebar-title">NSF AI 硬體研究<br>趨勢分析</div>
+    </div>
+    <ul class="toc" id="tocList">
+      <li><a href="#abstract">摘要</a></li>
+      <li><a href="#method">一、研究方法</a></li>
+      <li><a href="#funding">二、NSF 經費概觀</a></li>
+      <li><a href="#five-dim">三、五維分布分析</a>
+        <ul class="toc-sub">
+          <li><a href="#dim-A">A 技術路線</a></li>
+          <li><a href="#dim-B">B 研究層次</a></li>
+          <li><a href="#dim-C">C 計算階段</a></li>
+          <li><a href="#dim-D">D 部署環境</a></li>
+          <li><a href="#dim-E">E 應用領域</a></li>
+        </ul>
+      </li>
+      <li><a href="#heatmap">四、熱力圖：技術 × 層次</a></li>
+      <li><a href="#trend">五、時間趨勢</a></li>
+      <li><a href="#observations">六、三項核心觀察</a></li>
+      <li><a href="#cim">七、CIM：值得關注的方向</a></li>
+    </ul>
+  </aside>
+
+  <!-- ===== Main ===== -->
+  <main class="main">
+    <div class="content">
+
+      <!-- Hero -->
+      <header class="hero">
+        <span class="hero-tag">RESEARCH NOTE · 2026</span>
+        <h1>AI 硬體研究趨勢：<br>NSF 科研計畫資料庫分析</h1>
+        <p class="hero-sub">從 362 筆計畫看美國學界 AI 硬體研究的全貌（2018–2025）</p>
+        <div class="hero-meta">
+          <span>資料來源：NSF Award Database</span>
+          <span>分析期間：2018–2025</span>
+          <span>核心樣本：362 筆</span>
+        </div>
+      </header>
+
+      <!-- Abstract -->
+      <div class="abstract" id="abstract">
+        本研究以 NSF 計畫資料庫為基礎，透過關鍵字檢索、人工分類與五維分析框架，
+        系統性地檢視美國學界在 AI 硬體領域的研究投入。研究發現：
+        <strong>學界與業界形成系統性分工</strong>——學界專注於業界結構上難以投入的基礎建設方向，
+        包括跨硬體框架、新型運算典範、開源生態等；
+        <strong>NSF 在 2022–2023 年透過 6 個主題式系列計畫加速戰略推動</strong>；
+        而在三大新興技術路線中，<strong>ASIC、CIM、神經形態分別處於不同發展階段</strong>，
+        其中 CIM（記憶體內運算）值得特別關注。
+      </div>
+
+      <!-- 一、研究方法 -->
+      <section id="method">
+        <h2>一、研究方法</h2>
+        <p>本研究的資料來源為美國 NSF（National Science Foundation）獎助資料庫，
+        分析期間涵蓋 2018 至 2025 年。檢索策略以多組關鍵字組合執行，涵蓋人工智慧
+        （artificial intelligence / machine learning / deep learning）與硬體相關詞彙
+        （Accelerator、ASIC、Neuromorphic、GPU、CIM、PIM、Chip、Photonic、NPU、Hardware、
+        Processor、Edge、RRAM、Memristor、On-device）。</p>
+
+        <h4>檢索與篩選流程</h4>
+        <div class="flow">
+          <div class="flow-step">
+            <div class="flow-step-num">STEP 1</div>
+            <div class="flow-step-title">原始檢索</div>
+            <div class="flow-step-stat">3,670</div>
+            <div class="flow-step-desc">關鍵字組合檢索結果，86 個 CSV 檔案</div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-num">STEP 2</div>
+            <div class="flow-step-title">合併去重</div>
+            <div class="flow-step-stat">2,848</div>
+            <div class="flow-step-desc">合併與去除重複計畫</div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-num">STEP 3</div>
+            <div class="flow-step-title">主題篩選</div>
+            <div class="flow-step-stat">362</div>
+            <div class="flow-step-desc">剔除 AI 軟體應用、硬體採購等非核心計畫</div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-num">STEP 4</div>
+            <div class="flow-step-title">五維分類</div>
+            <div class="flow-step-stat">362</div>
+            <div class="flow-step-desc">以 ABCDE 五個維度進行判別</div>
+          </div>
+        </div>
+
+        <h4>五維分析框架</h4>
+        <div class="framework-table">
+        <div class="table-wrap"><table>
+          <thead>
+          <tr>
+            <th>A 技術路線</th>
+            <th>B 研發層次</th>
+            <th>C 運算階段</th>
+            <th>D 部署環境</th>
+            <th>E 應用領域</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>A1 通用可程式化<br>(GPU、FPGA)</td>
+            <td>B1 元件 / 材料</td>
+            <td>C1 訓練</td>
+            <td>D1 雲端</td>
+            <td>E1 通用 AI</td>
+          </tr>
+          <tr>
+            <td>A2 客製化 ASIC</td>
+            <td>B2 電路設計</td>
+            <td>C2 推論</td>
+            <td>D2 邊緣裝置</td>
+            <td>E2 醫療</td>
+          </tr>
+          <tr>
+            <td>A3 神經形態</td>
+            <td>B3 架構設計</td>
+            <td>C3 推訓混合</td>
+            <td>D3 感測端</td>
+            <td>E3 自駕</td>
+          </tr>
+          <tr>
+            <td>A4 光學運算</td>
+            <td>B4 封裝 / 系統整合</td>
+            <td>C_unclear 未明示</td>
+            <td>D4 跨層</td>
+            <td>E4 通訊</td>
+          </tr>
+          <tr>
+            <td>A5 記憶體內運算<br>(CIM、PIM)</td>
+            <td>B5 互連 / 記憶體系統</td>
+            <td>—</td>
+            <td>D_unclear 未明示</td>
+            <td>E5 影音</td>
+          </tr>
+          <tr>
+            <td>A6 非典型運算</td>
+            <td>B6 軟體工具鏈</td>
+            <td>—</td>
+            <td>—</td>
+            <td>E6 NLP、生成式 AI</td>
+          </tr>
+          <tr>
+            <td>A7 跨技術路線</td>
+            <td>B7 演算法-硬體協同</td>
+            <td>—</td>
+            <td>—</td>
+            <td>E7 安全</td>
+          </tr>
+          </tbody>
+        </table></div>
+        </div>
+      </section>
+
+      <!-- 二、NSF 經費概觀 -->
+      <section id="funding">
+        <h2>二、NSF 經費概觀</h2>
+        <p>NSF 在 2018–2025 年於 AI 硬體領域的 362 筆核心計畫，
+        累計投入 <strong>2.36 億美元</strong>，平均每件 65 萬美元、中位數 50 萬美元。
+        從年度時間軸觀察，可以看到三個明顯的轉折特徵：</p>
+
+        <div class="stats-grid">
+          <div class="stat">
+            <div class="stat-num">$236.3M</div>
+            <div class="stat-label">總投入經費</div>
+            <div class="stat-sub">2018–2025 累計</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">362</div>
+            <div class="stat-label">核心計畫件數</div>
+            <div class="stat-sub">經五維分類後</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">$650K</div>
+            <div class="stat-label">平均每件規模</div>
+            <div class="stat-sub">中位數 $500K</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">$60.2M</div>
+            <div class="stat-label">2023 年度高峰</div>
+            <div class="stat-sub">歷史新高</div>
+          </div>
+        </div>
+
+        <div class="chart-wrap">
+          <div class="chart-title">年度件數與總經費（2018–2025）</div>
+          <div class="chart-sub">柱：件數 ／ 折線：年度總經費（萬美元）</div>
+          <div class="chart-canvas-wrap tall"><canvas id="yearlyOverview"></canvas></div>
+        </div>
+
+        <div class="conclusion-card">
+          <div class="sub-label">三個關鍵轉折</div>
+          <h4>① 2022：單件平均規模翻倍</h4>
+          <p>從 2018–2021 年平均每件 55 萬美元，到 2022 年躍升至 <strong>104 萬美元/件</strong>。
+          這年的件數其實沒大幅增加（41 件），但個別計畫的規模顯著放大，
+          反映 NSF 從「廣撒小額」轉向「集中大額」的戰略轉變。</p>
+        </div>
+
+        <div class="conclusion-card">
+          <h4>② 2023：件數與經費同步創高</h4>
+          <p>2023 年單年新啟動 <strong>78 件計畫、總額 6,020 萬美元</strong>，
+          兩個指標都是 8 年內的歷史高峰。
+          這不是延續 2022 年「集中大額」的路線，而是 NSF 同時推出多個主題式系列計畫，
+          讓件數與經費雙雙跳升（單件平均反而回落到 77 萬美元）。</p>
+        </div>
+
+        <div class="conclusion-card">
+          <h4>③ 2024–2025：雙雙回落</h4>
+          <p>2024 年回到 57 件、3,513 萬美元，
+          2025 年截至資料截止僅 10 件（資料尚未涵蓋完整年度）。
+          整體趨勢顯示 2022–2023 是這波 AI 硬體投資擴張的高點。</p>
+        </div>
+
+        <h4>2018–2021 vs 2022–2024 的結構性差異</h4>
+        <div class="table-wrap"><table>
+          <thead>
+            <tr><th>區間</th><th>件數</th><th>總經費</th><th>平均每件</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="cat">2018–2021</td><td>176</td><td>$95.5M</td><td>$54萬</td></tr>
+            <tr><td class="cat">2022–2024</td><td>176</td><td>$138.2M</td><td>$78萬</td></tr>
+            <tr style="background: var(--bg-card-soft); font-weight: 700;"><td>變化</td><td>持平</td><td>+45%</td><td>+44%</td></tr>
+          </tbody>
+        </table></div>
+        <p>兩個區間的<strong>件數完全相同（176 件）</strong>，但經費差距 45%。
+        換句話說，NSF 在 AI 硬體領域的「研究關注度」變化不大，
+        但「資源投入強度」顯著提升——每個被選中的計畫，平均拿到的錢變多了。</p>
+
+        <h4>成長的部分解釋：主題式系列計畫</h4>
+        <p>2022 年起 NSF 啟動了多個主題式投資計畫，部分解釋了上述的規模擴張。
+        這些主題式計畫合計 <strong>37 件、佔整體 10% 件數，但佔 24% 預算</strong>，
+        每件平均規模顯著高於一般 SHF / CAREER 個別計畫。</p>
+
+        <div class="table-wrap"><table>
+          <thead>
+            <tr><th>計畫系列</th><th>件數</th><th>啟動年</th><th>總額</th><th>戰略目的</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="cat">PPoSS Large</td><td>4</td><td class="code">2022</td><td>$18.0M</td><td>跨硬體執行框架研究，讓 AI 演算法跨 GPU、加速器、新型硬體可移植執行</td></tr>
+            <tr><td class="cat">FuSe / FuSe2</td><td>16</td><td class="code">2022 / 2024</td><td>$12.3M</td><td>半導體前瞻典範，著力於 CIM 新材料元件、封裝內光學整合、領域特定運算晶片</td></tr>
+            <tr><td class="cat">EFRI BRAID</td><td>6</td><td class="code">2022</td><td>$11.2M</td><td>神經形態仿腦運算，將生物神經系統的學習機制轉化為新型 AI 運算硬體</td></tr>
+            <tr><td class="cat">ASCENT</td><td>5</td><td class="code">2022</td><td>$6.9M</td><td>跨次領域顛覆性技術，著力於 CIM 鐵電 / RRAM 元件、光學運算等前瞻方向</td></tr>
+            <tr><td class="cat">DESC</td><td>4</td><td class="code">2023</td><td>$5.2M</td><td>永續 AI 運算，將生命週期碳排納入 AI 晶片設計與運作優化準則</td></tr>
+            <tr><td class="cat">POSE Phase II</td><td>2</td><td class="code">2022</td><td>$3.0M</td><td>AI 硬體開源生態，建立社群與治理框架、降低 AI 晶片設計的進入門檻</td></tr>
+          </tbody>
+        </table></div>
+
+        <div class="insight">
+          <span class="insight-label">投資哲學觀察</span>
+          NSF 用 6 個不同的主題式投資計畫<strong>分散押注不同戰略目的</strong>，
+          涵蓋跨硬體基礎建設、半導體前瞻、神經形態革命、光學運算、永續運算、開源生態系。
+          不單獨投入特定路線，呈現多元並進的戰略策略——這是理解後續五維分布的重要前提。
+        </div>
+      </section>
+
+      <!-- 三、五維分布分析 -->
+      <section id="five-dim">
+        <h2>三、五維分布分析</h2>
+        <p>以下逐一分析五個維度的計畫分布特徵、關鍵發現與代表性案例。</p>
+
+        <!-- A 維度 -->
+        <h3 class="dim-A" id="dim-A"><span class="dim-badge">A</span>技術路線分布</h3>
+        <p>三大新興技術路線合計 62.4%——<strong>ASIC（97 件，26.8%）+ CIM（75 件，20.7%）+ 神經形態（54 件，14.9%）</strong>共 226 筆。
+        三條路線對應的產業現況截然不同：</p>
+        <ul>
+          <li><strong>ASIC</strong> 已商業化（Google TPU 等）</li>
+          <li><strong>CIM</strong> 進入商業化階段（聯發科天璣 9500 等）</li>
+          <li><strong>神經形態</strong> 仍以實驗室原型為主（少數產品如 Intel Loihi）</li>
+        </ul>
+        <p>其餘為通用可程式化（47 件）、光學運算（27 件）、非典型計算（18 件）、無特定技術主軸（43 件），
+        以及跨技術路線（1 件），顯示 NSF 對各式前瞻方向仍給予多元支持。</p>
+
+        <div class="chart-wrap">
+          <div class="chart-title">技術路線分布（件數）</div>
+          <div class="chart-sub">NSF 樣本，N = 362</div>
+          <div class="chart-canvas-wrap"><canvas id="chartA"></canvas></div>
+        </div>
+
+        <h4>A 維度代表性案例</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>類型</th><th>計畫</th><th>年份</th><th>研究內容</th></tr></thead>
+          <tbody>
+            <tr><td class="cat">A2 ASIC</td><td class="code">NSF-107569</td><td class="code">2020–2023</td><td>具備線上學習能力與稀疏感知能力的 AI 加速器晶片，讓 AI 模型部署後能根據即時資料持續調整</td></tr>
+            <tr><td class="cat">A5 CIM</td><td class="code">NSF-129873</td><td class="code">2022–2025</td><td>以鐵電材料元件構建記憶體內運算動力學引擎，在記憶體陣列內直接完成組合最佳化問題求解</td></tr>
+            <tr><td class="cat">A3 神經形態</td><td class="code">NSF-146595</td><td class="code">2023–2027</td><td>模擬小腦的時間性同步訊號機制，以神經形態元件實現超高效預測運算</td></tr>
+            <tr><td class="cat">A4 光學</td><td class="code">NSF-155999</td><td class="code">2024–2027</td><td>封裝內可重構光學交換技術，讓 AI 叢集內多顆晶片透過光直接互連</td></tr>
+          </tbody>
+        </table></div>
+
+        <!-- B 維度 -->
+        <h3 class="dim-B" id="dim-B"><span class="dim-badge">B</span>研究層次分布</h3>
+        <p>四大研究層次經費合計 90%——<strong>架構設計（103）+ 軟硬協同設計（89）+ 元件（84）+ 軟體工具鏈（52）</strong>共 328 筆。
+        顯示 NSF 計畫聚焦在投注創新的底層元件及頂層架構，同時也做軟硬搭配和新的軟體工具，
+        避開業界已大量投入的實作部分（封裝、互聯、電路設計等）。</p>
+
+        <p>其中<strong>封裝與系統整合</strong>是筆數最少（10 筆）但平均經費（100 萬美元 / 筆）最高的類別，
+        反映在 NSF 有能力做封裝研究的團隊並不多，但卻受到鉅額資金支持。</p>
+
+        <div class="chart-wrap">
+          <div class="chart-title">研究層次分布（件數）</div>
+          <div class="chart-sub">NSF 樣本，N = 362</div>
+          <div class="chart-canvas-wrap"><canvas id="chartB"></canvas></div>
+        </div>
+
+        <h4>B4 封裝研究代表案例</h4>
+        <p>封裝研究計畫（10 件）以「<em>封裝內整合的方法論研究</em>」為主，不涉及量產封裝製程，
+        包含封裝內光學整合 5 件、Chiplet 3D 整合方法 3 件、永續性與異質電源整合各 1 件。
+        平均單件補助最高的原因是 NSF 將封裝研究多以主題式計畫推動
+        （10 件中 8 件屬 FuSe / DESC / CMOS+X 等系列），且半數計畫為跨機構合作。</p>
+
+        <div class="table-wrap"><table>
+          <thead><tr><th>類型</th><th>計畫</th><th>年份</th><th>研究內容</th></tr></thead>
+          <tbody>
+            <tr><td class="cat">封裝內光學</td><td class="code">NSF-155999</td><td class="code">2024–2027</td><td>封裝內可重構光學交換技術，AI 叢集內多顆晶片透過光直接互連，突破電訊號頻寬與能耗限制</td></tr>
+            <tr><td class="cat">封裝內光學</td><td class="code">NSF-156587</td><td class="code">2024–2027</td><td>光電共封裝技術，將光收發器直接封進處理器封裝內，縮短電訊號路徑、降低資料中心 AI 互連延遲與能耗</td></tr>
+            <tr><td class="cat">Chiplet 3D</td><td class="code">NSF-150981</td><td class="code">2024–2028</td><td>將大型 AI 晶片拆解為微型 chiplet，在封裝內以可重構方式重新組合</td></tr>
+            <tr><td class="cat">永續性整合</td><td class="code">NSF-147566</td><td class="code">2023–2027</td><td>將退役晶片回收整合到新運算系統中，延長硬體生命週期、降低製造碳排與電子廢棄物</td></tr>
+          </tbody>
+        </table></div>
+
+        <h4>B6 軟體工具鏈代表案例</h4>
+        <p>軟體工具鏈（52 件）以「<em>跨硬體框架與設計工具</em>」研究為主軸（43 件），
+        其餘 9 件分屬新典範評測與驗證、開源生態、神經形態與 CIM 運算工具等，
+        <strong>與商業 EDA 工具方向不同</strong>。
+        平均單件經費高達 83 萬美元（全資料集平均的 1.3 倍）。</p>
+
+        <div class="table-wrap"><table>
+          <thead><tr><th>類型</th><th>計畫</th><th>年份</th><th>研究內容</th></tr></thead>
+          <tbody>
+            <tr><td class="cat">跨硬體框架</td><td class="code">NSF-133846</td><td class="code">2022–2026</td><td>張量運算的跨硬體執行框架，同一份程式碼可在 GPU、各類加速器、新型硬體上高效執行</td></tr>
+            <tr><td class="cat">跨硬體框架</td><td class="code">NSF-146431</td><td class="code">2023–2027</td><td>跨層協調與最佳化框架，讓不同硬體加速器能彼此協調分工</td></tr>
+            <tr><td class="cat">新典範評測</td><td class="code">NSF-135865</td><td class="code">2022–2026</td><td>為 CIM 記憶體內運算建立標準評測框架</td></tr>
+            <tr><td class="cat">新典範驗證</td><td class="code">NSF-146807</td><td class="code">2023–2027</td><td>數學形式化驗證方法檢驗 CIM 晶片運算正確性，為新型運算典範進入安全關鍵應用提供工具</td></tr>
+          </tbody>
+        </table></div>
+
+        <!-- C 維度 -->
+        <h3 class="dim-C" id="dim-C"><span class="dim-badge">C</span>計算階段分布</h3>
+        <p>計算階段分布中，<strong>純推論 126 件為件數最大宗</strong>（經費 30%），
+        訓推混合 96 件次之（經費 28%），<strong>推論相關合計 222 件</strong>（經費 58%）。
+        計算階段不明 113 件，<strong>但因為個別計畫規模較大，經費佔比反而是四類中最高（34.8%）</strong>，
+        反映 NSF 大型整合計畫在分類上常難以明確指向單一計算階段。
+        純訓練僅 27 件（經費 7%），為四類中最少。</p>
+
+        <div class="chart-wrap">
+          <div class="chart-title">計算階段分布</div>
+          <div class="chart-sub">N = 362</div>
+          <div class="chart-canvas-wrap"><canvas id="chartC"></canvas></div>
+        </div>
+
+        <div class="insight">
+          <span class="insight-label">關鍵觀察</span>
+          純訓練的 27 筆中<strong>無一件設計新的雲端訓練晶片</strong>
+          （對應 NVIDIA H100、Google TPU 等主流訓練硬體類型），
+          研究內容轉向五個非主流方向：邊緣裝置訓練 10 件、HPC 與跨硬體訓練框架 7 件、
+          神經形態學習機制 6 件、新典範訓練硬體（CIM、光學）2 件、特殊訓練演算法 2 件。
+        </div>
+
+        <h4>C1 訓練計畫代表案例</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>類型</th><th>計畫</th><th>年份</th><th>研究內容</th></tr></thead>
+          <tbody>
+            <tr><td class="cat">邊緣裝置訓練</td><td class="code">NSF-135786</td><td class="code">2022–2026</td><td>分散式增量學習系統，邊緣裝置接收串流資料時邊收邊學，不需將原始訓練資料回傳雲端</td></tr>
+            <tr><td class="cat">邊緣裝置訓練</td><td class="code">NSF-125760</td><td class="code">2021–2024</td><td>超低功耗 AI 加速器，將訓練能力帶到電池供電的邊緣裝置上</td></tr>
+            <tr><td class="cat">神經形態學習</td><td class="code">NSF-146618</td><td class="code">2023–2027</td><td>EFRI BRAID 旗艦計畫，神經形態仿腦硬體具備可擴展自我學習能力</td></tr>
+            <tr><td class="cat">HPC 框架</td><td class="code">NSF-157371</td><td class="code">2024–2026</td><td>主動光學超穎元件，提升資料中心 LLM 訓練時運算與記憶體間的光學互連能效</td></tr>
+          </tbody>
+        </table></div>
+
+        <!-- D 維度 -->
+        <h3 class="dim-D" id="dim-D"><span class="dim-badge">D</span>部署環境分布</h3>
+        <p>部署環境分布為<strong>邊緣裝置 115 件（經費 30%）為最大有明確類別</strong>，
+        雲端 64 件（經費 18%）次之，感測端 27 件（經費 5.8%）、跨層 22 件（經費 7%），
+        部署環境不明 134 件（經費 38%）。</p>
+
+        <p>排除不明後，<strong>裝置端部署（邊緣 + 感測端）合計達 142 件，為雲端部署的 2.2 倍</strong>，
+        顯示學界研究重心偏向裝置端而非資料中心。</p>
+
+        <div class="chart-wrap">
+          <div class="chart-title">部署環境分布</div>
+          <div class="chart-sub">N = 362</div>
+          <div class="chart-canvas-wrap"><canvas id="chartD"></canvas></div>
+        </div>
+
+        <h4>D3 感測端計畫案例</h4>
+        <p>在感測端的 27 筆計畫中，綁定特定應用 21 件、不綁特定應用 6 件。
+        21 件特定應用以<strong>影像感測內運算（8 件）與生醫穿戴/植入（8 件）</strong>為主。</p>
+
+        <div class="insight">
+          <span class="insight-label">研究分工現象</span>
+          應用綁定比率與全資料集呈相反趨勢——全體 362 件中通用佔 63%，感測端 27 件中通用卻僅 22%。
+          意味將運算搬入感測器後，研究內容必須綁定具體感測模態而難以維持通用性。
+        </div>
+
+        <div class="table-wrap"><table>
+          <thead><tr><th>類型</th><th>計畫</th><th>年份</th><th>研究內容</th></tr></thead>
+          <tbody>
+            <tr><td class="cat">影像感測</td><td class="code">NSF-147906</td><td class="code">2023–2026</td><td>超穎光學元件與機器視覺處理器垂直整合到影像感測器上（FuSe 戰略計畫）</td></tr>
+            <tr><td class="cat">影像感測</td><td class="code">NSF-125844</td><td class="code">2021–2025</td><td>PARIS 感測內運算架構結合相控陣雷達與神經形態運算，影像感測器即時完成 3D 影像分析</td></tr>
+            <tr><td class="cat">生醫植入</td><td class="code">NSF-154383</td><td class="code">2024–2027</td><td>RRAM 強化的可重構植入式神經介面平台，即時處理腦神經訊號</td></tr>
+            <tr><td class="cat">生醫穿戴</td><td class="code">NSF-157575</td><td class="code">2024–2028</td><td>攝護腺癌手術探針的邊緣 AI 生物阻抗系統晶片，手術中即時辨識並移除殘留癌細胞</td></tr>
+          </tbody>
+        </table></div>
+
+        <!-- E 維度 -->
+        <h3 class="dim-E" id="dim-E"><span class="dim-badge">E</span>應用領域分布</h3>
+        <p>應用領域分布中，<strong>通用 229 件（經費 59%）為絕對最大宗</strong>，
+        其他七類合計 133 件（經費 41%），特定應用計畫則高度分散。</p>
+
+        <p>其中「其他特定領域」內部以 HPC 與科學運算為最大宗（11 件），其餘為智慧製造、
+        環境與結構監測、永續運算、圖像分析等多元方向。</p>
+
+        <div class="insight">
+          <span class="insight-label">與業界熱潮的落差</span>
+          NSF 研究對應業界熱門領域的比例反而較低——
+          <strong>NLP 與 LLM 僅 10 件、通訊僅 9 件</strong>。
+          學界資源並沒有跟著業界熱門領域走，而是分布在更廣泛、更基礎的研究問題上。
+        </div>
+
+        <div class="chart-wrap">
+          <div class="chart-title">應用領域分布（特定領域）</div>
+          <div class="chart-sub">除通用 229 件外的其他類別</div>
+          <div class="chart-canvas-wrap"><canvas id="chartE"></canvas></div>
+        </div>
+      </section>
+
+      <!-- 四、熱力圖 -->
+      <section id="heatmap">
+        <h2>四、熱力圖：技術路線 × 研發層次</h2>
+        <p>將 A 維度（技術路線）與 B 維度（研究層次）交叉分析，
+        可清楚看見三大新興技術典範的研究位置差異：</p>
+
+        <div class="heatmap">
+        <div class="heatmap-grid">
+          <div class="heatmap-cell"></div>
+          <div class="heatmap-cell label-x">B1<br>元件</div>
+          <div class="heatmap-cell label-x">B2<br>電路</div>
+          <div class="heatmap-cell label-x">B3<br>架構</div>
+          <div class="heatmap-cell label-x">B4<br>封裝</div>
+          <div class="heatmap-cell label-x">B5<br>互連</div>
+          <div class="heatmap-cell label-x">B6<br>工具鏈</div>
+          <div class="heatmap-cell label-x">B7<br>軟硬協同</div>
+
+          <div class="heatmap-cell label-y">A2 ASIC (97)</div>
+          <div class="heatmap-cell low">1</div>
+          <div class="heatmap-cell low">5</div>
+          <div class="heatmap-cell high">35</div>
+          <div class="heatmap-cell low">2</div>
+          <div class="heatmap-cell empty">0</div>
+          <div class="heatmap-cell mid">10</div>
+          <div class="heatmap-cell max">44</div>
+
+          <div class="heatmap-cell label-y">A5 CIM (75)</div>
+          <div class="heatmap-cell high">34</div>
+          <div class="heatmap-cell low">1</div>
+          <div class="heatmap-cell mid">18</div>
+          <div class="heatmap-cell empty">0</div>
+          <div class="heatmap-cell low">2</div>
+          <div class="heatmap-cell mid">6</div>
+          <div class="heatmap-cell mid">14</div>
+
+          <div class="heatmap-cell label-y">A3 神經形態 (54)</div>
+          <div class="heatmap-cell max">36</div>
+          <div class="heatmap-cell low">1</div>
+          <div class="heatmap-cell mid">6</div>
+          <div class="heatmap-cell low">1</div>
+          <div class="heatmap-cell empty">0</div>
+          <div class="heatmap-cell low">3</div>
+          <div class="heatmap-cell mid">7</div>
+
+          <div class="heatmap-cell label-y">A1 通用 (47)</div>
+          <div class="heatmap-cell empty">0</div>
+          <div class="heatmap-cell empty">0</div>
+          <div class="heatmap-cell mid">16</div>
+          <div class="heatmap-cell low">1</div>
+          <div class="heatmap-cell low">3</div>
+          <div class="heatmap-cell mid">12</div>
+          <div class="heatmap-cell mid">15</div>
+
+          <div class="heatmap-cell label-y">A4 光學 (27)</div>
+          <div class="heatmap-cell mid">7</div>
+          <div class="heatmap-cell empty">0</div>
+          <div class="heatmap-cell mid">15</div>
+          <div class="heatmap-cell low">2</div>
+          <div class="heatmap-cell low">2</div>
+          <div class="heatmap-cell low">1</div>
+          <div class="heatmap-cell empty">0</div>
+        </div>
+        </div>
+
+        <div class="insight">
+          <span class="insight-label">三典範的不同發展位置</span>
+          <ul style="margin: 6px 0;">
+            <li><strong>ASIC</strong> 集中於架構層（B3：35 件）與軟硬共設計層（B7：44 件），元件層僅 1 件 → <em>最成熟</em></li>
+            <li><strong>CIM</strong> 在元件層（B1：34 件）與架構層（B3：18 件）並行分布，元件研究仍很活躍 → <em>居中</em></li>
+            <li><strong>神經形態</strong>絕大多數集中在元件層（B1：36 件），架構層僅 6 件 → <em>最前瞻，元件可行性尚在驗證</em></li>
+          </ul>
+          凸顯三種技術路線截然不同的發展進程：<strong>ASIC 最為成熟、CIM 次之、神經形態最為前瞻</strong>。
+        </div>
+      </section>
+
+      <!-- 五、時間趨勢 -->
+      <section id="trend">
+        <h2>五、時間趨勢分析</h2>
+        <p>從時間軸觀察各維度的經費變化，可發現幾個關鍵轉折點。</p>
+
+        <h4>A 技術路線經費趨勢</h4>
+        <p><strong>CIM 在 2023–24 年顯著加速</strong>：5 年（2018–2022）年均 400–700 萬美元，
+        驟增到 2023 年達 1,240 萬美元、2024 年也有 1,110 萬美元。
+        ASIC 則在 2023 年達 1,950 萬美元創歷史高峰、2024 年回落至 670 萬美元。
+        2023 年度總經費 6,020 萬美元創歷史新高。</p>
+
+        <div class="chart-wrap">
+          <div class="chart-title">技術路線年度經費（萬美元）</div>
+          <div class="chart-sub">2018–2025</div>
+          <div class="chart-canvas-wrap tall"><canvas id="trendA"></canvas></div>
+        </div>
+
+        <h4>B 研究層次經費趨勢</h4>
+        <p><strong>封裝層從 2018–2022 五年僅 50 萬美元、到 2023–2024 兩年達 1,000 萬美元</strong>，
+        屬於近乎從零崛起。元件層 2023–24 兩年合計 2,840 萬美元，接近前五年總和。
+        工具層經費高峰在 2022 年達 1,510 萬美元，對應 PPoSS Large 三筆計畫啟動。</p>
+
+        <div class="chart-wrap">
+          <div class="chart-title">研究層次年度經費（萬美元）</div>
+          <div class="chart-sub">2018–2025</div>
+          <div class="chart-canvas-wrap tall"><canvas id="trendB"></canvas></div>
+        </div>
+
+        <h4>D 部署環境經費趨勢</h4>
+        <p>雲端計畫在 2023 達 1,720 萬美元創歷史高峰，超過前五年（2018–22）總和 1,610 萬美元，
+        在 2024 回落至 850 萬美元。邊緣端計畫經費長期穩定，佔據整體主導地位。</p>
+
+        <div class="chart-wrap">
+          <div class="chart-title">部署環境年度經費（萬美元）</div>
+          <div class="chart-sub">2018–2025</div>
+          <div class="chart-canvas-wrap tall"><canvas id="trendD"></canvas></div>
+        </div>
+
+        <h4>雲端計畫 2023–24 增長案例分析</h4>
+        <p>雲端計畫在 2023–2024 共 31 件，經費達 2,570 萬美元。
+        直覺會推測是 LLM 浪潮拉動，<strong>但在 31 件中 LLM 直接相關僅 4 件</strong>（13% 件數、5% 預算）。
+        真正主要推動的是<strong>跨硬體框架與工具研究 7 件</strong>，
+        以及<strong>光學互連與光電共封裝 8 件</strong>。</p>
+
+        <div class="insight">
+          <span class="insight-label">學界與業界的時間差</span>
+          橫向對照在全資料集 362 件中，直接提及 LLM 也僅 12 件（3%），
+          且其中 9 件集中在 2024 年（2023 年之前 5 年完全沒有提及）。
+          <strong>反映學界研究跟進產業熱潮存在 1–2 年時間差，且經費上相較其他計畫也較低</strong>。
+        </div>
+
+        <h4>戰略級計畫啟動時間軸</h4>
+        <p>2022 年是 NSF 大型 AI 晶片整合計畫元年；
+        2023 年是戰略推動轉折年，6 個系列計畫同年推出，單年新啟動 26 件。
+        2023–2024 兩年戰略系列合計 39 件、經費 3,930 萬美元，
+        佔該兩年 29% 件數、41% 預算。</p>
+
+        <div class="table-wrap"><table>
+          <thead>
+            <tr><th>系列計畫</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>總計</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="cat">PPoSS Large</td><td>3</td><td>2</td><td>3</td><td>2</td><td>–</td><td>–</td><td><strong>10</strong></td></tr>
+            <tr><td class="cat">FuSe / FuSe2</td><td>–</td><td>–</td><td>–</td><td>8</td><td>8</td><td>–</td><td><strong>16</strong></td></tr>
+            <tr><td class="cat">EFRI BRAID</td><td>–</td><td>–</td><td>–</td><td>3</td><td>3</td><td>–</td><td><strong>6</strong></td></tr>
+            <tr><td class="cat">DESC</td><td>–</td><td>–</td><td>–</td><td>4</td><td>–</td><td>–</td><td><strong>4</strong></td></tr>
+            <tr><td class="cat">CMOS+X</td><td>–</td><td>–</td><td>–</td><td>4</td><td>–</td><td>–</td><td><strong>4</strong></td></tr>
+            <tr><td class="cat">ASCENT</td><td>3</td><td>1</td><td>1</td><td>–</td><td>–</td><td>–</td><td><strong>5</strong></td></tr>
+            <tr><td class="cat">POSE Phase II</td><td>–</td><td>–</td><td>–</td><td>2</td><td>–</td><td>–</td><td><strong>2</strong></td></tr>
+            <tr><td class="cat">ACED Fab</td><td>–</td><td>–</td><td>–</td><td>3</td><td>–</td><td>–</td><td><strong>3</strong></td></tr>
+            <tr><td class="cat">ENG-SEMICON</td><td>–</td><td>–</td><td>–</td><td>–</td><td>2</td><td>1</td><td><strong>3</strong></td></tr>
+            <tr style="background: var(--bg-card-soft); font-weight: 700;"><td>年度小計</td><td>6</td><td>3</td><td>4</td><td><strong>26</strong></td><td>13</td><td>1</td><td><strong>53</strong></td></tr>
+          </tbody>
+        </table></div>
+      </section>
+
+      <!-- 六、三項核心觀察 -->
+      <section id="observations">
+        <h2>六、三項核心觀察</h2>
+        <p>綜合五維分析與時間趨勢，從 NSF 計畫資料中可歸納出三項系統性觀察：</p>
+
+        <div class="conclusion-card">
+          <div class="sub-label">做什麼</div>
+          <h4>① 學界研究與業界產品線形成系統性分工</h4>
+          <p>四個學界完全不碰的方向：<strong>無新 GPU 設計、無量產封裝製程、無雲端訓練晶片、無通用 EDA 工具</strong>。
+          雲端 2023 年經費暴增也不是 LLM 推動——跨硬體框架 + 光學互連佔 67% 預算，
+          LLM 全集僅 3%。63% 計畫為跨應用通用方法，學界著力於業界結構上難以投入的基礎建設方向。</p>
+        </div>
+
+        <div class="conclusion-card">
+          <div class="sub-label">怎麼做</div>
+          <h4>② NSF 透過 6 個主要系列計畫推動戰略目標，2023 為大量啟動年</h4>
+          <p><strong>2022 為大型計畫元年、2023 為戰略推動轉折年</strong>：
+          六條系列同年釋出、單年系列計畫新啟動 26 件。
+          系列計畫佔 10% 件數卻佔 24% 預算，其餘 90% 件數仍為個別 SHF / CAREER 計畫。
+          反映 NSF 在「重點突破」與「廣泛支持」之間的雙軌策略。</p>
+        </div>
+
+        <div class="conclusion-card">
+          <div class="sub-label">往哪走</div>
+          <h4>③ 聚焦 ASIC、CIM、神經形態，分別處於不同發展進程</h4>
+          <ul>
+            <li><strong>ASIC（97 件）</strong>：集中在架構與軟硬共設計、元件層僅 1 件，走純系統設計、用既有 CMOS → <em>商業化進程最快</em></li>
+            <li><strong>CIM（75 件）</strong>：集中分布在元件、架構、共設計三層並行，仍以架構為主 → <em>居中</em></li>
+            <li><strong>神經形態（54 件）</strong>：集中在元件物理與架構層，仍在驗證材料與元件可行性 → <em>最前瞻</em></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 七、CIM -->
+      <section id="cim">
+        <h2>七、CIM：值得關注的關鍵方向</h2>
+        <p>在三大新興技術路線中，<strong>記憶體內運算（CIM）</strong>的位置最為特殊——
+        既不像 ASIC 已完成商業化（學界難以再切入產業價值），
+        也不像神經形態仍困在元件可行性驗證階段（產業化還很遠），
+        而是處於「<strong>學界研究持續加速、產業端開始進入量產</strong>」的關鍵交會點。</p>
+
+        <h3 style="margin-top: 28px;">7-1. CIM 在 NSF 資料的敘述統計</h3>
+        <p>從 362 筆 NSF 計畫資料中，CIM 相關研究呈現以下幾個量化特徵：</p>
+
+        <div class="stats-grid">
+          <div class="stat">
+            <div class="stat-num">75 件</div>
+            <div class="stat-label">CIM 計畫總數</div>
+            <div class="stat-sub">佔整體 20.7%，技術路線第二大</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">$48.3M</div>
+            <div class="stat-label">CIM 累計總經費</div>
+            <div class="stat-sub">2018–2025 八年合計</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">$23.5M</div>
+            <div class="stat-label">2023–24 兩年 CIM 經費</div>
+            <div class="stat-sub">接近前五年總和（$24.3M）</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">9 / 16</div>
+            <div class="stat-label">FuSe 系列中的 CIM 計畫</div>
+            <div class="stat-sub">NSF 戰略級押注比重最高</div>
+          </div>
+        </div>
+
+        <div class="insight">
+          <span class="insight-label">CIM 敘述統計的三項解讀</span>
+          <ul style="margin: 6px 0;">
+            <li><strong>規模顯著、加速中</strong>：CIM 在 NSF 資料庫中件數僅次於 ASIC，且 2023–24 兩年合計經費已接近前五年總和，顯示研究投入仍在加速</li>
+            <li><strong>元件與系統並行推進</strong>：CIM 在 B 維度的分布橫跨 B1 元件層（34 件）、B3 架構層（18 件）、B7 軟硬協同層（14 件）三層共 88%，元件研究仍在進行，但系統整合也已展開——這與神經形態（高度集中於元件層）截然不同</li>
+            <li><strong>戰略系列計畫的主要押注方向</strong>：FuSe 系列 16 件中有 9 件押注 CIM 方向，是 NSF 主題式戰略計畫中佔比最高的技術路線</li>
+          </ul>
+        </div>
+
+        <h3 style="margin-top: 36px;">7-2. CIM 在全球 AI 晶片產業的位置</h3>
+        <p>從目前可見的商業化進展觀察，CIM 在 AI 晶片市場呈現幾個特徵。
+        主流量產 AI 晶片仍以 ASIC 路線為主——NVIDIA GPU 系列（H100、B100）、
+        Google TPU、各家手機 SoC 的 NPU（Apple Neural Engine、Qualcomm Hexagon、
+        Samsung Exynos NPU）都是 ASIC 架構，目前尚未有大規模量產的純 CIM 加速器產品。
+        但「混合架構」開始進入旗艦量產：聯發科 2025 年 9 月發表的 Dimensity 9500
+        採用雙 NPU 架構，其中「Super Efficient NPU」據多家科技媒體報導為產業首款
+        將 CIM 整合進旗艦消費級 SoC 的 NPU，定位為常駐低功耗 AI 任務。</p>
+
+        <h4>各國 CIM 研發與商業化的代表廠商</h4>
+        <p>CIM 在不同國家發展出不同的技術路線與商業化路徑，
+        可大致歸納為以下幾個聚落：</p>
+
+        <div class="table-wrap"><table>
+          <thead>
+            <tr>
+              <th>國家 / 地區</th>
+              <th>代表廠商</th>
+              <th>主要技術路線</th>
+              <th>近期進展</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="cat">美國</td>
+              <td>IBM、Mythic、Syntiant</td>
+              <td>PCM-CIM（IBM）、類比 NOR Flash CIM（Mythic）</td>
+              <td>IBM 2023 於 Nature 發表 64 核混合訊號 PCM-CIM；
+                Mythic 2023–2024 商業出貨類比 AMP 晶片，2025/12 完成 $125M 募資</td>
+            </tr>
+            <tr>
+              <td class="cat">韓國</td>
+              <td>Samsung、SK Hynix、KAIST</td>
+              <td>HBM-PIM、DRAM 整合運算（FIMDRAM / Aquabolt-XL）</td>
+              <td>Samsung 2021 發表 HBM-PIM，已整合進 Xilinx Alveo 加速器測試；
+                2023 擴展支援 LLM 應用，2024 於 HPCA 發表 CXL-PNM</td>
+            </tr>
+            <tr>
+              <td class="cat">中國</td>
+              <td>知存科技、後摩智能、億鑄科技、昕原半導體、清華大學（北京）</td>
+              <td>Flash-PIM、SRAM-CIM、RRAM-CIM 並行發展</td>
+              <td>知存 WTM2101（Flash-PIM）累計出貨逾 1000 萬顆（華為、小米穿戴）；
+                後摩 H30 SRAM-CIM 智駕晶片 2025 量產（AEC-Q100 車規）；
+                昕原 28nm ReRAM 量產</td>
+            </tr>
+            <tr>
+              <td class="cat">日本</td>
+              <td>Maxram、Renesas</td>
+              <td>以與他國廠商合作為主</td>
+              <td>Maxram 與力積電合作 AIM 平台；Renesas 投入 PIM 研究</td>
+            </tr>
+            <tr>
+              <td class="cat">台灣</td>
+              <td>聯發科、力積電生態系、清華大學張孟凡團隊</td>
+              <td>SRAM-CIM macro、3D WoW DRAM-邏輯整合、ReRAM-CIM</td>
+              <td>D9500 整合 CIM NPU 2025 量產；力積電 AIM 平台 2023 公開、
+                2026 擴展為 3D AI Foundry 生態系；張孟凡團隊 ISSCC 連續多年入選</td>
+            </tr>
+          </tbody>
+        </table></div>
+
+        <div class="insight">
+          <span class="insight-label">國際對比的幾個觀察</span>
+          <ul style="margin: 6px 0;">
+            <li><strong>技術路線分歧明顯</strong>：美國新創偏好類比 CIM（Mythic 用 NOR Flash）與相變化記憶體（IBM PCM），
+              韓國走 DRAM 整合 PIM 路線，中國 SRAM/Flash/RRAM 三路並進，
+              台灣則同時涵蓋 SRAM-CIM 學術研究與 3D WoW 整合製程</li>
+            <li><strong>商業化進度差異</strong>：中國知存科技在端側可穿戴領域已實現千萬顆量產，
+              是目前 CIM 商業化最成功的單一產品案例；
+              聯發科 D9500 則是 CIM 整合進主流旗艦 SoC 的代表；
+              美國 Mythic 與韓國 Samsung 仍處於小量出貨或客戶測試階段</li>
+            <li><strong>市場規模預估</strong>：根據產業研究機構資料，
+              全球 CIM 相關市場規模在 2022 年約 163 億美元，
+              預估 2028 年達 413 億美元，CAGR 約 16.8%</li>
+          </ul>
+        </div>
+
+        <p>整體而言，CIM 目前處於一個「<strong>主流廠商分散、技術路線未定型、量產案例正陸續出現</strong>」
+        的中間階段，與 ASIC（已成熟量產）和神經形態（仍在元件可行性驗證）形成明顯對比。</p>
+
+        <h3 style="margin-top: 36px;">7-3. 台灣在 CIM 上的相關進展</h3>
+        <p>從近年公開資料初步盤點，台灣在 CIM 領域的相關進展可分為
+        <strong>學術研究、製程平台、終端產品</strong>三個層次。
+        三個層次都有近年的代表性案例，且時程上彼此呼應。</p>
+
+        <h4>三個層次的代表性進展</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>層次</th><th>代表案例</th><th>具體事證</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="cat">學術研究</td>
+              <td>清華大學張孟凡教授<br>Memory Design Lab</td>
+              <td>長期投入 SRAM-CIM 與 ReRAM-CIM macro 設計，ISSCC 2018 起連續多年入選；
+                ISSCC 2025 與台積電聯合發表「16nm 216Kb Gain-cell CIM macro，188.4 TOPS/W」；
+                ISSCC 2026 入選 3 篇 CIM 相關論文，含 16nm 1Mb 全數位 SRAM-CIM macro 444.21 TOPS/W</td>
+            </tr>
+            <tr>
+              <td class="cat">製程平台</td>
+              <td>力積電 AIM 平台<br>（AI-in-Memory）</td>
+              <td>2023 COMPUTEX 公開 AIM-200，以 40nm 邏輯 + 25nm DRAM 的 Wafer-on-Wafer（WoW）3D 堆疊，
+                邏輯-DRAM 傳輸頻寬達 1024-bit；
+                2025 與 Synopsys 合作開發 3DIC Compiler EDA 流程；
+                2026 COMPUTEX 擴展為「3D AI Foundry」生態系</td>
+            </tr>
+            <tr>
+              <td class="cat">終端產品</td>
+              <td>聯發科天璣 9500</td>
+              <td>2025/9/22 發表，TSMC N3P 製程；
+                據官方與 TechInsights、Electronic Design 等媒體報導，
+                為產業首款整合 CIM 的旗艦智慧型手機 SoC NPU；
+                CIM NPU 定位為「Super Efficient NPU」，主打常駐低功耗 AI 任務</td>
+            </tr>
+          </tbody>
+        </table></div>
+
+        <h4>台灣 CIM 相關產業鏈生態</h4>
+        <p>除了上述三個核心層次的代表案例，
+        台灣已逐步形成圍繞 CIM 與 3D 整合記憶體的小型產業鏈生態。
+        以下盤點以力積電「3D AI Foundry」生態系為核心展開，
+        並補上與 CIM 應用相關的記憶體與設計服務廠商：</p>
+
+        <div class="table-wrap"><table>
+          <thead><tr><th>環節</th><th>代表廠商</th><th>與 CIM / 3D AI 的關聯</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="cat">CIM 製程平台</td>
+              <td>力積電（6770）</td>
+              <td>AIM 3D WoW 平台、3D AI Foundry 主導者</td>
+            </tr>
+            <tr>
+              <td class="cat">3D 記憶體 IP</td>
+              <td>愛普（6531）</td>
+              <td>VHM 3D 堆疊記憶體技術，與力積電 WoW 整合，每 GB 提供 >4TB/s 頻寬</td>
+            </tr>
+            <tr>
+              <td class="cat">新型 PIM 記憶體</td>
+              <td>晶豪科（3006）</td>
+              <td>aiPIM（AI Processing-in-Memory）3D 存算一體架構，鎖定邊緣 AI 推論</td>
+            </tr>
+            <tr>
+              <td class="cat">CIM IC 設計服務</td>
+              <td>智慧記憶（力晶集團子公司）</td>
+              <td>提供以力積電 AIM 製程為基礎的 AI Engine IP 與 IC 設計服務</td>
+            </tr>
+            <tr>
+              <td class="cat">3D AI Foundry 夥伴</td>
+              <td>智成、Skymizer、滿拓、Zentel Japan、力晶微元</td>
+              <td>力積電 3D WoW 晶圓堆疊 IP 與產品設計合作夥伴（2025–2026 COMPUTEX）</td>
+            </tr>
+            <tr>
+              <td class="cat">終端晶片設計</td>
+              <td>聯發科（2454）</td>
+              <td>D9500 整合 CIM NPU 進旗艦消費級 SoC</td>
+            </tr>
+            <tr>
+              <td class="cat">利基型記憶體</td>
+              <td>南亞科（2408）、華邦電（2344）、旺宏（2337）</td>
+              <td>標準型/利基型 DRAM 與 NOR Flash 製造，可能為未來 CIM 異質整合提供基礎元件</td>
+            </tr>
+            <tr>
+              <td class="cat">IC 設計服務</td>
+              <td>世芯-KY、創意電子、M31</td>
+              <td>高複雜度 ASIC/SoC 設計服務與矽智財，可能承接 CIM 整合的客製化設計</td>
+            </tr>
+          </tbody>
+        </table></div>
+
+        <p class="source" style="display: block; font-size: 12.5px; color: var(--text-muted); background: rgba(184, 173, 148, 0.15); border-left: 2px solid var(--border-strong); padding: 8px 12px; margin: 12px 0 20px; border-radius: 0 3px 3px 0; line-height: 1.6;">
+          ※ 上表事證來源：力積電官網與媒體新聞稿（2023–2026）、Synopsys 部落格（2025）、
+          MediaTek 官方發布與 Android Authority／TechInsights／Electronic Design 等媒體（2025）、
+          IEEE SSCS 台北分會 ISSCC 入選論文新聞稿（2024–2026）、TechNOW Voice（2025）、
+          經濟部產業技術司資料。
+          技術名詞如「CIM」「PIM」「near-memory computing」「3D 整合」在不同來源定義略有差異，
+          本文採各廠商自我定位為準。
+        </p>
+
+        <div class="insight">
+          <span class="insight-label">綜合觀察</span>
+          相較於台灣在多數 AI 硬體前瞻技術路線（神經形態、光學運算、新型訓練架構等）
+          多以追隨者或代工角色出現，<strong>CIM 是少數台灣在學術、製程、終端產品三個層次
+          皆有具備自主能量的代表案例</strong>。
+          學研層有與台積電的長期合作累積；
+          製程層有力積電 AIM 平台以及圍繞其展開的 3D AI Foundry 生態系；
+          產品層有聯發科首發 SoC 整合 CIM 的領先地位。
+          時程上，2025 年同年發生兩件值得記錄的事——
+          張孟凡團隊與台積電聯合發表新的 Gain-cell CIM macro，
+          以及聯發科發表首款整合 CIM 的旗艦 SoC——
+          意味著從研究端到產品端的時程在 CIM 領域可能比其他 AI 晶片路線更為緊密。
+          <br><br>
+          與國際對比，台灣 CIM 的位置介於兩種模式之間：
+          <em>不像中國以新創公司大量湧現、各種技術路線並進的方式擴張</em>，
+          也<em>不像韓國 Samsung 以單一巨頭主導 HBM-PIM 的方式集中投入</em>，
+          而是依循台灣半導體既有的「<strong>學研 + 代工 + 主晶片設計</strong>」垂直分工模式，
+          形成相對小規模但跨層次連動的小型生態系。
+          這個結構是否能在 CIM 量產競爭真正起跑時轉化為實質優勢，
+          將取決於三個層次的時程能否持續同步、
+          以及生態系中各環節是否能進一步擴大規模與深化合作。
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-title">資料來源與方法說明</div>
+        <p>本研究資料來自 NSF Award Database 公開資料，分析方法包含關鍵字檢索、
+        合併去重、人工主題篩選與五維分類。研究時間範圍為 2018 年至 2025 年。
+        所有計畫識別碼、金額與分類為作者自行整理，如需引用請註明來源。</p>
+        <p style="margin-top: 14px; font-size: 12px; color: var(--text-dim);">
+          Research Note · 2026 · 作者：Shawn
+        </p>
+      </footer>
+
+    </div>
+  </main>
+</div>
+
+<script>
+  // ===== Chart.js 預設 =====
+  Chart.defaults.font.family = '"Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif';
+  Chart.defaults.font.size = 12;
+  Chart.defaults.color = '#5A534A';
+  Chart.defaults.borderColor = '#E0D8C4';
+  Chart.defaults.plugins.legend.labels.usePointStyle = true;
+  Chart.defaults.plugins.legend.labels.padding = 14;
+  Chart.defaults.maintainAspectRatio = false;
+
+  // ===== 年度件數與經費（Combo Chart） =====
+  new Chart(document.getElementById('yearlyOverview'), {
+    type: 'bar',
+    data: {
+      labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025*'],
+      datasets: [
+        {
+          type: 'bar',
+          label: '年度件數',
+          data: [29, 59, 48, 40, 41, 78, 57, 10],
+          backgroundColor: 'rgba(168, 72, 56, 0.65)',
+          borderColor: '#A84838',
+          borderWidth: 1,
+          borderRadius: 4,
+          borderSkipped: false,
+          yAxisID: 'yCount',
+          order: 2
+        },
+        {
+          type: 'line',
+          label: '總經費（萬美元）',
+          data: [1776, 3610, 1982, 2185, 4284, 6019, 3513, 261],
+          borderColor: '#2E5C8A',
+          backgroundColor: 'rgba(46, 92, 138, 0.08)',
+          borderWidth: 3,
+          tension: 0.3,
+          pointRadius: 5,
+          pointBackgroundColor: '#2E5C8A',
+          pointBorderColor: '#FFFFFF',
+          pointBorderWidth: 2,
+          yAxisID: 'yFund',
+          order: 1
+        }
+      ]
+    },
+    options: {
+      plugins: {
+        legend: { position: 'bottom' },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) {
+              if (ctx.dataset.label === '年度件數') {
+                return ` 件數：${ctx.parsed.y} 件`;
+              } else {
+                return ` 經費：$${ctx.parsed.y.toLocaleString()} 萬`;
+              }
+            }
+          }
+        }
+      },
+      scales: {
+        x: { grid: { display: false } },
+        yCount: {
+          type: 'linear',
+          position: 'left',
+          beginAtZero: true,
+          grid: { color: '#F0EAD8' },
+          title: { display: true, text: '件數', color: '#A84838' },
+          ticks: { color: '#A84838' }
+        },
+        yFund: {
+          type: 'linear',
+          position: 'right',
+          beginAtZero: true,
+          grid: { display: false },
+          title: { display: true, text: '萬美元', color: '#2E5C8A' },
+          ticks: { color: '#2E5C8A' }
+        }
+      }
+    }
+  });
+
+  // ===== A 技術路線分布 =====
+  new Chart(document.getElementById('chartA'), {
+    type: 'bar',
+    data: {
+      labels: ['ASIC', 'CIM', '神經形態', '通用可程式化', '無特定主軸', '光學運算', '非典型計算', '跨技術路線'],
+      datasets: [{
+        label: '件數',
+        data: [97, 75, 54, 47, 43, 27, 18, 1],
+        backgroundColor: ['#C26A4A', '#C26A4A', '#C26A4A', '#D9614F', '#E8A292', '#D9614F', '#D9614F', '#E8A292'],
+        borderRadius: 4,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { color: '#F0EAD8' }, beginAtZero: true },
+        y: { grid: { display: false } }
+      }
+    }
+  });
+
+  // ===== B 研究層次分布 =====
+  new Chart(document.getElementById('chartB'), {
+    type: 'bar',
+    data: {
+      labels: ['架構設計', '軟硬協同', '元件/材料', '軟體工具鏈', '互連/記憶體', '電路設計', '封裝/系統整合'],
+      datasets: [{
+        label: '件數',
+        data: [103, 89, 84, 52, 14, 10, 10],
+        backgroundColor: ['#2E5C8A', '#2E5C8A', '#2E5C8A', '#2E5C8A', '#5A8AC2', '#5A8AC2', '#5A8AC2'],
+        borderRadius: 4,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { color: '#F0EAD8' }, beginAtZero: true },
+        y: { grid: { display: false } }
+      }
+    }
+  });
+
+  // ===== C 計算階段分布 =====
+  new Chart(document.getElementById('chartC'), {
+    type: 'doughnut',
+    data: {
+      labels: ['純推論 (126)', '訓推混合 (96)', '計算階段不明 (113)', '純訓練 (27)'],
+      datasets: [{
+        data: [126, 96, 113, 27],
+        backgroundColor: ['#6B8E4E', '#8FAD68', '#C4D2A8', '#3F5C2B'],
+        borderColor: '#FFFFFF',
+        borderWidth: 2
+      }]
+    },
+    options: {
+      plugins: {
+        legend: { position: 'right' }
+      }
+    }
+  });
+
+  // ===== D 部署環境分布 =====
+  new Chart(document.getElementById('chartD'), {
+    type: 'doughnut',
+    data: {
+      labels: ['不明 (134)', '邊緣裝置 (115)', '雲端 (64)', '感測端 (27)', '跨層 (22)'],
+      datasets: [{
+        data: [134, 115, 64, 27, 22],
+        backgroundColor: ['#C9C4D8', '#8B6BB1', '#A584C9', '#5C4080', '#6E5491'],
+        borderColor: '#FFFFFF',
+        borderWidth: 2
+      }]
+    },
+    options: {
+      plugins: {
+        legend: { position: 'right' }
+      }
+    }
+  });
+
+  // ===== E 應用領域分布 (excluding 通用) =====
+  new Chart(document.getElementById('chartE'), {
+    type: 'bar',
+    data: {
+      labels: ['其他特定領域', '醫療', '安全', '影音', '自駕', 'NLP/生成式 AI', '通訊'],
+      datasets: [{
+        label: '件數',
+        data: [35, 23, 22, 19, 15, 10, 9],
+        backgroundColor: '#C9A227',
+        borderRadius: 4,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { color: '#F0EAD8' }, beginAtZero: true },
+        y: { grid: { display: false } }
+      }
+    }
+  });
+
+  // ===== 趨勢圖：A 技術路線 (實際年度經費，單位：萬美元) =====
+  new Chart(document.getElementById('trendA'), {
+    type: 'line',
+    data: {
+      labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+      datasets: [
+        {
+          label: 'ASIC',
+          data: [373, 1109, 450, 828, 1121, 1951, 673, 42],
+          borderColor: '#C26A4A',
+          backgroundColor: 'rgba(194, 106, 74, 0.1)',
+          tension: 0.3, borderWidth: 2.5
+        },
+        {
+          label: 'CIM',
+          data: [450, 394, 394, 483, 705, 1243, 1109, 49],
+          borderColor: '#2E5C8A',
+          backgroundColor: 'rgba(46, 92, 138, 0.1)',
+          tension: 0.3, borderWidth: 2.5
+        },
+        {
+          label: '神經形態',
+          data: [231, 674, 357, 307, 478, 1326, 345, 30],
+          borderColor: '#6B8E4E',
+          backgroundColor: 'rgba(107, 142, 78, 0.1)',
+          tension: 0.3, borderWidth: 2.5
+        },
+        {
+          label: '光學運算',
+          data: [89, 180, 275, 105, 436, 561, 353, 0],
+          borderColor: '#8B6BB1',
+          backgroundColor: 'rgba(139, 107, 177, 0.1)',
+          tension: 0.3, borderWidth: 2.5
+        }
+      ]
+    },
+    options: {
+      plugins: { legend: { position: 'bottom' } },
+      scales: {
+        x: { grid: { display: false } },
+        y: { grid: { color: '#F0EAD8' }, beginAtZero: true, title: { display: true, text: '萬美元' } }
+      }
+    }
+  });
+
+  // ===== 趨勢圖：B 研究層次（實際年度經費，萬美元） =====
+  new Chart(document.getElementById('trendB'), {
+    type: 'line',
+    data: {
+      labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+      datasets: [
+        {
+          label: '架構設計',
+          data: [630, 753, 853, 710, 1376, 1474, 473, 61],
+          borderColor: '#2E5C8A',
+          backgroundColor: 'rgba(46, 92, 138, 0.1)',
+          tension: 0.3, borderWidth: 2.5
+        },
+        {
+          label: '元件/材料',
+          data: [150, 697, 446, 546, 461, 1330, 1512, 30],
+          borderColor: '#C26A4A',
+          backgroundColor: 'rgba(194, 106, 74, 0.1)',
+          tension: 0.3, borderWidth: 2.5
+        },
+        {
+          label: '軟體工具鏈',
+          data: [560, 287, 174, 120, 1515, 1262, 324, 78],
+          borderColor: '#6B8E4E',
+          backgroundColor: 'rgba(107, 142, 78, 0.1)',
+          tension: 0.3, borderWidth: 2.5
+        },
+        {
+          label: '封裝/系統整合',
+          data: [45, 0, 0, 0, 0, 552, 454, 0],
+          borderColor: '#C9A227',
+          backgroundColor: 'rgba(201, 162, 39, 0.1)',
+          tension: 0.3, borderWidth: 2.5
+        },
+        {
+          label: '軟硬協同',
+          data: [391, 1602, 299, 649, 876, 1227, 281, 92],
+          borderColor: '#8B6BB1',
+          backgroundColor: 'rgba(139, 107, 177, 0.1)',
+          tension: 0.3, borderWidth: 2.5
+        }
+      ]
+    },
+    options: {
+      plugins: { legend: { position: 'bottom' } },
+      scales: {
+        x: { grid: { display: false } },
+        y: { grid: { color: '#F0EAD8' }, beginAtZero: true, title: { display: true, text: '萬美元' } }
+      }
+    }
+  });
+
+  // ===== 趨勢圖：D 部署環境（實際年度經費，萬美元） =====
+  new Chart(document.getElementById('trendD'), {
+    type: 'line',
+    data: {
+      labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+      datasets: [
+        {
+          label: '雲端',
+          data: [458, 360, 304, 277, 310, 1722, 853, 47],
+          borderColor: '#8B6BB1',
+          backgroundColor: 'rgba(139, 107, 177, 0.1)',
+          tension: 0.3, borderWidth: 2.5
+        },
+        {
+          label: '邊緣裝置',
+          data: [529, 1344, 732, 831, 1395, 1474, 906, 100],
+          borderColor: '#C26A4A',
+          backgroundColor: 'rgba(194, 106, 74, 0.1)',
+          tension: 0.3, borderWidth: 2.5
+        },
+        {
+          label: '感測端',
+          data: [0, 335, 92, 107, 54, 353, 436, 0],
+          borderColor: '#6B8E4E',
+          backgroundColor: 'rgba(107, 142, 78, 0.1)',
+          tension: 0.3, borderWidth: 2.5
+        },
+        {
+          label: '跨層',
+          data: [280, 50, 75, 200, 594, 108, 322, 32],
+          borderColor: '#C9A227',
+          backgroundColor: 'rgba(201, 162, 39, 0.1)',
+          tension: 0.3, borderWidth: 2.5
+        }
+      ]
+    },
+    options: {
+      plugins: { legend: { position: 'bottom' } },
+      scales: {
+        x: { grid: { display: false } },
+        y: { grid: { color: '#F0EAD8' }, beginAtZero: true, title: { display: true, text: '萬美元' } }
+      }
+    }
+  });
+
+  // ===== Mobile menu =====
+  const sidebar = document.getElementById('sidebar');
+  const toggle = document.getElementById('mobileToggle');
+  const overlay = document.getElementById('overlay');
+
+  toggle.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('visible');
+  });
+  overlay.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('visible');
+  });
+  sidebar.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      if (window.innerWidth <= 1024) {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('visible');
+      }
+    });
+  });
+
+  // ===== TOC active highlighting =====
+  const sections = document.querySelectorAll('section[id]');
+  const tocLinks = document.querySelectorAll('.toc > li > a');
+  const linkMap = new Map();
+  tocLinks.forEach(link => {
+    const id = link.getAttribute('href').slice(1);
+    linkMap.set(id, link.parentElement);
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        document.querySelectorAll('.toc > li.active').forEach(el => el.classList.remove('active'));
+        const target = linkMap.get(id);
+        if (target) target.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
