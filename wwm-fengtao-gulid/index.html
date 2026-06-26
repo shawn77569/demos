@@ -283,22 +283,6 @@
   .concept-card .body { font-size: 1.05rem; color: var(--ink-dark); line-height: 1.8; }
   .concept-card .body strong { color: var(--gold-main); font-weight: 600; }
 
-  /* ===== BOSS 戰場圖 ===== */
-  .arena-view {
-    background: var(--paper-card);
-    border: 1px solid var(--line);
-    padding: 24px;
-    margin: 24px 0;
-    text-align: center;
-  }
-  .arena-view svg { max-width: 100%; height: auto; min-height: 380px; }
-  .arena-view .caption {
-    margin-top: 14px;
-    color: var(--ink-mid);
-    font-size: 1rem;
-    font-style: italic;
-  }
-
   /* ===== 招式卡 ===== */
   .move-card {
     background: var(--paper-card);
@@ -379,13 +363,7 @@
     main {
       padding: 0 12px;
     }
-    .arena-view {
-      padding: 12px;
-    }
-    .arena-view svg {
-      min-height: 280px;
-    }
-  }
+}
   .move-card h4 {
     font-family: var(--font-display);
     color: var(--gold-main);
@@ -680,7 +658,7 @@
     <div class="concept-grid">
       <div class="concept-card">
         <div class="term">俠境</div>
-        <div class="body">十人副本 BOSS，每週可進入 <strong>2 次</strong>，需組成完整 10 人隊伍。難度高於一般副本，講究機制配合而非數值堆疊。</div>
+        <div class="body">十人副本 BOSS。每週可進入<strong>俠境 1 次 + 百業 1 次</strong>（共 2 次），需組成完整 10 人隊伍。難度高於一般副本，講究機制配合而非數值堆疊。</div>
       </div>
 
       <div class="concept-card">
@@ -717,55 +695,6 @@
   </div>
 
   <!-- 戰場圖 -->
-  <div class="arena-view">
-    <svg viewBox="0 0 600 360" xmlns="http://www.w3.org/2000/svg">
-      <!-- 戰場底圈 -->
-      <ellipse cx="300" cy="180" rx="270" ry="160" fill="rgba(251,247,236,0.7)" stroke="#D4CCBA" stroke-width="1"/>
-      <ellipse cx="300" cy="180" rx="270" ry="160" fill="none" stroke="#D4CCBA" stroke-width="1" stroke-dasharray="4 4"/>
-
-      <!-- 場地紋路 -->
-      <ellipse cx="300" cy="180" rx="200" ry="118" fill="none" stroke="#D4CCBA" stroke-width="0.5" stroke-dasharray="2 6"/>
-      <ellipse cx="300" cy="180" rx="130" ry="76" fill="none" stroke="#D4CCBA" stroke-width="0.5" stroke-dasharray="2 6"/>
-
-      <!-- 明光（中央發光體） -->
-      <g class="pulse-light">
-        <circle cx="300" cy="180" r="22" fill="rgba(167,123,58,0.18)"/>
-        <circle cx="300" cy="180" r="14" fill="rgba(167,123,58,0.45)"/>
-        <circle cx="300" cy="180" r="8" fill="#A77B3A"/>
-      </g>
-      <text x="300" y="220" text-anchor="middle" fill="#A77B3A" font-size="22" font-weight="bold">明 光</text>
-      <text x="300" y="236" text-anchor="middle" fill="#5C544A" font-size="19">星核 · 受護目標</text>
-
-      <!-- 鎮關吼位置示意 -->
-      <g transform="translate(180,140)">
-        <rect x="-22" y="-22" width="44" height="44" fill="#B5392C" opacity="0.15" stroke="#B5392C" stroke-width="1.5"/>
-        <text x="0" y="5" text-anchor="middle" fill="#B5392C" font-size="20" font-weight="bold">鎮關吼</text>
-      </g>
-
-      <!-- 玩家圍繞 -->
-      <g fill="#2A2520">
-        <circle cx="380" cy="120" r="4"/>
-        <circle cx="420" cy="160" r="4"/>
-        <circle cx="440" cy="220" r="4"/>
-        <circle cx="380" cy="260" r="4"/>
-        <circle cx="300" cy="290" r="4"/>
-        <circle cx="220" cy="270" r="4"/>
-        <circle cx="160" cy="240" r="4"/>
-      </g>
-      <text x="500" y="280" fill="#5C544A" font-size="19" text-anchor="end">玩家 · 圍繞輸出</text>
-
-      <!-- 鎮關壁示意（地圖邊緣三點） -->
-      <g fill="#3F5F7A" opacity="0.7">
-        <rect x="80" y="80" width="14" height="14"/>
-        <rect x="490" y="80" width="14" height="14"/>
-        <rect x="285" y="60" width="14" height="14"/>
-      </g>
-      <text x="293" y="30" fill="#3F5F7A" font-size="19" text-anchor="middle" font-weight="bold">鎮關壁</text>
-      <text x="293" y="50" fill="#5C544A" font-size="17" text-anchor="middle">(撞碎用)</text>
-    </svg>
-    <p class="caption">散關隘口戰場示意：明光位中央，玩家環形輸出，三面有鎮關壁可供撞碎</p>
-  </div>
-
   <!-- ============ 招式卡 壹：月焰 ============ -->
   <div class="move-card danger-mid" id="move-yueyan">
     <div class="header">
@@ -829,11 +758,16 @@
 
         <h4>應對方法</h4>
         <ol>
-          <li>BOSS 出技能前會點名一名玩家（通常是<strong>最遠的人</strong>）</li>
-          <li>被點名玩家站在鎮關壁正前方，讓 BOSS 衝鋒路徑通過鎮關壁</li>
-          <li>確保「BOSS → 玩家 → 鎮關壁」三點一線</li>
-          <li>等頭頂箭頭消失後即可跑位</li>
+          <li>BOSS 點名一名玩家後，頭頂出現朝下深紅色箭頭</li>
+          <li>站到「<strong>BOSS 與最近鎮關壁的連線上</strong>」即可——<strong>不用跑到鎮關壁後方</strong>，只要 BOSS 跟鎮關壁能連成一條線、玩家在線上就行</li>
+          <li>箭頭消失瞬間，立刻往<strong>下一個鎮關壁</strong>方向跑（保持新的連線）</li>
+          <li>BOSS 朝玩家衝鋒，撞向鎮關壁將其撞碎</li>
         </ol>
+
+        <div class="callout tip">
+          <div class="tag">小提醒</div>
+          一個機制要連續引導 BOSS 撞兩塊鎮關壁。被點名後不需要往遠處狂跑，只要保持自己跟下一塊鎮關壁的「連線位置」即可，跑得越遠 BOSS 撞鎮關壁前的距離越長，反而給容錯空間。
+        </div>
       </div>
       <div class="visual-side">
         <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
@@ -949,9 +883,19 @@
           <li>多人同時卸勢更穩定</li>
         </ul>
 
+        <div class="callout tip">
+          <div class="tag">騎龍回馬使用時機</div>
+          想用<strong>騎龍回馬</strong>規避這招的話，時機抓在 BOSS <strong>讀條 90–95%</strong> 時釋放，太早會被技能追上、太晚會直接吃滿。
+        </div>
+
         <div class="callout warn">
           <div class="tag">注意</div>
           BOSS 的紅光顯示<strong>有 bug</strong>，看不到紅光也要根據動作判斷。看到 BOSS 對著明光蓄力 → 立刻卡位卸勢。
+        </div>
+
+        <div class="callout">
+          <div class="tag">奶位提醒</div>
+          這招是<strong>高頻團隊大傷</strong>之一，全隊同步卸勢時可能有人手殘卸失敗、或卸完仍掉血。<strong>奶要備好群補/單補連發</strong>。
         </div>
       </div>
       <div class="visual-side">
@@ -1247,59 +1191,21 @@
   <div class="section-header">
     <div class="num">— 首 領 之 貳 —</div>
     <h2>五 殘</h2>
-    <p class="lead">分兩階段。<strong>一階段</strong>是雙血條壓血（地禍 + 天聽兩條血條同時打掉進入二階段），沒大團滅點，正常輸出就過。</p>
-    <p class="lead"><strong>二階段</strong>才是真正考驗，循環出現四個主要機制：<strong>無常索命</strong>（拉扯秒殺）、<strong>飛羽追魂</strong>（持續點名追擊）、<strong>哭喪電網</strong>（4 電棒搬離）、<strong>烏護殺意</strong>（鳥人衝鋒），中間還會穿插<strong>索魂追命圈</strong>（黃圈持續傷害）。</p>
+    <p class="lead">分兩階段。<strong>一階段</strong>是雙血條壓血（地禍 + 天聽兩條血條同時打掉進入二階段）。BOSS 在一階段就會放「聖旨到」生成兩個聖旨，但一階段沒有需要用聖旨應對的機制，<strong>注意不要待在聖旨範圍內</strong>（會強制跪拜掉血）即可。</p>
+    <p class="lead"><strong>二階段</strong>才是真正考驗，五個主要機制依序循環：<strong>索魂追命圈</strong>（最早放，黃圈持續傷害）→ <strong>無常索命</strong>（拉扯秒殺）→ <strong>飛羽追魂</strong>（持續點名追擊）→ <strong>哭喪電網</strong>（4 電棒搬離）→ <strong>烏護殺意</strong>（鳥人衝鋒）。</p>
     <p class="lead">場地兩個<strong>聖旨</strong>是策略性區域——平常不要進入會強制跪拜掉血，只在特定機制時利用它躲秒殺或被 BOSS 打掉。</p>
   </div>
 
   <!-- 場地圖 -->
-  <div class="arena-view">
-    <svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
-      <!-- 戰場 -->
-      <ellipse cx="300" cy="160" rx="270" ry="140" fill="rgba(251,247,236,0.7)" stroke="#D4CCBA" stroke-width="1"/>
-
-      <!-- BOSS -->
-      <g transform="translate(300,160)">
-        <rect x="-25" y="-25" width="50" height="50" fill="#B5392C" opacity="0.2" stroke="#B5392C" stroke-width="2"/>
-        <text x="0" y="5" text-anchor="middle" fill="#B5392C" font-size="21" font-weight="bold">五殘</text>
-      </g>
-
-      <!-- 聖旨 A（左上） -->
-      <g transform="translate(140,90)">
-        <rect x="-30" y="-18" width="60" height="36" fill="rgba(74,117,86,0.18)" stroke="#4A7556" stroke-width="2" stroke-dasharray="4 3"/>
-        <text x="0" y="-25" text-anchor="middle" fill="#4A7556" font-size="20" font-weight="bold">聖 旨 A</text>
-        <text x="0" y="5" text-anchor="middle" fill="#4A7556" font-size="19">下跪區</text>
-      </g>
-
-      <!-- 聖旨 B（右下） -->
-      <g transform="translate(460,230)">
-        <rect x="-30" y="-18" width="60" height="36" fill="rgba(74,117,86,0.18)" stroke="#4A7556" stroke-width="2" stroke-dasharray="4 3"/>
-        <text x="0" y="-25" text-anchor="middle" fill="#4A7556" font-size="20" font-weight="bold">聖 旨 B</text>
-        <text x="0" y="5" text-anchor="middle" fill="#4A7556" font-size="19">下跪區</text>
-      </g>
-
-      <!-- 玩家 -->
-      <g fill="#2A2520">
-        <circle cx="240" cy="120" r="4"/>
-        <circle cx="350" cy="100" r="4"/>
-        <circle cx="380" cy="200" r="4"/>
-        <circle cx="220" cy="220" r="4"/>
-        <circle cx="280" cy="240" r="4"/>
-      </g>
-      <text x="160" y="290" fill="#5C544A" font-size="19">玩家環繞輸出</text>
-    </svg>
-    <p class="caption">五殘戰場示意：兩個聖旨區（綠色）為策略性機制工具，<strong>非必要時不進入</strong></p>
-  </div>
-
   <!-- 一階段說明 -->
   <div class="scroll-card">
     <h4 style="font-family: var(--font-display); color: var(--gold-main); font-size: 1.1rem; margin-bottom: 12px; letter-spacing: 0.1em;">一階段（簡單）</h4>
     <p style="color: var(--ink-dark); font-size: 1.05rem; line-height: 1.8;">
-      一階段相對簡單，主要是<strong>壓血</strong>。BOSS 有兩條血條（地禍、天聽），同時打掉即可進入二階段。<strong>場地上的聖旨也是二階段才刷出來</strong>，所以一階段不用管它。沒什麼大團滅點，正常輸出加躲技能就過了。
+      一階段相對簡單，主要是<strong>壓血</strong>。BOSS 有兩條血條（地禍、天聽），同時打掉即可進入二階段。<strong>BOSS 在一階段就會放「聖旨到」技能</strong>，生成兩個聖旨，但一階段沒有需要用聖旨應對的機制——只要記得<strong>不要待在聖旨範圍內</strong>（會強制跪拜掉血）即可。沒什麼大團滅點，正常輸出加躲技能就過了。
     </p>
     <div class="callout tip" style="margin-top: 16px;">
       <div class="tag">提醒</div>
-      二階段聖旨刷出後才是真正考驗。記得<strong>平常時間不要待在聖旨範圍內</strong>，只在無常索命時跑進去下跪。
+      聖旨會在一階段就出現，但<strong>策略性使用</strong>要到二階段才用上（救無常索命、引飛羽追魂打掉聖旨等）。一階段純粹當「禁區」對待，繞開即可。
     </div>
   </div>
 
@@ -1307,10 +1213,92 @@
     二階段主要機制
   </h3>
 
-  <!-- ============ 五殘 招式壹：無常索命 ============ -->
-  <div class="move-card danger-high">
+  <!-- ============ 五殘 招式壹：索魂追命圈 ============ -->
+  <div class="move-card danger-mid">
     <div class="header">
       <div class="move-num">壹</div>
+      <div class="move-name">索魂追命圈</div>
+      <div class="danger-tag mid">開場機制 · 拉到外場</div>
+    </div>
+    <div class="body">
+      <div class="text-side">
+        <h4>機制描述</h4>
+        <p>五殘隨機點名玩家，腳下生成<span class="text-red">持續傷害的雷圈</span>（俗稱「放電圈」、望月嬋媛同款技能）。</p>
+        <p>雷圈<strong>持續時間很久</strong>，會卡住場地空間，所以放置位置很重要。</p>
+
+        <h4>應對方法</h4>
+        <ul>
+          <li>被點名後立刻<strong>移動到場地外圍</strong>放置雷圈</li>
+          <li><strong>不要放進聖旨範圍內</strong>——會影響其他機制應對</li>
+          <li>不要放在團隊輸出位置——會擋住走位動線</li>
+          <li>放完後跑離雷圈繼續輸出</li>
+        </ul>
+
+        <div class="callout warn">
+          <div class="tag">重要提醒</div>
+          <strong>不要用三段跳規避！</strong>跳起來反而會被空中拉扯抓住。<strong>跑動才是正解</strong>。
+        </div>
+
+        <div class="callout">
+          <div class="tag">機制節奏</div>
+          索魂追命圈是<strong>二階段最早放</strong>的技能，放完<strong>馬上接無常索命</strong>。應對時要快速判斷被點名的玩家、把雷圈拉到場外，然後準備接下一個機制。
+        </div>
+      </div>
+      <div class="visual-side">
+        <svg viewBox="0 0 360 260" xmlns="http://www.w3.org/2000/svg">
+          <!-- 標題 -->
+          <text x="180" y="22" text-anchor="middle" fill="#2A2520" font-size="14" font-weight="bold">點名後拉到場外角落</text>
+
+          <!-- 場地 -->
+          <ellipse cx="180" cy="140" rx="160" ry="100" fill="none" stroke="#D4CCBA" stroke-width="1" stroke-dasharray="3 4"/>
+
+          <!-- BOSS（中央） -->
+          <rect x="166" y="126" width="28" height="28" fill="#B5392C" opacity="0.4" stroke="#B5392C" stroke-width="2"/>
+          <text x="180" y="145" text-anchor="middle" fill="#FBF7EC" font-size="12" font-weight="bold">BOSS</text>
+
+          <!-- 聖旨 A（左上）- 不可放 -->
+          <g>
+            <rect x="65" y="68" width="48" height="24" fill="rgba(74,117,86,0.18)" stroke="#4A7556" stroke-width="2" stroke-dasharray="3 2"/>
+            <text x="89" y="83" text-anchor="middle" fill="#4A7556" font-size="12" font-weight="bold">聖旨</text>
+            <text x="89" y="108" text-anchor="middle" fill="#B5392C" font-size="11" font-weight="bold">✗ 別放</text>
+          </g>
+
+          <!-- 聖旨 B（右上）-->
+          <g>
+            <rect x="247" y="68" width="48" height="24" fill="rgba(74,117,86,0.18)" stroke="#4A7556" stroke-width="2" stroke-dasharray="3 2"/>
+            <text x="271" y="83" text-anchor="middle" fill="#4A7556" font-size="12" font-weight="bold">聖旨</text>
+            <text x="271" y="108" text-anchor="middle" fill="#B5392C" font-size="11" font-weight="bold">✗ 別放</text>
+          </g>
+
+          <!-- 被點名玩家起點 -->
+          <circle cx="180" cy="195" r="8" fill="#A77B3A"/>
+          <text x="180" y="215" text-anchor="middle" fill="#A77B3A" font-size="12" font-weight="bold">被點名</text>
+
+          <!-- 跑動箭頭（從 BOSS 附近往角落） -->
+          <path d="M 188 195 Q 245 215 305 220" fill="none" stroke="#A77B3A" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#arrow-run5)"/>
+          <defs>
+            <marker id="arrow-run5" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L9,3 z" fill="#A77B3A"/>
+            </marker>
+          </defs>
+
+          <!-- 終點：場外角落的雷圈（推薦位置） -->
+          <g>
+            <circle cx="318" cy="220" r="20" fill="rgba(167,123,58,0.30)" stroke="#A77B3A" stroke-width="2"/>
+            <circle cx="318" cy="220" r="9" fill="rgba(181,57,44,0.35)"/>
+            <text x="318" y="248" text-anchor="middle" fill="#4A7556" font-size="11" font-weight="bold">✓ 放這</text>
+          </g>
+        </svg>
+        <p class="visual-caption">拖到角落放雷圈，避開聖旨與團隊輸出位</p>
+        </div>
+    </div>
+  </div>
+
+  <!-- 通關口訣 -->
+<!-- ============ 五殘 招式貳：無常索命 ============ -->
+  <div class="move-card danger-high">
+    <div class="header">
+      <div class="move-num">貳</div>
       <div class="move-name">無常索命</div>
       <div class="danger-tag high">秒殺機制 · 必躲</div>
     </div>
@@ -1329,6 +1317,11 @@
         <div class="callout">
           <div class="tag">注意</div>
           <strong>不建議用三段跳規避</strong>——三段跳容易被空中拉扯抓住直接秒殺。<strong>聖旨下跪是最穩定的解法</strong>。
+        </div>
+
+        <div class="callout">
+          <div class="tag">奶位提醒</div>
+          全員下跪聖旨時仍會吃到<strong>少量範圍傷害</strong>，加上跑位過程可能有人被拉扯刮到。奶要在這階段<strong>群補一次</strong>。
         </div>
       </div>
       <div class="visual-side">
@@ -1372,10 +1365,10 @@
     </div>
   </div>
 
-  <!-- ============ 五殘 招式貳：飛羽追魂 ============ -->
+  <!-- ============ 五殘 招式參：飛羽追魂 ============ -->
   <div class="move-card danger-mid">
     <div class="header">
-      <div class="move-num">貳</div>
+      <div class="move-num">參</div>
       <div class="move-name">飛羽追魂</div>
       <div class="danger-tag mid">點名追擊 · 引導</div>
     </div>
@@ -1387,13 +1380,18 @@
         <h4>應對方法</h4>
         <ol>
           <li>被點名玩家<strong>保持移動</strong>，留住體力</li>
-          <li>引導 BOSS 的攻擊軌跡<strong>碰瓷聖旨</strong></li>
-          <li>讓 BOSS 把聖旨打掉，化解傷害</li>
+          <li>跑到<strong>聖旨的後方</strong>站位（讓聖旨夾在 BOSS 跟你之間）</li>
+          <li>BOSS 射出的羽毛會打到聖旨上 → <strong>聖旨被擊毀化解傷害</strong></li>
         </ol>
 
         <div class="callout warn">
           <div class="tag">注意</div>
           未被點名的玩家不要靠近被點名玩家，否則<strong>羽毛會刮到附近的人</strong>。建議全場保持移動，自己避讓。
+        </div>
+
+        <div class="callout">
+          <div class="tag">奶位提醒</div>
+          被點名玩家<strong>持續掉血</strong>直到羽毛打到聖旨為止，奶要<strong>盯緊被點名者的血量</strong>單補。
         </div>
       </div>
       <div class="visual-side">
@@ -1440,10 +1438,10 @@
     </div>
   </div>
 
-  <!-- ============ 五殘 招式參：哭喪電網 ============ -->
+  <!-- ============ 五殘 招式肆：哭喪電網 ============ -->
   <div class="move-card danger-high">
     <div class="header">
-      <div class="move-num">參</div>
+      <div class="move-num">肆</div>
       <div class="move-name">哭喪電網</div>
       <div class="danger-tag high">分頭搬離 · 配合</div>
     </div>
@@ -1469,6 +1467,11 @@
           哭喪電網跟<strong>烏護殺意</strong>是同一套流程的兩個階段：
           <br>① 電棒出現 → 分頭搬離（這張卡）
           <br>② 烏護出現 → 派人重新組電網電住烏護（下張卡）
+        </div>
+
+        <div class="callout">
+          <div class="tag">奶位提醒</div>
+          搬電棒的 4 名玩家需要走到電網範圍內取棒，會<strong>吃到電網的持續傷害</strong>，奶要<strong>群補頂著</strong>，特別是動作慢的玩家。
         </div>
       </div>
       <div class="visual-side">
@@ -1525,10 +1528,10 @@
     </div>
   </div>
 
-  <!-- ============ 五殘 招式肆：烏護殺意（搭配）============ -->
+  <!-- ============ 五殘 招式伍：烏護殺意（搭配）============ -->
   <div class="move-card danger-high">
     <div class="header">
-      <div class="move-num">肆</div>
+      <div class="move-num">伍</div>
       <div class="move-name">烏護殺意</div>
       <div class="danger-tag high">拉網電鳥 · 配合</div>
     </div>
@@ -1553,6 +1556,11 @@
         <div class="callout">
           <div class="tag">配合默契</div>
           這個機制是<strong>哭喪電網的延續</strong>——前面搬離分散的時候要記得位置，方便後續拿起電棒組合。
+        </div>
+
+        <div class="callout">
+          <div class="tag">奶位提醒</div>
+          <strong>兩名拉電網玩家</strong>站在電網兩側持續吃電網範圍傷害，是這階段血量壓力最大的位置，<strong>奶要全程盯著他們補</strong>。被點名引導者也要兼顧。
         </div>
       </div>
       <div class="visual-side">
@@ -1609,89 +1617,7 @@
     </div>
   </div>
 
-  <!-- ============ 五殘 招式伍：索魂追命圈（穿插機制）============ -->
-  <div class="move-card danger-mid">
-    <div class="header">
-      <div class="move-num">伍</div>
-      <div class="move-name">索魂追命圈</div>
-      <div class="danger-tag mid">穿插機制 · 拉到外場</div>
-    </div>
-    <div class="body">
-      <div class="text-side">
-        <h4>機制描述</h4>
-        <p>五殘隨機點名玩家，腳下生成<span class="text-red">持續傷害的雷圈</span>（俗稱「放電圈」、望月嬋媛同款技能）。</p>
-        <p>雷圈<strong>持續時間很久</strong>，會卡住場地空間，所以放置位置很重要。</p>
-
-        <h4>應對方法</h4>
-        <ul>
-          <li>被點名後立刻<strong>移動到場地外圍</strong>放置雷圈</li>
-          <li><strong>不要放進聖旨範圍內</strong>——會影響其他機制應對</li>
-          <li>不要放在團隊輸出位置——會擋住走位動線</li>
-          <li>放完後跑離雷圈繼續輸出</li>
-        </ul>
-
-        <div class="callout warn">
-          <div class="tag">重要提醒</div>
-          <strong>不要用三段跳規避！</strong>跳起來反而會被空中拉扯抓住。<strong>跑動才是正解</strong>。
-        </div>
-
-        <div class="callout">
-          <div class="tag">機制循環</div>
-          二階段三大機制（無常索命 → 飛羽追魂 → 哭喪電網）之間，<strong>會穿插出現</strong>索魂追命圈。出現時機沒有固定規律，要隨時做好應變準備。
-        </div>
-      </div>
-      <div class="visual-side">
-        <svg viewBox="0 0 360 260" xmlns="http://www.w3.org/2000/svg">
-          <!-- 標題 -->
-          <text x="180" y="22" text-anchor="middle" fill="#2A2520" font-size="14" font-weight="bold">點名後拉到場外角落</text>
-
-          <!-- 場地 -->
-          <ellipse cx="180" cy="140" rx="160" ry="100" fill="none" stroke="#D4CCBA" stroke-width="1" stroke-dasharray="3 4"/>
-
-          <!-- BOSS（中央） -->
-          <rect x="166" y="126" width="28" height="28" fill="#B5392C" opacity="0.4" stroke="#B5392C" stroke-width="2"/>
-          <text x="180" y="145" text-anchor="middle" fill="#FBF7EC" font-size="12" font-weight="bold">BOSS</text>
-
-          <!-- 聖旨 A（左上）- 不可放 -->
-          <g>
-            <rect x="65" y="68" width="48" height="24" fill="rgba(74,117,86,0.18)" stroke="#4A7556" stroke-width="2" stroke-dasharray="3 2"/>
-            <text x="89" y="83" text-anchor="middle" fill="#4A7556" font-size="12" font-weight="bold">聖旨</text>
-            <text x="89" y="108" text-anchor="middle" fill="#B5392C" font-size="11" font-weight="bold">✗ 別放</text>
-          </g>
-
-          <!-- 聖旨 B（右上）-->
-          <g>
-            <rect x="247" y="68" width="48" height="24" fill="rgba(74,117,86,0.18)" stroke="#4A7556" stroke-width="2" stroke-dasharray="3 2"/>
-            <text x="271" y="83" text-anchor="middle" fill="#4A7556" font-size="12" font-weight="bold">聖旨</text>
-            <text x="271" y="108" text-anchor="middle" fill="#B5392C" font-size="11" font-weight="bold">✗ 別放</text>
-          </g>
-
-          <!-- 被點名玩家起點 -->
-          <circle cx="180" cy="195" r="8" fill="#A77B3A"/>
-          <text x="180" y="215" text-anchor="middle" fill="#A77B3A" font-size="12" font-weight="bold">被點名</text>
-
-          <!-- 跑動箭頭（從 BOSS 附近往角落） -->
-          <path d="M 188 195 Q 245 215 305 220" fill="none" stroke="#A77B3A" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#arrow-run5)"/>
-          <defs>
-            <marker id="arrow-run5" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
-              <path d="M0,0 L0,6 L9,3 z" fill="#A77B3A"/>
-            </marker>
-          </defs>
-
-          <!-- 終點：場外角落的雷圈（推薦位置） -->
-          <g>
-            <circle cx="318" cy="220" r="20" fill="rgba(167,123,58,0.30)" stroke="#A77B3A" stroke-width="2"/>
-            <circle cx="318" cy="220" r="9" fill="rgba(181,57,44,0.35)"/>
-            <text x="318" y="248" text-anchor="middle" fill="#4A7556" font-size="11" font-weight="bold">✓ 放這</text>
-          </g>
-        </svg>
-        <p class="visual-caption">拖到角落放雷圈，避開聖旨與團隊輸出位</p>
-        </div>
-    </div>
-  </div>
-
-  <!-- 通關口訣 -->
-</section>
+  </section>
 
 
 
