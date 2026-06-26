@@ -185,6 +185,9 @@
     font-size: 1.1rem;
     line-height: 1.8;
   }
+  .section-header .lead + .lead {
+    margin-top: 12px;
+  }
 
   /* ===== 副本概覽（卷軸樣式）===== */
   .scroll-card {
@@ -223,6 +226,37 @@
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 20px;
     margin-top: 24px;
+  }
+
+  /* details/summary 摺疊樣式 */
+  details.basics-toggle {
+    margin: 0;
+  }
+  details.basics-toggle > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0;
+    user-select: none;
+  }
+  details.basics-toggle > summary::-webkit-details-marker {
+    display: none;
+  }
+  details.basics-toggle > summary .toggle-icon {
+    display: inline-block;
+    margin-left: 12px;
+    font-size: 1.2rem;
+    color: var(--gold-main);
+    transition: transform 0.25s ease;
+    transform: rotate(0deg);
+  }
+  details.basics-toggle[open] > summary .toggle-icon {
+    transform: rotate(180deg);
+  }
+  details.basics-toggle > summary:hover h2 {
+    color: var(--gold-deep);
+  }
+  details.basics-toggle > summary h2 {
+    transition: color 0.2s;
   }
   .concept-card {
     background: var(--paper-card);
@@ -334,7 +368,23 @@
     flex-direction: column;
   }
   @media (max-width: 720px) {
-    .move-card .visual-side { border-left: none; border-top: 1px solid var(--line); }
+    .move-card .visual-side { 
+      border-left: none; 
+      border-top: 1px solid var(--line);
+      padding: 16px 12px; 
+    }
+    .move-card .text-side {
+      padding: 24px 20px;
+    }
+    main {
+      padding: 0 12px;
+    }
+    .arena-view {
+      padding: 12px;
+    }
+    .arena-view svg {
+      min-height: 280px;
+    }
   }
   .move-card h4 {
     font-family: var(--font-display);
@@ -618,72 +668,52 @@
 
 <!-- ============== 新手必讀 ============== -->
 <section id="basics">
-  <div class="section-header">
-    <div class="num">— 卷 之 一 —</div>
-    <h2>新手必讀 · 基礎觀念</h2>
-    <p class="lead">如果你是第一次打俠境，這裡先把術語和規則講清楚。已經熟練的老手可以直接跳到 BOSS 章節。</p>
-  </div>
+  <details class="basics-toggle" open>
+    <summary>
+      <div class="section-header" style="margin-bottom: 0;">
+        <div class="num">— 卷 之 一 —</div>
+        <h2>新手必讀 · 基礎觀念 <span class="toggle-icon">▼</span></h2>
+        <p class="lead">第一次打俠境的玩家先讀這段；老手可以摺疊跳到 BOSS 章節。</p>
+      </div>
+    </summary>
 
-  <div class="concept-grid">
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="term">俠境</div>
+        <div class="body">十人副本 BOSS，每週可進入 <strong>2 次</strong>，需組成完整 10 人隊伍。難度高於一般副本，講究機制配合而非數值堆疊。</div>
+      </div>
 
-    <div class="concept-card">
-      <div class="term">俠境</div>
-      <div class="romaji">10-MAN RAID</div>
-      <div class="body">10 人副本玩法，每週可挑戰一次拿首通獎勵（不消耗心力）。<strong>百業俠境</strong>是另一個獨立次數，加入百業且通關後可額外拿一次獎勵。</div>
+      <div class="concept-card">
+        <div class="term">首領天賦</div>
+        <div class="body">進入副本時可選的<strong>副本內 buff</strong>，影響團隊能力。常見組合是「<strong>天賦右三</strong>」全員增傷，搬完飛星六連石頭後自動成就。</div>
+      </div>
+
+      <div class="concept-card">
+        <div class="term">攻擊辨識</div>
+        <div class="body">BOSS 攻擊前會給三種提示：<span class="text-red">紅光</span>=可卸勢（按 <strong>E</strong> 反彈傷害並回耐力）；<span style="color:#A77B3A">黃光</span>=必須躲開（不可卸）；<span class="text-red">頭頂朝下深紅色箭頭</span>=點名你（要拉走或站位）。<br><br>本副本常見「<strong>全隊同步卸勢</strong>」場合（如碎日追擊救明光），看到紅光要立刻按 E。</div>
+      </div>
+
+      <div class="concept-card">
+        <div class="term">站位術語</div>
+        <div class="body"><strong>T</strong>=坦克（拉仇恨）；<strong>奶</strong>=治療；<strong>DPS</strong>=輸出；<strong>承傷</strong>=指定挨技能的人（通常 T 兼任）。本副本建議 1T + 1 輔 + 8 DPS 或 8 輸出 + 2 治療。</div>
+      </div>
+
+      <div class="concept-card">
+        <div class="term">必帶奇術</div>
+        <div class="body">輸出：<strong>簫吟千浪</strong>（聚怪/位移）+ <strong>騎龍回馬</strong>（高傷處決）；機動：<strong>凌雲踏</strong>（快速貼近 BOSS）；治療：<strong>無相金身</strong>（群體免傷）。</div>
+      </div>
     </div>
-
-    <div class="concept-card">
-      <div class="term">首領天賦</div>
-      <div class="romaji">BOSS TALENTS</div>
-      <div class="body">每隻 BOSS 都有自己的天賦樹，分 <strong>1-1、1-2、1-3、2-1、2-2、2-3</strong> 六個節點。要在特定條件下通關才解鎖（例如「撞滿六顆石頭再殺 BOSS」）。提供永久增傷或減傷加成。</div>
-    </div>
-
-    <div class="concept-card">
-      <div class="term">卸勢</div>
-      <div class="romaji">PARRY</div>
-      <div class="body">看到 BOSS 的<span class="text-red">紅光技</span>，按防禦鍵反彈，化解傷害並消耗 BOSS 真氣。本副本許多技能都靠卸勢化解。<strong>黃光技</strong>則必須走位躲避，不可卸勢。</div>
-    </div>
-
-    <div class="concept-card">
-      <div class="term">紅光 / 黃光</div>
-      <div class="romaji">RED / YELLOW TELL</div>
-      <div class="body"><span class="text-red">紅光</span>=可卸勢、<span class="text-gold">黃光</span>=必須躲開（不可卸）、<span class="text-blue">紫色牽引線</span>=點名你（要拉走或站位）。看到光的顏色就知道怎麼處理。</div>
-    </div>
-
-    <div class="concept-card">
-      <div class="term">站位術語</div>
-      <div class="romaji">ROLES</div>
-      <div class="body"><strong>T</strong> = 坦克（拉仇恨）；<strong>奶</strong> = 治療；<strong>DPS</strong> = 輸出；<strong>承傷</strong> = 指定挨技能的人（通常 T 兼任）。本副本建議 1T + 1 輔 + 8 DPS 或 8 輸出 + 2 治療。</div>
-    </div>
-
-    <div class="concept-card">
-      <div class="term">必帶奇術</div>
-      <div class="romaji">SKILLS LOADOUT</div>
-      <div class="body">輸出：<strong>簫吟千浪</strong>（聚怪/位移）+ <strong>騎龍回馬</strong>（高傷處決）；機動：<strong>凌雲踏</strong>（快速貼近 BOSS）；治療：<strong>無相金身</strong>（群體免傷）。</div>
-    </div>
-
-    <div class="concept-card">
-      <div class="term">明光（鎮關吼專用）</div>
-      <div class="romaji">STAR CORE</div>
-      <div class="body">場地中央會出現一顆<span class="text-gold">星核「明光」</span>，是鎮關吼戰的核心。明光血量降到 0 → <strong>團滅</strong>。BOSS 的多個技能就是針對明光，玩家要全程保護它。</div>
-    </div>
-
-    <div class="concept-card">
-      <div class="term">聖旨（五殘專用）</div>
-      <div class="romaji">DECREE ZONES</div>
-      <div class="body">五殘二階段刷出<span class="text-green">兩個聖旨</span>。<strong>平常不要進入</strong>——待超過 3 秒會強制跪拜掉血，頂上倒計時歸零還會放 AOE。只有遇到<strong>無常索命</strong>這種秒殺機制時才進去下跪躲避；某些機制反而要把 BOSS 引過去<strong>打掉聖旨</strong>。</div>
-    </div>
-
-  </div>
+  </details>
 </section>
-
 
 <!-- ============== BOSS 1 鎮關吼 ============== -->
 <section id="boss1">
   <div class="section-header">
     <div class="num">— 首 領 之 壹 —</div>
     <h2>鎮 關 吼</h2>
-    <p class="lead">難度較高的星狮 BOSS，所有機制圍繞「<span class="text-gold">傳送門</span>」與「<span class="text-gold">明光保護</span>」展開。看似技能繁多，掌握核心三原則後其實有章可循：<strong>門要對線、光要護嚴、卸要及時</strong>。</p>
+    <p class="lead">難度較高的星狮 BOSS，所有機制圍繞兩個核心元素：場地中央的<strong>明光（星核）</strong>和 BOSS 點名生成的<strong>傳送門</strong>。</p>
+    <p class="lead">明光是團隊命脈——多數技能會直擊明光或要求玩家站位擋下傷害，明光血量歸零就團滅。傳送門則是工具，用來在機制間快速位移、躲牽引、搬石頭。</p>
+    <p class="lead">應對思路：<strong>保護明光、善用傳送門、紅光秒殺技全隊同步卸勢</strong>。</p>
   </div>
 
   <!-- 戰場圖 -->
@@ -703,13 +733,13 @@
         <circle cx="300" cy="180" r="14" fill="rgba(167,123,58,0.45)"/>
         <circle cx="300" cy="180" r="8" fill="#A77B3A"/>
       </g>
-      <text x="300" y="220" text-anchor="middle" fill="#A77B3A" font-size="13" font-weight="bold">明 光</text>
-      <text x="300" y="236" text-anchor="middle" fill="#5C544A" font-size="10">星核 · 受護目標</text>
+      <text x="300" y="220" text-anchor="middle" fill="#A77B3A" font-size="22" font-weight="bold">明 光</text>
+      <text x="300" y="236" text-anchor="middle" fill="#5C544A" font-size="19">星核 · 受護目標</text>
 
       <!-- 鎮關吼位置示意 -->
       <g transform="translate(180,140)">
         <rect x="-22" y="-22" width="44" height="44" fill="#B5392C" opacity="0.15" stroke="#B5392C" stroke-width="1.5"/>
-        <text x="0" y="5" text-anchor="middle" fill="#B5392C" font-size="11" font-weight="bold">鎮關吼</text>
+        <text x="0" y="5" text-anchor="middle" fill="#B5392C" font-size="20" font-weight="bold">鎮關吼</text>
       </g>
 
       <!-- 玩家圍繞 -->
@@ -722,7 +752,7 @@
         <circle cx="220" cy="270" r="4"/>
         <circle cx="160" cy="240" r="4"/>
       </g>
-      <text x="500" y="280" fill="#5C544A" font-size="10" text-anchor="end">玩家 · 圍繞輸出</text>
+      <text x="500" y="280" fill="#5C544A" font-size="19" text-anchor="end">玩家 · 圍繞輸出</text>
 
       <!-- 鎮關壁示意（地圖邊緣三點） -->
       <g fill="#3F5F7A" opacity="0.7">
@@ -730,15 +760,10 @@
         <rect x="490" y="80" width="14" height="14"/>
         <rect x="285" y="60" width="14" height="14"/>
       </g>
-      <text x="500" y="74" fill="#3F5F7A" font-size="10">鎮關壁</text>
-      <text x="500" y="86" fill="#5C544A" font-size="9">(撞碎用)</text>
+      <text x="293" y="30" fill="#3F5F7A" font-size="19" text-anchor="middle" font-weight="bold">鎮關壁</text>
+      <text x="293" y="50" fill="#5C544A" font-size="17" text-anchor="middle">(撞碎用)</text>
     </svg>
     <p class="caption">散關隘口戰場示意：明光位中央，玩家環形輸出，三面有鎮關壁可供撞碎</p>
-  </div>
-
-  <div class="callout warn">
-    <div class="tag">核心規則</div>
-    <strong>明光血量歸零 = 團滅。</strong>BOSS 多數技能都會直擊明光，玩家全程要監控明光血量，遇到明光相關機制（碎日追擊、飛星六連）優先處理。
   </div>
 
   <!-- ============ 招式卡 壹：月焰 ============ -->
@@ -771,23 +796,19 @@
           <rect x="0" y="0" width="320" height="220" fill="none"/>
           <!-- BOSS -->
           <rect x="140" y="100" width="40" height="40" fill="#B5392C" opacity="0.3" stroke="#B5392C" stroke-width="2"/>
-          <text x="160" y="125" text-anchor="middle" fill="#B5392C" font-size="10" font-weight="bold">BOSS</text>
+          <text x="160" y="125" text-anchor="middle" fill="#B5392C" font-size="13" font-weight="bold">BOSS</text>
           <!-- 扇形範圍 -->
           <path d="M 160 100 L 60 30 A 150 150 0 0 1 260 30 Z" fill="rgba(181,57,44,0.15)" stroke="#B5392C" stroke-width="1" stroke-dasharray="4 3"/>
-          <text x="160" y="55" text-anchor="middle" fill="#B5392C" font-size="11" font-weight="bold">月焰範圍</text>
-          <text x="160" y="70" text-anchor="middle" fill="#B5392C" font-size="9">(危險區)</text>
+          <text x="160" y="55" text-anchor="middle" fill="#B5392C" font-size="14" font-weight="bold">月焰範圍</text>
+          <text x="160" y="73" text-anchor="middle" fill="#B5392C" font-size="12">(危險區)</text>
 
           <!-- 安全玩家位 -->
           <circle cx="60" cy="150" r="6" fill="#4A7556"/>
-          <text x="60" y="170" text-anchor="middle" fill="#4A7556" font-size="9">安全</text>
+          <text x="60" y="170" text-anchor="middle" fill="#4A7556" font-size="12">安全</text>
           <circle cx="260" cy="150" r="6" fill="#4A7556"/>
-          <text x="260" y="170" text-anchor="middle" fill="#4A7556" font-size="9">安全</text>
+          <text x="260" y="170" text-anchor="middle" fill="#4A7556" font-size="12">安全</text>
           <circle cx="160" cy="190" r="6" fill="#4A7556"/>
-          <text x="160" y="208" text-anchor="middle" fill="#4A7556" font-size="9">背後最安全</text>
-
-          <!-- 危險玩家 -->
-          <circle cx="160" cy="50" r="6" fill="#B5392C"/>
-          <text x="160" y="38" text-anchor="middle" fill="#B5392C" font-size="9">秒殺</text>
+          <text x="160" y="208" text-anchor="middle" fill="#4A7556" font-size="12">背後最安全</text>
         </svg>
         <p class="visual-caption">玩家跑到 BOSS 兩側/背後即安全</p>
         </div>
@@ -811,23 +832,23 @@
           <li>BOSS 出技能前會點名一名玩家（通常是<strong>最遠的人</strong>）</li>
           <li>被點名玩家站在鎮關壁正前方，讓 BOSS 衝鋒路徑通過鎮關壁</li>
           <li>確保「BOSS → 玩家 → 鎮關壁」三點一線</li>
-          <li>等紫色牽引線消失後即可跑位</li>
+          <li>等頭頂箭頭消失後即可跑位</li>
         </ol>
       </div>
       <div class="visual-side">
         <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
           <!-- 鎮關壁 -->
           <rect x="270" y="100" width="20" height="40" fill="#3F5F7A" stroke="#3F5F7A" stroke-width="1"/>
-          <text x="280" y="155" text-anchor="middle" fill="#3F5F7A" font-size="9">鎮關壁</text>
+          <text x="280" y="155" text-anchor="middle" fill="#3F5F7A" font-size="12">鎮關壁</text>
 
           <!-- BOSS -->
           <rect x="40" y="100" width="30" height="30" fill="#B5392C" opacity="0.3" stroke="#B5392C" stroke-width="2"/>
-          <text x="55" y="120" text-anchor="middle" fill="#B5392C" font-size="10" font-weight="bold">BOSS</text>
+          <text x="55" y="120" text-anchor="middle" fill="#B5392C" font-size="13" font-weight="bold">BOSS</text>
 
           <!-- 點名玩家 -->
           <circle cx="180" cy="115" r="6" fill="#A77B3A"/>
-          <text x="180" y="100" text-anchor="middle" fill="#A77B3A" font-size="9" font-weight="bold">被點名</text>
-          <text x="180" y="135" text-anchor="middle" fill="#A77B3A" font-size="9">站位</text>
+          <text x="180" y="100" text-anchor="middle" fill="#A77B3A" font-size="12" font-weight="bold">被點名</text>
+          <text x="180" y="135" text-anchor="middle" fill="#A77B3A" font-size="12">站位</text>
 
           <!-- 衝鋒路徑 -->
           <line x1="70" y1="115" x2="270" y2="115" stroke="#B5392C" stroke-width="2" stroke-dasharray="6 3" marker-end="url(#arrow)"/>
@@ -836,11 +857,10 @@
               <path d="M0,0 L0,6 L9,3 z" fill="#B5392C"/>
             </marker>
           </defs>
-          <text x="160" y="180" text-anchor="middle" fill="#B5392C" font-size="10">衝鋒方向</text>
 
           <!-- 標示 -->
-          <text x="160" y="40" text-anchor="middle" fill="#2A2520" font-size="11" font-weight="bold">三點一線</text>
-          <text x="160" y="55" text-anchor="middle" fill="#5C544A" font-size="9">BOSS · 玩家 · 鎮關壁</text>
+          <text x="160" y="40" text-anchor="middle" fill="#2A2520" font-size="14" font-weight="bold">三點一線</text>
+          <text x="160" y="55" text-anchor="middle" fill="#5C544A" font-size="12">BOSS · 玩家 · 鎮關壁</text>
 
           <!-- 其他玩家 -->
           <circle cx="100" cy="170" r="4" fill="#2A2520"/>
@@ -885,25 +905,25 @@
 
           <!-- BOSS -->
           <rect x="80" y="95" width="28" height="28" fill="#B5392C" opacity="0.3" stroke="#B5392C" stroke-width="2"/>
-          <text x="94" y="113" text-anchor="middle" fill="#B5392C" font-size="9" font-weight="bold">BOSS</text>
+          <text x="94" y="113" text-anchor="middle" fill="#B5392C" font-size="12" font-weight="bold">BOSS</text>
 
           <!-- 明光 -->
           <circle cx="170" cy="110" r="10" fill="rgba(167,123,58,0.5)" stroke="#A77B3A" stroke-width="1"/>
-          <text x="170" y="135" text-anchor="middle" fill="#A77B3A" font-size="9">明光</text>
+          <text x="170" y="135" text-anchor="middle" fill="#A77B3A" font-size="12">明光</text>
 
           <!-- 傳送門 1：中場 -->
           <ellipse cx="170" cy="65" rx="14" ry="8" fill="rgba(63,95,122,0.22)" stroke="#3F5F7A" stroke-width="2"/>
-          <text x="170" y="55" text-anchor="middle" fill="#3F5F7A" font-size="9" font-weight="bold">門 A</text>
-          <text x="170" y="85" text-anchor="middle" fill="#5C544A" font-size="8">中場</text>
+          <text x="170" y="55" text-anchor="middle" fill="#3F5F7A" font-size="12" font-weight="bold">門 A</text>
+          <text x="170" y="85" text-anchor="middle" fill="#5C544A" font-size="11">中場</text>
 
           <!-- 傳送門 2：外場 -->
           <ellipse cx="270" cy="180" rx="14" ry="8" fill="rgba(63,95,122,0.22)" stroke="#3F5F7A" stroke-width="2"/>
-          <text x="270" y="170" text-anchor="middle" fill="#3F5F7A" font-size="9" font-weight="bold">門 B</text>
-          <text x="270" y="200" text-anchor="middle" fill="#5C544A" font-size="8">外場</text>
+          <text x="270" y="170" text-anchor="middle" fill="#3F5F7A" font-size="12" font-weight="bold">門 B</text>
+          <text x="270" y="200" text-anchor="middle" fill="#5C544A" font-size="11">外場</text>
 
           <!-- 連線 -->
           <line x1="170" y1="65" x2="270" y2="180" stroke="#3F5F7A" stroke-width="1" stroke-dasharray="4 4"/>
-          <text x="225" y="115" fill="#3F5F7A" font-size="9" transform="rotate(45 225 115)">傳送通道</text>
+          <text x="225" y="115" fill="#3F5F7A" font-size="12" transform="rotate(45 225 115)">傳送通道</text>
         </svg>
         <p class="visual-caption">兩個傳送門：一中場一外場，建立逃生通道</p>
         </div>
@@ -938,16 +958,16 @@
         <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
           <!-- BOSS -->
           <rect x="40" y="95" width="30" height="30" fill="#B5392C" opacity="0.3" stroke="#B5392C" stroke-width="2"/>
-          <text x="55" y="115" text-anchor="middle" fill="#B5392C" font-size="10" font-weight="bold">BOSS</text>
+          <text x="55" y="115" text-anchor="middle" fill="#B5392C" font-size="13" font-weight="bold">BOSS</text>
 
           <!-- 玩家（卡位） -->
           <circle cx="160" cy="110" r="9" fill="#A77B3A"/>
-          <text x="160" y="92" text-anchor="middle" fill="#A77B3A" font-size="9" font-weight="bold">卡位玩家</text>
-          <text x="160" y="132" text-anchor="middle" fill="#A77B3A" font-size="9">卸勢！</text>
+          <text x="160" y="92" text-anchor="middle" fill="#A77B3A" font-size="12" font-weight="bold">卡位玩家</text>
+          <text x="160" y="132" text-anchor="middle" fill="#A77B3A" font-size="12">卸勢！</text>
 
           <!-- 明光 -->
           <circle cx="270" cy="110" r="14" fill="rgba(167,123,58,0.5)" stroke="#A77B3A" stroke-width="1.5"/>
-          <text x="270" y="138" text-anchor="middle" fill="#A77B3A" font-size="10">明光</text>
+          <text x="270" y="138" text-anchor="middle" fill="#A77B3A" font-size="13">明光</text>
 
           <!-- 衝鋒線 -->
           <line x1="70" y1="110" x2="150" y2="110" stroke="#B5392C" stroke-width="3" stroke-dasharray="5 3" marker-end="url(#arrow2)"/>
@@ -959,11 +979,11 @@
 
           <!-- 卸勢反彈 -->
           <path d="M 170 110 Q 200 80 220 110" fill="none" stroke="#A77B3A" stroke-width="2" stroke-dasharray="3 3"/>
-          <text x="200" y="75" text-anchor="middle" fill="#A77B3A" font-size="9">反彈</text>
+          <text x="200" y="75" text-anchor="middle" fill="#A77B3A" font-size="12">反彈</text>
 
           <!-- 標題 -->
-          <text x="160" y="195" text-anchor="middle" fill="#2A2520" font-size="11" font-weight="bold">BOSS → 玩家(卸勢) → 明光</text>
-          <text x="160" y="208" text-anchor="middle" fill="#5C544A" font-size="9">站在中間擋下衝鋒</text>
+          <text x="160" y="195" text-anchor="middle" fill="#2A2520" font-size="14" font-weight="bold">BOSS → 玩家(卸勢) → 明光</text>
+          <text x="160" y="208" text-anchor="middle" fill="#5C544A" font-size="12">站在中間擋下衝鋒</text>
         </svg>
         <p class="visual-caption">站在 BOSS 與明光之間卸勢化解</p>
         </div>
@@ -1000,20 +1020,20 @@
           <g>
             <circle cx="90" cy="110" r="55" fill="rgba(181,57,44,0.12)" stroke="#B5392C" stroke-width="1" stroke-dasharray="3 3"/>
             <rect x="76" y="96" width="28" height="28" fill="#B5392C" opacity="0.3" stroke="#B5392C" stroke-width="2"/>
-            <text x="90" y="115" text-anchor="middle" fill="#B5392C" font-size="9" font-weight="bold">BOSS</text>
-            <text x="90" y="40" text-anchor="middle" fill="#2A2520" font-size="10" font-weight="bold">① 第一段</text>
-            <text x="90" y="55" text-anchor="middle" fill="#5C544A" font-size="9">BOSS 中心 AOE</text>
+            <text x="90" y="115" text-anchor="middle" fill="#B5392C" font-size="12" font-weight="bold">BOSS</text>
+            <text x="90" y="40" text-anchor="middle" fill="#2A2520" font-size="13" font-weight="bold">① 第一段</text>
+            <text x="90" y="55" text-anchor="middle" fill="#5C544A" font-size="12">BOSS 中心 AOE</text>
           </g>
 
           <!-- 第二段：玩家中心 -->
           <g>
             <circle cx="240" cy="110" r="50" fill="rgba(167,123,58,0.15)" stroke="#A77B3A" stroke-width="1" stroke-dasharray="3 3"/>
             <circle cx="240" cy="110" r="8" fill="#A77B3A"/>
-            <text x="240" y="40" text-anchor="middle" fill="#2A2520" font-size="10" font-weight="bold">② 第二段（延遲 5s）</text>
-            <text x="240" y="55" text-anchor="middle" fill="#5C544A" font-size="9">被鎖定玩家中心</text>
+            <text x="240" y="40" text-anchor="middle" fill="#2A2520" font-size="13" font-weight="bold">② 第二段（延遲 5s）</text>
+            <text x="240" y="55" text-anchor="middle" fill="#5C544A" font-size="12">被鎖定玩家中心</text>
           </g>
 
-          <text x="160" y="200" text-anchor="middle" fill="#4A7556" font-size="11" font-weight="bold">兩段都可卸勢</text>
+          <text x="160" y="200" text-anchor="middle" fill="#4A7556" font-size="14" font-weight="bold">兩段都可卸勢</text>
         </svg>
         <p class="visual-caption">兩段中心範圍攻擊，皆可卸勢化解</p>
         </div>
@@ -1055,7 +1075,7 @@
 
           <!-- BOSS -->
           <rect x="166" y="116" width="28" height="28" fill="#B5392C" stroke="#B5392C" stroke-width="2"/>
-          <text x="180" y="135" text-anchor="middle" fill="#FBF7EC" font-size="11" font-weight="bold">BOSS</text>
+          <text x="180" y="135" text-anchor="middle" fill="#FBF7EC" font-size="14" font-weight="bold">BOSS</text>
 
           <defs>
             <marker id="arrow-pull" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
@@ -1075,19 +1095,19 @@
 
           <!-- 內門 -->
           <ellipse cx="120" cy="80" rx="16" ry="9" fill="rgba(63,95,122,0.35)" stroke="#3F5F7A" stroke-width="2"/>
-          <text x="120" y="68" text-anchor="middle" fill="#3F5F7A" font-size="11" font-weight="bold">內 門</text>
-          <text x="120" y="103" text-anchor="middle" fill="#3F5F7A" font-size="10">(踩這裡)</text>
+          <text x="120" y="68" text-anchor="middle" fill="#3F5F7A" font-size="14" font-weight="bold">內 門</text>
+          <text x="120" y="103" text-anchor="middle" fill="#3F5F7A" font-size="13">(踩這裡)</text>
 
           <!-- 外門 -->
           <ellipse cx="305" cy="200" rx="18" ry="10" fill="rgba(74,117,86,0.30)" stroke="#4A7556" stroke-width="2"/>
-          <text x="305" y="186" text-anchor="middle" fill="#4A7556" font-size="11" font-weight="bold">外 門</text>
-          <text x="305" y="225" text-anchor="middle" fill="#4A7556" font-size="10">(瞬移到此)</text>
+          <text x="305" y="186" text-anchor="middle" fill="#4A7556" font-size="14" font-weight="bold">外 門</text>
+          <text x="305" y="225" text-anchor="middle" fill="#4A7556" font-size="13">(瞬移到此)</text>
 
           <!-- 瞬移路徑 -->
           <path d="M 132 78 Q 220 50 293 195" fill="none" stroke="#4A7556" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow-warp)"/>
 
-          <text x="180" y="22" text-anchor="middle" fill="#2A2520" font-size="13" font-weight="bold">牽引中</text>
-          <text x="180" y="252" text-anchor="middle" fill="#5C544A" font-size="11">踩內門 → 瞬移外門 → 脫離牽引</text>
+          <text x="180" y="22" text-anchor="middle" fill="#2A2520" font-size="16" font-weight="bold">牽引中</text>
+          <text x="180" y="252" text-anchor="middle" fill="#5C544A" font-size="14">踩內門 → 瞬移外門 → 脫離牽引</text>
         </svg>
         <p class="visual-caption">內門靠 BOSS、外門在場外，踩內門瞬移逃脫</p>
         </div>
@@ -1126,7 +1146,7 @@
 
           <!-- 明光 -->
           <circle cx="160" cy="110" r="14" fill="rgba(167,123,58,0.5)" stroke="#A77B3A" stroke-width="2"/>
-          <text x="160" y="130" text-anchor="middle" fill="#A77B3A" font-size="9">明光</text>
+          <text x="160" y="130" text-anchor="middle" fill="#A77B3A" font-size="12">明光</text>
 
           <!-- 6 塊石頭（初始位置：明光周圍） -->
           <g fill="#3F5F7A" opacity="0.7">
@@ -1154,12 +1174,12 @@
           </defs>
 
           <!-- 目的地 -->
-          <text x="160" y="20" text-anchor="middle" fill="#4A7556" font-size="9">→ 邊緣</text>
-          <text x="60" y="40" fill="#4A7556" font-size="9">邊緣</text>
-          <text x="260" y="40" fill="#4A7556" font-size="9">邊緣</text>
-          <text x="60" y="180" fill="#4A7556" font-size="9">邊緣</text>
-          <text x="260" y="180" fill="#4A7556" font-size="9">邊緣</text>
-          <text x="160" y="208" text-anchor="middle" fill="#4A7556" font-size="9">→ 邊緣</text>
+          <text x="160" y="20" text-anchor="middle" fill="#4A7556" font-size="12">→ 邊緣</text>
+          <text x="60" y="40" fill="#4A7556" font-size="12">邊緣</text>
+          <text x="260" y="40" fill="#4A7556" font-size="12">邊緣</text>
+          <text x="60" y="180" fill="#4A7556" font-size="12">邊緣</text>
+          <text x="260" y="180" fill="#4A7556" font-size="12">邊緣</text>
+          <text x="160" y="208" text-anchor="middle" fill="#4A7556" font-size="12">→ 邊緣</text>
         </svg>
         <p class="visual-caption">6 塊石頭由明光旁搬到場地最外側</p>
         </div>
@@ -1190,17 +1210,17 @@
         <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
           <!-- BOSS（殘血） -->
           <rect x="70" y="95" width="30" height="30" fill="#B5392C" opacity="0.3" stroke="#B5392C" stroke-width="2"/>
-          <text x="85" y="115" text-anchor="middle" fill="#B5392C" font-size="10" font-weight="bold">BOSS</text>
+          <text x="85" y="115" text-anchor="middle" fill="#B5392C" font-size="13" font-weight="bold">BOSS</text>
           <!-- 血條 -->
           <rect x="60" y="75" width="50" height="6" fill="#D4CCBA"/>
           <rect x="60" y="75" width="5" height="6" fill="#B5392C"/>
-          <text x="85" y="68" text-anchor="middle" fill="#B5392C" font-size="9">10%</text>
+          <text x="85" y="68" text-anchor="middle" fill="#B5392C" font-size="12">10%</text>
 
           <!-- 明光變獅子 -->
           <g transform="translate(220,110)">
             <circle cx="0" cy="0" r="20" fill="rgba(167,123,58,0.25)" stroke="#A77B3A" stroke-width="1.5"/>
-            <text x="0" y="-30" text-anchor="middle" fill="#A77B3A" font-size="10" font-weight="bold">明光 → 第二頭獅子</text>
-            <text x="0" y="35" text-anchor="middle" fill="#A77B3A" font-size="9">協戰</text>
+            <text x="0" y="-30" text-anchor="middle" fill="#A77B3A" font-size="13" font-weight="bold">明光 → 第二頭獅子</text>
+            <text x="0" y="35" text-anchor="middle" fill="#A77B3A" font-size="12">協戰</text>
           </g>
 
           <!-- 玩家集火 -->
@@ -1211,7 +1231,7 @@
             <circle cx="100" cy="55" r="4"/>
             <circle cx="140" cy="50" r="4"/>
           </g>
-          <text x="100" y="195" text-anchor="middle" fill="#2A2520" font-size="10">集火爆發</text>
+          <text x="100" y="195" text-anchor="middle" fill="#2A2520" font-size="13">集火爆發</text>
         </svg>
         <p class="visual-caption">10% 血觸發過場，正常輸出即可</p>
         </div>
@@ -1219,10 +1239,6 @@
   </div>
 
   <!-- 通關口訣 -->
-  <div class="mantra">
-    <div class="label">— 鎮 關 吼 通 關 口 訣 —</div>
-    <div class="text">門 要 對 線 · 光 要 護 嚴 · 卸 要 及 時 · 爆 要 集 中</div>
-  </div>
 </section>
 
 
@@ -1231,7 +1247,9 @@
   <div class="section-header">
     <div class="num">— 首 領 之 貳 —</div>
     <h2>五 殘</h2>
-    <p class="lead">相比鎮關吼，五殘<strong>難度較低</strong>，一階段幾乎沒有團滅點，重點在二階段四大機制：<span class="text-gold">無常索命</span>、<span class="text-gold">飛羽追魂</span>、<span class="text-gold">哭喪電網</span>，以及穿插的<span class="text-gold">索魂追命圈</span>。場地兩個<span class="text-green">聖旨</span>是策略工具——平常別進，秒殺技才用。</p>
+    <p class="lead">分兩階段。<strong>一階段</strong>是雙血條壓血（地禍 + 天聽兩條血條同時打掉進入二階段），沒大團滅點，正常輸出就過。</p>
+    <p class="lead"><strong>二階段</strong>才是真正考驗，循環出現四個主要機制：<strong>無常索命</strong>（拉扯秒殺）、<strong>飛羽追魂</strong>（持續點名追擊）、<strong>哭喪電網</strong>（4 電棒搬離）、<strong>烏護殺意</strong>（鳥人衝鋒），中間還會穿插<strong>索魂追命圈</strong>（黃圈持續傷害）。</p>
+    <p class="lead">場地兩個<strong>聖旨</strong>是策略性區域——平常不要進入會強制跪拜掉血，只在特定機制時利用它躲秒殺或被 BOSS 打掉。</p>
   </div>
 
   <!-- 場地圖 -->
@@ -1243,21 +1261,21 @@
       <!-- BOSS -->
       <g transform="translate(300,160)">
         <rect x="-25" y="-25" width="50" height="50" fill="#B5392C" opacity="0.2" stroke="#B5392C" stroke-width="2"/>
-        <text x="0" y="5" text-anchor="middle" fill="#B5392C" font-size="12" font-weight="bold">五殘</text>
+        <text x="0" y="5" text-anchor="middle" fill="#B5392C" font-size="21" font-weight="bold">五殘</text>
       </g>
 
       <!-- 聖旨 A（左上） -->
       <g transform="translate(140,90)">
         <rect x="-30" y="-18" width="60" height="36" fill="rgba(74,117,86,0.18)" stroke="#4A7556" stroke-width="2" stroke-dasharray="4 3"/>
-        <text x="0" y="-25" text-anchor="middle" fill="#4A7556" font-size="11" font-weight="bold">聖 旨 A</text>
-        <text x="0" y="5" text-anchor="middle" fill="#4A7556" font-size="10">下跪區</text>
+        <text x="0" y="-25" text-anchor="middle" fill="#4A7556" font-size="20" font-weight="bold">聖 旨 A</text>
+        <text x="0" y="5" text-anchor="middle" fill="#4A7556" font-size="19">下跪區</text>
       </g>
 
       <!-- 聖旨 B（右下） -->
       <g transform="translate(460,230)">
         <rect x="-30" y="-18" width="60" height="36" fill="rgba(74,117,86,0.18)" stroke="#4A7556" stroke-width="2" stroke-dasharray="4 3"/>
-        <text x="0" y="-25" text-anchor="middle" fill="#4A7556" font-size="11" font-weight="bold">聖 旨 B</text>
-        <text x="0" y="5" text-anchor="middle" fill="#4A7556" font-size="10">下跪區</text>
+        <text x="0" y="-25" text-anchor="middle" fill="#4A7556" font-size="20" font-weight="bold">聖 旨 B</text>
+        <text x="0" y="5" text-anchor="middle" fill="#4A7556" font-size="19">下跪區</text>
       </g>
 
       <!-- 玩家 -->
@@ -1268,7 +1286,7 @@
         <circle cx="220" cy="220" r="4"/>
         <circle cx="280" cy="240" r="4"/>
       </g>
-      <text x="160" y="290" fill="#5C544A" font-size="10">玩家環繞輸出</text>
+      <text x="160" y="290" fill="#5C544A" font-size="19">玩家環繞輸出</text>
     </svg>
     <p class="caption">五殘戰場示意：兩個聖旨區（綠色）為策略性機制工具，<strong>非必要時不進入</strong></p>
   </div>
@@ -1318,8 +1336,8 @@
           <!-- BOSS 在空中 -->
           <g transform="translate(160,60)">
             <rect x="-18" y="-18" width="36" height="36" fill="#B5392C" opacity="0.3" stroke="#B5392C" stroke-width="2"/>
-            <text x="0" y="4" text-anchor="middle" fill="#B5392C" font-size="10" font-weight="bold">BOSS</text>
-            <text x="0" y="-25" text-anchor="middle" fill="#B5392C" font-size="9">跳空中</text>
+            <text x="0" y="4" text-anchor="middle" fill="#B5392C" font-size="13" font-weight="bold">BOSS</text>
+            <text x="0" y="-25" text-anchor="middle" fill="#B5392C" font-size="12">跳空中</text>
           </g>
 
           <!-- 拉扯箭頭 -->
@@ -1336,17 +1354,17 @@
           <!-- 聖旨 A -->
           <g transform="translate(60,180)">
             <rect x="-25" y="-15" width="50" height="30" fill="rgba(74,117,86,0.18)" stroke="#4A7556" stroke-width="2"/>
-            <text x="0" y="-22" text-anchor="middle" fill="#4A7556" font-size="9" font-weight="bold">聖旨</text>
+            <text x="0" y="-22" text-anchor="middle" fill="#4A7556" font-size="12" font-weight="bold">聖旨</text>
             <circle cx="0" cy="0" r="5" fill="#4A7556"/>
-            <text x="0" y="35" text-anchor="middle" fill="#4A7556" font-size="8">下跪</text>
+            <text x="0" y="35" text-anchor="middle" fill="#4A7556" font-size="11">下跪</text>
           </g>
 
           <!-- 聖旨 B -->
           <g transform="translate(260,180)">
             <rect x="-25" y="-15" width="50" height="30" fill="rgba(74,117,86,0.18)" stroke="#4A7556" stroke-width="2"/>
-            <text x="0" y="-22" text-anchor="middle" fill="#4A7556" font-size="9" font-weight="bold">聖旨</text>
+            <text x="0" y="-22" text-anchor="middle" fill="#4A7556" font-size="12" font-weight="bold">聖旨</text>
             <circle cx="0" cy="0" r="5" fill="#4A7556"/>
-            <text x="0" y="35" text-anchor="middle" fill="#4A7556" font-size="8">下跪</text>
+            <text x="0" y="35" text-anchor="middle" fill="#4A7556" font-size="11">下跪</text>
           </g>
         </svg>
         <p class="visual-caption">全員跑進聖旨區下跪，等技能結束</p>
@@ -1364,7 +1382,7 @@
     <div class="body">
       <div class="text-side">
         <h4>機制描述</h4>
-        <p>BOSS 點名多名玩家（頭頂出現 <span class="text-red">↓ 圖示</span>），對其持續追擊高傷害。</p>
+        <p>BOSS 點名多名玩家（<span class="text-red">頭頂出現朝下的深紅色箭頭</span>），對其持續追擊高傷害。</p>
 
         <h4>應對方法</h4>
         <ol>
@@ -1382,13 +1400,13 @@
         <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
           <!-- BOSS -->
           <rect x="146" y="96" width="28" height="28" fill="#B5392C" opacity="0.3" stroke="#B5392C" stroke-width="2"/>
-          <text x="160" y="114" text-anchor="middle" fill="#B5392C" font-size="9" font-weight="bold">BOSS</text>
+          <text x="160" y="114" text-anchor="middle" fill="#B5392C" font-size="12" font-weight="bold">BOSS</text>
 
           <!-- 點名玩家 -->
           <g transform="translate(80,110)">
             <circle cx="0" cy="0" r="7" fill="#A77B3A"/>
-            <text x="0" y="-12" text-anchor="middle" fill="#B5392C" font-size="12" font-weight="bold">↓</text>
-            <text x="0" y="20" text-anchor="middle" fill="#A77B3A" font-size="8">點名</text>
+            <text x="0" y="-12" text-anchor="middle" fill="#B5392C" font-size="15" font-weight="bold">↓</text>
+            <text x="0" y="20" text-anchor="middle" fill="#A77B3A" font-size="11">點名</text>
           </g>
 
           <!-- 移動軌跡 -->
@@ -1402,9 +1420,9 @@
           <!-- 聖旨（被引導去打） -->
           <g transform="translate(60,40)">
             <rect x="-25" y="-12" width="50" height="24" fill="rgba(74,117,86,0.18)" stroke="#4A7556" stroke-width="2"/>
-            <text x="0" y="3" text-anchor="middle" fill="#4A7556" font-size="9">聖旨</text>
+            <text x="0" y="3" text-anchor="middle" fill="#4A7556" font-size="12">聖旨</text>
           </g>
-          <text x="60" y="20" text-anchor="middle" fill="#4A7556" font-size="9">引 BOSS 打這裡</text>
+          <text x="60" y="20" text-anchor="middle" fill="#4A7556" font-size="12">引 BOSS 打這裡</text>
 
           <!-- BOSS 攻擊軌跡 -->
           <path d="M 160 110 L 80 50" fill="none" stroke="#B5392C" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>
@@ -1415,7 +1433,7 @@
             <circle cx="260" cy="160" r="5"/>
             <circle cx="200" cy="180" r="5"/>
           </g>
-          <text x="260" y="200" text-anchor="middle" fill="#5C544A" font-size="9">其他人離遠</text>
+          <text x="260" y="200" text-anchor="middle" fill="#5C544A" font-size="12">其他人離遠</text>
         </svg>
         <p class="visual-caption">被點名玩家引 BOSS 攻擊碰瓷聖旨</p>
         </div>
@@ -1427,161 +1445,189 @@
     <div class="header">
       <div class="move-num">參</div>
       <div class="move-name">哭喪電網</div>
-      <div class="danger-tag high">配對機制 · 高難</div>
+      <div class="danger-tag high">分頭搬離 · 配合</div>
     </div>
     <div class="body">
       <div class="text-side">
         <h4>機制描述</h4>
-        <p>地圖上刷出 <span class="text-red">4 個哭喪棒</span>，造成多段傷害。後續會招小怪做大範圍攻擊干擾。</p>
+        <p>五殘召喚 <span class="text-red">4 個電棒</span>，分成兩組（<span class="text-gold">黃色 2 根</span>、<span style="color:#4A7556">綠色 2 根</span>）。同色棒之間會<strong>自動連成電網</strong>持續造成傷害。</p>
 
         <h4>應對方法</h4>
         <ol>
-          <li>把<strong>4 個哭喪棒搬到場上</strong>適當位置</li>
-          <li>兩兩相同顏色圖示的棒子<strong>放在一起</strong>，拉成一條電網</li>
-          <li>後續刷小怪時，被鎖定的玩家<strong>帶小怪去撞電網</strong>暈住它</li>
-          <li>全員集火秒掉小怪</li>
+          <li>電棒出現後，派 <strong>4 名玩家分頭去搬</strong>（每人搬一根）</li>
+          <li>把每根棒子<strong>搬離原位、分散放置</strong>，讓電網斷開</li>
+          <li>分散時注意間距——後續「烏護殺意」階段還要用電棒組電網（見下一張卡），位置不要全擠在一起或太遠</li>
         </ol>
 
-        <div class="callout tip">
-          <div class="tag">進階技巧</div>
-          兩條電網建議擺成<strong>直角狀</strong>，覆蓋範圍更大。理想配置是「鳥 → 電網 → 被點名玩家」三點一線，電網夾在中間。
+        <div class="callout warn">
+          <div class="tag">關鍵</div>
+          這階段核心動作是「<strong>搬離</strong>」，不是配對。同色棒擺一起會連網，要分散開。
+        </div>
+
+        <div class="callout">
+          <div class="tag">兩階段機制</div>
+          哭喪電網跟<strong>烏護殺意</strong>是同一套流程的兩個階段：
+          <br>① 電棒出現 → 分頭搬離（這張卡）
+          <br>② 烏護出現 → 派人重新組電網電住烏護（下張卡）
         </div>
       </div>
       <div class="visual-side">
-        <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
-          <!-- 場地 -->
-          <rect x="20" y="20" width="280" height="200" fill="none" stroke="#D4CCBA" stroke-width="1" stroke-dasharray="3 3"/>
-
-          <!-- 電網 A（藍色配對）-->
-          <g>
-            <rect x="60" y="60" width="8" height="20" fill="#3F5F7A"/>
-            <rect x="100" y="60" width="8" height="20" fill="#3F5F7A"/>
-            <line x1="64" y1="70" x2="104" y2="70" stroke="#3F5F7A" stroke-width="2" stroke-dasharray="2 2"/>
-            <text x="84" y="55" text-anchor="middle" fill="#3F5F7A" font-size="9" font-weight="bold">電網 ①</text>
-          </g>
-
-          <!-- 電網 B（金色配對，與 A 垂直）-->
-          <g>
-            <rect x="160" y="80" width="8" height="20" fill="#A77B3A"/>
-            <rect x="160" y="140" width="8" height="20" fill="#A77B3A"/>
-            <line x1="164" y1="100" x2="164" y2="140" stroke="#A77B3A" stroke-width="2" stroke-dasharray="2 2"/>
-            <text x="190" y="125" fill="#A77B3A" font-size="9" font-weight="bold">電網 ②</text>
-            <text x="190" y="138" fill="#A77B3A" font-size="8">(直角)</text>
-          </g>
-
-          <!-- 小怪/鳥 -->
-          <g transform="translate(40,120)">
-            <circle cx="0" cy="0" r="8" fill="#B5392C" opacity="0.4" stroke="#B5392C" stroke-width="1.5"/>
-            <text x="0" y="3" text-anchor="middle" fill="#B5392C" font-size="8" font-weight="bold">鳥</text>
-          </g>
-
-          <!-- 點名玩家 -->
-          <g transform="translate(240,120)">
-            <circle cx="0" cy="0" r="6" fill="#A77B3A"/>
-            <text x="0" y="-12" text-anchor="middle" fill="#A77B3A" font-size="9" font-weight="bold">玩家</text>
-          </g>
-
-          <!-- 三點一線示意 -->
-          <line x1="48" y1="120" x2="232" y2="120" stroke="#4A7556" stroke-width="1" stroke-dasharray="2 4" opacity="0.7"/>
-          <text x="160" y="180" text-anchor="middle" fill="#4A7556" font-size="9" font-weight="bold">鳥 → 電網 → 玩家（三點一線）</text>
-
+        <svg viewBox="0 0 360 260" xmlns="http://www.w3.org/2000/svg">
           <!-- 標題 -->
-          <text x="160" y="35" text-anchor="middle" fill="#2A2520" font-size="11" font-weight="bold">兩兩配對 · 直角擺放</text>
+          <text x="180" y="22" text-anchor="middle" fill="#2A2520" font-size="14" font-weight="bold">4 根電棒分組 · 派人搬離</text>
+
+          <!-- 場地 -->
+          <rect x="20" y="40" width="320" height="200" fill="none" stroke="#D4CCBA" stroke-width="1" stroke-dasharray="3 3"/>
+
+          <!-- 黃色組（初始位置）-->
+          <g>
+            <rect x="100" y="75" width="10" height="22" fill="#A77B3A"/>
+            <rect x="140" y="75" width="10" height="22" fill="#A77B3A"/>
+            <line x1="110" y1="86" x2="140" y2="86" stroke="#A77B3A" stroke-width="2.5" stroke-dasharray="3 2"/>
+            <text x="125" y="68" text-anchor="middle" fill="#A77B3A" font-size="12" font-weight="bold">黃組</text>
+          </g>
+
+          <!-- 綠色組（初始位置）-->
+          <g>
+            <rect x="220" y="155" width="10" height="22" fill="#4A7556"/>
+            <rect x="260" y="155" width="10" height="22" fill="#4A7556"/>
+            <line x1="230" y1="166" x2="260" y2="166" stroke="#4A7556" stroke-width="2.5" stroke-dasharray="3 2"/>
+            <text x="245" y="148" text-anchor="middle" fill="#4A7556" font-size="12" font-weight="bold">綠組</text>
+          </g>
+
+          <!-- 搬離箭頭：黃組分開 -->
+          <path d="M 105 100 Q 70 130 50 165" fill="none" stroke="#A77B3A" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#arrow-move-y1)"/>
+          <path d="M 145 100 Q 175 110 195 95" fill="none" stroke="#A77B3A" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#arrow-move-y2)"/>
+
+          <!-- 搬離箭頭：綠組分開 -->
+          <path d="M 225 180 Q 215 215 250 225" fill="none" stroke="#4A7556" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#arrow-move-g1)"/>
+          <path d="M 265 180 Q 295 205 315 220" fill="none" stroke="#4A7556" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#arrow-move-g2)"/>
+
+          <defs>
+            <marker id="arrow-move-y1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#A77B3A"/></marker>
+            <marker id="arrow-move-y2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#A77B3A"/></marker>
+            <marker id="arrow-move-g1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#4A7556"/></marker>
+            <marker id="arrow-move-g2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#4A7556"/></marker>
+          </defs>
+
+          <!-- 圖例 -->
+          <g transform="translate(40,225)">
+            <rect x="0" y="-4" width="8" height="10" fill="#A77B3A"/>
+            <text x="14" y="5" fill="#5C544A" font-size="11">黃色棒</text>
+            <rect x="65" y="-4" width="8" height="10" fill="#4A7556"/>
+            <text x="79" y="5" fill="#5C544A" font-size="11">綠色棒</text>
+            <line x1="135" y1="0" x2="155" y2="0" stroke="#B5392C" stroke-width="2" stroke-dasharray="3 2"/>
+            <text x="163" y="5" fill="#5C544A" font-size="11">同色連網(傷害)</text>
+          </g>
         </svg>
-        <p class="visual-caption">電網直角擺放、鳥電網玩家三點一線</p>
+        <p class="visual-caption">4 人分頭把同色棒搬離開，斷開電網</p>
         </div>
     </div>
   </div>
 
   <!-- ============ 五殘 招式肆：烏護殺意（搭配）============ -->
-  <div class="move-card danger-mid">
+  <div class="move-card danger-high">
     <div class="header">
       <div class="move-num">肆</div>
       <div class="move-name">烏護殺意</div>
-      <div class="danger-tag mid">配合電網 · 引導</div>
+      <div class="danger-tag high">拉網電鳥 · 配合</div>
     </div>
     <div class="body">
       <div class="text-side">
         <h4>機制描述</h4>
-        <p>五殘召喚烏護，點名隨機玩家發起<strong>衝鋒</strong>。被點名玩家需要<strong>引導烏護撞到電網上</strong>暈住它。</p>
+        <p>哭喪電網階段結束後，五殘召喚 <span class="text-red">烏護</span>（鳥人）鎖定一名玩家發起<strong>衝鋒</strong>。需要把烏護電住才能擊殺。</p>
 
         <h4>應對方法</h4>
         <ol>
-          <li>被點名玩家保持移動</li>
-          <li>把烏護引導撞向已擺好的<strong>電網</strong></li>
-          <li>另一位玩家可以幫忙<strong>舉電棒拉電網</strong>配合走位</li>
-          <li>暈住後全員集火秒殺烏護</li>
+          <li>派 <strong>一組（2 名）玩家</strong>分別拿起兩根同色電棒</li>
+          <li>兩人站到適當距離，<strong>讓兩根電棒之間自動連成電網</strong></li>
+          <li>被點名玩家把烏護引導到電網位置，<strong>讓烏護衝鋒撞到電網</strong></li>
+          <li>烏護被<strong>電擊束縛</strong>無法行動 → 全員集火秒殺</li>
         </ol>
 
-        <div class="callout tip">
+        <div class="callout warn">
+          <div class="tag">關鍵</div>
+          烏護<strong>沒被電網束縛</strong>會持續放火造成減員。拉電網的玩家要會看時機，烏護一出現就要組好電網。
+        </div>
+
+        <div class="callout">
           <div class="tag">配合默契</div>
-          這個機制要求<strong>哭喪電網先擺對位置</strong>。如果電網擺得不好，烏護根本撞不到，會變成持續放火造成大量減員。
+          這個機制是<strong>哭喪電網的延續</strong>——前面搬離分散的時候要記得位置，方便後續拿起電棒組合。
         </div>
       </div>
       <div class="visual-side">
-        <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
-          <!-- 電網 -->
-          <g>
-            <rect x="140" y="80" width="8" height="20" fill="#3F5F7A"/>
-            <rect x="140" y="120" width="8" height="20" fill="#3F5F7A"/>
-            <line x1="144" y1="100" x2="144" y2="120" stroke="#3F5F7A" stroke-width="3" stroke-dasharray="2 2"/>
-            <text x="120" y="115" text-anchor="middle" fill="#3F5F7A" font-size="9">電網</text>
+        <svg viewBox="0 0 360 240" xmlns="http://www.w3.org/2000/svg">
+          <!-- 標題 -->
+          <text x="180" y="22" text-anchor="middle" fill="#2A2520" font-size="14" font-weight="bold">2 人拉電網 → 烏護撞網 → 集火</text>
+
+          <!-- 拉電網的兩個玩家 -->
+          <g transform="translate(150,90)">
+            <circle cx="0" cy="0" r="9" fill="#4A7556"/>
+            <text x="0" y="-15" text-anchor="middle" fill="#4A7556" font-size="11" font-weight="bold">拉網者A</text>
+            <!-- 電棒 -->
+            <rect x="6" y="10" width="9" height="20" fill="#A77B3A"/>
+          </g>
+          <g transform="translate(150,160)">
+            <circle cx="0" cy="0" r="9" fill="#4A7556"/>
+            <text x="0" y="22" text-anchor="middle" fill="#4A7556" font-size="11" font-weight="bold">拉網者B</text>
+            <!-- 電棒 -->
+            <rect x="6" y="-30" width="9" height="20" fill="#A77B3A"/>
           </g>
 
-          <!-- 烏護 -->
-          <g transform="translate(50,110)">
-            <circle cx="0" cy="0" r="12" fill="#B5392C" opacity="0.4" stroke="#B5392C" stroke-width="2"/>
-            <text x="0" y="4" text-anchor="middle" fill="#B5392C" font-size="9" font-weight="bold">烏護</text>
+          <!-- 電網（兩個電棒之間）-->
+          <line x1="160" y1="115" x2="160" y2="135" stroke="#B5392C" stroke-width="3.5" stroke-dasharray="2 2"/>
+          <text x="195" y="128" fill="#B5392C" font-size="12" font-weight="bold">電網</text>
+
+          <!-- 烏護（左側）-->
+          <g transform="translate(50,125)">
+            <circle cx="0" cy="0" r="16" fill="#B5392C" opacity="0.4" stroke="#B5392C" stroke-width="2"/>
+            <text x="0" y="-22" text-anchor="middle" fill="#B5392C" font-size="13" font-weight="bold">烏護</text>
+            <text x="0" y="5" text-anchor="middle" fill="#FBF7EC" font-size="11">鳥</text>
           </g>
 
-          <!-- 衝鋒線 -->
-          <path d="M 62 110 L 135 110" stroke="#B5392C" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arrow7)"/>
+          <!-- 衝鋒線（從烏護穿過電網） -->
+          <path d="M 66 125 L 152 125" stroke="#B5392C" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arrow-charge2)"/>
           <defs>
-            <marker id="arrow7" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <marker id="arrow-charge2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
               <path d="M0,0 L0,6 L7,3 z" fill="#B5392C"/>
             </marker>
           </defs>
-          <text x="100" y="100" text-anchor="middle" fill="#B5392C" font-size="9">衝鋒</text>
+          <text x="105" y="118" text-anchor="middle" fill="#B5392C" font-size="11">衝鋒</text>
 
-          <!-- 被點名玩家（引導者） -->
-          <g transform="translate(240,110)">
-            <circle cx="0" cy="0" r="7" fill="#A77B3A"/>
-            <text x="0" y="-12" text-anchor="middle" fill="#A77B3A" font-size="9" font-weight="bold">引導者</text>
+          <!-- 被點名玩家（電網右側） -->
+          <g transform="translate(280,125)">
+            <circle cx="0" cy="0" r="9" fill="#A77B3A"/>
+            <text x="0" y="-17" text-anchor="middle" fill="#A77B3A" font-size="12" font-weight="bold">被點名玩家</text>
+            <text x="0" y="27" text-anchor="middle" fill="#5C544A" font-size="11">(引導烏護)</text>
           </g>
 
-          <!-- 引導路徑 -->
-          <line x1="148" y1="110" x2="232" y2="110" stroke="#A77B3A" stroke-width="1.5" stroke-dasharray="3 3"/>
-          <text x="190" y="130" text-anchor="middle" fill="#A77B3A" font-size="9">玩家拉怪走</text>
-
-          <text x="160" y="195" text-anchor="middle" fill="#4A7556" font-size="10" font-weight="bold">烏護撞電網 → 暈住 → 全員集火</text>
+          <!-- 引導虛線 -->
+          <line x1="168" y1="125" x2="271" y2="125" stroke="#A77B3A" stroke-width="0.8" stroke-dasharray="2 4" opacity="0.5"/>
         </svg>
-        <p class="visual-caption">引導烏護撞電網暈住，再集火秒殺</p>
+        <p class="visual-caption">兩人拿電棒組電網，被點名者引烏護撞網電住</p>
         </div>
     </div>
   </div>
 
   <!-- ============ 五殘 招式伍：索魂追命圈（穿插機制）============ -->
-  <div class="move-card danger-high">
+  <div class="move-card danger-mid">
     <div class="header">
       <div class="move-num">伍</div>
       <div class="move-name">索魂追命圈</div>
-      <div class="danger-tag high">穿插機制 · 跑動躲</div>
+      <div class="danger-tag mid">穿插機制 · 拉到外場</div>
     </div>
     <div class="body">
       <div class="text-side">
         <h4>機制描述</h4>
-        <p>五殘隨機點名玩家，腳下落下<span class="text-red">巨大黃圈</span>（俗稱「放電圈」）。黃圈會：</p>
-        <ol>
-          <li>第一段：點名玩家腳下<strong>落電</strong>，造成範圍傷害</li>
-          <li>第二段：落地後<strong>擴散傷害</strong>到周圍</li>
-          <li>第三段：場上留下一個<strong>持續性電圈</strong></li>
-        </ol>
+        <p>五殘隨機點名玩家，腳下生成<span class="text-red">持續傷害的雷圈</span>（俗稱「放電圈」、望月嬋媛同款技能）。</p>
+        <p>雷圈<strong>持續時間很久</strong>，會卡住場地空間，所以放置位置很重要。</p>
 
         <h4>應對方法</h4>
         <ul>
-          <li>被點名後立刻<strong>持續跑動</strong>拉開黃圈位置</li>
-          <li>把電圈拉到場地邊緣，避免擋住其他機制動線</li>
-          <li>未被點名玩家也要保持距離，避免被擴散傷害波及</li>
+          <li>被點名後立刻<strong>移動到場地外圍</strong>放置雷圈</li>
+          <li><strong>不要放進聖旨範圍內</strong>——會影響其他機制應對</li>
+          <li>不要放在團隊輸出位置——會擋住走位動線</li>
+          <li>放完後跑離雷圈繼續輸出</li>
         </ul>
 
         <div class="callout warn">
@@ -1591,63 +1637,60 @@
 
         <div class="callout">
           <div class="tag">機制循環</div>
-          二階段三大機制（無常索命 → 飛羽追魂 → 哭喪電網）循環之間，<strong>會穿插出現</strong>索魂追命圈。出現時機沒有固定規律，要隨時做好應變準備。
+          二階段三大機制（無常索命 → 飛羽追魂 → 哭喪電網）之間，<strong>會穿插出現</strong>索魂追命圈。出現時機沒有固定規律，要隨時做好應變準備。
         </div>
       </div>
       <div class="visual-side">
         <svg viewBox="0 0 360 260" xmlns="http://www.w3.org/2000/svg">
+          <!-- 標題 -->
+          <text x="180" y="22" text-anchor="middle" fill="#2A2520" font-size="14" font-weight="bold">點名後拉到場外角落</text>
+
           <!-- 場地 -->
-          <ellipse cx="180" cy="130" rx="170" ry="115" fill="none" stroke="#D4CCBA" stroke-width="1" stroke-dasharray="3 4"/>
+          <ellipse cx="180" cy="140" rx="160" ry="100" fill="none" stroke="#D4CCBA" stroke-width="1" stroke-dasharray="3 4"/>
 
-          <!-- BOSS -->
-          <rect x="166" y="116" width="28" height="28" fill="#B5392C" opacity="0.4" stroke="#B5392C" stroke-width="2"/>
-          <text x="180" y="135" text-anchor="middle" fill="#FBF7EC" font-size="10" font-weight="bold">BOSS</text>
+          <!-- BOSS（中央） -->
+          <rect x="166" y="126" width="28" height="28" fill="#B5392C" opacity="0.4" stroke="#B5392C" stroke-width="2"/>
+          <text x="180" y="145" text-anchor="middle" fill="#FBF7EC" font-size="12" font-weight="bold">BOSS</text>
 
-          <!-- 第一階段：點名落電位置 -->
+          <!-- 聖旨 A（左上）- 不可放 -->
           <g>
-            <circle cx="80" cy="80" r="32" fill="rgba(167,123,58,0.18)" stroke="#A77B3A" stroke-width="2" stroke-dasharray="4 3"/>
-            <text x="80" y="50" text-anchor="middle" fill="#A77B3A" font-size="11" font-weight="bold">① 點名黃圈</text>
-            <text x="80" y="63" text-anchor="middle" fill="#5C544A" font-size="10">(落電起點)</text>
+            <rect x="65" y="68" width="48" height="24" fill="rgba(74,117,86,0.18)" stroke="#4A7556" stroke-width="2" stroke-dasharray="3 2"/>
+            <text x="89" y="83" text-anchor="middle" fill="#4A7556" font-size="12" font-weight="bold">聖旨</text>
+            <text x="89" y="108" text-anchor="middle" fill="#B5392C" font-size="11" font-weight="bold">✗ 別放</text>
           </g>
 
-          <!-- 玩家：被點名 -->
-          <circle cx="80" cy="85" r="8" fill="#A77B3A"/>
-          <text x="80" y="105" text-anchor="middle" fill="#A77B3A" font-size="10" font-weight="bold">被點名</text>
+          <!-- 聖旨 B（右上）-->
+          <g>
+            <rect x="247" y="68" width="48" height="24" fill="rgba(74,117,86,0.18)" stroke="#4A7556" stroke-width="2" stroke-dasharray="3 2"/>
+            <text x="271" y="83" text-anchor="middle" fill="#4A7556" font-size="12" font-weight="bold">聖旨</text>
+            <text x="271" y="108" text-anchor="middle" fill="#B5392C" font-size="11" font-weight="bold">✗ 別放</text>
+          </g>
 
-          <!-- 跑動箭頭：拉到邊緣 -->
-          <path d="M 88 85 Q 150 180 280 210" fill="none" stroke="#A77B3A" stroke-width="2" stroke-dasharray="4 3">
-            <animate attributeName="stroke-dashoffset" from="0" to="-14" dur="1s" repeatCount="indefinite"/>
-          </path>
+          <!-- 被點名玩家起點 -->
+          <circle cx="180" cy="195" r="8" fill="#A77B3A"/>
+          <text x="180" y="215" text-anchor="middle" fill="#A77B3A" font-size="12" font-weight="bold">被點名</text>
 
+          <!-- 跑動箭頭（從 BOSS 附近往角落） -->
+          <path d="M 188 195 Q 245 215 305 220" fill="none" stroke="#A77B3A" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#arrow-run5)"/>
           <defs>
-            <marker id="arrow-run" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+            <marker id="arrow-run5" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
               <path d="M0,0 L0,6 L9,3 z" fill="#A77B3A"/>
             </marker>
           </defs>
 
-          <!-- 第二階段：擴散位置（中途）-->
-          <circle cx="160" cy="180" r="22" fill="rgba(181,57,44,0.10)" stroke="#B5392C" stroke-width="1" stroke-dasharray="3 3"/>
-          <text x="160" y="218" text-anchor="middle" fill="#B5392C" font-size="10" font-weight="bold">② 擴散傷害</text>
-
-          <!-- 第三階段：留下電圈 -->
-          <circle cx="285" cy="205" r="28" fill="rgba(167,123,58,0.20)" stroke="#A77B3A" stroke-width="2"/>
-          <circle cx="285" cy="205" r="14" fill="rgba(181,57,44,0.20)"/>
-          <text x="285" y="170" text-anchor="middle" fill="#A77B3A" font-size="11" font-weight="bold">③ 持續電圈</text>
-          <text x="285" y="183" text-anchor="middle" fill="#5C544A" font-size="10">(拉到邊緣)</text>
-
-          <!-- 標題 -->
-          <text x="180" y="22" text-anchor="middle" fill="#2A2520" font-size="13" font-weight="bold">三段傷害·跑動躲避</text>
+          <!-- 終點：場外角落的雷圈（推薦位置） -->
+          <g>
+            <circle cx="318" cy="220" r="20" fill="rgba(167,123,58,0.30)" stroke="#A77B3A" stroke-width="2"/>
+            <circle cx="318" cy="220" r="9" fill="rgba(181,57,44,0.35)"/>
+            <text x="318" y="248" text-anchor="middle" fill="#4A7556" font-size="11" font-weight="bold">✓ 放這</text>
+          </g>
         </svg>
-        <p class="visual-caption">被點名後跑動把電圈拉到場邊，避開機制動線</p>
+        <p class="visual-caption">拖到角落放雷圈，避開聖旨與團隊輸出位</p>
         </div>
     </div>
   </div>
 
   <!-- 通關口訣 -->
-  <div class="mantra">
-    <div class="label">— 五 殘 通 關 口 訣 —</div>
-    <div class="text">無 常 跪 旨 · 飛 羽 碰 瓷 · 電 網 直 角 · 黃 圈 跑 動</div>
-  </div>
 </section>
 
 
