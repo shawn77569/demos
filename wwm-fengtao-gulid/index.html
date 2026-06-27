@@ -17,11 +17,17 @@
     --ink-light:     #8A7A6A;  /* 深暖灰 */
     --gold-main:     #D4A668;  /* 亮金(標題/重點) */
     --gold-deep:     #A77B3A;  /* 深金 */
-    --red-warn:      #E85A47;  /* 鮮紅(危險) */
-    --green-safe:    #7AA888;  /* 翡翠綠(安全) */
-    --blue-mech:     #6B95B5;  /* 鈷藍(中性) */
+    --red-warn:      #FF0050;  /* 霓虹紅(危險) */
+    --green-safe:    #39FF14;  /* 電光綠(安全) */
+    --blue-mech:     #00E5FF;  /* 霓虹青(中性) */
+    --purple-cyber:  #BF00FF;  /* 霓虹紫(次強調) */
+    --pink-cyber:    #FF00C8;  /* 品紅(點綴) */
     --line:          #4A2E2A;  /* 暗紅木邊線 */
     --line-soft:     #3A2422;  /* 淡邊線 */
+    /* 賽博漸層 */
+    --grad-cyber:    linear-gradient(90deg, #00E5FF, #BF00FF);
+    --grad-danger:   linear-gradient(90deg, #FF0050, #FF00C8);
+    --grad-safe:     linear-gradient(90deg, #39FF14, #00E5FF);
 
     /* 字型 */
     --font-display: "Noto Serif TC", "Songti TC", "STSongti-TC-Regular", "PMingLiU", serif;
@@ -332,9 +338,9 @@
     font-family: var(--font-mono);
     text-transform: uppercase;
   }
-  .danger-tag.high { background: rgba(181,57,44,0.12); color: var(--red-warn); border: 1px solid var(--red-warn); }
+  .danger-tag.high { background: rgba(170,0,55,0.15); color: var(--red-warn); border: 1px solid var(--red-warn); }
   .danger-tag.mid { background: rgba(167,123,58,0.12); color: var(--gold-main); border: 1px solid var(--gold-deep); }
-  .danger-tag.low { background: rgba(74,117,86,0.10); color: var(--green-safe); border: 1px solid var(--green-safe); }
+  .danger-tag.low { background: rgba(40,180,14,0.12); color: var(--green-safe); border: 1px solid var(--green-safe); }
 
   .move-card .body {
     display: grid;
@@ -500,13 +506,13 @@
     padding: 18px 22px;
     margin: 18px 0;
     border-left: 3px solid var(--blue-mech);
-    background: rgba(107,149,181,0.10);
+    background: rgba(0,229,255,0.12);
     font-size: 1rem;
     color: var(--ink-dark);
     line-height: 1.85;
   }
-  .callout.warn { border-left-color: var(--red-warn); background: rgba(232,90,71,0.10); }
-  .callout.tip { border-left-color: var(--green-safe); background: rgba(122,168,136,0.10); }
+  .callout.warn { border-left-color: var(--red-warn); background: rgba(255,0,80,0.12); }
+  .callout.tip { border-left-color: var(--green-safe); background: rgba(57,255,20,0.12); }
   .callout .tag {
     font-family: var(--font-display);
     font-size: 1.1rem;
@@ -552,18 +558,18 @@
     width: 40px;
     height: 40px;
     flex-shrink: 0;
-    filter: drop-shadow(0 0 6px rgba(232, 90, 71, 0.3));
+    filter: drop-shadow(0 0 6px rgba(255, 0, 80, 0.35));
   }
   .brand-cluster .symbol:hover,
   .brand-cluster .wordmark-mini:hover {
-    filter: drop-shadow(0 0 12px rgba(232, 90, 71, 0.55));
+    filter: drop-shadow(0 0 12px rgba(255, 0, 80, 0.55));
     transition: filter 0.3s ease;
   }
   .brand-cluster .wordmark-mini {
     height: 40px;
     width: auto;
     flex-shrink: 0;
-    filter: drop-shadow(0 0 6px rgba(232, 90, 71, 0.3));
+    filter: drop-shadow(0 0 6px rgba(255, 0, 80, 0.35));
     transition: filter 0.3s ease;
   }
   .brand-cluster .divider {
@@ -603,7 +609,7 @@
     height: auto;
     margin-bottom: 18px;
     /* 在深底上加微弱發光，呼應「不夜京」夜中明燈意象 */
-    filter: drop-shadow(0 0 14px rgba(232, 90, 71, 0.2));
+    filter: drop-shadow(0 0 14px rgba(255, 0, 80, 0.25));
   }
   .footer-brand .society-tag {
     font-family: var(--font-display);
@@ -673,6 +679,110 @@
       50% { opacity: 0.4; }
     }
   }
+
+  /* ===== Cyber 強化（方案 B 賽博武俠融合） ===== */
+
+  /* Nav 底邊霓虹漸層 + 微光暈 */
+  nav.topbar {
+    border-bottom: none;
+  }
+  nav.topbar::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, #00E5FF 30%, #BF00FF 70%, transparent 100%);
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    pointer-events: none;
+  }
+
+  /* LOGO 光暈強化 */
+  .brand-cluster .symbol {
+    filter: drop-shadow(0 0 8px rgba(255, 0, 80, 0.55));
+  }
+  .brand-cluster .wordmark-mini {
+    filter: drop-shadow(0 0 8px rgba(255, 0, 80, 0.55));
+  }
+  .brand-cluster .symbol:hover,
+  .brand-cluster .wordmark-mini:hover {
+    filter: drop-shadow(0 0 14px rgba(255, 0, 80, 0.85));
+  }
+
+  /* Hero 標題金光 */
+  .hero h1 {
+    text-shadow: 0 0 32px rgba(212, 166, 104, 0.25);
+  }
+
+  /* Section header h2 下方霓虹底線 */
+  .section-header h2 {
+    display: inline-block;
+    position: relative;
+    padding-bottom: 10px;
+  }
+  .section-header h2::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 72px;
+    height: 2px;
+    background: linear-gradient(90deg, #00E5FF, #BF00FF);
+    box-shadow: 0 0 8px rgba(0, 229, 255, 0.6);
+  }
+
+  /* 招式卡 danger 等級邊框光暈 */
+  .move-card.danger-high {
+    box-shadow: -2px 0 20px rgba(255, 0, 80, 0.3);
+  }
+  .move-card.danger-mid {
+    box-shadow: -2px 0 14px rgba(212, 166, 104, 0.18);
+  }
+  .move-card.danger-low {
+    box-shadow: -2px 0 18px rgba(57, 255, 20, 0.22);
+  }
+
+  /* danger-tag 文字發光 */
+  .danger-tag.high {
+    text-shadow: 0 0 6px rgba(255, 0, 80, 0.7);
+    box-shadow: 0 0 10px rgba(255, 0, 80, 0.35);
+  }
+  .danger-tag.mid {
+    text-shadow: 0 0 4px rgba(212, 166, 104, 0.5);
+  }
+  .danger-tag.low {
+    text-shadow: 0 0 6px rgba(57, 255, 20, 0.65);
+    box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+  }
+
+  /* Callout 邊框光暈 */
+  .callout.warn {
+    box-shadow: -2px 0 12px rgba(255, 0, 80, 0.22);
+  }
+  .callout.tip {
+    box-shadow: -2px 0 12px rgba(57, 255, 20, 0.22);
+  }
+
+  /* 滾動條霓虹色 */
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #00E5FF, #BF00FF);
+    box-shadow: 0 0 6px rgba(0, 229, 255, 0.5);
+  }
+
+  /* Nav 連結 hover 改為霓虹青 */
+  nav.topbar a:hover {
+    color: #00E5FF;
+    text-shadow: 0 0 8px rgba(0, 229, 255, 0.7);
+  }
+
+  /* Footer wordmark 紅+紫雙色發光 */
+  .footer-brand .wordmark {
+    filter: drop-shadow(0 0 14px rgba(255, 0, 80, 0.4)) drop-shadow(0 0 28px rgba(191, 0, 255, 0.22));
+  }
+
+  /* 內文強調色字體微光 */
+  .text-red { text-shadow: 0 0 6px rgba(255, 0, 80, 0.45); }
+  .text-blue { text-shadow: 0 0 6px rgba(0, 229, 255, 0.45); }
+  .text-green { text-shadow: 0 0 6px rgba(57, 255, 20, 0.45); }
+
 </style>
 </head>
 <body>
@@ -758,7 +868,7 @@
 
       <div class="concept-card">
         <div class="term">攻擊辨識</div>
-        <div class="body">BOSS 攻擊前會給三種提示：<span class="text-red">紅光</span>=可卸勢（按 <strong>E</strong> 反彈傷害並回耐力）；<span style="color:#F0C040">黃光</span>=必須躲開（不可卸）；<span class="text-red">頭頂朝下深紅色箭頭</span>=點名你（要拉走或站位）。<br><br>本副本常見「<strong>全隊同步卸勢</strong>」場合（如碎日追擊救明光），看到紅光要立刻按 E。</div>
+        <div class="body">BOSS 攻擊前會給三種提示：<span class="text-red">紅光</span>=可卸勢（按 <strong>E</strong> 反彈傷害並回耐力）；<span style="color:#FFE600">黃光</span>=必須躲開（不可卸）；<span class="text-red">頭頂朝下深紅色箭頭</span>=點名你（要拉走或站位）。<br><br>本副本常見「<strong>全隊同步卸勢</strong>」場合（如碎日追擊救明光），看到紅光要立刻按 E。</div>
       </div>
 
       <div class="concept-card">
@@ -814,20 +924,20 @@
           <!-- 戰場 -->
           <rect x="0" y="0" width="320" height="220" fill="none"/>
           <!-- BOSS -->
-          <rect x="140" y="100" width="40" height="40" fill="#E85A47" opacity="0.3" stroke="#E85A47" stroke-width="2"/>
-          <text x="160" y="125" text-anchor="middle" fill="#E85A47" font-size="13" font-weight="bold">BOSS</text>
+          <rect x="140" y="100" width="40" height="40" fill="#FF0050" opacity="0.3" stroke="#FF0050" stroke-width="2"/>
+          <text x="160" y="125" text-anchor="middle" fill="#FF0050" font-size="13" font-weight="bold">BOSS</text>
           <!-- 扇形範圍 -->
-          <path d="M 160 100 L 60 30 A 150 150 0 0 1 260 30 Z" fill="rgba(181,57,44,0.15)" stroke="#E85A47" stroke-width="1" stroke-dasharray="4 3"/>
-          <text x="160" y="55" text-anchor="middle" fill="#E85A47" font-size="14" font-weight="bold">月焰範圍</text>
-          <text x="160" y="73" text-anchor="middle" fill="#E85A47" font-size="12">(危險區)</text>
+          <path d="M 160 100 L 60 30 A 150 150 0 0 1 260 30 Z" fill="rgba(170,0,55,0.2)" stroke="#FF0050" stroke-width="1" stroke-dasharray="4 3"/>
+          <text x="160" y="55" text-anchor="middle" fill="#FF0050" font-size="14" font-weight="bold">月焰範圍</text>
+          <text x="160" y="73" text-anchor="middle" fill="#FF0050" font-size="12">(危險區)</text>
 
           <!-- 安全玩家位 -->
-          <circle cx="60" cy="150" r="6" fill="#7AA888"/>
-          <text x="60" y="170" text-anchor="middle" fill="#7AA888" font-size="12">安全</text>
-          <circle cx="260" cy="150" r="6" fill="#7AA888"/>
-          <text x="260" y="170" text-anchor="middle" fill="#7AA888" font-size="12">安全</text>
-          <circle cx="160" cy="190" r="6" fill="#7AA888"/>
-          <text x="160" y="208" text-anchor="middle" fill="#7AA888" font-size="12">背後最安全</text>
+          <circle cx="60" cy="150" r="6" fill="#39FF14"/>
+          <text x="60" y="170" text-anchor="middle" fill="#39FF14" font-size="12">安全</text>
+          <circle cx="260" cy="150" r="6" fill="#39FF14"/>
+          <text x="260" y="170" text-anchor="middle" fill="#39FF14" font-size="12">安全</text>
+          <circle cx="160" cy="190" r="6" fill="#39FF14"/>
+          <text x="160" y="208" text-anchor="middle" fill="#39FF14" font-size="12">背後最安全</text>
         </svg>
         <p class="visual-caption">玩家跑到 BOSS 兩側/背後即安全</p>
         </div>
@@ -862,12 +972,12 @@
       <div class="visual-side">
         <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
           <!-- 鎮關壁 -->
-          <rect x="270" y="100" width="20" height="40" fill="#6B95B5" stroke="#6B95B5" stroke-width="1"/>
-          <text x="280" y="155" text-anchor="middle" fill="#6B95B5" font-size="12">鎮關壁</text>
+          <rect x="270" y="100" width="20" height="40" fill="#00E5FF" stroke="#00E5FF" stroke-width="1"/>
+          <text x="280" y="155" text-anchor="middle" fill="#00E5FF" font-size="12">鎮關壁</text>
 
           <!-- BOSS -->
-          <rect x="40" y="100" width="30" height="30" fill="#E85A47" opacity="0.3" stroke="#E85A47" stroke-width="2"/>
-          <text x="55" y="120" text-anchor="middle" fill="#E85A47" font-size="13" font-weight="bold">BOSS</text>
+          <rect x="40" y="100" width="30" height="30" fill="#FF0050" opacity="0.3" stroke="#FF0050" stroke-width="2"/>
+          <text x="55" y="120" text-anchor="middle" fill="#FF0050" font-size="13" font-weight="bold">BOSS</text>
 
           <!-- 點名玩家 -->
           <circle cx="180" cy="115" r="6" fill="#D4A668"/>
@@ -875,10 +985,10 @@
           <text x="180" y="135" text-anchor="middle" fill="#D4A668" font-size="12">站位</text>
 
           <!-- 衝鋒路徑 -->
-          <line x1="70" y1="115" x2="270" y2="115" stroke="#E85A47" stroke-width="2" stroke-dasharray="6 3" marker-end="url(#arrow)"/>
+          <line x1="70" y1="115" x2="270" y2="115" stroke="#FF0050" stroke-width="2" stroke-dasharray="6 3" marker-end="url(#arrow)"/>
           <defs>
             <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
-              <path d="M0,0 L0,6 L9,3 z" fill="#E85A47"/>
+              <path d="M0,0 L0,6 L9,3 z" fill="#FF0050"/>
             </marker>
           </defs>
 
@@ -928,26 +1038,26 @@
           <ellipse cx="160" cy="110" rx="140" ry="90" fill="none" stroke="#6B4A40" stroke-width="1" stroke-dasharray="3 3"/>
 
           <!-- BOSS -->
-          <rect x="80" y="95" width="28" height="28" fill="#E85A47" opacity="0.3" stroke="#E85A47" stroke-width="2"/>
-          <text x="94" y="113" text-anchor="middle" fill="#E85A47" font-size="12" font-weight="bold">BOSS</text>
+          <rect x="80" y="95" width="28" height="28" fill="#FF0050" opacity="0.3" stroke="#FF0050" stroke-width="2"/>
+          <text x="94" y="113" text-anchor="middle" fill="#FF0050" font-size="12" font-weight="bold">BOSS</text>
 
           <!-- 明光 -->
           <circle cx="170" cy="110" r="10" fill="rgba(167,123,58,0.5)" stroke="#D4A668" stroke-width="1"/>
           <text x="170" y="135" text-anchor="middle" fill="#D4A668" font-size="12">明光</text>
 
           <!-- 傳送門 1：中場 -->
-          <ellipse cx="170" cy="65" rx="14" ry="8" fill="rgba(63,95,122,0.22)" stroke="#6B95B5" stroke-width="2"/>
-          <text x="170" y="55" text-anchor="middle" fill="#6B95B5" font-size="12" font-weight="bold">門 A</text>
+          <ellipse cx="170" cy="65" rx="14" ry="8" fill="rgba(0,150,180,0.28)" stroke="#00E5FF" stroke-width="2"/>
+          <text x="170" y="55" text-anchor="middle" fill="#00E5FF" font-size="12" font-weight="bold">門 A</text>
           <text x="170" y="85" text-anchor="middle" fill="#B5A88E" font-size="11">中場</text>
 
           <!-- 傳送門 2：外場 -->
-          <ellipse cx="270" cy="180" rx="14" ry="8" fill="rgba(63,95,122,0.22)" stroke="#6B95B5" stroke-width="2"/>
-          <text x="270" y="170" text-anchor="middle" fill="#6B95B5" font-size="12" font-weight="bold">門 B</text>
+          <ellipse cx="270" cy="180" rx="14" ry="8" fill="rgba(0,150,180,0.28)" stroke="#00E5FF" stroke-width="2"/>
+          <text x="270" y="170" text-anchor="middle" fill="#00E5FF" font-size="12" font-weight="bold">門 B</text>
           <text x="270" y="200" text-anchor="middle" fill="#B5A88E" font-size="11">外場</text>
 
           <!-- 連線 -->
-          <line x1="170" y1="65" x2="270" y2="180" stroke="#6B95B5" stroke-width="1" stroke-dasharray="4 4"/>
-          <text x="225" y="115" fill="#6B95B5" font-size="12" transform="rotate(45 225 115)">傳送通道</text>
+          <line x1="170" y1="65" x2="270" y2="180" stroke="#00E5FF" stroke-width="1" stroke-dasharray="4 4"/>
+          <text x="225" y="115" fill="#00E5FF" font-size="12" transform="rotate(45 225 115)">傳送通道</text>
         </svg>
         <p class="visual-caption">兩個傳送門：一中場一外場，建立逃生通道</p>
         </div>
@@ -991,8 +1101,8 @@
       <div class="visual-side">
         <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
           <!-- BOSS -->
-          <rect x="40" y="95" width="30" height="30" fill="#E85A47" opacity="0.3" stroke="#E85A47" stroke-width="2"/>
-          <text x="55" y="115" text-anchor="middle" fill="#E85A47" font-size="13" font-weight="bold">BOSS</text>
+          <rect x="40" y="95" width="30" height="30" fill="#FF0050" opacity="0.3" stroke="#FF0050" stroke-width="2"/>
+          <text x="55" y="115" text-anchor="middle" fill="#FF0050" font-size="13" font-weight="bold">BOSS</text>
 
           <!-- 玩家（卡位） -->
           <circle cx="160" cy="110" r="9" fill="#D4A668"/>
@@ -1004,10 +1114,10 @@
           <text x="270" y="138" text-anchor="middle" fill="#D4A668" font-size="13">明光</text>
 
           <!-- 衝鋒線 -->
-          <line x1="70" y1="110" x2="150" y2="110" stroke="#E85A47" stroke-width="3" stroke-dasharray="5 3" marker-end="url(#arrow2)"/>
+          <line x1="70" y1="110" x2="150" y2="110" stroke="#FF0050" stroke-width="3" stroke-dasharray="5 3" marker-end="url(#arrow2)"/>
           <defs>
             <marker id="arrow2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
-              <path d="M0,0 L0,6 L9,3 z" fill="#E85A47"/>
+              <path d="M0,0 L0,6 L9,3 z" fill="#FF0050"/>
             </marker>
           </defs>
 
@@ -1052,9 +1162,9 @@
         <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
           <!-- 第一段：BOSS 中心 -->
           <g>
-            <circle cx="90" cy="110" r="55" fill="rgba(181,57,44,0.12)" stroke="#E85A47" stroke-width="1" stroke-dasharray="3 3"/>
-            <rect x="76" y="96" width="28" height="28" fill="#E85A47" opacity="0.3" stroke="#E85A47" stroke-width="2"/>
-            <text x="90" y="115" text-anchor="middle" fill="#E85A47" font-size="12" font-weight="bold">BOSS</text>
+            <circle cx="90" cy="110" r="55" fill="rgba(170,0,55,0.15)" stroke="#FF0050" stroke-width="1" stroke-dasharray="3 3"/>
+            <rect x="76" y="96" width="28" height="28" fill="#FF0050" opacity="0.3" stroke="#FF0050" stroke-width="2"/>
+            <text x="90" y="115" text-anchor="middle" fill="#FF0050" font-size="12" font-weight="bold">BOSS</text>
             <text x="90" y="40" text-anchor="middle" fill="#E8DCC4" font-size="13" font-weight="bold">① 第一段</text>
             <text x="90" y="55" text-anchor="middle" fill="#B5A88E" font-size="12">BOSS 中心 AOE</text>
           </g>
@@ -1067,7 +1177,7 @@
             <text x="240" y="55" text-anchor="middle" fill="#B5A88E" font-size="12">被鎖定玩家中心</text>
           </g>
 
-          <text x="160" y="200" text-anchor="middle" fill="#7AA888" font-size="14" font-weight="bold">兩段都可卸勢</text>
+          <text x="160" y="200" text-anchor="middle" fill="#39FF14" font-size="14" font-weight="bold">兩段都可卸勢</text>
         </svg>
         <p class="visual-caption">兩段中心範圍攻擊，皆可卸勢化解</p>
         </div>
@@ -1104,41 +1214,41 @@
           <ellipse cx="180" cy="130" rx="170" ry="115" fill="none" stroke="#6B4A40" stroke-width="1" stroke-dasharray="3 4"/>
 
           <!-- BOSS 牽引範圍 -->
-          <circle cx="180" cy="130" r="60" fill="rgba(181,57,44,0.10)" stroke="#E85A47" stroke-width="1" stroke-dasharray="3 3"/>
-          <circle cx="180" cy="130" r="35" fill="rgba(181,57,44,0.20)"/>
+          <circle cx="180" cy="130" r="60" fill="rgba(170,0,55,0.12)" stroke="#FF0050" stroke-width="1" stroke-dasharray="3 3"/>
+          <circle cx="180" cy="130" r="35" fill="rgba(170,0,55,0.25)"/>
 
           <!-- BOSS -->
-          <rect x="166" y="116" width="28" height="28" fill="#E85A47" stroke="#E85A47" stroke-width="2"/>
+          <rect x="166" y="116" width="28" height="28" fill="#FF0050" stroke="#FF0050" stroke-width="2"/>
           <text x="180" y="135" text-anchor="middle" fill="#E8DCC4" font-size="14" font-weight="bold">BOSS</text>
 
           <defs>
             <marker id="arrow-pull" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
-              <path d="M0,0 L0,6 L9,3 z" fill="#E85A47"/>
+              <path d="M0,0 L0,6 L9,3 z" fill="#FF0050"/>
             </marker>
             <marker id="arrow-warp" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
-              <path d="M0,0 L0,6 L9,3 z" fill="#7AA888"/>
+              <path d="M0,0 L0,6 L9,3 z" fill="#39FF14"/>
             </marker>
           </defs>
 
           <!-- 牽引箭頭 -->
-          <g stroke="#E85A47" stroke-width="1.5" fill="none" opacity="0.6" stroke-dasharray="4 3">
+          <g stroke="#FF0050" stroke-width="1.5" fill="none" opacity="0.6" stroke-dasharray="4 3">
             <path d="M 80 60 L 145 110" marker-end="url(#arrow-pull)"/>
             <path d="M 70 200 L 145 150" marker-end="url(#arrow-pull)"/>
             <path d="M 300 70 L 215 110" marker-end="url(#arrow-pull)"/>
           </g>
 
           <!-- 內門 -->
-          <ellipse cx="120" cy="80" rx="16" ry="9" fill="rgba(63,95,122,0.35)" stroke="#6B95B5" stroke-width="2"/>
-          <text x="120" y="68" text-anchor="middle" fill="#6B95B5" font-size="14" font-weight="bold">內 門</text>
-          <text x="120" y="103" text-anchor="middle" fill="#6B95B5" font-size="13">(踩這裡)</text>
+          <ellipse cx="120" cy="80" rx="16" ry="9" fill="rgba(0,150,180,0.4)" stroke="#00E5FF" stroke-width="2"/>
+          <text x="120" y="68" text-anchor="middle" fill="#00E5FF" font-size="14" font-weight="bold">內 門</text>
+          <text x="120" y="103" text-anchor="middle" fill="#00E5FF" font-size="13">(踩這裡)</text>
 
           <!-- 外門 -->
-          <ellipse cx="305" cy="200" rx="18" ry="10" fill="rgba(74,117,86,0.30)" stroke="#7AA888" stroke-width="2"/>
-          <text x="305" y="186" text-anchor="middle" fill="#7AA888" font-size="14" font-weight="bold">外 門</text>
-          <text x="305" y="225" text-anchor="middle" fill="#7AA888" font-size="13">(瞬移到此)</text>
+          <ellipse cx="305" cy="200" rx="18" ry="10" fill="rgba(40,180,14,0.35)" stroke="#39FF14" stroke-width="2"/>
+          <text x="305" y="186" text-anchor="middle" fill="#39FF14" font-size="14" font-weight="bold">外 門</text>
+          <text x="305" y="225" text-anchor="middle" fill="#39FF14" font-size="13">(瞬移到此)</text>
 
           <!-- 瞬移路徑 -->
-          <path d="M 132 78 Q 220 50 293 195" fill="none" stroke="#7AA888" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow-warp)"/>
+          <path d="M 132 78 Q 220 50 293 195" fill="none" stroke="#39FF14" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow-warp)"/>
 
           <text x="180" y="22" text-anchor="middle" fill="#E8DCC4" font-size="16" font-weight="bold">牽引中</text>
           <text x="180" y="252" text-anchor="middle" fill="#B5A88E" font-size="14">踩內門 → 瞬移外門 → 脫離牽引</text>
@@ -1183,7 +1293,7 @@
           <text x="160" y="130" text-anchor="middle" fill="#D4A668" font-size="12">明光</text>
 
           <!-- 6 塊鎮關隕（初始位置：明光周圍） -->
-          <g fill="#6B95B5" opacity="0.7">
+          <g fill="#00E5FF" opacity="0.7">
             <circle cx="135" cy="85" r="6"/>
             <circle cx="160" cy="80" r="6"/>
             <circle cx="185" cy="85" r="6"/>
@@ -1193,7 +1303,7 @@
           </g>
 
           <!-- 搬運箭頭 -->
-          <g stroke="#7AA888" stroke-width="1.5" fill="none" marker-end="url(#arrow4)">
+          <g stroke="#39FF14" stroke-width="1.5" fill="none" marker-end="url(#arrow4)">
             <path d="M 135 85 L 70 50"/>
             <path d="M 160 80 L 160 30"/>
             <path d="M 185 85 L 250 50"/>
@@ -1203,17 +1313,17 @@
           </g>
           <defs>
             <marker id="arrow4" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-              <path d="M0,0 L0,6 L7,3 z" fill="#7AA888"/>
+              <path d="M0,0 L0,6 L7,3 z" fill="#39FF14"/>
             </marker>
           </defs>
 
           <!-- 目的地 -->
-          <text x="160" y="20" text-anchor="middle" fill="#7AA888" font-size="12">→ 邊緣</text>
-          <text x="60" y="40" fill="#7AA888" font-size="12">邊緣</text>
-          <text x="260" y="40" fill="#7AA888" font-size="12">邊緣</text>
-          <text x="60" y="180" fill="#7AA888" font-size="12">邊緣</text>
-          <text x="260" y="180" fill="#7AA888" font-size="12">邊緣</text>
-          <text x="160" y="208" text-anchor="middle" fill="#7AA888" font-size="12">→ 邊緣</text>
+          <text x="160" y="20" text-anchor="middle" fill="#39FF14" font-size="12">→ 邊緣</text>
+          <text x="60" y="40" fill="#39FF14" font-size="12">邊緣</text>
+          <text x="260" y="40" fill="#39FF14" font-size="12">邊緣</text>
+          <text x="60" y="180" fill="#39FF14" font-size="12">邊緣</text>
+          <text x="260" y="180" fill="#39FF14" font-size="12">邊緣</text>
+          <text x="160" y="208" text-anchor="middle" fill="#39FF14" font-size="12">→ 邊緣</text>
         </svg>
         <p class="visual-caption">6 塊鎮關隕由明光旁搬到場地最外側</p>
         </div>
@@ -1243,12 +1353,12 @@
       <div class="visual-side">
         <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
           <!-- BOSS（殘血） -->
-          <rect x="70" y="95" width="30" height="30" fill="#E85A47" opacity="0.3" stroke="#E85A47" stroke-width="2"/>
-          <text x="85" y="115" text-anchor="middle" fill="#E85A47" font-size="13" font-weight="bold">BOSS</text>
+          <rect x="70" y="95" width="30" height="30" fill="#FF0050" opacity="0.3" stroke="#FF0050" stroke-width="2"/>
+          <text x="85" y="115" text-anchor="middle" fill="#FF0050" font-size="13" font-weight="bold">BOSS</text>
           <!-- 血條 -->
           <rect x="60" y="75" width="50" height="6" fill="#6B4A40"/>
-          <rect x="60" y="75" width="5" height="6" fill="#E85A47"/>
-          <text x="85" y="68" text-anchor="middle" fill="#E85A47" font-size="12">10%</text>
+          <rect x="60" y="75" width="5" height="6" fill="#FF0050"/>
+          <text x="85" y="68" text-anchor="middle" fill="#FF0050" font-size="12">10%</text>
 
           <!-- 明光變獅子 -->
           <g transform="translate(220,110)">
@@ -1343,21 +1453,21 @@
           <ellipse cx="180" cy="140" rx="160" ry="100" fill="none" stroke="#6B4A40" stroke-width="1" stroke-dasharray="3 4"/>
 
           <!-- BOSS（中央） -->
-          <rect x="166" y="126" width="28" height="28" fill="#E85A47" opacity="0.4" stroke="#E85A47" stroke-width="2"/>
+          <rect x="166" y="126" width="28" height="28" fill="#FF0050" opacity="0.4" stroke="#FF0050" stroke-width="2"/>
           <text x="180" y="145" text-anchor="middle" fill="#E8DCC4" font-size="12" font-weight="bold">BOSS</text>
 
           <!-- 聖旨 A（左上）- 不可放 -->
           <g>
-            <rect x="65" y="68" width="48" height="24" fill="rgba(74,117,86,0.18)" stroke="#7AA888" stroke-width="2" stroke-dasharray="3 2"/>
-            <text x="89" y="83" text-anchor="middle" fill="#7AA888" font-size="12" font-weight="bold">聖旨</text>
-            <text x="89" y="108" text-anchor="middle" fill="#E85A47" font-size="11" font-weight="bold">✗ 別放</text>
+            <rect x="65" y="68" width="48" height="24" fill="rgba(40,180,14,0.22)" stroke="#39FF14" stroke-width="2" stroke-dasharray="3 2"/>
+            <text x="89" y="83" text-anchor="middle" fill="#39FF14" font-size="12" font-weight="bold">聖旨</text>
+            <text x="89" y="108" text-anchor="middle" fill="#FF0050" font-size="11" font-weight="bold">✗ 別放</text>
           </g>
 
           <!-- 聖旨 B（右上）-->
           <g>
-            <rect x="247" y="68" width="48" height="24" fill="rgba(74,117,86,0.18)" stroke="#7AA888" stroke-width="2" stroke-dasharray="3 2"/>
-            <text x="271" y="83" text-anchor="middle" fill="#7AA888" font-size="12" font-weight="bold">聖旨</text>
-            <text x="271" y="108" text-anchor="middle" fill="#E85A47" font-size="11" font-weight="bold">✗ 別放</text>
+            <rect x="247" y="68" width="48" height="24" fill="rgba(40,180,14,0.22)" stroke="#39FF14" stroke-width="2" stroke-dasharray="3 2"/>
+            <text x="271" y="83" text-anchor="middle" fill="#39FF14" font-size="12" font-weight="bold">聖旨</text>
+            <text x="271" y="108" text-anchor="middle" fill="#FF0050" font-size="11" font-weight="bold">✗ 別放</text>
           </g>
 
           <!-- 被點名玩家起點 -->
@@ -1375,8 +1485,8 @@
           <!-- 終點：場外角落的雷圈（推薦位置） -->
           <g>
             <circle cx="318" cy="220" r="20" fill="rgba(167,123,58,0.30)" stroke="#D4A668" stroke-width="2"/>
-            <circle cx="318" cy="220" r="9" fill="rgba(181,57,44,0.35)"/>
-            <text x="318" y="248" text-anchor="middle" fill="#7AA888" font-size="11" font-weight="bold">✓ 放這</text>
+            <circle cx="318" cy="220" r="9" fill="rgba(170,0,55,0.4)"/>
+            <text x="318" y="248" text-anchor="middle" fill="#39FF14" font-size="11" font-weight="bold">✓ 放這</text>
           </g>
         </svg>
         <p class="visual-caption">拖到角落放雷圈，避開聖旨與團隊輸出位</p>
@@ -1418,36 +1528,36 @@
         <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
           <!-- BOSS 在空中 -->
           <g transform="translate(160,60)">
-            <rect x="-18" y="-18" width="36" height="36" fill="#E85A47" opacity="0.3" stroke="#E85A47" stroke-width="2"/>
-            <text x="0" y="4" text-anchor="middle" fill="#E85A47" font-size="13" font-weight="bold">BOSS</text>
-            <text x="0" y="-25" text-anchor="middle" fill="#E85A47" font-size="12">跳空中</text>
+            <rect x="-18" y="-18" width="36" height="36" fill="#FF0050" opacity="0.3" stroke="#FF0050" stroke-width="2"/>
+            <text x="0" y="4" text-anchor="middle" fill="#FF0050" font-size="13" font-weight="bold">BOSS</text>
+            <text x="0" y="-25" text-anchor="middle" fill="#FF0050" font-size="12">跳空中</text>
           </g>
 
           <!-- 拉扯箭頭 -->
-          <g stroke="#E85A47" stroke-width="1.5" fill="none" opacity="0.6" stroke-dasharray="4 3">
+          <g stroke="#FF0050" stroke-width="1.5" fill="none" opacity="0.6" stroke-dasharray="4 3">
             <path d="M 60 180 L 145 75" marker-end="url(#arrow5)"/>
             <path d="M 260 180 L 175 75" marker-end="url(#arrow5)"/>
           </g>
           <defs>
             <marker id="arrow5" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-              <path d="M0,0 L0,6 L7,3 z" fill="#E85A47"/>
+              <path d="M0,0 L0,6 L7,3 z" fill="#FF0050"/>
             </marker>
           </defs>
 
           <!-- 聖旨 A -->
           <g transform="translate(60,180)">
-            <rect x="-25" y="-15" width="50" height="30" fill="rgba(74,117,86,0.18)" stroke="#7AA888" stroke-width="2"/>
-            <text x="0" y="-22" text-anchor="middle" fill="#7AA888" font-size="12" font-weight="bold">聖旨</text>
-            <circle cx="0" cy="0" r="5" fill="#7AA888"/>
-            <text x="0" y="35" text-anchor="middle" fill="#7AA888" font-size="11">下跪</text>
+            <rect x="-25" y="-15" width="50" height="30" fill="rgba(40,180,14,0.22)" stroke="#39FF14" stroke-width="2"/>
+            <text x="0" y="-22" text-anchor="middle" fill="#39FF14" font-size="12" font-weight="bold">聖旨</text>
+            <circle cx="0" cy="0" r="5" fill="#39FF14"/>
+            <text x="0" y="35" text-anchor="middle" fill="#39FF14" font-size="11">下跪</text>
           </g>
 
           <!-- 聖旨 B -->
           <g transform="translate(260,180)">
-            <rect x="-25" y="-15" width="50" height="30" fill="rgba(74,117,86,0.18)" stroke="#7AA888" stroke-width="2"/>
-            <text x="0" y="-22" text-anchor="middle" fill="#7AA888" font-size="12" font-weight="bold">聖旨</text>
-            <circle cx="0" cy="0" r="5" fill="#7AA888"/>
-            <text x="0" y="35" text-anchor="middle" fill="#7AA888" font-size="11">下跪</text>
+            <rect x="-25" y="-15" width="50" height="30" fill="rgba(40,180,14,0.22)" stroke="#39FF14" stroke-width="2"/>
+            <text x="0" y="-22" text-anchor="middle" fill="#39FF14" font-size="12" font-weight="bold">聖旨</text>
+            <circle cx="0" cy="0" r="5" fill="#39FF14"/>
+            <text x="0" y="35" text-anchor="middle" fill="#39FF14" font-size="11">下跪</text>
           </g>
         </svg>
         <p class="visual-caption">全員跑進聖旨區下跪，等技能結束</p>
@@ -1487,13 +1597,13 @@
       <div class="visual-side">
         <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
           <!-- BOSS -->
-          <rect x="146" y="96" width="28" height="28" fill="#E85A47" opacity="0.3" stroke="#E85A47" stroke-width="2"/>
-          <text x="160" y="114" text-anchor="middle" fill="#E85A47" font-size="12" font-weight="bold">BOSS</text>
+          <rect x="146" y="96" width="28" height="28" fill="#FF0050" opacity="0.3" stroke="#FF0050" stroke-width="2"/>
+          <text x="160" y="114" text-anchor="middle" fill="#FF0050" font-size="12" font-weight="bold">BOSS</text>
 
           <!-- 點名玩家 -->
           <g transform="translate(80,110)">
             <circle cx="0" cy="0" r="7" fill="#D4A668"/>
-            <text x="0" y="-12" text-anchor="middle" fill="#E85A47" font-size="15" font-weight="bold">↓</text>
+            <text x="0" y="-12" text-anchor="middle" fill="#FF0050" font-size="15" font-weight="bold">↓</text>
             <text x="0" y="20" text-anchor="middle" fill="#D4A668" font-size="11">點名</text>
           </g>
 
@@ -1507,13 +1617,13 @@
 
           <!-- 聖旨（被引導去打） -->
           <g transform="translate(60,40)">
-            <rect x="-25" y="-12" width="50" height="24" fill="rgba(74,117,86,0.18)" stroke="#7AA888" stroke-width="2"/>
-            <text x="0" y="3" text-anchor="middle" fill="#7AA888" font-size="12">聖旨</text>
+            <rect x="-25" y="-12" width="50" height="24" fill="rgba(40,180,14,0.22)" stroke="#39FF14" stroke-width="2"/>
+            <text x="0" y="3" text-anchor="middle" fill="#39FF14" font-size="12">聖旨</text>
           </g>
-          <text x="60" y="20" text-anchor="middle" fill="#7AA888" font-size="12">引 BOSS 打這裡</text>
+          <text x="60" y="20" text-anchor="middle" fill="#39FF14" font-size="12">引 BOSS 打這裡</text>
 
           <!-- BOSS 攻擊軌跡 -->
-          <path d="M 160 110 L 80 50" fill="none" stroke="#E85A47" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>
+          <path d="M 160 110 L 80 50" fill="none" stroke="#FF0050" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>
 
           <!-- 其他玩家保持距離 -->
           <g fill="#B5A88E">
@@ -1538,7 +1648,7 @@
     <div class="body">
       <div class="text-side">
         <h4>機制描述</h4>
-        <p>五殘召喚 <span class="text-red">4 個電棒</span>，分成兩組（<span class="text-gold">黃色 2 根</span>、<span style="color:#4A7556">綠色 2 根</span>）。同色棒之間會<strong>自動連成電網</strong>持續造成傷害。</p>
+        <p>五殘召喚 <span class="text-red">4 個電棒</span>，分成兩組（<span class="text-gold">黃色 2 根</span>、<span style="color:#28B40E">綠色 2 根</span>）。同色棒之間會<strong>自動連成電網</strong>持續造成傷害。</p>
 
         <h4>應對方法</h4>
         <ol>
@@ -1582,10 +1692,10 @@
 
           <!-- 綠色組（初始位置）-->
           <g>
-            <rect x="220" y="155" width="10" height="22" fill="#7AA888"/>
-            <rect x="260" y="155" width="10" height="22" fill="#7AA888"/>
-            <line x1="230" y1="166" x2="260" y2="166" stroke="#7AA888" stroke-width="2.5" stroke-dasharray="3 2"/>
-            <text x="245" y="148" text-anchor="middle" fill="#7AA888" font-size="12" font-weight="bold">綠組</text>
+            <rect x="220" y="155" width="10" height="22" fill="#39FF14"/>
+            <rect x="260" y="155" width="10" height="22" fill="#39FF14"/>
+            <line x1="230" y1="166" x2="260" y2="166" stroke="#39FF14" stroke-width="2.5" stroke-dasharray="3 2"/>
+            <text x="245" y="148" text-anchor="middle" fill="#39FF14" font-size="12" font-weight="bold">綠組</text>
           </g>
 
           <!-- 搬離箭頭：黃組分開 -->
@@ -1593,23 +1703,23 @@
           <path d="M 145 100 Q 175 110 195 95" fill="none" stroke="#D4A668" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#arrow-move-y2)"/>
 
           <!-- 搬離箭頭：綠組分開 -->
-          <path d="M 225 180 Q 215 215 250 225" fill="none" stroke="#7AA888" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#arrow-move-g1)"/>
-          <path d="M 265 180 Q 295 205 315 220" fill="none" stroke="#7AA888" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#arrow-move-g2)"/>
+          <path d="M 225 180 Q 215 215 250 225" fill="none" stroke="#39FF14" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#arrow-move-g1)"/>
+          <path d="M 265 180 Q 295 205 315 220" fill="none" stroke="#39FF14" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#arrow-move-g2)"/>
 
           <defs>
             <marker id="arrow-move-y1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#D4A668"/></marker>
             <marker id="arrow-move-y2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#D4A668"/></marker>
-            <marker id="arrow-move-g1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#7AA888"/></marker>
-            <marker id="arrow-move-g2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#7AA888"/></marker>
+            <marker id="arrow-move-g1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#39FF14"/></marker>
+            <marker id="arrow-move-g2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#39FF14"/></marker>
           </defs>
 
           <!-- 圖例 -->
           <g transform="translate(40,225)">
             <rect x="0" y="-4" width="8" height="10" fill="#D4A668"/>
             <text x="14" y="5" fill="#B5A88E" font-size="11">黃色棒</text>
-            <rect x="65" y="-4" width="8" height="10" fill="#7AA888"/>
+            <rect x="65" y="-4" width="8" height="10" fill="#39FF14"/>
             <text x="79" y="5" fill="#B5A88E" font-size="11">綠色棒</text>
-            <line x1="135" y1="0" x2="155" y2="0" stroke="#E85A47" stroke-width="2" stroke-dasharray="3 2"/>
+            <line x1="135" y1="0" x2="155" y2="0" stroke="#FF0050" stroke-width="2" stroke-dasharray="3 2"/>
             <text x="163" y="5" fill="#B5A88E" font-size="11">同色連網(傷害)</text>
           </g>
         </svg>
@@ -1660,37 +1770,37 @@
 
           <!-- 拉電網的兩個玩家 -->
           <g transform="translate(150,90)">
-            <circle cx="0" cy="0" r="9" fill="#7AA888"/>
-            <text x="0" y="-15" text-anchor="middle" fill="#7AA888" font-size="11" font-weight="bold">拉網者A</text>
+            <circle cx="0" cy="0" r="9" fill="#39FF14"/>
+            <text x="0" y="-15" text-anchor="middle" fill="#39FF14" font-size="11" font-weight="bold">拉網者A</text>
             <!-- 電棒 -->
             <rect x="6" y="10" width="9" height="20" fill="#D4A668"/>
           </g>
           <g transform="translate(150,160)">
-            <circle cx="0" cy="0" r="9" fill="#7AA888"/>
-            <text x="0" y="22" text-anchor="middle" fill="#7AA888" font-size="11" font-weight="bold">拉網者B</text>
+            <circle cx="0" cy="0" r="9" fill="#39FF14"/>
+            <text x="0" y="22" text-anchor="middle" fill="#39FF14" font-size="11" font-weight="bold">拉網者B</text>
             <!-- 電棒 -->
             <rect x="6" y="-30" width="9" height="20" fill="#D4A668"/>
           </g>
 
           <!-- 電網（兩個電棒之間）-->
-          <line x1="160" y1="115" x2="160" y2="135" stroke="#E85A47" stroke-width="3.5" stroke-dasharray="2 2"/>
-          <text x="195" y="128" fill="#E85A47" font-size="12" font-weight="bold">電網</text>
+          <line x1="160" y1="115" x2="160" y2="135" stroke="#FF0050" stroke-width="3.5" stroke-dasharray="2 2"/>
+          <text x="195" y="128" fill="#FF0050" font-size="12" font-weight="bold">電網</text>
 
           <!-- 烏護（左側）-->
           <g transform="translate(50,125)">
-            <circle cx="0" cy="0" r="16" fill="#E85A47" opacity="0.4" stroke="#E85A47" stroke-width="2"/>
-            <text x="0" y="-22" text-anchor="middle" fill="#E85A47" font-size="13" font-weight="bold">烏護</text>
+            <circle cx="0" cy="0" r="16" fill="#FF0050" opacity="0.4" stroke="#FF0050" stroke-width="2"/>
+            <text x="0" y="-22" text-anchor="middle" fill="#FF0050" font-size="13" font-weight="bold">烏護</text>
             <text x="0" y="5" text-anchor="middle" fill="#E8DCC4" font-size="11">鳥</text>
           </g>
 
           <!-- 衝鋒線（從烏護穿過電網） -->
-          <path d="M 66 125 L 152 125" stroke="#E85A47" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arrow-charge2)"/>
+          <path d="M 66 125 L 152 125" stroke="#FF0050" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arrow-charge2)"/>
           <defs>
             <marker id="arrow-charge2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-              <path d="M0,0 L0,6 L7,3 z" fill="#E85A47"/>
+              <path d="M0,0 L0,6 L7,3 z" fill="#FF0050"/>
             </marker>
           </defs>
-          <text x="105" y="118" text-anchor="middle" fill="#E85A47" font-size="11">衝鋒</text>
+          <text x="105" y="118" text-anchor="middle" fill="#FF0050" font-size="11">衝鋒</text>
 
           <!-- 被點名玩家（電網右側） -->
           <g transform="translate(280,125)">
