@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>把球扣得更重 · 排球扣球完整指南</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-page: #F4F1E9;
+  --bg-elev: #FBF9F3;
+  --bg-data: #EFEBE0;
+  --ink: #1A1815;
+  --ink-soft: #3A3530;
+  --ink-mute: #6E665A;
+  --ink-faint: #9A9183;
+  --rule: #D6D0C0;
+  --rule-soft: #E5E0D2;
+  --impact: #C53A1D;
+  --impact-soft: #E8C5B8;
+  --data: #1E3A5F;
+  --warm: #8B6332;
+  --good: #4A6B3E;
+  --max-w: 760px;
+  --wide-w: 1080px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg-page);
+  color: var(--ink);
+  font-family: "Source Serif 4", "Noto Serif TC", Georgia, serif;
+  font-size: 17px;
+  line-height: 1.82;
+  font-feature-settings: "kern", "liga";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+}
+
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 28px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== HERO ===== */
+.hero {
+  padding: 88px 0 56px;
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+  z-index: 2;
+}
+
+.eyebrow {
+  font-family: "Archivo", "Noto Sans TC", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--impact);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.eyebrow::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+.hero h1 {
+  font-family: "Archivo", "Noto Sans TC", sans-serif;
+  font-weight: 900;
+  font-size: clamp(40px, 6.5vw, 68px);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+
+.hero h1 .accent { color: var(--impact); font-style: italic; font-weight: 800; }
+
+.hero .subtitle {
+  font-family: "Source Serif 4", "Noto Serif TC", serif;
+  font-style: italic;
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 600px;
+  margin-bottom: 40px;
+}
+
+.hero-intro {
+  font-size: 18px;
+  line-height: 1.78;
+  color: var(--ink-soft);
+  margin: 32px 0 0;
+  padding-top: 32px;
+  border-top: 1px solid var(--rule-soft);
+}
+
+.hero-intro p { margin-bottom: 14px; }
+.hero-intro p:last-child { margin-bottom: 0; }
+
+/* ===== BIG IDEA HERO ===== */
+.big-idea {
+  margin: 56px 0 0;
+  padding: 40px 44px;
+  background: var(--bg-elev);
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-left: 6px solid var(--impact);
+  border-radius: 2px;
+  position: relative;
+}
+
+.big-idea-label {
+  font-family: "Archivo", "Noto Sans TC", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--impact);
+  margin-bottom: 18px;
+}
+
+.big-idea h2 {
+  font-family: "Archivo", "Noto Sans TC", sans-serif;
+  font-weight: 800;
+  font-size: clamp(26px, 3.8vw, 34px);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin-bottom: 18px;
+  color: var(--ink);
+}
+
+.big-idea h2 .accent { color: var(--impact); font-style: italic; }
+
+.big-idea p {
+  font-family: "Source Serif 4", "Noto Serif TC", serif;
+  font-size: 17px;
+  line-height: 1.78;
+  color: var(--ink-soft);
+  margin-bottom: 12px;
+}
+
+.big-idea p:last-child { margin-bottom: 0; }
+
+/* ===== SECTION ===== */
+.section {
+  padding: 72px 0 24px;
+  scroll-margin-top: 24px;
+}
+
+.section-marker {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--impact);
+  letter-spacing: 0.12em;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-marker::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+  max-width: 80px;
+}
+
+.section h2 {
+  font-family: "Archivo", "Noto Sans TC", sans-serif;
+  font-weight: 800;
+  font-size: clamp(30px, 4vw, 42px);
+  line-height: 1.12;
+  letter-spacing: -0.018em;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+
+.section .lead {
+  font-family: "Source Serif 4", "Noto Serif TC", serif;
+  font-style: italic;
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--ink-mute);
+  margin-bottom: 36px;
+  max-width: 620px;
+}
+
+.section h3 {
+  font-family: "Noto Sans TC", sans-serif;
+  font-weight: 700;
+  font-size: 23px;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+  margin: 52px 0 18px;
+  color: var(--ink);
+}
+
+.section h4 {
+  font-family: "Noto Sans TC", sans-serif;
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 1.4;
+  margin: 32px 0 12px;
+  color: var(--ink);
+}
+
+.section p {
+  margin-bottom: 20px;
+  color: var(--ink-soft);
+}
+
+.section p strong, .section li strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.section ul, .section ol {
+  margin: 0 0 22px 0;
+  padding-left: 24px;
+}
+
+.section li {
+  margin-bottom: 12px;
+  color: var(--ink-soft);
+}
+
+.section li::marker { color: var(--impact); }
+
+/* ===== TOC ===== */
+.toc {
+  margin: 56px 0 0;
+  padding: 28px 32px;
+  background: var(--bg-data);
+  border-left: 3px solid var(--impact);
+}
+
+.toc h4 {
+  font-family: "Archivo", "Noto Sans TC", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 16px;
+}
+
+.toc ol {
+  list-style: none;
+  counter-reset: toc;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 24px;
+}
+
+.toc li {
+  counter-increment: toc;
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.toc li a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  display: flex;
+  gap: 12px;
+  padding: 4px 0;
+  transition: color 0.15s;
+}
+
+.toc li a::before {
+  content: counter(toc, decimal-leading-zero);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  color: var(--impact);
+  font-weight: 700;
+  min-width: 24px;
+  padding-top: 3px;
+}
+
+.toc li a:hover { color: var(--impact); }
+
+/* ===== FEEL BLOCK (the key new element) ===== */
+.feel {
+  margin: 28px 0;
+  padding: 28px 32px;
+  background: var(--bg-elev);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.feel::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--impact);
+}
+
+.feel-label {
+  font-family: "Archivo", "Noto Sans TC", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--impact);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.feel h4 {
+  font-family: "Noto Sans TC", sans-serif;
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 1.4;
+  color: var(--ink);
+  margin: 0 0 12px;
+}
+
+.feel p {
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 10px;
+  color: var(--ink-soft);
+}
+
+.feel p:last-child { margin-bottom: 0; }
+
+/* ===== CHECK BLOCK ===== */
+.check {
+  margin: 24px 0;
+  padding: 22px 26px;
+  background: rgba(74, 107, 62, 0.06);
+  border-left: 3px solid var(--good);
+  border-radius: 2px;
+}
+
+.check-label {
+  font-family: "Archivo", "Noto Sans TC", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--good);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.check h4 {
+  font-family: "Noto Sans TC", sans-serif;
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 1.4;
+  margin: 0 0 12px;
+  color: var(--ink);
+}
+
+.check p, .check li {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+.check ul { margin: 8px 0 0; padding-left: 22px; }
+.check li { margin-bottom: 6px; }
+.check li::marker { color: var(--good); }
+
+/* ===== COMMON MISCONCEPTION ===== */
+.myth {
+  margin: 24px 0;
+  padding: 22px 26px;
+  background: rgba(197, 58, 29, 0.04);
+  border-left: 3px solid var(--impact);
+}
+
+.myth-label {
+  font-family: "Archivo", "Noto Sans TC", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--impact);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.myth h4 {
+  font-family: "Noto Sans TC", sans-serif;
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 1.4;
+  margin: 0 0 14px;
+  color: var(--ink);
+}
+
+.myth p {
+  font-size: 16px;
+  line-height: 1.72;
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+
+.myth p:last-child { margin-bottom: 0; }
+
+.myth .wrong { color: var(--impact); font-weight: 600; }
+.myth .right { color: var(--good); font-weight: 600; }
+
+/* ===== SCIENCE COLLAPSIBLE ===== */
+.science {
+  margin: 24px 0;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  overflow: hidden;
+  background: var(--bg-elev);
+}
+
+.science summary {
+  font-family: "Archivo", "Noto Sans TC", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--data);
+  padding: 16px 22px;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(30, 58, 95, 0.04);
+  border-bottom: 1px solid transparent;
+  transition: background 0.15s;
+}
+
+.science summary::-webkit-details-marker { display: none; }
+
+.science summary::before {
+  content: "▸";
+  font-size: 12px;
+  transition: transform 0.2s;
+}
+
+.science[open] summary {
+  border-bottom: 1px solid var(--rule);
+}
+
+.science[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.science summary:hover {
+  background: rgba(30, 58, 95, 0.08);
+}
+
+.science .science-body {
+  padding: 20px 24px 22px;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+.science .science-body p { margin-bottom: 10px; }
+.science .science-body p:last-child { margin-bottom: 0; }
+
+.science .data-val {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.9em;
+  font-weight: 600;
+  color: var(--data);
+  background: rgba(30, 58, 95, 0.08);
+  padding: 1px 5px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+.science cite {
+  font-style: italic;
+  color: var(--ink-mute);
+  font-size: 0.92em;
+}
+
+/* ===== STAGE CARD ===== */
+.stage {
+  margin: 20px 0 28px;
+  background: var(--bg-elev);
+  border: 1px solid var(--rule);
+  padding: 26px 30px;
+  position: relative;
+}
+
+.stage::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--impact) 0%, var(--warm) 50%, var(--data) 100%);
+}
+
+.stage-num {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--impact);
+  letter-spacing: 0.12em;
+  margin-bottom: 6px;
+}
+
+.stage-name {
+  font-family: "Noto Sans TC", sans-serif;
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--ink);
+  margin-bottom: 16px;
+  line-height: 1.35;
+}
+
+.stage p {
+  font-size: 16px;
+  line-height: 1.72;
+  margin-bottom: 18px;
+}
+
+.stage p:last-child { margin-bottom: 0; }
+
+.stage .key {
+  display: block;
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--impact);
+  margin: 0 0 4px;
+}
+
+/* ===== DRILL CARD ===== */
+.drill-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.drill {
+  padding: 22px 26px;
+  background: var(--bg-elev);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+}
+
+.drill-num {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--impact);
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+
+.drill h4 {
+  font-family: "Noto Sans TC", sans-serif;
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 1.4;
+  color: var(--ink);
+  margin: 0 0 10px;
+}
+
+.drill p {
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.drill .how {
+  margin-top: 10px;
+  font-size: 14.5px;
+  color: var(--ink-mute);
+}
+
+.drill .how strong {
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+/* ===== INLINE EMPHASIS ===== */
+.metaphor {
+  font-style: italic;
+  color: var(--warm);
+  font-weight: 500;
+}
+
+/* ===== REFERENCES ===== */
+.refs {
+  margin: 80px 0 60px;
+  padding: 40px 0;
+  border-top: 2px solid var(--ink);
+}
+
+.refs h2 {
+  font-family: "Archivo", "Noto Sans TC", sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -0.005em;
+  margin-bottom: 12px;
+}
+
+.refs p.lead {
+  font-style: italic;
+  color: var(--ink-mute);
+  font-size: 15px;
+  margin-bottom: 22px;
+}
+
+.refs ol {
+  list-style: decimal;
+  padding-left: 24px;
+  font-size: 13.5px;
+  color: var(--ink-mute);
+  line-height: 1.65;
+}
+
+.refs li {
+  margin-bottom: 8px;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  padding: 32px 0 60px;
+  border-top: 1px solid var(--rule);
+  text-align: center;
+  font-family: "Archivo", "Noto Sans TC", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 720px) {
+  body { font-size: 16px; line-height: 1.78; }
+  .hero { padding: 56px 0 40px; }
+  .container { padding: 0 22px; }
+  .toc ol { grid-template-columns: 1fr; }
+  .big-idea, .feel, .check, .myth, .stage, .drill { padding: 22px 22px; }
+  .big-idea { padding: 30px 24px; }
+}
+
+@media print {
+  body { background: white; font-size: 11pt; }
+  body::before { display: none; }
+  .toc, .footer { display: none; }
+  .section { page-break-inside: avoid; padding: 24pt 0 12pt; }
+  .science[open] summary::before { content: "▾"; transform: none; }
+  a { color: inherit; text-decoration: none; }
+}
+
+::selection {
+  background: var(--impact);
+  color: var(--bg-page);
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="container">
+    <div class="eyebrow">扣球完整指南 · For Players</div>
+    <h1>把球扣得更重,<br>從<span class="accent">「會用全身」</span>開始。</h1>
+    <p class="subtitle">一份寫給想真的進步的人的扣球指南——<br>講感覺、講動作、講練習,理論放在側邊備查。</p>
+    
+    <div class="hero-intro">
+      <p>很多人扣球打不重,不是手不夠用力,而是 <strong>只用了手</strong>。</p>
+      <p>正確的扣球力量,有 80% 來自手以外的部位:你的腿、你的腰、你的肩膀旋轉、你的整個身體在空中的弓身與爆發。手只是把這些力量「送出去」的最後一棒。這份指南會告訴你那 80% 是什麼、感覺起來是什麼樣子、怎麼一步一步練起來。</p>
+      <p>每一段都會先講「該怎麼做」和「該有什麼感覺」,如果你想知道背後的研究依據,點開灰色區塊就好。</p>
+    </div>
+
+    <!-- Big Idea Hero -->
+    <div class="big-idea">
+      <div class="big-idea-label">如果你只記得一件事</div>
+      <h2>扣球的力量,是<span class="accent">從地板開始</span>,<br>一路傳到指尖的。</h2>
+      <p>想像你在甩一條鞭子:握把(腿)先動,中段(腰、肩)接著加速,最後鞭梢(手)爆出最快的速度。手會痛、會響,不是因為你出力甩鞭梢,而是因為前面所有節段把能量一棒一棒交到了它手上。</p>
+      <p>扣球完全一樣。<strong>腿煞車→腰旋轉→肩鞭打→手收尾。</strong>每一段都要把能量交給下一段,任何一段「斷掉」,力量就漏光了。這就是為什麼有些人看起來瘦瘦的卻能把球打得很重——他們會「接力」,不是力大。</p>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== TOC ===================== -->
+<div class="container">
+  <nav class="toc">
+    <h4>這份指南的目次</h4>
+    <ol>
+      <li><a href="#sec1">為什麼你扣球打不重?</a></li>
+      <li><a href="#sec2">扣球的五個動作階段</a></li>
+      <li><a href="#sec3">六個你可能正在犯的錯</a></li>
+      <li><a href="#sec4">在家就能練的基本功</a></li>
+      <li><a href="#sec5">在球場上要練什麼</a></li>
+      <li><a href="#sec6">關於肩膀和膝蓋的保護</a></li>
+      <li><a href="#sec7">其他扣球類型怎麼打</a></li>
+      <li><a href="#sec8">給不同程度的人:該怎麼安排?</a></li>
+    </ol>
+  </nav>
+</div>
+
+<!-- ===================== SECTION 1 ===================== -->
+<section class="section" id="sec1">
+  <div class="container">
+    <div class="section-marker">01 — DIAGNOSIS</div>
+    <h2>為什麼你扣球打不重?</h2>
+    <p class="lead">先搞清楚問題在哪。下面這幾種情況,可能就是你正在發生的事。</p>
+
+    <h3>診斷一:你只用了手臂</h3>
+    <p>最常見的問題。跳起來之後,只有手在揮,身體是「凍住」的——軀幹沒有後仰、沒有旋轉,肚子沒有「收」的感覺,只有肩膀在用力。結果就是:你以為很出力,球卻飄飄的、軟軟的、容易被攔。</p>
+
+    <div class="feel">
+      <span class="feel-label">正確的感覺</span>
+      <h4>整個身體像鞭子,從腳底傳到指尖</h4>
+      <p>跳起來在空中那一瞬間,你應該感覺到:<strong>胸口被拉開、肚子被拉長、手臂往後拉到耳朵後面</strong>(像拉滿弓的姿勢),然後 <strong>肚子用力縮、腰甩過去、肩膀像甩鞭一樣把手送出去</strong>。如果你只感覺到肩膀痠,沒感覺到肚子和腰用力,那就是只用手在打。</p>
+    </div>
+
+    <h3>診斷二:你的助跑沒幫到你</h3>
+    <p>助跑不只是為了跑到球的位置,更重要的是 <strong>把往前跑的速度,「轉換」成往上跳的高度,順便給扣球加力量</strong>。如果你助跑是「走過去再跳」,等於什麼都沒幫到。好的助跑會讓你「跳得比平常高」,而且空中更有力。</p>
+
+    <div class="feel">
+      <span class="feel-label">正確的感覺</span>
+      <h4>最後兩步「踩煞車」,把往前的衝力扳成往上的爆發</h4>
+      <p>想像你開車衝向懸崖然後緊急煞車——車身會往前頓一下,然後你會被甩出去。扣球的最後兩步就是這個感覺:<strong>倒數第二步用腳跟先著地、身體稍微往後仰煞車</strong>,接著 <strong>最後一步快速跟上、雙腳一起踩地</strong>,把整個人「彈」上去。雙手同時從後面甩到前上方,幫你跳更高。</p>
+    </div>
+
+    <h3>診斷三:你打到球時手臂已經慢下來了</h3>
+    <p>很多人擊球點太低——球在頭頂上方或者偏後面才打到,這時候手臂已經過了最高速度,當然打不重。正確的擊球點是 <strong>球到你身體正前方、最高點稍微前面一點</strong> 的時候打,這時候手臂剛好甩到最快。</p>
+
+    <div class="feel">
+      <span class="feel-label">正確的感覺</span>
+      <h4>你的手是在「迎向」球,不是球掉下來才打</h4>
+      <p>想像球是釘在牆上的目標,你要 <strong>主動把手送過去打它</strong>。如果你感覺自己是在「等球掉下來」再揮,那就是太晚了。理想時機是球還在最高點時你就要起跳開始揮,手揮到最高點的那一瞬間正好碰到球。</p>
+    </div>
+
+    <h3>診斷四:你的非擊球手「沒在用」</h3>
+    <p>右手選手的左手(左手選手的右手)很多人空中時都「忘了」放在哪。但這隻非擊球手其實是你 <strong>軀幹旋轉的引擎</strong>——它先往前上方伸出去,接著往下拉,帶動你的腰跟肩轉過來,擊球手才能跟著被「甩」過來。</p>
+
+    <div class="feel">
+      <span class="feel-label">正確的感覺</span>
+      <h4>非擊球手像「拉門」一樣把身體轉過來</h4>
+      <p>右手選手:在空中時左手先往前伸高,等開始要揮的時候,<strong>把左手快速往下、往身體後方拉</strong>,你會感覺到整個左半身先轉動,身體像門板繞門軸轉,右肩自然就跟著被甩過去了。這個「拉門動作」做對了,你的揮臂速度會明顯快很多。</p>
+    </div>
+
+    <details class="science">
+      <summary>研究怎麼說?(點開看依據)</summary>
+      <div class="science-body">
+        <p><strong>「只用手」為什麼打不重</strong>:Reeser et al. (2010, <em>Sports Health</em>) 量測女子大專選手的扣球,肩內旋角速度峰值高達 <span class="data-val">2,594°/s</span>、肘伸展角速度 <span class="data-val">1,666°/s</span>——這種速度單靠肩膀肌肉收縮是達不到的,必須是「被前面節段甩出來」的結果。研究中說明這是典型的「proximal-to-distal sequence(由近端到遠端的速度疊加)」:骨盆旋轉先達峰值 → 軀幹旋轉 → 軀幹屈曲 → 肩內旋 → 肘伸展 → 腕。任何環節缺席,後面的速度就達不到峰值。</p>
+        <p><strong>動力鏈訓練確實會改善表現</strong>:Chang, Chang & Shih (2022, <em>J Strength Cond Res</em>) 的隨機對照研究,對有肩胛動作異常的選手進行 8 週動力鏈訓練,扣球的運動學一致性顯著改善——間接證明「全身連動」不只是教練的口頭禪,而是有量化效益的訓練方向。</p>
+        <p><strong>「拉門」的力學基礎</strong>:右手選手揮臂為「同側旋轉(ipsilateral rotation)」——以左肩胛與左髖為軸,身體像門板繞門軸旋轉。PeerJ (2024) 跳發球研究量化發現:非攻擊腿、前臂、手的角動量可解釋約 <span class="data-val">35%</span> 的揮臂速度變異,證實非擊球側的貢獻被低估。</p>
+        <p><strong>助跑速度與跳躍高度的關係</strong>:Wagner et al. (2009, <em>Int J Sports Med</em>) 測男子聯賽選手:助跑水平速度約 <span class="data-val">3.71 ± 0.33 m/s</span>、扣球跳躍高度 <span class="data-val">0.67 ± 0.07 m</span>,兩者顯著相關(<span class="data-val">r = 0.71, p = 0.002</span>)——這就是「煞車步」存在的意義:把水平動量轉成垂直高度。</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ===================== SECTION 2 ===================== -->
+<section class="section" id="sec2">
+  <div class="container">
+    <div class="section-marker">02 — THE FIVE STAGES</div>
+    <h2>扣球的五個動作階段</h2>
+    <p class="lead">從你站在後場準備跑,到落地完成,完整的一個扣球可以分成五個階段。每個階段都有它要做的事。</p>
+
+    <div class="stage">
+      <div class="stage-num">STAGE 1</div>
+      <div class="stage-name">助跑:從慢到快的三步節奏</div>
+      <p><span class="key">節奏</span> 右手選手的標準三步是「<strong>左 — 右 — 左</strong>」,左手選手相反。重點不是步數,而是 <strong>節奏由慢加快</strong>——第一步試探、第二步加速、最後兩步爆發。</p>
+      <p><span class="key">時機</span> 第一步通常在 <strong>舉球員手碰到球的那一瞬間</strong> 邁出去。太早會變成等球、太晚會追不上。</p>
+      <p><span class="key">距離</span> 站位要夠後面!初學者常見錯誤是離網太近,結果撞網或者打不到擊球點。一般要從三米線後面開始跑。</p>
+    </div>
+
+    <div class="stage">
+      <div class="stage-num">STAGE 2</div>
+      <div class="stage-name">煞車起跳:最關鍵的兩步</div>
+      <p><span class="key">煞車步</span> 倒數第二步要 <strong>大步、用腳跟先著地、身體稍微後傾</strong>。這一步在幹嘛?把你跑步的「往前衝力」吃下來,儲存成往上跳的力量。沒做這一步,你的速度全部用來繼續往前跑,跳不高也跳不出力。</p>
+      <p><span class="key">併步</span> 最後一步快速跟上,<strong>兩腳幾乎同時落地</strong>,變成跳台。這時候雙手已經擺到後面,準備往前上方甩出去。</p>
+      <p><span class="key">擺臂</span> 雙手從後方一起 <strong>用力往上甩</strong>,這個甩臂的力量可以讓你跳更高(實測能多出來相當顯著的高度)。很多人忽略這個動作,等於把免費的高度浪費掉了。</p>
+      <p><span class="key">口訣</span> <span class="metaphor">「大煞車、快併步、雙手甩、向上穿過球」</span></p>
+    </div>
+
+    <div class="stage">
+      <div class="stage-num">STAGE 3</div>
+      <div class="stage-name">空中蓄力:擺出「弓箭」姿勢</div>
+      <p><span class="key">身體</span> 跳起來之後,整個人 <strong>像被拉滿的弓</strong>:胸口打開、肚子拉長、腰微微後仰、頭抬起來。前側肌肉(腹肌、胸肌)被拉開,儲存彈性能,準備爆發。</p>
+      <p><span class="key">手肘</span> 擊球手的手肘要 <strong>抬高,而且要高於耳朵</strong>。前臂自然垂在頭後面,手掌朝向球的方向。手肘低=肩膀沒打開=力量出不來,還容易受傷。</p>
+      <p><span class="key">非擊球手</span> 另一隻手向前上方伸出去,當作 <strong>瞄準器和旋轉引擎</strong>(對好球的位置 + 等下要拉門帶動身體轉)。</p>
+    </div>
+
+    <div class="stage">
+      <div class="stage-num">STAGE 4</div>
+      <div class="stage-name">揮臂擊球:身體先轉,手才跟上</div>
+      <p><span class="key">順序很重要</span> 這是最關鍵的——揮臂順序是 <strong>肚子用力 → 腰旋轉 → 肩膀帶動 → 手肘領先 → 前臂甩出 → 手接觸球</strong>。每一個環節都要等前一個先動,絕對 <strong>不能用手帶身體</strong>。</p>
+      <p><span class="key">肘領先</span> 揮臂的時候,先把 <strong>手肘往球的方向頂出去</strong>,前臂和手是「被甩」出去的,不是主動推出去的。這就是鞭打的精髓。</p>
+      <p><span class="key">擊球點</span> 在 <strong>身體正前方、最高點稍微前面一點</strong>(像時鐘的 12 點鐘方向偏前)碰到球。這時候手臂剛好接近完全伸直、速度最快。</p>
+      <p><span class="key">手型</span> 手指張開、手掌「包住」球,擊球瞬間 <strong>手腕自然蓋過去</strong> 製造下壓和上旋。注意:腕是「自然跟著」,不是用力甩,後面會解釋。</p>
+    </div>
+
+    <div class="stage">
+      <div class="stage-num">STAGE 5</div>
+      <div class="stage-name">收勢落地:保護自己</div>
+      <p><span class="key">隨揮</span> 手臂打完球之後 <strong>順勢往下、橫過身體前方</strong>,不要硬煞停。突然煞停會讓肩膀承受很大的拉扯力,長期累積就是肩傷。</p>
+      <p><span class="key">落地</span> <strong>兩腳同時著地,膝蓋彎曲緩衝</strong>,腳掌-腳跟一起。單腳落地、或者膝蓋打直撐地板,是膝蓋受傷的最快方法。</p>
+    </div>
+
+    <details class="science">
+      <summary>研究怎麼說?(點開看依據)</summary>
+      <div class="science-body">
+        <p><strong>助跑與起跳的具體數據</strong>:Tai et al. (2021, <em>Applied Sciences</em>) 量測雙腳起跳(RSJ-2L)時,初觸地膝屈約 <span class="data-val">37.8°</span>、峰值膝屈 <span class="data-val">85.8°</span>、髖屈峰值 <span class="data-val">35.1°</span>——這是「煞車步深蹲」的具體角度範圍。雙腳起跳跳得比單腳高,但單腳起跳的地面反作用力較大(<span class="data-val">3.0 倍體重</span> vs. <span class="data-val">1.63 倍體重</span>),也就是衝擊較高、傷害風險較大。</p>
+        <p><strong>擺臂為什麼能增加跳躍高度</strong>:Wagner et al. (2009) 男子聯賽選手資料顯示,左肩過伸(擺臂)最大角速度 <span class="data-val">458 ± 113°/s</span> 與跳躍高度顯著相關(<span class="data-val">r = 0.72</span>)。擺臂不是裝飾,而是直接貢獻垂直高度。</p>
+        <p><strong>空中弓箭姿勢的角度</strong>:Reeser et al. (2010) 量測強攻時:最大肩外旋角 <span class="data-val">163 ± 10°</span>(這就是「弓滿」的位置,大於同性別選手做網球發球或棒球投擲)、擊球瞬間肩外展角 <span class="data-val">~130°</span>、擊球瞬間肘屈角 <span class="data-val">~34°</span>(接近全伸直但未完全打直)。「肘高於耳朵」這個教練口訣,對應到的就是這個 130° 肩外展。</p>
+        <p><strong>下肢起跳的肌肉活化序列</strong>:Bobbert 與 van Ingen Schenau 及 Ravn et al. 研究發現,起跳時下肢肌肉呈現近端到遠端的活化序列——臀大肌最先啟動,接著股四頭肌,最後是腓腸肌與比目魚肌,呈現由「大關節」往「小關節」的爆發傳遞。這個序列在男子選手身上比女子更明顯。</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ===================== SECTION 3 ===================== -->
+<section class="section" id="sec3">
+  <div class="container">
+    <div class="section-marker">03 — COMMON MISTAKES</div>
+    <h2>六個你可能正在犯的錯</h2>
+    <p class="lead">這些錯誤超級常見,而且每一個都有對應的修正法。對照看看你是哪一種。</p>
+
+    <div class="myth">
+      <span class="myth-label">錯誤 #1</span>
+      <h4>「鐵手」扣球:手臂僵硬地推球</h4>
+      <p><span class="wrong">症狀:</span>手臂打直、肌肉緊繃,用「推」的方式打球。球速慢、容易出界或被攔。</p>
+      <p><span class="right">修正:</span>練「放鬆+鞭打」的感覺。手臂要 <strong>像鞭子一樣鬆,只有接觸球那一瞬間才繃緊</strong>。可以對牆練習,刻意放慢揮臂,感受手肘領先、前臂被甩出去的感覺。</p>
+    </div>
+
+    <div class="myth">
+      <span class="myth-label">錯誤 #2</span>
+      <h4>用肩膀力量取代全身發力</h4>
+      <p><span class="wrong">症狀:</span>打完球肩膀很痠、感覺到肩膀在「使勁」。長期下來肩膀容易痛、容易受傷,而且球速永遠上不去。</p>
+      <p><span class="right">修正:</span>每次練扣球前,先做幾次 <strong>「不用手」的扣球練習</strong>——只做助跑+起跳+空中弓身+旋轉,手只是輕輕跟著。練到你能用「身體甩動」的感覺打球,再加上手臂。記住:<strong>肩膀只是傳遞力量的中繼站,不是發力的主角</strong>。</p>
+    </div>
+
+    <div class="myth">
+      <span class="myth-label">錯誤 #3</span>
+      <h4>擊球點在頭頂或身體後方</h4>
+      <p><span class="wrong">症狀:</span>球到頭頂正上方甚至過了再打。結果球被「拍」成直直下墜或者直接掛網。</p>
+      <p><span class="right">修正:</span><strong>提早起跳</strong>。很多人擊球點晚是因為起跳太晚——球都掉下來了你才跳。理想時機是 <strong>球還在最高點時,你已經跳起來、手臂已經拉到弓箭位</strong>,接著你的手是「迎上去」打球,而不是等球落下來。</p>
+    </div>
+
+    <div class="myth">
+      <span class="myth-label">錯誤 #4</span>
+      <h4>助跑沒有「煞車」,直接衝過去跳</h4>
+      <p><span class="wrong">症狀:</span>跳起來之後身體還往前飄,撞網或者落地超過球網位置。</p>
+      <p><span class="right">修正:</span>專門練最後兩步。可以畫兩條線在地上,慢動作練 <strong>大步煞車 → 快步併步 → 起跳</strong> 的節奏。先不要扣球,只練起跳。能跳得又高又直(不前傾)再加上扣球。</p>
+    </div>
+
+    <div class="myth">
+      <span class="myth-label">錯誤 #5</span>
+      <h4>手肘比耳朵還低</h4>
+      <p><span class="wrong">症狀:</span>引臂時手肘垂下來、夾在身側,看起來像在「丟」球而不是揮。這姿勢力量出不來,而且肩膀內部會夾擠,長期會傷。</p>
+      <p><span class="right">修正:</span>站著對牆練「sight 90」姿勢——<strong>手肘抬到比耳朵高、前臂垂直、手掌朝前</strong>,從這個位置出發練揮臂。練到不用想都能自動做到這個姿勢。</p>
+    </div>
+
+    <div class="myth">
+      <span class="myth-label">錯誤 #6</span>
+      <h4>關於甩腕的迷思</h4>
+      <p><span class="wrong">迷思:</span>「要用力甩手腕才能製造上旋下壓」。</p>
+      <p><span class="right">真相:</span>研究發現扣球接觸球的時間極短,刻意「用力甩腕」反而 <strong>會降低力量、增加失誤</strong>。真正的上旋來自於 <strong>擊球點打在球的中心偏上方</strong>,加上手掌包覆的角度,腕部會「自然跟著」做出收的動作。所以練扣球時,專注在「整條手臂加速」和「接觸球的位置」上,腕部就讓它自然發生就好。</p>
+    </div>
+
+    <details class="science">
+      <summary>研究怎麼說?(點開看依據)</summary>
+      <div class="science-body">
+        <p><strong>關於甩腕</strong>:教練教育資源 Gold Medal Squared 引述研究指出,扣球(注意是扣球,不是跳發球)時球與手接觸時間極短,手腕的屈曲動作多發生在球已經離開手之後。也就是說,你看到的「甩腕」其實是 <em>follow-through</em>,不是真正在加速球。對跳發球而言則不同,因為球飛行距離長,上旋的影響時間夠久,確實有意義。</p>
+        <p><strong>關於擊球點與球速</strong>:Reeser et al. (2010, <em>Sports Health</em>) 量測 14 名女子 NCAA D-I 選手,正面強攻時:肩外旋角 <span class="data-val">163°</span>、肩內旋角速度峰值 <span class="data-val">2,594°/s</span>、肘伸展角速度 <span class="data-val">1,666°/s</span>、擊球瞬間肘屈角僅 <span class="data-val">34°</span>(接近全伸直但未完全打直),擊球後球速 <span class="data-val">15.5 m/s</span>。男子精英選手實戰球速可達 <span class="data-val">25–30 m/s</span> 以上。</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ===================== SECTION 4 ===================== -->
+<section class="section" id="sec4">
+  <div class="container">
+    <div class="section-marker">04 — HOME DRILLS</div>
+    <h2>在家就能練的基本功</h2>
+    <p class="lead">不一定要進球場才能練扣球。下面這些練習,在家、在公園、甚至辦公室都可以做。每天 10-15 分鐘,兩週就會有感覺。</p>
+
+    <div class="drill-grid">
+      <div class="drill">
+        <div class="drill-num">DRILL 01</div>
+        <h4>對牆揮臂(每天 30 下 × 3 組)</h4>
+        <p>站在牆前一公尺,把擊球手擺成 sight 90 姿勢(手肘高、前臂垂直),慢慢揮臂讓手掌拍到牆上。專注 <strong>手肘領先、前臂被甩出去</strong> 的感覺,不求快、不求重。</p>
+        <p class="how"><strong>練什麼:</strong>揮臂順序、肘領先的肌肉記憶</p>
+      </div>
+
+      <div class="drill">
+        <div class="drill-num">DRILL 02</div>
+        <h4>弓箭姿勢檢查(站姿)</h4>
+        <p>站立,雙腳與肩同寬,做出空中弓箭姿勢:擊球手手肘高過耳朵、前臂後拉、非擊球手前伸。胸口打開、肚子拉長、稍微後仰。在鏡子前檢查,定住這個姿勢 5 秒。</p>
+        <p class="how"><strong>練什麼:</strong>身體記住正確的蓄力位置</p>
+      </div>
+
+      <div class="drill">
+        <div class="drill-num">DRILL 03</div>
+        <h4>原地起跳擺臂</h4>
+        <p>不需要球,原地練起跳:雙腳張開、雙手後擺、半蹲,然後 <strong>雙手用力往上甩 + 雙腳蹬地</strong> 同時起跳。專注感受擺臂的「拉力」幫你跳更高。每天 20 下。</p>
+        <p class="how"><strong>練什麼:</strong>擺臂與起跳的協調、爆發力</p>
+      </div>
+
+      <div class="drill">
+        <div class="drill-num">DRILL 04</div>
+        <h4>三步助跑分解(地板畫線)</h4>
+        <p>在地上畫三條線(代表三步落點),慢速走過去,每一步都停下來檢查重心、腳尖方向、身體姿勢。確認對了之後,慢慢加速到實際助跑節奏。</p>
+        <p class="how"><strong>練什麼:</strong>助跑節奏、煞車步的位置感</p>
+      </div>
+
+      <div class="drill">
+        <div class="drill-num">DRILL 05</div>
+        <h4>自拋自打(需要球和空地)</h4>
+        <p>原地站著,<strong>左手把球拋到右肩前上方,右手揮過去打</strong>。不求力量,專注練「擊球點在身體正前方略高」的位置感。打 50 下。</p>
+        <p class="how"><strong>練什麼:</strong>固定的擊球點、手掌包球的觸感</p>
+      </div>
+
+      <div class="drill">
+        <div class="drill-num">DRILL 06</div>
+        <h4>軀幹旋轉(用毛巾或球)</h4>
+        <p>站立,雙腳與肩同寬,雙手抓毛巾(或抱一顆球)。把毛巾從右後方,用 <strong>腰的旋轉</strong> 甩到左前下方,感受腰部和肚子用力。每邊 15 下。</p>
+        <p class="how"><strong>練什麼:</strong>軀幹旋轉的爆發力(扣球發力的核心)</p>
+      </div>
+    </div>
+
+    <div class="check">
+      <span class="check-label">自我檢測</span>
+      <h4>兩週後,你應該能感覺到:</h4>
+      <ul>
+        <li>對牆揮臂時,手臂能 <strong>放鬆地甩出去</strong>,不需要刻意用力</li>
+        <li>原地起跳時,擺臂能 <strong>明顯幫你跳更高</strong></li>
+        <li>自拋自打時,擊球點 <strong>每次都在差不多的位置</strong></li>
+        <li>做完軀幹旋轉,<strong>肚子和腰兩側會痠</strong>(代表用對肌肉了)</li>
+      </ul>
+    </div>
+
+    <details class="science">
+      <summary>研究怎麼說?(點開看依據)</summary>
+      <div class="science-body">
+        <p><strong>「想像甩鞭」確實有效</strong>:Frontiers (2022, <em>Psychology</em>) 的隨機對照研究發現,使用「外在注意力線索」(external focus of attention,例如「想像甩鞭傳遞動量」)的年輕女子選手,扣球揮臂速度顯著高於使用「內在注意力線索」(專注在自己的肌肉收縮)的對照組。也就是說,本指南反覆使用的比喻法(鞭子、拉門、弓箭)不只是教學技巧,而是有實證支持的有效方法。</p>
+        <p><strong>牽張-縮短循環(SSC)是練爆發的關鍵</strong>:Tai et al. (2021) 指出,助跑速度較快時可增強 SSC 效應,提高肌肉預激活與牽張反射,使後續向心收縮更有力——這就是為什麼「原地起跳擺臂」這個訓練重要:訓練的不只是肌力,更是「下蹲立即起跳」的反射速度。</p>
+        <p><strong>EMG 研究指出該訓練哪些肌肉</strong>:Rokito et al. (1998, <em>J Shoulder Elbow Surg</em>) 同步 EMG 與高速攝影量測 8 條肩部肌肉的活化模式發現,棘下肌、小圓肌等「肩部後方旋轉肌群」在引臂(cocking)期協同使肱骨外旋,在減速期離心收縮以煞停手臂——這就是為什麼基本功訓練要包含彈力帶外旋(後面第 6 章會詳細展開)。</p>
+        <p><strong>medicine ball 旋轉投擲的原理</strong>:扣球的軀幹旋轉是擊球速度的主要來源之一。藥球或毛巾旋轉訓練重現「離心拉長→向心爆發」的腹斜肌使用模式,被多份運動表現訓練文獻列為投擲類運動的核心訓練。</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ===================== SECTION 5 ===================== -->
+<section class="section" id="sec5">
+  <div class="container">
+    <div class="section-marker">05 — COURT DRILLS</div>
+    <h2>在球場上要練什麼</h2>
+    <p class="lead">有了基本功,接著要把它整合到實際扣球裡。場上練習的順序很重要——從簡單到複雜,不要跳級。</p>
+
+    <h3>練習階梯:從最簡單到完整扣球</h3>
+
+    <div class="drill-grid">
+      <div class="drill">
+        <div class="drill-num">LEVEL 1 · 最基礎</div>
+        <h4>over-the-mat(過墊扣球)</h4>
+        <p>把巧拼或墊子疊高當「假網」,自拋自打過墊。先不跳、再加跳。重點是 <strong>固定的擊球點和包球感</strong>。</p>
+      </div>
+
+      <div class="drill">
+        <div class="drill-num">LEVEL 2 · 加上助跑</div>
+        <h4>三步助跑+定點拋球</h4>
+        <p>請隊友/教練在固定位置拋一個高拋球,你 <strong>從後場開始三步助跑、跳起、扣球</strong>。重點是助跑節奏對到拋球時機。</p>
+      </div>
+
+      <div class="drill">
+        <div class="drill-num">LEVEL 3 · 進入真實情境</div>
+        <h4>舉球員設定球扣球</h4>
+        <p>由舉球員(或教練)設定真實高度的球,你完成一次完整扣球。每次扣完問自己:<strong>是腳/腰/肩/手哪個環節出力最多?</strong></p>
+      </div>
+
+      <div class="drill">
+        <div class="drill-num">LEVEL 4 · 加上對手</div>
+        <h4>有攔網的扣球</h4>
+        <p>讓隊友站在網前模擬攔網,你要練習 <strong>看攔網手位置、選擇打線(直線/斜線/打手/吊球)</strong>。這時候才開始練「戰術」面。</p>
+      </div>
+    </div>
+
+    <div class="feel">
+      <span class="feel-label">實戰練習的關鍵</span>
+      <h4>每一球都「自我反饋」一秒</h4>
+      <p>很多人練扣球就是一直打,沒在想。<strong>每打完一球,花一秒問自己:剛才感覺對嗎?</strong> 是腰甩過去的還是只有手?手肘有高嗎?擊球點在哪?這一秒的反饋,比多打十球更有效。</p>
+    </div>
+
+    <h3>進階:用手機錄自己</h3>
+    <p>練到一定程度後,用手機側面錄下自己的扣球(慢動作模式更好),回看時專注三件事:</p>
+    <ol>
+      <li><strong>起跳前最後兩步:</strong>有沒有明顯的「大步煞車 + 快併步」?</li>
+      <li><strong>空中姿勢:</strong>有沒有弓箭蓄力?手肘高度?</li>
+      <li><strong>擊球瞬間:</strong>擊球點在身體正前方還是頭頂後方?手臂幾乎打直?</li>
+    </ol>
+    <p>免費的軟體 <strong>Kinovea</strong> 可以幫你逐格回放、畫角度線。看自己的影片才知道你想做的跟你實際做的差多少。</p>
+
+    <details class="science">
+      <summary>研究怎麼說?(點開看依據)</summary>
+      <div class="science-body">
+        <p><strong>力量-速度剖面與球速的關係</strong>:Baena-Raya et al. (2021, <em>PLOS One</em>) 量測 22 名西班牙甲級冠軍隊男子選手,發現垂直跳的理論最大力(F0)、衝刺最大速度、臥推投擲 F0 都與扣球/發球球速強相關(<span class="data-val">rs = 0.53–0.84, p < 0.05</span>),解釋了 <span class="data-val">20%–36%</span> 的球速變異。原文結論:「<em>These mechanical variables explained 20%–36% of the variability in spike and serve ball speeds, with a greater influence on the serve speed.</em>」這提示了想真的進步,必須在「肌力」和「速度」兩個面向都發展,不能只練其中一個。</p>
+        <p><strong>動力鏈訓練的隨機對照證據</strong>:Chang, Chang & Shih (2022, <em>J Strength Cond Res</em>) 對有肩胛動作異常的選手做 8 週介入後,扣球的運動學一致性顯著改善——這證實「整合性練習」(本章節推薦的階梯練習)比單項機械式重複更有效。</p>
+        <p><strong>影像回饋(video feedback)實證有效</strong>:Nature Sci Rep (2025) 的 4 週訓練研究結合 hop jump 訓練與影像回饋,顯示參與者落地時垂直地面反作用力降低、膝關節負荷率改善。也就是說,本章節建議的「用手機錄自己」不只是「看到自己做錯」這麼簡單,而是有量化的學習效果。</p>
+        <p><strong>外在注意力線索在影像回饋中的應用</strong>:相較於只看影片回放,搭配「外在注意力線索」(例如教練說「想像甩鞭」「想像把手送過去打目標」)的影像回饋,改善效果更顯著(Frontiers, 2022)。所以練習時不只看自己,還要有清楚的「畫面意象」。</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ===================== SECTION 6 ===================== -->
+<section class="section" id="sec6">
+  <div class="container">
+    <div class="section-marker">06 — STAY HEALTHY</div>
+    <h2>關於肩膀和膝蓋的保護</h2>
+    <p class="lead">扣球是高強度動作,如果只練威力不練保護,遲早會受傷。下面這兩個部位是排球選手最常出問題的地方。</p>
+
+    <h3>肩膀:離心訓練是關鍵</h3>
+    <p>每一次扣球,肩膀後方的小肌肉(旋轉肌群)都要用力「煞住」你揮出去的手臂。長期下來,如果煞車力量不夠,肩膀就會發炎、撕裂。這就是為什麼很多排球選手 <strong>越打越痛、不打就好</strong>。</p>
+
+    <div class="check">
+      <span class="check-label">肩膀保護菜單</span>
+      <h4>每週 2-3 次,每次 10 分鐘</h4>
+      <ul>
+        <li><strong>彈力帶外旋:</strong>側躺或站姿,上臂貼身,前臂向外轉。每邊 15 下 × 3 組。</li>
+        <li><strong>Face Pull:</strong>用彈力帶或滑輪拉到臉前方,雙手分開。15 下 × 3 組。</li>
+        <li><strong>俯臥 Y/T:</strong>趴在床或椅子邊,手臂做出 Y 字和 T 字後抬起。每個動作 12 下 × 3 組。</li>
+        <li><strong>原則:</strong>練「拉」要比練「推」多。你扣球已經練很多「推」了,要平衡。</li>
+      </ul>
+    </div>
+
+    <h3>膝蓋:跳得越多越要練落地</h3>
+    <p>研究顯示,排球選手 <strong>跳躍者膝(髕腱發炎)的盛行率最高的運動,高過籃球</strong>。而且傷害不是發生在跳起的時候,而是 <strong>落地時膝蓋承受的衝擊</strong>。你練多少次跳,就要對等地練多少次「軟落地」。</p>
+
+    <div class="check">
+      <span class="check-label">膝蓋保護菜單</span>
+      <h4>每次練球前後都要做</h4>
+      <ul>
+        <li><strong>軟落地練習:</strong>從矮箱(30cm)往下跳,落地時 <strong>腳尖先著地、膝蓋彎曲、髖部後坐</strong>,像羽毛一樣輕。每次練習 10 下。</li>
+        <li><strong>慢速離心深蹲:</strong>下蹲花 5 秒、起立 1 秒。每組 8 下 × 3 組。能強化髕腱。</li>
+        <li><strong>單腳平衡:</strong>單腳站立 30 秒,可以閉眼增加難度。</li>
+        <li><strong>警訊:</strong>如果髕骨下方持續疼痛,馬上減量、不要硬打。早期休息+復健,比硬撐受傷再休一年好得多。</li>
+      </ul>
+    </div>
+
+    <details class="science">
+      <summary>研究怎麼說?(點開看依據)</summary>
+      <div class="science-body">
+        <p><strong>肩傷數據</strong>:精英排球選手每年扣球量可超過 <span class="data-val">40,000 次</span>,過度使用的肩傷約佔排球所有過度使用傷害的 <span class="data-val">19%</span>。研究指出維持「離心外旋:向心內旋」強度比 <span class="data-val">&gt; 1</span>(或至少 <span class="data-val">&gt; 0.76</span>)是降低肩傷風險的關鍵指標。<cite>(Reeser 等 / 多篇文獻)</cite></p>
+        <p><strong>膝傷數據</strong>:Lian 等(2005, <em>Am J Sports Med</em>)實測 613 名九種運動精英選手,跳躍者膝整體盛行率 <span class="data-val">14.2%</span>,<strong>排球最高達 <span class="data-val">44.6%</span></strong>、籃球 <span class="data-val">31.9%</span>、自行車與定向越野 <span class="data-val">0%</span>。研究確認傷害主要來自落地離心減速階段。影像回饋訓練可改善落地姿勢,降低垂直地面反作用力與膝關節負荷。</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ===================== SECTION 7 ===================== -->
+<section class="section" id="sec7">
+  <div class="container">
+    <div class="section-marker">07 — OTHER ATTACKS</div>
+    <h2>其他扣球類型怎麼打</h2>
+    <p class="lead">除了主攻手的標準強攻,排球場上還有幾種常見扣球類型。基本原理一樣,但時機和動作幅度不同。</p>
+
+    <h3>快攻(中間手的招牌)</h3>
+    <p>動作精簡,中間攔網手在 <strong>舉球員碰球前(或同時)</strong> 就已經跳起來。設定球低而快,讓對方攔網來不及反應。</p>
+    <p>關鍵心態:<strong>是舉球員把球送進你的手裡,不是你等球</strong>。所以中間手要「先跳、相信舉球員」。</p>
+
+    <h3>後排攻擊(從三米線後跳起來打)</h3>
+    <p>必須在三米線後起跳,因為離網更遠,所以要 <strong>更早起跳、更大幅度擺臂、軌跡更平更快</strong>。後排攻擊的助跑速度和跳躍高度通常都比前排攻擊更猛。</p>
+
+    <h3>輕扣/吊球(沒有空檔時的選擇)</h3>
+    <p>當對方攔網太密、強攻打不過,用手指輕推(tip)或手掌軟觸後手腕滾過(roll shot)讓球落在對方防守空檔。<strong>力量小、動作隱蔽、靠落點得分</strong>。研究顯示吊球的力學負荷遠低於強攻,也不容易造成肩傷,是長期保護自己的好選項。</p>
+
+    <details class="science">
+      <summary>研究怎麼說?(點開看依據)</summary>
+      <div class="science-body">
+        <p><strong>強攻 vs. 吊球的力學量化對照</strong>:Reeser et al. (2010) 同時量測強攻與 roll shot,差異極為明顯:</p>
+        <p>· 肩外旋角:強攻 <span class="data-val">163°</span> vs. 吊球 <span class="data-val">129°</span><br>
+        · 球速:強攻 <span class="data-val">15.5 m/s</span> vs. 吊球 <span class="data-val">8.9 m/s</span><br>
+        · 肩內旋扭矩:強攻 <span class="data-val">36.7 N·m</span> vs. 吊球 <span class="data-val">16.5 N·m</span></p>
+        <p>吊球的肩內旋扭矩不到強攻的一半,這就是為什麼吊球是「保護肩膀」的戰術選擇——不是因為它「不算扣球」,而是它的力學負荷量化上確實低很多。長期巡迴賽的精英選手會策略性地穿插吊球,部分原因就是分散肩部負荷。</p>
+        <p><strong>正面強攻 vs. 斜線強攻力學差異</strong>:同篇研究發現,正面與斜線強攻在所有測量參數(肩外旋、肩內旋角速度、肘伸展角速度、扭矩、球速)上均「無統計顯著差異」。也就是說,改變打線角度不會增加或減少傷害風險,可以放心依戰術需要選擇。</p>
+        <p><strong>後排攻擊的助跑與起跳特性</strong>:研究顯示後排攻擊的助跑與起跳時,身體重心(CM)水平速度與跳躍高度均大於前排攻擊——因為距離網更遠,需要更大的水平動量推進,以及更早的起跳時機補償球到達球網的時間差。</p>
+        <p><strong>男女精英選手的差異</strong>:Fuchs et al. (2019, <em>J Sports Sci</em>) 比較男女精英選手,起跳機制存在系統性差異(男性下肢肌肉活化的近端-遠端序列更明顯)。但「動力鏈完整性」對球速的重要性兩性都成立——技術原則是普適的。</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ===================== SECTION 8 ===================== -->
+<section class="section" id="sec8">
+  <div class="container">
+    <div class="section-marker">08 — YOUR ROADMAP</div>
+    <h2>給不同程度的人:該怎麼安排?</h2>
+    <p class="lead">不要跳級。每個階段都有它要學會的東西,跳級的人通常會卡在某個瓶頸打不破,或者受傷。</p>
+
+    <div class="stage">
+      <div class="stage-num">階段 1</div>
+      <div class="stage-name">初學者:先學會跳和落地</div>
+      <p><strong>目標:</strong>能穩定地用三步助跑、雙腳起跳、雙腳安全落地。</p>
+      <p><strong>不用急著加力量。</strong>先把動作骨架建立起來。每次練習花 70% 時間在 <strong>助跑節奏 + 起跳 + 落地</strong>,30% 時間在揮臂。</p>
+      <p><strong>進階訊號:</strong>能用左-右-左節奏穩定雙腳起跳;落地時膝蓋彎曲、不痛;對牆揮臂能感受到肘領先。</p>
+    </div>
+
+    <div class="stage">
+      <div class="stage-num">階段 2</div>
+      <div class="stage-name">中階:整合全身動力鏈</div>
+      <p><strong>目標:</strong>能把腿、腰、肩的力量串連起來,打出有威力的球。</p>
+      <p>練習重點:<strong>軀幹弓身與旋轉、非擊球手的拉門動作</strong>。可以加入藥球旋轉投擲、增強式跳躍訓練。開始錄影檢查自己。</p>
+      <p><strong>進階訊號:</strong>能感覺到「腰甩過去」的力量;扣球能穩定下壓過網;肩膀不會在打完球後特別痠(代表沒有過度依賴肩膀)。</p>
+    </div>
+
+    <div class="stage">
+      <div class="stage-num">階段 3</div>
+      <div class="stage-name">進階/競技:優化細節 + 嚴防受傷</div>
+      <p><strong>目標:</strong>在保持高訓練量的同時不受傷,並針對個人弱項精進。</p>
+      <p>這時候要 <strong>嚴格控管訓練量</strong>——精英選手是因為有完整的醫療團隊和恢復系統才能承受高強度。一般人不要硬學職業選手的訓練量。</p>
+      <p><strong>系統化做:</strong>每週至少兩次肩膀離心訓練、每次練球後做髕腱離心、賽季前漸進加量、出現持續疼痛立刻減量。</p>
+      <p><strong>什麼時候該停下來:</strong>持續肩痛(尤其引臂時)、膝蓋下方持續疼痛、揮臂感覺「沒勁」——這些都是過度訓練的訊號。<strong>休息 1-2 週,比硬撐受傷休 6 個月好。</strong></p>
+    </div>
+
+    <div class="feel">
+      <span class="feel-label">最後一個建議</span>
+      <h4>進步的速度,跟你「願意慢下來」成正比</h4>
+      <p>很多人練扣球就是一直打、一直打,以為量大就會進步。但 <strong>反覆做錯誤的動作,只會讓錯誤更難改</strong>。真正會進步的人,願意花時間練分解動作、願意慢動作對牆揮臂、願意錄影看自己。這些事情無聊,但是有效。</p>
+      <p>把扣球當成一個 <strong>需要慢慢磨的技藝</strong>,而不是一個力量比賽。半年後再回來看,你會發現你的球變得又重又準,而且不容易受傷。</p>
+    </div>
+
+    <details class="science">
+      <summary>研究怎麼說?(點開看依據)</summary>
+      <div class="science-body">
+        <p><strong>季前傷害率較高的證據</strong>:多份排球運動傷害監測研究指出,<em>季前期(pre-season)</em> 是傷害發生率的高峰——選手在休季後忽然恢復高強度訓練,組織還沒適應就被過度負荷。這就是「階段 3 進階者」必須漸進加量的科學基礎,不是憑感覺的保守建議。</p>
+        <p><strong>精英選手的訓練量基準</strong>:精英排球選手每年扣球量可達 <span class="data-val">40,000 次</span>以上;單場一隊的過頂揮臂(扣+發)約 <span class="data-val">200 次</span>。但他們能承受這個量,是建立在每天的肩袖維護、髕腱保養、營養與恢復管理上——一般選手如果直接複製訓練量,傷害幾乎是必然的。</p>
+        <p><strong>離心訓練比向心訓練更能預防傷害</strong>:多項隨機對照試驗(包括髕腱離心訓練、肩袖外旋離心訓練)顯示,離心模式的肌力訓練在預防過度使用傷害上效果優於傳統向心訓練——這就是為什麼第 6 章特別強調「彈力帶外旋」「慢速離心深蹲」這類動作。</p>
+        <p><strong>動作學習的「分散練習」優於「集中練習」</strong>:運動學習文獻長期一致發現,間隔性、有反饋的分散練習,比一次性大量重複的集中練習,在技術轉移與長期保留上效果更好。也就是說,本指南建議的「每天 10-15 分鐘對牆揮臂」勝過「週末爆練 3 小時」,不是直覺判斷,而是學習科學的共識。</p>
+        <p><strong>「願意慢下來」的學習科學依據</strong>:Frontiers (2022) 等動作技能學習研究指出,刻意慢速分解(deliberate practice)能讓神經系統建立更精準的動作表徵,降低後續高速動作時的執行錯誤率。看似笨拙的慢動作練習,其實是高速正確動作的必要前提。</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ===================== REFERENCES ===================== -->
+<section class="refs">
+  <div class="container">
+    <h2>主要參考來源</h2>
+    <p class="lead">想看完整的研究數據和學術依據,可以參考下面這些文獻和資源。本指南內所有理論面數據與生物力學描述都來自這些來源。</p>
+    <ol>
+      <li>Reeser JC, Fleisig GS, Bolt B, Ruan M. <em>Upper Limb Biomechanics During the Volleyball Serve and Spike.</em> Sports Health. 2010;2(5):368–374.</li>
+      <li>Wagner H, Tilp M, von Duvillard SP, Mueller E. <em>Kinematic Analysis of Volleyball Spike Jump.</em> Int J Sports Med. 2009;30(10):760–765.</li>
+      <li>Tai WH, et al. <em>Dynamic Characteristics of Approach Spike Jump Tasks in Male Volleyball Players.</em> Appl Sci. 2021;11(6):2710.</li>
+      <li>Rokito AS, et al. <em>Electromyographic analysis of shoulder function during the volleyball serve and spike.</em> J Shoulder Elbow Surg. 1998;7(3):256–263.</li>
+      <li>Lian OB, Engebretsen L, Bahr R. <em>Prevalence of jumper's knee among elite athletes from different sports.</em> Am J Sports Med. 2005;33:561–567.</li>
+      <li>Baena-Raya A, et al. <em>The force-velocity profile as determinant of spike and serve ball speed in top-level male volleyball players.</em> PLOS One. 2021;e0249612.</li>
+      <li>Chang CC, Chang CM, Shih YF. <em>Kinetic chain exercise intervention…scapular dyskinesis.</em> J Strength Cond Res. 2022;36(10):2844–2852.</li>
+      <li>教練/教學資源:Gold Medal Squared、The Art of Coaching Volleyball、VolleyballXL、Gears Sports、AVP。</li>
+    </ol>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    為想真的進步的人寫的扣球指南 · 2026
+  </div>
+</footer>
+
+</body>
+</html>
