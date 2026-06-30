@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>經典三人鬥地主競技取勝策略全解析</title>
+<meta name="description" content="從新手到中高階競技:叫地主決策、農民配合、牌型拆解、節奏控制的完整策略指南。">
+<meta name="theme-color" content="#c8302b">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Palette: ivory paper × poker red/black */
+    --bg: #f5f0e3;
+    --bg-alt: #ede5d2;
+    --card: #ffffff;
+    --card-soft: #fbf8f1;
+    --ink: #1f1812;
+    --ink-strong: #0f0a06;
+    --ink-soft: #5a4f42;
+    --ink-mute: #8a7e6e;
+    --rule: #ddd5c4;
+    --rule-soft: #ebe4d3;
+    --poker-red: #c8302b;
+    --poker-red-soft: #fceeec;
+    --poker-black: #1a1a1a;
+    --gold: #b8862d;
+    --gold-soft: #faf2dd;
+    --safe: #4a7c5a;
+    --warn: #c47a1a;
+
+    /* Type */
+    --font-serif: "Noto Serif TC", "Songti TC", Georgia, "Times New Roman", serif;
+    --font-sans: "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    --font-mono: "JetBrains Mono", "SF Mono", Consolas, monospace;
+
+    /* Sizes – strictly descending: h1>h2>h3>h4>p */
+    --fs-h1: 2.3rem;       /* ~37px */
+    --fs-h2: 1.65rem;      /* ~26px */
+    --fs-h3: 1.3rem;       /* ~21px */
+    --fs-h4: 1.125rem;     /* ~18px */
+    --fs-body: 1rem;       /* 16px */
+    --fs-small: 0.875rem;  /* 14px */
+    --fs-meta: 0.8rem;     /* ~13px */
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: var(--fs-body);
+    line-height: 1.85;
+    color: var(--ink);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 0.01em;
+  }
+
+  /* ============ Layout ============ */
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ============ Header / Hero (light, not dark block) ============ */
+  header.hero {
+    background:
+      linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 100%);
+    border-bottom: 1px solid var(--rule);
+    padding: 4rem 0 3rem;
+    position: relative;
+  }
+  header.hero::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg,
+      var(--poker-red) 0%, var(--poker-red) 50%,
+      var(--poker-black) 50%, var(--poker-black) 100%);
+  }
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: var(--fs-meta);
+    color: var(--poker-red);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .eyebrow .suits {
+    font-family: "Times New Roman", "Songti TC", serif;
+    font-size: 1rem;
+    letter-spacing: 0.3em;
+    font-variant-emoji: text;
+  }
+  .eyebrow .suits .red { color: var(--poker-red); }
+  .eyebrow .suits .black { color: var(--poker-black); }
+
+  h1 {
+    font-family: var(--font-serif);
+    font-size: var(--fs-h1);
+    font-weight: 900;
+    line-height: 1.2;
+    color: var(--ink-strong);
+    margin: 0 0 1.25rem;
+    letter-spacing: -0.01em;
+  }
+  .hero-sub {
+    font-size: 1.125rem;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin: 0 0 2rem;
+    max-width: 42rem;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    font-size: var(--fs-small);
+    color: var(--ink-mute);
+    border-top: 1px solid var(--rule);
+    padding-top: 1.25rem;
+    margin-top: 1.5rem;
+  }
+  .hero-meta span strong {
+    color: var(--ink-soft);
+    font-weight: 500;
+    margin-right: 0.35rem;
+  }
+
+  /* ============ Section ============ */
+  section {
+    padding: 3.5rem 0 1rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  section:last-of-type { border-bottom: none; }
+
+  h2 {
+    font-family: var(--font-serif);
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--ink-strong);
+    margin: 0 0 1.75rem;
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    letter-spacing: 0.01em;
+  }
+  h2 .num {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    color: var(--poker-red);
+    font-weight: 600;
+    flex: 0 0 auto;
+    letter-spacing: 0;
+  }
+  h2 .suit {
+    font-family: "Times New Roman", "Songti TC", serif;
+    color: var(--poker-red);
+    font-size: 1.35rem;
+    flex: 0 0 auto;
+    font-variant-emoji: text;
+  }
+  h2 .suit.black { color: var(--poker-black); }
+
+  h3 {
+    font-family: var(--font-serif);
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--ink-strong);
+    margin: 2.5rem 0 1rem;
+  }
+
+  h4 {
+    font-family: var(--font-sans);
+    font-size: var(--fs-h4);
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--ink-strong);
+    margin: 1.75rem 0 0.65rem;
+  }
+
+  p {
+    font-size: var(--fs-body);
+    margin: 0 0 1.1rem;
+    color: var(--ink);
+  }
+
+  ul, ol {
+    padding-left: 1.5rem;
+    margin: 0 0 1.25rem;
+  }
+  li {
+    margin-bottom: 0.5rem;
+    line-height: 1.85;
+  }
+  li > strong:first-child { color: var(--ink-strong); }
+
+  strong { color: var(--ink-strong); font-weight: 700; }
+  em { font-style: normal; color: var(--poker-red); font-weight: 500; }
+
+  code, .mono {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    background: var(--bg-alt);
+    padding: 0.1em 0.4em;
+    border-radius: 3px;
+    color: var(--ink-strong);
+  }
+
+  /* ============ Cards (left-bar accent) ============ */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--poker-red);
+    padding: 1.5rem 1.75rem;
+    margin: 1.5rem 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .card.gold { border-left-color: var(--gold); }
+  .card.black { border-left-color: var(--poker-black); }
+  .card.safe { border-left-color: var(--safe); }
+  .card > *:first-child { margin-top: 0; }
+  .card > *:last-child { margin-bottom: 0; }
+  .card-title {
+    font-size: var(--fs-h4);
+    font-weight: 700;
+    color: var(--ink-strong);
+    margin: 0 0 0.6rem;
+    font-family: var(--font-sans);
+  }
+
+  /* ============ Callouts ============ */
+  .callout {
+    display: flex;
+    gap: 0.85rem;
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    border-left: 4px solid;
+  }
+  .callout-icon {
+    font-size: 1.05rem;
+    flex: 0 0 auto;
+    line-height: 1.4;
+  }
+  .callout-body { flex: 1; }
+  .callout-body p:last-child { margin-bottom: 0; }
+
+  .callout.warn {
+    background: var(--poker-red-soft);
+    border-color: var(--poker-red);
+    color: #5c1410;
+  }
+  .callout.warn strong { color: var(--poker-red); }
+
+  .callout.tip {
+    background: var(--gold-soft);
+    border-color: var(--gold);
+    color: #4a3208;
+  }
+  .callout.tip strong { color: var(--gold); }
+
+  .callout.note {
+    background: var(--card-soft);
+    border-color: var(--ink-soft);
+    color: var(--ink);
+  }
+
+  /* ============ TL;DR / Key Findings highlight section ============ */
+  .summary-block {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 2rem 2rem 1.5rem;
+    margin: 2rem 0 0;
+    position: relative;
+  }
+  .summary-block::before {
+    content: "";
+    position: absolute;
+    top: -1px; left: -1px;
+    width: 80px;
+    height: 4px;
+    background: var(--poker-red);
+  }
+  .summary-block h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--poker-red);
+    font-family: var(--font-serif);
+    font-weight: 900;
+    letter-spacing: 0.04em;
+  }
+
+  /* ============ Tables ============ */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    background: var(--card);
+  }
+  thead { background: var(--bg-alt); }
+  th {
+    text-align: left;
+    padding: 0.85rem 1rem;
+    font-weight: 700;
+    color: var(--ink-strong);
+    font-size: var(--fs-small);
+    letter-spacing: 0.04em;
+    border-bottom: 2px solid var(--rule);
+    white-space: nowrap;
+  }
+  td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--rule-soft);
+    vertical-align: top;
+    line-height: 1.65;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--card-soft); }
+
+  /* ============ TOC ============ */
+  nav.toc {
+    background: var(--card-soft);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0 0;
+  }
+  nav.toc h4 {
+    margin: 0 0 0.75rem;
+    font-size: var(--fs-small);
+    letter-spacing: 0.15em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  nav.toc ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  nav.toc li {
+    margin: 0;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid var(--rule-soft);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+  }
+  nav.toc li:last-child { border-bottom: none; }
+  nav.toc .toc-num {
+    font-family: var(--font-mono);
+    color: var(--poker-red);
+    font-weight: 600;
+    font-size: 0.85rem;
+    flex: 0 0 auto;
+  }
+  nav.toc a {
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  nav.toc a:hover { color: var(--poker-red); }
+
+  /* ============ Inline lists (def list style) ============ */
+  .def-list {
+    margin: 1rem 0 1.5rem;
+    padding: 0;
+    list-style: none;
+  }
+  .def-list li {
+    padding: 0.85rem 0;
+    border-bottom: 1px dashed var(--rule);
+    line-height: 1.75;
+  }
+  .def-list li:last-child { border-bottom: none; }
+  .def-list .term {
+    display: block;
+    font-weight: 700;
+    color: var(--ink-strong);
+    font-size: var(--fs-h4);
+    margin-bottom: 0.25rem;
+  }
+
+  /* ============ Step / Threshold blocks ============ */
+  .stage-block {
+    margin: 1.25rem 0;
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--poker-black);
+    background: var(--card);
+    border-radius: 0 4px 4px 0;
+    padding: 1.25rem 1.5rem;
+  }
+  .stage-block.red { border-left-color: var(--poker-red); }
+  .stage-block.gold { border-left-color: var(--gold); }
+  .stage-title {
+    font-size: var(--fs-h4);
+    font-weight: 700;
+    color: var(--ink-strong);
+    margin: 0 0 0.5rem;
+  }
+  .stage-block .threshold {
+    margin-top: 0.85rem;
+    padding-top: 0.85rem;
+    border-top: 1px dashed var(--rule);
+    font-size: var(--fs-small);
+    color: var(--ink-soft);
+  }
+  .stage-block .threshold strong { color: var(--poker-red); }
+
+  /* ============ Footer ============ */
+  footer {
+    padding: 3rem 0;
+    text-align: center;
+    background: var(--bg-alt);
+    border-top: 1px solid var(--rule);
+    margin-top: 2rem;
+  }
+  footer .suits-bar {
+    font-family: "Times New Roman", "Songti TC", serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.5em;
+    margin-bottom: 0.75rem;
+    font-variant-emoji: text;
+  }
+  footer .suits-bar .red { color: var(--poker-red); }
+  footer .suits-bar .black { color: var(--poker-black); }
+  footer p {
+    font-size: var(--fs-small);
+    color: var(--ink-mute);
+    margin: 0.25rem 0;
+  }
+
+  /* ============ Misc ============ */
+  abbr { text-decoration: none; border-bottom: 1px dotted var(--ink-mute); }
+  .pill {
+    display: inline-block;
+    padding: 0.15em 0.6em;
+    border-radius: 3px;
+    font-size: 0.82em;
+    font-weight: 600;
+    background: var(--gold-soft);
+    color: var(--gold);
+    margin-right: 0.35em;
+    font-family: var(--font-sans);
+    letter-spacing: 0.02em;
+  }
+  .pill.red { background: var(--poker-red-soft); color: var(--poker-red); }
+  .pill.black { background: #e8e6e0; color: var(--poker-black); }
+
+  /* ============ Responsive ============ */
+  @media (max-width: 640px) {
+    :root {
+      --fs-h1: 1.85rem;
+      --fs-h2: 1.4rem;
+      --fs-h3: 1.18rem;
+      --fs-h4: 1.05rem;
+    }
+    header.hero { padding: 2.75rem 0 2rem; }
+    section { padding: 2.5rem 0 0.5rem; }
+    .wrap { padding: 0 1.1rem; }
+    .card { padding: 1.2rem 1.25rem; }
+    h2 { gap: 0.6rem; }
+    th, td { padding: 0.65rem 0.8rem; font-size: 0.9rem; }
+    .hero-meta { gap: 0.85rem; flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">
+      <span class="suits"><span class="black">♠</span> <span class="red">♥</span> <span class="red">♦</span> <span class="black">♣</span></span>
+      <span>競技策略研究</span>
+    </div>
+    <h1>經典三人鬥地主<br>競技取勝策略全解析</h1>
+    <p class="hero-sub">
+      54 張標準版,從新手到中高階競技。涵蓋叫地主決策、農民配合、牌型拆解與節奏控制,
+      整合人類玩家共識與快手 DouZero AI 研究結論。
+    </p>
+    <div class="hero-meta">
+      <span><strong>版本</strong>三人 54 張(不含癩子)</span>
+      <span><strong>適用</strong>新手 → 中高階競技</span>
+      <span><strong>定位</strong>實戰策略,非規則入門</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ============== TL;DR ============== -->
+<section id="tldr">
+  <h2><span class="num">00</span><span>結論先行</span></h2>
+  <div class="summary-block">
+    <ul>
+      <li><strong>叫地主的本質是期望值決策。</strong>用量化牌力(大牌點數 + 手數 + 牌型結構)判斷是否值得「1 打 2」;起手要達到「兩把絕對控制」(如雙王或大王 + 多個 2 等)才值得叫 3 分,邊際牌寧可當農民打配合。</li>
+      <li><strong>農民的勝負手在「配合」而非個人牌力。</strong>地主下家負責「頂」、地主上家負責「跑」;核心是<em>保大放小、該過則過、絕不互搶大牌</em>。高端局農民勝率反而高於 50%,正是配合差距所致。</li>
+      <li><strong>AI 研究(快手 DouZero,ICML 2021)證實</strong>:鬥地主最優策略重視「全局期望勝率」而非當下最大化;機器以純自我對弈達到人類頂尖水平,印證「節奏控制 + 手數計算」這套人類經驗的有效性。</li>
+    </ul>
+  </div>
+  <nav class="toc">
+    <h4>章節目錄</h4>
+    <ol>
+      <li><span class="toc-num">02</span><a href="#sec-0">遊戲基本設定與計分</a></li>
+      <li><span class="toc-num">03</span><a href="#sec-1">叫地主/搶地主的數學決策</a></li>
+      <li><span class="toc-num">04</span><a href="#sec-2">農民配合(上下家配合學)</a></li>
+      <li><span class="toc-num">05</span><a href="#sec-3">牌型拆解與出牌時序</a></li>
+      <li><span class="toc-num">06</span><a href="#sec-4">中高階競技技巧</a></li>
+      <li><span class="toc-num">07</span><a href="#sec-5">競技賽事層級的策略</a></li>
+      <li><span class="toc-num">08</span><a href="#sec-rec">三段式進階路線</a></li>
+      <li><span class="toc-num">09</span><a href="#sec-caveats">限制與資料邊界</a></li>
+    </ol>
+  </nav>
+</section>
+
+<!-- ============== Key Findings ============== -->
+<section id="key">
+  <h2><span class="num">01</span><span>核心發現</span></h2>
+
+  <ol>
+    <li><strong>遊戲設定</strong>:54 張(含大小王),地主 20 張(含 3 張明底牌)對兩農民各 17 張。計分 = 底分(叫分 1/2/3)× 倍數,倍數由炸彈、王炸(火箭)、春天/反春、加倍等相乘累加。</li>
+    <li><strong>叫牌量化</strong>:可用桥牌精確改編版(大王 4 點、小王 3 點、2 為 2 點、A 為 1 點,≥7 點才叫);袁克強《巧斗地主》另有一套點數系統。但叫牌真正要看<em>牌點大不大 + 牌型齊不齊 + 手數少不少</em>三者綜合。</li>
+    <li><strong>位置不同任務不同</strong>:地主下家(門板)負責頂牌,地主上家(管理員)負責接牌跑牌,分工完全不同。</li>
+    <li><strong>拆牌與手數</strong>:核心競技概念是把手牌拆成「最少手數」,並計算自己與對手還需幾手,據此決定攻守。</li>
+    <li><strong>節奏控制</strong>:「讓別人跟著你的節奏出牌」是高手心法;用小牌試探、套對方大牌,保留炸彈/王炸到關鍵點。</li>
+    <li><strong>統計現實</strong>:平均勝率約 47%(因 2/3 機率當農民、農民單局勝率較低所致);頂尖玩家靠農民配合把農民勝率拉過 50%。</li>
+  </ol>
+</section>
+
+<!-- ============== 0. 遊戲設定 ============== -->
+<section id="sec-0">
+  <h2><span class="num">02</span><span class="suit black">♠</span><span>遊戲基本設定與計分</span></h2>
+
+  <h3>牌數、發牌與勝負</h3>
+  <ul>
+    <li><strong>牌數與分配</strong>:一副 54 張(52 張 + 大王/小王)。發牌時每人 17 張,留 3 張底牌蓋著;叫牌決定地主後,3 張底牌亮明並歸地主,故<em>地主 20 張、農民各 17 張</em>。</li>
+    <li><strong>牌點大小</strong>:大王 &gt; 小王 &gt; 2 &gt; A &gt; K &gt; Q &gt; J &gt; 10 &gt; 9 &gt; 8 &gt; 7 &gt; 6 &gt; 5 &gt; 4 &gt; 3,不分花色。</li>
+    <li><strong>叫牌</strong>:系統隨機指定首叫,逆時針輪流,每人一次,可叫「不叫/1 分/2 分/3 分」,後叫者只能叫更高分;有人叫 3 分即立刻定地主。三家全不叫則重新發牌(部分平台默認首叫者當地主、1 分)。</li>
+    <li><strong>勝負</strong>:地主先出完牌 → 地主勝;任一農民先出完 → 兩農民皆勝(這是農民必須配合的根本原因)。</li>
+  </ul>
+
+  <h3>計分機制</h3>
+  <ul>
+    <li>底分 = 叫分(1/2/3)。</li>
+    <li>倍數初始為 1(地主因輸贏雙倍,常被理解為基礎 ×2),出現<em>火箭(王炸)、炸彈各 ×2</em>(不論誰出、出幾個都疊乘),<em>春天/反春 ×2</em>,搶地主、加倍(明加倍/超級加倍)等也 ×2,多數平台相乘累加,常設上限。</li>
+    <li><strong>春天</strong>:地主出完牌、農民一張未出(地主壓倒性勝)。<strong>反春(農民春天)</strong>:地主只出過第一手,之後全是農民出牌直到農民走完。兩者皆翻倍。</li>
+  </ul>
+
+  <div class="callout note">
+    <span class="callout-icon">📘</span>
+    <div class="callout-body">
+      <strong>官方規則原文。</strong>國家體育總局《競技二打一撲克競賽規則》(2016 年 2 月,棋牌運動管理中心):「防守人的得分為莊家所叫分值 × 勝負係數 × 加倍係數。莊家得分為兩名防守人得分之和的相反數。」勝負係數為 ±1,加倍係數 = 2 的(火箭數 + 炸彈數 + 春天 + 反春 + 加倍次數)次方。
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠</span>
+    <div class="callout-body">
+      <strong>新手最常記錯的兩點。</strong>
+      <p>(1) 四帶二(如 5555 + 3 + 8)<em>不是炸彈</em>,不能壓炸彈、也不能壓其他牌型,只能壓更小的四帶二。</p>
+      <p>(2) 順子/連對/飛機<em>不含 2 與大小王</em>。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 1. 叫地主 ============== -->
+<section id="sec-1">
+  <h2><span class="num">03</span><span class="suit">♥</span><span>叫地主的數學決策</span></h2>
+
+  <h3>為什麼叫牌是期望值問題</h3>
+  <p>地主是「1 打 2」,先天人數劣勢,但有兩個補償:<em>多 3 張底牌</em>(且能補強既有牌型)與<em>先手出牌權</em>(主動權)。叫牌就是判斷「底牌 + 先手」的補償是否蓋過「1 對 2」的劣勢。</p>
+  <p>據玩家大樣本統計(知乎、小米遊戲中心多篇),鬥地主平均勝率約 <strong>47%</strong>,因為有 2/3 機率當農民、而農民單局勝率通常低於地主;換言之,<em>牌不夠好卻硬叫地主,是輸分的主要來源</em>。</p>
+
+  <h3>三種起手牌力評估法</h3>
+
+  <div class="card black">
+    <p class="card-title">A · 數張法(最快,新手用)</p>
+    <p>數「大牌張數」:王(大、小)、2、A 的數量。經驗共識:</p>
+    <ul>
+      <li>有<strong>炸彈</strong> → 基本要叫(除非完全沒王沒 2,炸彈孤立)。</li>
+      <li>有<strong>大王</strong> → 基本要叫(除非沒 2 且牌極散,補底牌也連不起來)。</li>
+      <li>有<strong>三個 2 + 一對 A</strong> → 可叫(略冒險,怕對方王炸,但值得賭,且底牌可能補強)。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <p class="card-title">B · 算分法(量化牌力)</p>
+    <p><strong>桥牌精確叫牌法改編版</strong>(源自魏重慶精確制,最通用於三人標準局):</p>
+    <ul>
+      <li>大王 = 4 點、小王 = 3 點、2 = 2 點、A = 1 點。</li>
+      <li>牌力 <em>≥ 7 點</em>才叫牌,尤其第一家叫牌更需謹慎。</li>
+      <li>口訣:「一看牌點大不大,二看牌型齊不齊」。</li>
+      <li>例:大王 + 小王 = 7 點(剛好門檻,且王炸本身極強),即可叫。</li>
+    </ul>
+    <p style="margin-top: 1rem;"><strong>袁克強《巧斗地主》點數系統</strong>(上海鬥地主賽事常勝選手):</p>
+    <ul>
+      <li>一副炸彈 = 4P(但 7、8、10、J 的炸彈遇順必拆要減 1P,五張炸不減)。</li>
+      <li>三個 2 = 3P;大王 = 2P(若無大王要扣 1P);小王 = 1P。</li>
+      <li>一對 2 = 1P(單張 2 幾乎無價值,約 0P);任何三張 = 1P(易摸成炸彈、且跑牌快)。</li>
+    </ul>
+    <div class="callout warn" style="margin-top: 1rem;">
+      <span class="callout-icon">⚠</span>
+      <div class="callout-body">
+        袁克強系統<em>原本是針對四人上海鬥地主(兩副牌、競叫小/大地主)</em>設計,門檻為「第一、二家滿 12 點加一檔,第三、四家滿 10 點加一檔,滿 16 點叫大地主,滿 20 點可頭撩」,<strong>不能直接套用到三人 1/2/3 分</strong>;但其量化思路對三人局仍極有參考價值。
+      </div>
+    </div>
+  </div>
+
+  <div class="card gold">
+    <p class="card-title">C · 結構評估法(手數 + 牌型,中高階核心)</p>
+    <p>不只看大牌,更看<em>這副牌幾手能走完,且能不能連續搶到主動權</em>:</p>
+    <ul>
+      <li><strong>主線</strong>:有沒有飛機、長順、連對、三帶這些一次走多張的牌型,能快速減少手數。</li>
+      <li><strong>控制牌(收尾牌)</strong>:王、2、大炸彈,能在關鍵輪次奪回主動權。</li>
+      <li>競技口訣:<em>能連續兩回合主動(如飛機 → 三帶),再考慮叫高分/搶地主</em>;只能零星丟單張高牌,就讓別人當地主。</li>
+      <li><strong>兩頭尖</strong>(萌娘百科術語):起手小牌與大牌多為單張、中間斷層,即使補底牌也難送出,是<em>最不適合搶地主</em>的牌型;反之牌型成片(「兩頭鼓」)才適合叫。</li>
+    </ul>
+  </div>
+
+  <h3>該叫 3 分/2 分/1 分/不叫</h3>
+  <ul>
+    <li><strong>叫 3 分</strong>:雙王、或大王 + 多個 2、或本身有硬炸彈 + 大牌做收尾,牌型成片、預估「兩把絕對控制」。3 分是底分翻 3 倍,要有 ≥7 成把握才上 3 分。</li>
+    <li><strong>叫 2 分/1 分</strong>:牌力中上但不穩,或想當地主又怕被高分搶走時的折衷。</li>
+    <li><strong>不叫</strong>:邊際牌型(如「一對 A + 一個王」這種要大不大)、兩頭尖、無炸無王無 2,寧可當農民打配合。共識是<em>邊際牌叫地主的期望值往往低於當農民</em>,因為農民有隊友分攤防守。</li>
+  </ul>
+
+  <h3>搶地主的期望值</h3>
+  <p>搶地主 = 在已有人叫的基礎上加價(倍數 ×2)。要搶,牌力門檻要比首叫更高,因為:</p>
+  <ol>
+    <li>倍數放大了輸贏。</li>
+    <li>你已知至少一家也認為自己牌好(潛在炸彈/大牌在對方手裡)。</li>
+  </ol>
+  <p>原則:<em>底牌未知的部分(3 張)約佔 1/6 手牌,是大變數</em>,搶地主等於賭「自己牌 + 底牌」能壓過對手;牌型成片 + 有炸時才值得搶。</p>
+
+  <h3>位置對農民勝率的影響</h3>
+  <ul>
+    <li><strong>地主下家</strong>(坐在地主左手、地主出完牌後第一個跟的人) = 「<em>門板</em>」:主要任務是頂牌、卡地主,給地主設障礙。</li>
+    <li><strong>地主上家</strong>(坐在地主右手、最後輪到、出牌後地主接不到的人) = 「<em>管理員</em>」:主要任務是控大牌、伺機跑牌收尾。</li>
+    <li>共識:地主下家位置相對被動(要頂),地主上家位置相對主力(能跑);但兩者勝率差異主要取決於配合質量,而非單純位置。</li>
+  </ul>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠</span>
+    <div class="callout-body">
+      <strong>競技玩家共識與常見錯誤。</strong>
+      <p>QQ/JJ/騰訊歡樂鬥地主高手共識:叫牌看「牌點 + 牌型整齊度 + 手數」綜合,不是只看大牌數量。</p>
+      <p><strong>常見錯誤 ①</strong>:新手「多 3 張牌很爽」就無腦叫地主 → 1 打 2 劣勢被放大,送分。</p>
+      <p><strong>常見錯誤 ②</strong>:拿到一對 2 就叫 3 分 → 沒有收尾牌型,中段被農民卡死。</p>
+      <p><strong>常見錯誤 ③</strong>:邊際牌硬搶地主,倍數翻上去後一個炸彈就血崩。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 2. 農民配合 ============== -->
+<section id="sec-2">
+  <h2><span class="num">04</span><span class="suit">♦</span><span>農民配合(上下家配合學)</span></h2>
+
+  <p>這是鬥地主<em>最能拉開水平</em>的部分,也是 AI 最難學會的部分(DouZero 論文明確指出農民協作是難點)。</p>
+
+  <h3>角色分工</h3>
+
+  <div class="card">
+    <p class="card-title">地主下家(門板 / 頂牌位)</p>
+    <ul>
+      <li><strong>核心任務:頂牌</strong>——地主出小牌時,用大牌(A、2、甚至中大單張如 Q、K)壓制,逼地主消耗大牌,不讓地主輕鬆走小牌。</li>
+      <li><strong>經典手法</strong>:頂牌時常用 <em>Q 左右的牌頂</em>——一方面地主的小牌出不了,另一方面即使地主不要、由地主上家(隊友)接,消耗也不大;若直接出 A 去頂,地主不要時隊友得用 2 以上才能接,消耗太大。</li>
+      <li><strong>目標</strong>:即使自己跑不掉,也要耗光地主大牌,為隊友(地主上家)創造跑牌機會;手牌允許時應盡早趴單趴雙(把單張對子打簡化),讓隊友收尾。</li>
+    </ul>
+  </div>
+
+  <div class="card gold">
+    <p class="card-title">地主上家(管理員 / 接牌跑牌位)</p>
+    <ul>
+      <li><strong>核心任務:控大牌、跑牌收尾</strong>——保存實力,伺機一波走完;同時留一些小牌,在隊友(門板)有機會贏時放小牌「送」給隊友。</li>
+      <li>是農民方獲勝的<em>主力</em>。</li>
+    </ul>
+  </div>
+
+  <h3>「保大放小」核心原則</h3>
+  <ul>
+    <li>隊友出大牌壓地主時,<em>自己即使有更大的牌也選擇「不出(過)」</em>,保留大牌做後續支援。</li>
+    <li>在隊友出牌壓制地主時跟著壓,是<em>最典型的豬隊友行為</em>(互搶大牌)。</li>
+    <li>當發現隊友一直「不出」,表示他在配合你、幫你打輔助,這時你應盡量出牌壓地主或吊出地主大牌。</li>
+  </ul>
+
+  <h3>何時頂、何時過、何時接</h3>
+  <ul>
+    <li><strong>該頂</strong>:地主出小牌、你在地主下家位、且頂了之後不會嚴重破壞自己牌型時 → 頂(尤其用中大牌頂,逼地主拆牌/出大牌)。</li>
+    <li><strong>該過</strong>:隊友已經出牌壓住地主時(保大放小);或你壓了之後只剩零散小牌、反而幫地主清場時。</li>
+    <li><strong>該接(搶上手)</strong>:你在地主下家、地主出小牌、而你手牌順可以一波跑掉時,搶上手清小牌。</li>
+  </ul>
+
+  <h3>信號傳遞(用出牌暗示牌力)</h3>
+
+  <ul class="def-list">
+    <li>
+      <span class="term">發單 / 發對的反向暗示</span>
+      地主開始發對,你(上手後)就發單;地主發單,你就發對——「反其道而行」傳遞「我這類牌型不缺,你走另一類」的訊息。
+    </li>
+    <li>
+      <span class="term">送小單 = 示弱求救</span>
+      打出很小的單張(3、4)通常意味著「我這門走不了,靠你了」或「我快沒牌了,請放行」。
+    </li>
+    <li>
+      <span class="term">越出越小</span>
+      地主或隊友連續出越來越小的牌,是在表達「我走不動了,把主動權讓給你」。
+    </li>
+    <li>
+      <span class="term">拆對打單</span>
+      當你大牌壓制成功後,根據「地主怕什麼就出什麼」——地主怕單就拆對出單,地主怕對就拆順子上的對子出對(換門子/送牌)。
+    </li>
+  </ul>
+
+  <h3>反推隊友與地主手牌</h3>
+  <ul>
+    <li>地主出 A、農民下家很快出 2 → 他單 2 可能性大。</li>
+    <li>地主出 2 後沒人能壓、或地主出 2 後另一家不出 → <em>兩個王極可能在同一家</em>(成了王炸)。</li>
+    <li>地主出小牌(如單 3)→ 通常代表他對自己的牌很有信心(手數少),農民要格外小心。</li>
+    <li>農民下家對地主出的 4「不要」→ 要嘛他牌很整齊沒單張,要嘛他有單但很大不想壓小牌。</li>
+  </ul>
+
+  <h3>炸彈保留與配合</h3>
+  <ul>
+    <li>有炸彈的農民<em>別急著炸</em>,留到地主準備「一口氣衝線」(連續出牌即將走完)時再砸,效益最大(切斷地主節奏並奪回主動權)。</li>
+    <li>兩農民若各有炸,協調好「誰炸」——通常讓手牌更順、更有跑牌贏面的那家保留主動權。</li>
+  </ul>
+
+  <h3>殘局收尾配合(倒數幾手)</h3>
+  <ul>
+    <li><strong>經典死亡循環</strong>:地主剩單張(如單 2)時,「地主下家出小單 → 地主上家頂上放對子 → 下家對子大上」這種循環可把地主卡死。</li>
+    <li>倒數第二手與最後一手要算清「報手數」:誰先到 1 張牌要提醒;確認自己這門能不能在對方收尾前走完。</li>
+    <li><strong>死牌意識</strong>:農民只剩小牌、只能主動出卻拿不到主動權時,這些牌變「死牌」永遠出不掉——要提前避免把自己打成這種局面。</li>
+  </ul>
+
+  <div class="callout warn">
+    <span class="callout-icon">🤝</span>
+    <div class="callout-body">
+      <strong>常見配合錯誤。</strong>
+      <p><strong>互搶大牌</strong>:隊友 A 壓了地主,你又用更大的牌壓隊友 → 浪費資源、幫地主。</p>
+      <p><strong>該頂不頂</strong>:地主下家放小牌讓地主輕鬆走小 → 地主節奏起來了。</p>
+      <p><strong>該保大時放小 / 該放小時保大</strong>:搞錯角色(門板去當主力跑、管理員去硬頂)。</p>
+      <p><strong>不記牌亂頂</strong>:不知道大牌分布就瞎頂,把自己關鍵牌消耗在沒意義的輪次。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 3. 牌型拆解 ============== -->
+<section id="sec-3">
+  <h2><span class="num">05</span><span class="suit black">♣</span><span>牌型拆解與出牌時序</span></h2>
+
+  <h3>牌型基礎與相剋</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>牌型</th>
+          <th>範例</th>
+          <th>說明 / 壓制邏輯</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>單張</td><td>任意一張</td><td>比點數</td></tr>
+        <tr><td>對子</td><td>33</td><td>比點數</td></tr>
+        <tr><td>三張</td><td>999</td><td>比點數</td></tr>
+        <tr><td>三帶一</td><td>999 + 6</td><td>比三張部分</td></tr>
+        <tr><td>三帶對</td><td>999 + 66</td><td>比三張部分</td></tr>
+        <tr><td>單順(≥5 張)</td><td>45678</td><td>比最大張;不含 2/王</td></tr>
+        <tr><td>雙順 / 連對(≥3 對)</td><td>334455</td><td>比最大對;不含 2/王</td></tr>
+        <tr><td>飛機(≥2 連三張)</td><td>333444</td><td>比最大三張;不含 2/王</td></tr>
+        <tr><td>飛機帶翅膀</td><td>333444 + 79 或 + 7799</td><td>帶單 / 帶對,張數須一致</td></tr>
+        <tr><td>四帶二</td><td>5555 + 3 + 8 或 4444 + 55 + 77</td><td><em>非炸彈</em>,比四張部分</td></tr>
+        <tr><td>炸彈</td><td>8888</td><td>壓除王炸 / 更大炸彈外一切</td></tr>
+        <tr><td>王炸 / 火箭</td><td>大王 + 小王</td><td>最大,壓一切</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>相剋邏輯</strong>:王炸 &gt; 炸彈 &gt; (同牌型同張數比點數)。非炸彈牌型必須「同牌型、同張數」才能比大小。炸彈無視牌型硬壓(王炸最大)。</p>
+
+  <h3>拆牌策略(算手數)</h3>
+  <p><strong>最少手數原理</strong>(鬥地主 AI 普遍用 DP 動態規劃計算):除了順子和飛機與「點數連續性」有關,其他牌型(炸彈、三張、對子、單張)的最少出牌手數,只要每種牌的張數固定就固定了。實戰人腦版:</p>
+  <ol>
+    <li>先定王炸、炸彈(不輕易拆)。</li>
+    <li>再組三順(飛機):有 444555666 時,優先合成一個飛機(一手走 6 張),而非拆成 444555 + 666 兩手。</li>
+    <li>再組單順(順子能合就合)。</li>
+    <li>剩下的三張、對子、單張各算一手。</li>
+  </ol>
+
+  <h4>拆與不拆的判斷</h4>
+  <ul>
+    <li><strong>順子拆不拆</strong>:若拆順子能湊出炸彈/飛機或大幅降手數,可拆;若拆了製造一堆斷張(拖手數),不拆。袁克強系統提到「7、8、10、J 的炸彈遇順必拆」——即這些炸彈常被順子需求拆掉,所以叫牌時其價值要打折。</li>
+    <li><strong>三帶的拆法</strong>:三張盡量<em>帶出去</em>(三帶一/三帶對)以一次清掉廢牌,而非純三張單出;帶單還是帶對看手裡哪種廢牌多。</li>
+    <li><strong>留對 vs 拆對打單</strong>:手裡對子多時,看對手「怕單還是怕對」決定拆不拆;殘局時拆對打單常是配合需要。</li>
+    <li><strong>連對與飛機優先組合</strong>:能連的盡量連(連對、飛機一次走多張,降手數),但要保留收尾的控制牌。</li>
+  </ul>
+
+  <h3>出牌時序</h3>
+
+  <h4>地主先手出什麼</h4>
+  <ul>
+    <li><em>出小不出大、出長不出短</em>:先用小牌、長牌型試探並清廢牌,保留大牌與短收尾牌。</li>
+    <li>拿到牌先「拆牌」規劃路線:把三帶一抽掉後,剩下的 10 以下小單張先發;有對先發對。</li>
+    <li>地主的整體策略:<em>故意暴露弱點</em>——先把成對/成組的牌打出去,讓農民以為穩贏而打光配合牌,最後地主用留下的牌一波收尾。</li>
+  </ul>
+
+  <h4>試牌(試應手)的時機與目的</h4>
+  <ul>
+    <li>不知道對手風格時,突然出個 A,看對方要不要,分辨「凶猛型」(你出 A 他出 2、你出 2 他出王)與「謹慎型」。</li>
+    <li>用「探路牌」確認自己哪些牌是最大的:如手裡 1 王、1 對 2、1 對 A、1 張 K、1 對 Q、3 個 J,先出 1 對 Q 探對方有沒有 3 個 K,沒被壓就把 3 個 J 留到最後。</li>
+  </ul>
+
+  <h4>何時出炸彈</h4>
+  <ul>
+    <li><strong>為了贏</strong>:奪回關鍵主動權、或一波收尾前的清場。</li>
+    <li><strong>為了控制節奏 / 止損</strong>:明知會輸時,主動炸打亂對方計劃,逼對方重新跟你的節奏,目的是<em>少輸</em>(避免被春天、避免對方連炸疊倍)。高手共識:該炸要果斷,<em>猶豫反而暴露牌力</em>讓對方反炸。</li>
+    <li><strong>王炸保留</strong>:王炸是「穩拿一次主動權」的終極資源,通常留到最後一波啟動收尾,或用來壓對方的關鍵炸彈/大牌。地主有雙王時,「拆王走牌(保後手主動權)」vs「留王炸(抗衡對方強牌型)」是經典抉擇——統計上留王炸常有更高勝率。</li>
+  </ul>
+
+  <h4>收手時機(主動權的放與收)</h4>
+  <ul>
+    <li><strong>打下家讓上家</strong>(知乎高讚):地主牌不能絕對控制時,若各類牌型較全,故意讓上家一手過掉關鍵牌,後面反而穩。</li>
+    <li>農民「越出越小」表示讓權;地主/隊友據此決定收回主動權還是放手。</li>
+  </ul>
+
+  <h4>最後幾手的計算(必勝判斷)</h4>
+  <ul>
+    <li>殘局 = 完全/近似完全信息博弈,理論上可用對抗搜索(Minmax)判定必勝方。人腦版:數雙方剩餘手數與牌型,判斷「我先手能不能在對方收尾前走完」。</li>
+    <li>經典殘局例:<code>345566</code> 先出打贏 <code>345577</code> → 唯一解是<em>先出單 4</em>,據對方反應分支制勝。說明<em>最後幾手的出牌順序選擇</em>往往是唯一解,差一手就輸贏逆轉。</li>
+  </ul>
+
+  <div class="callout tip">
+    <span class="callout-icon">🎯</span>
+    <div class="callout-body">
+      <strong>「報手數」概念。</strong>高手出三圈牌後就能推出對方牌的大致分布;自己也要時刻清楚「我還剩幾手、對方還剩幾手」,這是節奏控制的計算基礎。
+    </div>
+  </div>
+</section>
+
+<!-- ============== 4. 中高階 ============== -->
+<section id="sec-4">
+  <h2><span class="num">06</span><span class="suit">♥</span><span>中高階競技技巧</span></h2>
+
+  <h3>算牌(記牌)</h3>
+  <ul>
+    <li><em>記牌是區分高手與新手的第一道門檻</em>。記不全就至少記:<strong>王、2、A</strong>,以及<strong>斷張判斷(炸彈可能性)</strong>。</li>
+    <li>進階記 <em>7 和 10</em>——這兩張決定順子能否連起(口訣:所有 7、10 都出過,場上幾乎不會再有順子;10–A 專吃 3–7 段)。</li>
+    <li><strong>炸彈排除法</strong>:拿牌時先判斷有幾種炸彈可能性,後續逐回合排除。</li>
+    <li><strong>記牌訣竅</strong>:把 14 個點數分組記憶——3 到 7(5 張一段)、10 到 A(5 張一段)、8/9、2/王;鏈子長度 = (末張 + 1) − 首張。</li>
+  </ul>
+
+  <h3>從叫牌與出牌反推手牌</h3>
+  <ul>
+    <li>叫了 3 分的地主 → 大牌多、可能有炸;不叫卻有明牌的(部分玩法)→ 受限。</li>
+    <li>出牌節奏反推:出 2 沒人壓 → 王在一家;快速出 A 後馬上出 2 → 單 2 多;對某張小牌「不要」→ 牌整齊無單張。</li>
+  </ul>
+
+  <h3>心理戰</h3>
+  <ul>
+    <li><strong>虛張聲勢</strong>:故意攥著 4 張/2 張牌,讓對方以為你有炸彈/王炸而不敢出牌;托管時對方可能誤判你的牌型(如以為你也是對子,逼地主開炸)。</li>
+    <li><strong>誘導拆牌</strong>:地主故意示弱(越出越小、先丟成對牌),誘農民拆掉配合牌或打光大牌。</li>
+    <li><strong>果斷出牌掩飾</strong>:炸彈/大牌要果斷出,猶豫會暴露「牌不夠好」。</li>
+  </ul>
+
+  <h3>節奏控制</h3>
+  <ul>
+    <li>核心心法:<em>讓別人跟著你的節奏出牌,而不是被牽著走</em>。</li>
+    <li>用小牌套對方大牌(吊牌):出中高單張(J、Q)逼出對方的 2、王,讓對方最後只剩小牌出不掉。</li>
+    <li>該快則快(手數少、要衝線時連續出)、該慢則慢(試探、等隊友配合時放緩)。</li>
+  </ul>
+
+  <h3>殘局計算與防春天</h3>
+  <ul>
+    <li><strong>防春天</strong>(地主視角):自己牌差也要爭取出牌哪怕一張、壓一手,避免被打春天(雙倍損失);至少出一張能讓對方無法「一條龍」走完。</li>
+    <li><strong>反防春天</strong>(農民視角):農民若想做反春,需地主只出第一手後就被完全壓制——通常靠炸彈在地主出第一手後立刻奪權 + 一波清牌。</li>
+    <li><strong>三個 2 無王最難打</strong>:兩王分開時,單牌多就被動(你出 2 別人出王,永遠上不了手),這種牌型要特別小心。</li>
+  </ul>
+
+  <h3>常見定式與破解</h3>
+  <ul>
+    <li><strong>地主剩單張的死亡循環</strong>:農民用「小單 → 頂對 → 對子大上」鎖死地主。</li>
+    <li><strong>山寨老大 AA</strong>:22 出完後 AA 成最大對,但運用需技巧——有時要拆 A 保順子,有時絕不能拆。</li>
+    <li>破解定式靠記牌 + 算手數,沒有萬能定式。</li>
+  </ul>
+</section>
+
+<!-- ============== 5. 競技賽事 ============== -->
+<section id="sec-5">
+  <h2><span class="num">07</span><span class="suit black">♠</span><span>競技賽事層級的策略</span></h2>
+
+  <h3>官方競技化與賽制</h3>
+  <ul>
+    <li>鬥地主已被中國國家體育總局正規化為「<em>競技二打一撲克</em>」:棋牌運動管理中心 2016 年 3 月 31 日發布「趣味棋牌競技化」方針、列二打一為首個試點項目;同年 2 月頒布《競技二打一撲克競賽規則》。</li>
+    <li><strong>2016 年 9 月 3 日舉辦首屆全國錦標賽(CCPC),總獎金達 500 萬元</strong>。</li>
+    <li><strong>複式賽制</strong>:不同牌桌上、同方位的選手發完全相同的牌,比較相同牌面下誰打得更好,以消除運氣成分(類似橋牌複式)。截至 2025 年已辦 5 屆國家級賽事。</li>
+    <li>學術界另提出<em>同等牌力賽制</em>(用 GDI 等級難度指標生成牌力相當但不完全相同的牌),以解決線上複式賽「不同方位互報手牌作弊」的問題(李淑琴等,《竞技二打一游戏中同等牌力的研究》)。</li>
+    <li><strong>商業賽事</strong>:騰訊歡樂鬥地主錦標賽(TDT,2015 年創辦),2017 年 TDT 總獎池 200 萬、預選賽超過一億人次參賽;總決賽冠軍由河北三河選手<em>楊超以 10300 分奪得、獎金 30 萬元</em>,亞軍梁威、季軍高亮分別獲 20 萬、10 萬元。</li>
+  </ul>
+
+  <h3>賽事層級的決策共識</h3>
+  <ul>
+    <li>複式賽中,由於「同樣的牌大家都在打」,勝負取決於<em>把同一副牌打出比對手更高的期望分</em>——這放大了「叫牌準確度」「拆牌手數最優」「配合零失誤」的重要性。</li>
+    <li>高手出牌風格共識:重視<em>手數計算與控制牌保留</em>,不貪小利、不亂炸、不互搶;地主追求快速清牌 + 保留收尾控制,農民追求零配合失誤。</li>
+  </ul>
+
+  <h3>AI 研究成果(重點)</h3>
+
+  <div class="card black">
+    <p class="card-title">DouZero(快手 AI 平台部,ICML 2021)</p>
+    <p>論文資訊:Daochen Zha 等,Kwai Inc.,<code>arXiv:2106.06135</code>。首個從零開始(不用任何人類知識)、純自我對弈深度強化學習的鬥地主 AI。將傳統蒙地卡羅方法(Deep Monte-Carlo, DMC)結合深度神經網路、動作編碼、並行 Actor。</p>
+    <ul>
+      <li>論文原文:「DouZero outperformed all the existing DouDizhu AI programs in days of training and was ranked the first in the Botzone leaderboard among 344 AI agents.」——用單機 4 張 GPU、<em>數天訓練即勝過所有既有鬥地主 AI</em>(完整訓練週期為 30 天)。</li>
+      <li>Botzone 平台排名:「DouZero ranked the first among the 344 bots, achieving an Elo rating score of 1625.11 as of October 30, 2020.」——<em>344 個 AI 中排名第一,Elo 1625.11</em>(截至 2020/10/30)。</li>
+      <li>2 天訓練超過監督學習(SL)基準,10 天內超過 DeltaDou。</li>
+      <li>兩種訓練目標:<strong>WP(勝率)</strong>與 <strong>ADP(平均分差,Average Difference Points)</strong>,分別對應「只求贏」與「求贏得多/輸得少」的策略傾向——這正對應人類「該不該為翻倍冒險」的決策。</li>
+      <li>模型分<strong>地主、地主上家(LandlordUp)、地主下家(LandlordDown)</strong>三個位置分別訓練,印證位置策略確實不同。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <p class="card-title">DouZero+(2022)</p>
+    <p>論文資訊:<code>arXiv:2204.02558</code>。引入<em>對手建模(opponent modeling)與教練網路(coach network)</em>,在 400+ AI 中排名超過原版 DouZero——印證「反推對手手牌」(對手建模)確實能提升水平。</p>
+  </div>
+
+  <div class="callout tip">
+    <span class="callout-icon">💡</span>
+    <div class="callout-body">
+      <strong>AI 研究的關鍵啟示。</strong>
+      <p>(1) AI 的出牌<em>不是選當下勝率最高的一手,而是看全局期望</em>——印證人類「節奏控制、留牌、放權」等反直覺操作的價值。</p>
+      <p>(2) 論文與實測都指出<em>農民之間的協作是最弱環節</em>——人類玩家的配合學正是最高價值、最難練的技能。</p>
+      <p>(3) 鬥地主動作空間巨大(地主某些局面合法出牌可達上萬種),這是它比圍棋、德撲更難被 AI 攻克的原因。</p>
+    </div>
+  </div>
+
+  <h3>統計學觀點下的最優傾向</h3>
+  <ul>
+    <li><strong>平均勝率約 47%</strong> 是結構性的(1/3 當地主、2/3 當農民,農民單局勝率較低);<em>衡量水平不能只看勝率</em>——有時最優決策(如留王炸而非拆王搶手數)短期降勝率卻長期提高期望分。</li>
+    <li><strong>大樣本數據</strong>:基層玩家平均勝率約 47.6%、當地主機率約 27.1%;排行榜前 100 高手平均勝率約 50.2%、當地主機率約 32.7%,且<em>高手的農民勝率 &gt; 50%</em>——統計實證了「配合」是頂尖水平的分水嶺。</li>
+    <li><strong>最優傾向總結</strong>:叫牌偏緊(牌不夠好不叫) + 地主重節奏與收尾 + 農民重零失誤配合 + 炸彈/王炸用在期望增益最大的關鍵點。</li>
+  </ul>
+</section>
+
+<!-- ============== Recommendations / 進階路線 ============== -->
+<section id="sec-rec">
+  <h2><span class="num">08</span><span>三段式進階路線</span></h2>
+
+  <div class="stage-block red">
+    <p class="stage-title">新手階段 · 先建立正確框架</p>
+    <ol>
+      <li>背熟牌型相剋與兩大誤區(四帶二非炸彈、順子不含 2/王)。</li>
+      <li>叫牌用「數張法」:有炸/有大王/有三個 2 + 對 A 才叫,其餘不叫。</li>
+      <li>當農民死守「保大放小」:隊友壓地主時,有更大的牌也過。</li>
+      <li>開始記王、2、A 出了沒。</li>
+    </ol>
+    <div class="threshold"><strong>升級門檻</strong>:當你能穩定不犯「互搶大牌」與「無腦叫地主」兩個錯,且勝率接近 47–48%,進入中階。</div>
+  </div>
+
+  <div class="stage-block gold">
+    <p class="stage-title">中階階段 · 量化與配合</p>
+    <ol>
+      <li>叫牌改用算分法(大王 4 / 小王 3 / 2 為 2 / A 為 1,≥7 點才叫) + 手數評估(能不能兩回合連續主動)。</li>
+      <li>練「算手數」:拿牌後立刻拆成最少手數,規劃出牌路線。</li>
+      <li>分清自己是門板(頂牌位)還是管理員(跑牌位),按角色打。</li>
+      <li>記牌擴展到 7、10 與炸彈排除。</li>
+      <li>地主練「出小不出大、試應手、留王炸收尾」。</li>
+    </ol>
+    <div class="threshold"><strong>升級門檻</strong>:能在殘局正確數手數、判斷該頂該過,農民勝率開始 &gt; 50%,進入高階。</div>
+  </div>
+
+  <div class="stage-block">
+    <p class="stage-title">高階 / 競技階段 · 節奏與期望值</p>
+    <ol>
+      <li>主打節奏控制:用小牌吊大牌、該炸果斷炸(為贏或止損)、打下家讓上家。</li>
+      <li>對手建模:從叫牌與前三圈出牌反推雙方手牌分布。</li>
+      <li>殘局精算:把最後 5–7 張當對抗搜索題,找唯一解。</li>
+      <li>研究 DouZero 線上 demo(<code>douzero.org</code>)觀察 AI 在分歧點的勝率變化,校準自己的直覺。</li>
+      <li>若打複式競技賽,把目標從「贏這局」改成「把這副牌打出比對手更高的期望分」,叫牌與拆牌追求最優而非夠用。</li>
+    </ol>
+  </div>
+
+  <h3>會改變策略的關鍵閾值</h3>
+  <ul>
+    <li>牌力 &lt; 7 點(算分法)→ 一律不叫地主。</li>
+    <li>起手無法「兩回合連續主動」→ 不搶地主、不上 3 分。</li>
+    <li>當農民且隊友已壓制地主 → 永遠過牌(除非你能一波走完)。</li>
+    <li>倍數已被炸彈/加倍推高 → 防守方更要謹慎,避免送春天;進攻方評估是否值得再炸疊倍。</li>
+  </ul>
+</section>
+
+<!-- ============== Caveats ============== -->
+<section id="sec-caveats">
+  <h2><span class="num">09</span><span>限制與資料邊界</span></h2>
+
+  <ul>
+    <li><strong>平台規則差異</strong>:四帶二能否帶對、飛機翅膀帶幾張、炸彈疊倍上限、明牌/超級加倍等細節,各平台(JJ、QQ、騰訊歡樂鬥地主、神來也)不同;競技官方規則(國家體育總局版)與民間/網遊版亦有差異。實戰前務必看該平台規則頁。</li>
+    <li><strong>點數系統的適用範圍</strong>:袁克強《巧斗地主》的點數系統原針對<em>四人上海鬥地主(兩副牌)</em>,其門檻(12/10/16/20 點、頭撩)不能直接搬到三人 1/2/3 分標準局;桥牌精確法改編版(7 點門檻)較適用於三人標準局,但仍是經驗法則而非精確最優。</li>
+    <li><strong>勝率數字來源</strong>:47% 平均勝率、高手 50.2% 等數據來自玩家社群統計與遊戲媒體(知乎、小米遊戲中心),非經同行審查的學術數據,屬大樣本經驗值,方向可信但精確值會因平台、段位、樣本而異。</li>
+    <li><strong>AI 結論的邊界</strong>:DouZero 的強度與排名(Botzone 344 個 AI 第一、Elo 1625.11)是 2020–2021 年的數據;其「最優傾向」是在隨機發牌、特定計分目標(WP/ADP)下訓練的結果,對人類有啟發但不等於唯一正解。論文也坦承農民協作仍有提升空間。</li>
+    <li><strong>殘局必勝判定</strong>:理論上殘局(近似完全信息)可被對抗搜索解出必勝方,但這需要雙方明牌或近似明牌;實戰中你只能基於記牌做機率推斷,不能保證每個殘局都有人腦可算的唯一解。</li>
+    <li><strong>適用範圍</strong>:本報告策略以「標準三人 54 張、不含癩子」為前提;癩子場、連炸場等變體的叫牌與拆牌邏輯會明顯不同。</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="suits-bar">
+      <span class="black">♠</span><span class="red">♥</span><span class="red">♦</span><span class="black">♣</span>
+    </div>
+    <p>經典三人鬥地主競技策略研究</p>
+    <p>整合競技規則、玩家社群共識與 DouZero AI 研究結論</p>
+  </div>
+</footer>
+
+</body>
+</html>
