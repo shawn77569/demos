@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>白駒飛霞 · 燕雲十六聲試劍攻略</title>
+<meta name="description" content="96級試劍五人鎮守「白駒飛霞」機制攻略：舞馬人、馮如之機制、逃課打法與首領天賦解法。新手友善，內含示意圖。">
+<meta property="og:title" content="白駒飛霞 · 燕雲十六聲試劍攻略">
+<meta property="og:description" content="96級試劍五人鎮守「白駒飛霞」機制攻略：舞馬人、馮如之機制、逃課打法與首領天賦解法。新手友善，內含示意圖。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shawn77569.github.io/demos/wwm-baiju-guide/">
+<meta property="og:site_name" content="不夜京 · 燕雲十六聲攻略">
+<meta name="theme-color" content="#D4A668">
+<style>
+  :root {
+    /* 紅木深底配色 — 夜讀古籍風 */
+    --paper-base:    #1F1410;  /* 紅木深黑 */
+    --paper-warm:    #3F2520;  /* 暗紅褐 */
+    --paper-card:    #2A1A18;  /* 紅木卡面 */
+    --paper-light:   #3A2422;  /* 高亮卡面 */
+    --ink-dark:      #E8DCC4;  /* 暖米白(主文字) */
+    --ink-mid:       #B5A88E;  /* 暖灰(次文字) */
+    --ink-light:     #8A7A6A;  /* 深暖灰 */
+    --gold-main:     #D4A668;  /* 亮金(標題/重點) */
+    --gold-deep:     #A77B3A;  /* 深金 */
+    --red-warn:      #FF0050;  /* 霓虹紅(危險) */
+    --green-safe:    #39FF14;  /* 電光綠(安全) */
+    --blue-mech:     #00E5FF;  /* 霓虹青(中性) */
+    --purple-cyber:  #BF00FF;  /* 霓虹紫(次強調) */
+    --pink-cyber:    #FF00C8;  /* 品紅(點綴) */
+    --line:          #4A2E2A;  /* 暗紅木邊線 */
+    --line-soft:     #3A2422;  /* 淡邊線 */
+    /* 賽博漸層 */
+    --grad-cyber:    linear-gradient(90deg, #00E5FF, #BF00FF);
+    --grad-danger:   linear-gradient(90deg, #FF0050, #FF00C8);
+    --grad-safe:     linear-gradient(90deg, #39FF14, #00E5FF);
+
+    /* 字型 */
+    --font-display: "Noto Serif TC", "Songti TC", "STSongti-TC-Regular", "PMingLiU", serif;
+    --font-body:    "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Heiti TC", sans-serif;
+    --font-mono:    "JetBrains Mono", "SF Mono", Consolas, monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+
+  body {
+    background: var(--paper-base);
+    background-image:
+      radial-gradient(ellipse at top, rgba(212,166,104,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(74,46,42,0.4) 0%, transparent 50%);
+    color: var(--ink-dark);
+    font-family: var(--font-body);
+    line-height: 1.9;
+    letter-spacing: 0.02em;
+    font-size: 20px;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ===== 頂部導覽 ===== */
+  nav.topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(31,20,16,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav.topbar .inner {
+    max-width: 1100px; margin: 0 auto;
+    padding: 14px 24px;
+    display: flex; align-items: center; gap: 24px;
+    flex-wrap: wrap;
+  }
+  nav.topbar .brand {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--gold-main);
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+  nav.topbar ul {
+    list-style: none;
+    display: flex; gap: 22px;
+    margin-left: auto;
+    flex-wrap: wrap;
+  }
+  nav.topbar a {
+    color: var(--ink-mid);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.2s;
+  }
+  nav.topbar a:hover { color: var(--gold-main); }
+
+  /* ===== 容器 ===== */
+  main { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+  section:last-child { border-bottom: none; }
+
+  /* ===== Hero ===== */
+  .hero {
+    padding: 80px 0 48px;
+    text-align: center;
+    position: relative;
+  }
+  .hero .eyebrow {
+    font-size: 1rem;
+    letter-spacing: 0.4em;
+    color: var(--gold-deep);
+    margin-bottom: 24px;
+    font-family: var(--font-display);
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 7vw, 4.8rem);
+    font-weight: 700;
+    color: var(--ink-dark);
+    letter-spacing: 0.08em;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    white-space: nowrap;
+  }
+  .hero h1 .char {
+    display: inline-block;
+    margin: 0 2px;
+  }
+  @media (min-width: 640px) {
+    .hero h1 { letter-spacing: 0.15em; }
+    .hero h1 .char { margin: 0 6px; }
+  }
+  .hero .subtitle {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--ink-mid);
+    letter-spacing: 0.2em;
+    margin-bottom: 32px;
+  }
+  .hero .quote {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--gold-main);
+    font-size: 1.15rem;
+    max-width: 580px;
+    margin: 0 auto 48px;
+    line-height: 2;
+    letter-spacing: 0.05em;
+  }
+  .hero .status-strip {
+    display: inline-flex;
+    gap: 24px;
+    padding: 16px 32px;
+    border: 1px solid var(--gold-deep);
+    border-radius: 2px;
+    background: rgba(42,26,24,0.6);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .status-strip .item {
+    text-align: left;
+    min-width: 110px;
+  }
+  .status-strip .label {
+    font-size: 1rem;
+    color: var(--ink-mid);
+    letter-spacing: 0.15em;
+    margin-bottom: 4px;
+  }
+  .status-strip .value {
+    font-family: var(--font-display);
+    color: var(--gold-main);
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  /* ===== Section Headers ===== */
+  .section-header {
+    margin-bottom: 40px;
+    position: relative;
+  }
+  .section-header .num {
+    font-family: var(--font-display);
+    color: var(--gold-deep);
+    font-size: 1rem;
+    letter-spacing: 0.3em;
+    margin-bottom: 8px;
+  }
+  .section-header h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    color: var(--ink-dark);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
+  }
+  .section-header .lead {
+    color: var(--ink-mid);
+    max-width: 760px;
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+  .section-header .lead + .lead {
+    margin-top: 12px;
+  }
+
+  /* ===== 副本概覽（卷軸樣式）===== */
+  .scroll-card {
+    background: var(--paper-card);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--gold-main);
+    padding: 32px;
+    margin: 24px 0;
+  }
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+  }
+  .overview-grid .cell {
+    border-left: 1px solid var(--line);
+    padding-left: 16px;
+  }
+  .overview-grid .cell:first-child { border-left: none; padding-left: 0; }
+  .cell .term {
+    font-family: var(--font-display);
+    color: var(--gold-deep);
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 6px;
+  }
+  .cell .desc {
+    color: var(--ink-dark);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* ===== 基礎觀念（新手）===== */
+  .concept-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-top: 24px;
+  }
+
+  /* details/summary 摺疊樣式 */
+  details.basics-toggle {
+    margin: 0;
+  }
+  details.basics-toggle > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0;
+    user-select: none;
+  }
+  details.basics-toggle > summary::-webkit-details-marker {
+    display: none;
+  }
+  details.basics-toggle > summary .toggle-icon {
+    display: inline-block;
+    margin-left: 12px;
+    font-size: 1.2rem;
+    color: var(--gold-main);
+    transition: transform 0.25s ease;
+    transform: rotate(0deg);
+  }
+  details.basics-toggle[open] > summary .toggle-icon {
+    transform: rotate(180deg);
+  }
+  details.basics-toggle > summary:hover h2 {
+    color: var(--gold-deep);
+  }
+  details.basics-toggle > summary h2 {
+    transition: color 0.2s;
+  }
+  .concept-card {
+    background: var(--paper-card);
+    border: 1px solid var(--line);
+    padding: 24px;
+    transition: border-color 0.2s;
+  }
+  .concept-card:hover { border-color: var(--gold-deep); }
+  .concept-card .term {
+    font-family: var(--font-display);
+    color: var(--gold-main);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: 0.08em;
+  }
+  .concept-card .romaji {
+    color: var(--ink-mid);
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    margin-bottom: 12px;
+    font-family: var(--font-mono);
+  }
+  .concept-card .body { font-size: 1.05rem; color: var(--ink-dark); line-height: 1.8; }
+  .concept-card .body strong { color: var(--gold-main); font-weight: 600; }
+
+  /* ===== 招式卡 ===== */
+  .move-card {
+    background: var(--paper-card);
+    border: 1px solid var(--line);
+    margin: 32px 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .move-card.danger-high { border-left: 3px solid var(--red-warn); }
+  .move-card.danger-mid { border-left: 3px solid var(--gold-main); }
+  .move-card.danger-low { border-left: 3px solid var(--green-safe); }
+
+  .move-card .header {
+    padding: 20px 28px;
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--line);
+  }
+  .move-card .move-num {
+    font-family: var(--font-display);
+    color: var(--gold-main);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    min-width: 40px;
+    line-height: 1;
+  }
+  .move-card .move-name {
+    font-family: var(--font-display);
+    color: var(--ink-dark);
+    font-size: 1.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-right: auto;
+  }
+  .move-card .danger-tag {
+    font-size: 1rem;
+    padding: 5px 12px;
+    border-radius: 2px;
+    letter-spacing: 0.15em;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+  }
+  .danger-tag.high { background: rgba(170,0,55,0.15); color: var(--red-warn); border: 1px solid var(--red-warn); }
+  .danger-tag.mid { background: rgba(167,123,58,0.12); color: var(--gold-main); border: 1px solid var(--gold-deep); }
+  .danger-tag.low { background: rgba(40,180,14,0.12); color: var(--green-safe); border: 1px solid var(--green-safe); }
+
+  .move-card .body {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 0;
+  }
+  @media (max-width: 720px) {
+    .move-card .body { grid-template-columns: 1fr; }
+  }
+  .move-card .text-side {
+    padding: 32px 36px;
+  }
+  .move-card .visual-side {
+    padding: 32px;
+    background: var(--paper-base);
+    border-left: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  @media (max-width: 720px) {
+    .move-card .visual-side { 
+      border-left: none; 
+      border-top: 1px solid var(--line);
+      padding: 16px 12px; 
+    }
+    .move-card .text-side {
+      padding: 24px 20px;
+    }
+    main {
+      padding: 0 12px;
+    }
+}
+  .move-card h4 {
+    font-family: var(--font-display);
+    color: var(--gold-main);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    margin-bottom: 10px;
+    margin-top: 20px;
+  }
+  .move-card h4:first-child { margin-top: 0; }
+  .move-card p, .move-card li {
+    font-size: 1.05rem;
+    color: var(--ink-dark);
+    line-height: 1.8;
+  }
+  .move-card ul, .move-card ol {
+    padding-left: 22px;
+    margin: 8px 0;
+  }
+  .move-card li { margin-bottom: 6px; }
+  .move-card .visual-side svg { width: 100%; height: auto; min-height: 280px; }
+.move-card .visual-caption {
+    margin-top: 12px;
+    color: var(--ink-mid);
+    font-size: 1rem;
+    font-style: italic;
+    text-align: center;
+  }
+
+  /* ===== 重點口訣 ===== */
+  .mantra {
+    background: linear-gradient(135deg, var(--paper-card) 0%, rgba(167,123,58,0.06) 100%);
+    border: 1px solid var(--gold-deep);
+    padding: 32px;
+    margin: 40px 0;
+    text-align: center;
+  }
+  .mantra .label {
+    font-family: var(--font-display);
+    color: var(--gold-deep);
+    font-size: 1rem;
+    letter-spacing: 0.4em;
+    margin-bottom: 16px;
+  }
+  .mantra .text {
+    font-family: var(--font-display);
+    color: var(--gold-main);
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    letter-spacing: 0.3em;
+    font-weight: 600;
+  }
+
+  /* ===== 表格（首領天賦）===== */
+  .talent-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 1rem;
+  }
+  .talent-table th, .talent-table td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  .talent-table th {
+    background: var(--paper-card);
+    color: var(--gold-main);
+    font-family: var(--font-display);
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .talent-table tr:hover td { background: rgba(167,123,58,0.05); }
+  .talent-table .id {
+    font-family: var(--font-mono);
+    color: var(--gold-deep);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .talent-table td:nth-child(2) { color: var(--ink-dark); font-weight: 500; }
+  .talent-table td:nth-child(3) { color: var(--ink-dark); }
+
+  /* ===== 隊伍配置 ===== */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .role-card {
+    background: var(--paper-card);
+    border: 1px solid var(--line);
+    padding: 24px;
+    text-align: center;
+  }
+  .role-card .role-icon {
+    width: 56px; height: 56px;
+    margin: 0 auto 16px;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--gold-deep);
+    border-radius: 50%;
+    color: var(--gold-main);
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+  .role-card .role-name {
+    font-family: var(--font-display);
+    color: var(--ink-dark);
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+  .role-card .role-count {
+    color: var(--gold-main);
+    font-size: 1rem;
+    margin-bottom: 12px;
+    font-family: var(--font-mono);
+  }
+  .role-card .role-desc {
+    font-size: 1rem;
+    color: var(--ink-mid);
+    line-height: 1.7;
+  }
+
+  /* ===== Callout (提醒框) ===== */
+  .callout {
+    padding: 18px 22px;
+    margin: 18px 0;
+    border-left: 3px solid var(--blue-mech);
+    background: rgba(0,229,255,0.12);
+    font-size: 1rem;
+    color: var(--ink-dark);
+    line-height: 1.85;
+  }
+  .callout.warn { border-left-color: var(--red-warn); background: rgba(255,0,80,0.12); }
+  .callout.tip { border-left-color: var(--green-safe); background: rgba(57,255,20,0.12); }
+  .callout .tag {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--gold-main);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+  .callout.warn .tag { color: var(--red-warn); }
+  .callout.tip .tag { color: var(--green-safe); }
+
+  /* ===== 參考來源 ===== */
+  .ref-list { list-style: none; }
+  .ref-list li {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .ref-list .ref-source {
+    font-family: var(--font-display);
+    color: var(--gold-main);
+    font-size: 1.05rem;
+    letter-spacing: 0.05em;
+    min-width: 130px;
+  }
+  .ref-list .ref-title { color: var(--ink-dark); flex: 1; min-width: 220px; font-size: 1rem; }
+  .ref-list .ref-author { color: var(--ink-mid); font-size: 1rem; }
+  .ref-list a { color: inherit; text-decoration: underline; text-decoration-color: var(--gold-deep); text-underline-offset: 3px; }
+  .ref-list a:hover { color: var(--gold-main); }
+
+  /* ===== 不夜京品牌 ===== */
+  /* Nav 左側：社群印記 + 攻略標題 */
+  .brand-cluster {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .brand-cluster .symbol {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 6px rgba(255, 0, 80, 0.35));
+  }
+  .brand-cluster .symbol:hover,
+  .brand-cluster .wordmark-mini:hover {
+    filter: drop-shadow(0 0 12px rgba(255, 0, 80, 0.55));
+    transition: filter 0.3s ease;
+  }
+  .brand-cluster .wordmark-mini {
+    height: 40px;
+    width: auto;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 6px rgba(255, 0, 80, 0.35));
+    transition: filter 0.3s ease;
+  }
+  .brand-cluster .divider {
+    width: 1px;
+    height: 32px;
+    background: var(--gold-deep);
+    opacity: 0.5;
+    flex-shrink: 0;
+  }
+  .brand-cluster .guide-name {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--gold-main);
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    line-height: 1;
+  }
+  /* 手機版：保留 symbol + wordmark，去除分隔線並縮小攻略名 */
+  @media (max-width: 520px) {
+    .brand-cluster { gap: 10px; }
+    .brand-cluster .symbol { width: 32px; height: 32px; }
+    .brand-cluster .wordmark-mini { height: 30px; }
+    .brand-cluster .divider { display: none; }
+    .brand-cluster .guide-name { font-size: 1rem; }
+  }
+
+  /* Footer 不夜京 wordmark 區段 */
+  .footer-brand {
+    padding: 56px 24px 16px;
+    text-align: center;
+    border-top: 1px solid var(--line);
+  }
+  .footer-brand .wordmark {
+    display: inline-block;
+    max-width: 280px;
+    width: 60%;
+    height: auto;
+    margin-bottom: 18px;
+    /* 在深底上加微弱發光，呼應「不夜京」夜中明燈意象 */
+    filter: drop-shadow(0 0 14px rgba(255, 0, 80, 0.25));
+  }
+  .footer-brand .society-tag {
+    font-family: var(--font-display);
+    color: var(--ink-mid);
+    font-size: 1rem;
+    letter-spacing: 0.4em;
+    margin-bottom: 4px;
+  }
+  .footer-brand .society-sub {
+    font-family: var(--font-display);
+    color: var(--gold-deep);
+    font-size: 0.9rem;
+    letter-spacing: 0.3em;
+    opacity: 0.8;
+  }
+
+  /* ===== 頁尾 ===== */
+  footer {
+    padding: 40px 24px 32px;
+    text-align: center;
+    color: var(--ink-mid);
+    font-size: 1rem;
+  }
+  footer .ornament {
+    font-family: var(--font-display);
+    color: var(--gold-deep);
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+    letter-spacing: 0.4em;
+  }
+  footer .meta { margin-bottom: 8px; }
+  footer .disclaimer {
+    margin-top: 16px;
+    font-size: 1rem;
+    color: var(--line);
+    color: var(--ink-mid);
+    opacity: 0.7;
+    max-width: 600px;
+    margin-left: auto; margin-right: auto;
+    line-height: 1.7;
+  }
+
+  /* ===== 通用 ===== */
+  .text-gold { color: var(--gold-main); }
+  .text-red { color: var(--red-warn); }
+  .text-green { color: var(--green-safe); }
+  .text-blue { color: var(--blue-mech); }
+
+  /* SVG 通用樣式 */
+  svg text {
+    font-family: var(--font-body);
+    fill: var(--ink-dark);
+  }
+
+  /* 滾動條 */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--paper-base); }
+  ::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 4px; }
+
+  /* 動畫 */
+  @media (prefers-reduced-motion: no-preference) {
+    .pulse-light {
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.9; }
+      50% { opacity: 0.4; }
+    }
+  }
+
+  /* ===== Cyber 強化（方案 B 賽博武俠融合） ===== */
+
+  /* Nav 底邊霓虹漸層 + 微光暈 */
+  nav.topbar {
+    border-bottom: none;
+  }
+  nav.topbar::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, #00E5FF 30%, #BF00FF 70%, transparent 100%);
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    pointer-events: none;
+  }
+
+  /* LOGO 光暈強化 */
+  .brand-cluster .symbol {
+    filter: drop-shadow(0 0 8px rgba(255, 0, 80, 0.55));
+  }
+  .brand-cluster .wordmark-mini {
+    filter: drop-shadow(0 0 8px rgba(255, 0, 80, 0.55));
+  }
+  .brand-cluster .symbol:hover,
+  .brand-cluster .wordmark-mini:hover {
+    filter: drop-shadow(0 0 14px rgba(255, 0, 80, 0.85));
+  }
+
+  /* Hero 標題金光 */
+  .hero h1 {
+    text-shadow: 0 0 32px rgba(212, 166, 104, 0.25);
+  }
+
+  /* Section header h2 下方霓虹底線 */
+  .section-header h2 {
+    display: inline-block;
+    position: relative;
+    padding-bottom: 10px;
+  }
+  .section-header h2::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 72px;
+    height: 2px;
+    background: linear-gradient(90deg, #00E5FF, #BF00FF);
+    box-shadow: 0 0 8px rgba(0, 229, 255, 0.6);
+  }
+
+  /* 招式卡 danger 等級邊框光暈 */
+  .move-card.danger-high {
+    box-shadow: -2px 0 20px rgba(255, 0, 80, 0.3);
+  }
+  .move-card.danger-mid {
+    box-shadow: -2px 0 14px rgba(212, 166, 104, 0.18);
+  }
+  .move-card.danger-low {
+    box-shadow: -2px 0 18px rgba(57, 255, 20, 0.22);
+  }
+
+  /* danger-tag 文字發光 */
+  .danger-tag.high {
+    text-shadow: 0 0 6px rgba(255, 0, 80, 0.7);
+    box-shadow: 0 0 10px rgba(255, 0, 80, 0.35);
+  }
+  .danger-tag.mid {
+    text-shadow: 0 0 4px rgba(212, 166, 104, 0.5);
+  }
+  .danger-tag.low {
+    text-shadow: 0 0 6px rgba(57, 255, 20, 0.65);
+    box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+  }
+
+  /* Callout 邊框光暈 */
+  .callout.warn {
+    box-shadow: -2px 0 12px rgba(255, 0, 80, 0.22);
+  }
+  .callout.tip {
+    box-shadow: -2px 0 12px rgba(57, 255, 20, 0.22);
+  }
+
+  /* 滾動條霓虹色 */
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #00E5FF, #BF00FF);
+    box-shadow: 0 0 6px rgba(0, 229, 255, 0.5);
+  }
+
+  /* Nav 連結 hover 改為霓虹青 */
+  nav.topbar a:hover {
+    color: #00E5FF;
+    text-shadow: 0 0 8px rgba(0, 229, 255, 0.7);
+  }
+
+  /* Footer wordmark 紅+紫雙色發光 */
+  .footer-brand .wordmark {
+    filter: drop-shadow(0 0 14px rgba(255, 0, 80, 0.4)) drop-shadow(0 0 28px rgba(191, 0, 255, 0.22));
+  }
+
+  /* 內文強調色字體微光 */
+  .text-red { text-shadow: 0 0 6px rgba(255, 0, 80, 0.45); }
+  .text-blue { text-shadow: 0 0 6px rgba(0, 229, 255, 0.45); }
+  .text-green { text-shadow: 0 0 6px rgba(57, 255, 20, 0.45); }
+
+</style>
+</head>
+<body>
+
+<!-- ============== 頂部導覽 ============== -->
+<nav class="topbar">
+  <div class="inner">
+    <div class="brand-cluster">
+      <img class="symbol" src="data:image/png;base64,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" alt="不夜京社徽">
+      <img class="wordmark-mini" src="data:image/png;base64,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" alt="不夜京">
+      <span class="divider"></span>
+      <span class="guide-name">白駒飛霞</span>
+    </div>
+    <ul>
+      <li><a href="#basics">新手必讀</a></li>
+      <li><a href="#boss1">壹 · 舞馬人</a></li>
+      <li><a href="#boss2">貳 · 馮如之</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>
+    <span class="char">白</span>
+    <span class="char">駒</span>
+    <span class="char">飛</span>
+    <span class="char">霞</span>
+  </h1>
+  <p class="quote">
+    「白駒踏風隙，飛霞落晴川。」
+  </p>
+  <div class="status-strip">
+    <div class="item">
+      <div class="label">隊伍人數</div>
+      <div class="value">5 人</div>
+    </div>
+    <div class="item">
+      <div class="label">副本等級</div>
+      <div class="value">96 級 · 試劍五人鎮守</div>
+    </div>
+    <div class="item">
+      <div class="label">全天賦稱號</div>
+      <div class="value">「一劍可當萬師」</div>
+    </div>
+    <div class="item">
+      <div class="label">陸服上線</div>
+      <div class="value">2025/9 月底</div>
+    </div>
+    <div class="item">
+      <div class="label">國際服上線</div>
+      <div class="value">2.0「不見山」· 2026/7/23 起</div>
+    </div>
+  </div>
+</section>
+
+<main>
+
+<section id="basics">
+  <details class="basics-toggle" open>
+    <summary>
+      <div class="section-header" style="margin-bottom: 0;">
+        <div class="num">— 卷 之 一 —</div>
+        <h2>新手必讀 · 基礎觀念 <span class="toggle-icon">▼</span></h2>
+        <p class="lead">第一次打五人試劍的玩家先讀這段；老手可以摺疊跳到 BOSS 章節。</p>
+      </div>
+    </summary>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="term">試劍五人鎮守</div>
+        <div class="body">5 人副本 BOSS，機制多、容錯率低，講究每個人各司其職——五人本裡<strong>沒有人可以躺</strong>，任一人失誤都可能直接團滅。</div>
+      </div>
+
+      <div class="concept-card">
+        <div class="term">首領天賦</div>
+        <div class="body">每隻 BOSS 對應一棵<strong>解鎖式天賦樹</strong>。需要特別安排解法的是 <strong>1-1 至 2-3 共 6 項</strong>；3-1 至 3-3 正常通關即可完成。兩隻 BOSS 天賦全解可獲稱號<strong>「一劍可當萬師」</strong>。</div>
+      </div>
+
+      <div class="concept-card">
+        <div class="term">太極（本本核心）</div>
+        <div class="body">馮如之戰<span class="text-red">全員必帶太極</span>：反彈爆竹、反彈水波（飛龍在天）、反彈劍氣全靠它。<strong>階段尾聲別亂丟</strong>，CD 卡到團滅機制就沒救了。</div>
+      </div>
+
+      <div class="concept-card">
+        <div class="term">攻擊辨識</div>
+        <div class="body"><span class="text-red">紅光/紅圈</span>=可卸勢（按 <strong>E</strong>）；<span style="color:#FFE600">黃光/金圈</span>=必須躲開（不可卸）。本副本大量「<strong>多人同時卸勢</strong>」與「<strong>分散站位</strong>」判定，站位優先於輸出。</div>
+      </div>
+
+      <div class="concept-card">
+        <div class="term">必帶奇術</div>
+        <div class="body">全員：<strong>太極</strong>＋<strong>凌雲踏</strong>（被打飛快速回台）；逃課場加帶<strong>百鬼點穴手</strong>；推薦<strong>金玉手、流星墜火、騎龍回馬</strong>。<span class="text-red">逃課場不推薦簫吟千浪</span>（會誤殺要保留的小怪）。</div>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============== BOSS 1 舞馬人 ============== -->
+<section id="boss1">
+  <div class="section-header">
+    <div class="num">— 首 領 之 壹 —</div>
+    <h2>舞 馬 人</h2>
+    <p class="lead">白馬與舞者的雙體 BOSS。戰鬥分場中戰與<strong>「趕馬」迷宮追逐階段</strong>交替：場中處理毒爆、毒波、震地；追逐階段全隊堵路把白馬趕回中場，並利用場邊的<strong>草藥花</strong>回血。</p>
+    <p class="lead">應對思路：<strong>紅條技能引導與卸勢優先、堵路人數精簡（2 人夠）、氣竭時機嚴格控管</strong>。</p>
+  </div>
+
+  <div class="move-card danger-mid" id="move-dubao">
+    <div class="header">
+      <div class="move-num">1</div>
+      <div class="move-name">毒爆</div>
+      <div class="danger-tag mid">三人紅圈 · 分散卸勢</div>
+    </div>
+    <div class="body">
+      <div class="text-side">
+        <h4>機制描述</h4>
+        <p>隨機點名 <strong>3 人紅圈</strong>。</p>
+
+        <h4>應對方法</h4>
+        <ul>
+          <li>被點名者先<strong>分散站位</strong>，避免圈重疊波及隊友</li>
+          <li>站定後<strong>同時卸勢</strong></li>
+        </ul>
+      </div>
+      <div class="visual-side">
+        <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+          <rect x="130" y="85" width="60" height="50" fill="#FF0050" opacity="0.25" stroke="#FF0050" stroke-width="2"/>
+          <text x="160" y="115" text-anchor="middle" fill="#FF0050" font-size="12" font-weight="bold">舞馬人</text>
+          <g>
+            <circle cx="60" cy="60" r="6" fill="#FF0050"/><circle cx="60" cy="60" r="18" fill="none" stroke="#FF0050" stroke-dasharray="3 3"/>
+            <circle cx="265" cy="65" r="6" fill="#FF0050"/><circle cx="265" cy="65" r="18" fill="none" stroke="#FF0050" stroke-dasharray="3 3"/>
+            <circle cx="160" cy="190" r="6" fill="#FF0050"/><circle cx="160" cy="190" r="18" fill="none" stroke="#FF0050" stroke-dasharray="3 3"/>
+          </g>
+          <text x="60" y="95" text-anchor="middle" fill="#39FF14" font-size="11">卸勢</text>
+          <text x="265" y="100" text-anchor="middle" fill="#39FF14" font-size="11">卸勢</text>
+          <text x="215" y="195" text-anchor="middle" fill="#39FF14" font-size="11">卸勢</text>
+        </svg>
+        <p class="visual-caption">三人拉開距離後同時卸勢</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="move-card danger-high" id="move-zhuizhu">
+    <div class="header">
+      <div class="move-num">2</div>
+      <div class="move-name">追逐階段（趕馬）</div>
+      <div class="danger-tag high">堵路 · 採花 · 天賦相關</div>
+    </div>
+    <div class="body">
+      <div class="text-side">
+        <h4>機制描述</h4>
+        <p>白馬跳進外圍迷宮四處衝刺，衝刺造成可卸勢的 AOE；每次衝刺後停下<strong>轉圈 AOE</strong>。玩法是<strong>堵住錯誤的路、留出正確的路</strong>，把馬趕回中場。</p>
+
+        <h4>應對方法</h4>
+        <ul>
+          <li><strong>最多 2 人堵路就夠</strong>（按防禦減傷），看好馬跑的方向堵其他岔路</li>
+          <li>其餘人去外場<strong>採草藥花回血</strong>——這是設計上的正解，不是摸魚</li>
+          <li>擋馬期間出<span class="text-red">紅線</span>就卸勢；轉圈 AOE 由奶抬血</li>
+        </ul>
+      </div>
+      <div class="visual-side">
+        <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="20" width="280" height="180" fill="none" stroke="#4A2E2A" stroke-width="2"/>
+          <rect x="110" y="80" width="100" height="60" fill="rgba(57,255,20,0.08)" stroke="#39FF14" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <text x="160" y="114" text-anchor="middle" fill="#39FF14" font-size="11">中場(目標)</text>
+          <circle cx="45" cy="45" r="9" fill="rgba(255,0,80,0.4)" stroke="#FF0050" stroke-width="2"/>
+          <text x="45" y="34" text-anchor="middle" fill="#FF0050" font-size="11">馬</text>
+          <circle cx="150" cy="45" r="6" fill="#00E5FF"/>
+          <circle cx="45" cy="140" r="6" fill="#00E5FF"/>
+          <text x="150" y="34" text-anchor="middle" fill="#00E5FF" font-size="10">堵路1</text>
+          <text x="72" y="145" text-anchor="middle" fill="#00E5FF" font-size="10">堵路2</text>
+          <circle cx="270" cy="50" r="6" fill="#D4A668"/><text x="270" y="38" text-anchor="middle" fill="#D4A668" font-size="10">花</text>
+          <circle cx="270" cy="170" r="6" fill="#D4A668"/><text x="270" y="190" text-anchor="middle" fill="#D4A668" font-size="10">花</text>
+          <text x="255" y="115" text-anchor="middle" fill="#D4A668" font-size="10">其餘人採花回血</text>
+          <path d="M 55 55 Q 90 90 108 100" fill="none" stroke="#FF0050" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#arrB1)"/>
+          <defs><marker id="arrB1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#FF0050"/></marker></defs>
+        </svg>
+        <p class="visual-caption">2 人堵岔路把馬趕回中場，其餘人採花</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="move-card danger-mid" id="move-dubo">
+    <div class="header">
+      <div class="move-num">3</div>
+      <div class="move-name">毒波</div>
+      <div class="danger-tag mid">引導打斷 · 天賦相關</div>
+    </div>
+    <div class="body">
+      <div class="text-side">
+        <h4>機制描述</h4>
+        <p>白馬進行<strong>很長的蓄力讀條</strong>（前搖明顯，與震地區分）。舞馬人（舞者）固定出現在小場地<strong>四角的數字標點</strong>，開局固定在①點、之後隨機。</p>
+
+        <h4>應對方法</h4>
+        <ul>
+          <li>T（或被隨機點名者）把<span class="text-red">紅色直線 AOE</span> 引導<strong>覆蓋到舞馬人所在標點</strong>，可打斷蓄力</li>
+        </ul>
+      </div>
+      <div class="visual-side">
+        <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+          <rect x="30" y="30" width="260" height="160" fill="none" stroke="#4A2E2A" stroke-width="2"/>
+          <text x="48" y="52" fill="#B5A88E" font-size="11">①</text>
+          <text x="270" y="52" fill="#B5A88E" font-size="11">②</text>
+          <text x="48" y="180" fill="#B5A88E" font-size="11">④</text>
+          <text x="270" y="180" fill="#B5A88E" font-size="11">③</text>
+          <circle cx="62" cy="60" r="9" fill="rgba(191,0,255,0.4)" stroke="#BF00FF" stroke-width="2"/>
+          <text x="62" y="85" text-anchor="middle" fill="#BF00FF" font-size="10">舞馬人</text>
+          <circle cx="160" cy="150" r="9" fill="rgba(255,0,80,0.4)" stroke="#FF0050" stroke-width="2"/>
+          <text x="160" y="175" text-anchor="middle" fill="#FF0050" font-size="10">白馬蓄力</text>
+          <circle cx="230" cy="110" r="6" fill="#00E5FF"/>
+          <text x="252" y="114" fill="#00E5FF" font-size="10">T</text>
+          <polygon points="152,144 68,66 76,58 166,136" fill="rgba(255,0,80,0.2)" stroke="#FF0050" stroke-width="1"/>
+          <text x="118" y="120" text-anchor="middle" fill="#39FF14" font-size="11">直線覆蓋舞馬人=打斷</text>
+        </svg>
+        <p class="visual-caption">引導紅色直線壓在舞馬人標點上</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="move-card danger-mid" id="move-zhendi">
+    <div class="header">
+      <div class="move-num">4</div>
+      <div class="move-name">震地</div>
+      <div class="danger-tag mid">連續卸勢 · 天賦相關</div>
+    </div>
+    <div class="body">
+      <div class="text-side">
+        <h4>機制描述</h4>
+        <p>無讀條、可卸勢的<span class="text-red">紅色直線 AOE</span>，分「固定點名承傷 2 次」與「點名全員共 5 次」兩種。BOSS 去四周前與回中場後各<strong>砸地 4 下</strong>；回場後另有多段隨機紅條技能。</p>
+
+        <h4>應對方法</h4>
+        <ul>
+          <li>全團可卸勢規避傷害並<strong>削 BOSS 真氣</strong></li>
+          <li>直線範圍內<strong>只能站一人</strong>（天賦判定）</li>
+          <li>多段隨機紅條硬吃或卸勢皆可，傷害不高，但與天賦掛鉤</li>
+        </ul>
+      </div>
+      <div class="visual-side">
+        <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="160" cy="60" r="14" fill="rgba(255,0,80,0.4)" stroke="#FF0050" stroke-width="2"/>
+          <text x="160" y="40" text-anchor="middle" fill="#FF0050" font-size="11">白馬</text>
+          <polygon points="150,72 130,200 150,200" fill="rgba(255,0,80,0.18)" stroke="#FF0050" stroke-width="1"/>
+          <polygon points="170,72 190,200 210,200" fill="rgba(255,0,80,0.18)" stroke="#FF0050" stroke-width="1"/>
+          <circle cx="142" cy="180" r="6" fill="#39FF14"/>
+          <text x="142" y="212" text-anchor="middle" fill="#39FF14" font-size="10">1 線 1 人卸勢</text>
+          <circle cx="198" cy="180" r="6" fill="#39FF14"/>
+          <text x="240" y="212" text-anchor="middle" fill="#39FF14" font-size="10">別擠同一條線</text>
+        </svg>
+        <p class="visual-caption">直線內只站一人，各自卸勢</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="move-card danger-high" id="move-qijie">
+    <div class="header">
+      <div class="move-num">5</div>
+      <div class="move-name">氣竭時機（BUG 警告）</div>
+      <div class="danger-tag high">卡機制風險</div>
+    </div>
+    <div class="body">
+      <div class="text-side">
+        <h4>機制描述</h4>
+        <p>陸服上線初期存在 BUG：白馬結束追逐階段回中場時會<strong>回復真氣值</strong>；若在<span class="text-red">剛回中場時打進氣竭</span>，BOSS 會在中場進入無敵，卡死戰鬥。</p>
+
+        <h4>應對方法</h4>
+        <ul>
+          <li>能在 BOSS <strong>跑路前</strong>壓出氣竭 → 正常打</li>
+          <li>沒壓出來 → BOSS 剛回中場<strong>千萬別打進氣竭</strong>，先防禦停手，等紅條卸勢技能出來再打進氣竭</li>
+        </ul>
+
+        <div class="callout warn" style="margin-top:16px;">
+          <div class="tag">待驗證</div>
+          此為陸服 2025/9–10 月觀察到的狀況，國際服 2.0 上線時<strong>是否已修復未知</strong>。開荒週建議先照保守打法走。
+        </div>
+      </div>
+      <div class="visual-side">
+        <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+          <line x1="30" y1="110" x2="290" y2="110" stroke="#4A2E2A" stroke-width="2"/>
+          <circle cx="70" cy="110" r="8" fill="#39FF14"/>
+          <text x="70" y="85" text-anchor="middle" fill="#39FF14" font-size="10">跑路前氣竭 ✓</text>
+          <circle cx="160" cy="110" r="8" fill="#8A7A6A"/>
+          <text x="160" y="140" text-anchor="middle" fill="#8A7A6A" font-size="10">追逐階段</text>
+          <circle cx="235" cy="110" r="8" fill="#FF0050"/>
+          <text x="235" y="85" text-anchor="middle" fill="#FF0050" font-size="10">剛回場氣竭 ✗ 無敵BUG</text>
+          <text x="235" y="160" text-anchor="middle" fill="#39FF14" font-size="10">等紅條技能後再氣竭 ✓</text>
+        </svg>
+        <p class="visual-caption">回場瞬間停手，等技能出完再壓氣竭</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 舞馬人 天賦 -->
+  <div class="section-header" style="margin-top:56px;">
+    <div class="num">— 天 賦 之 壹 —</div>
+    <h2>舞馬人 · 首領天賦解法</h2>
+    <p class="lead">需要特別安排的 6 項（1-1 至 2-3）如下；3-1 至 3-3 正常通關即可完成。</p>
+  </div>
+
+  <table class="talent-table">
+    <thead>
+      <tr><th style="width:64px;">編號</th><th style="width:30%;">條件</th><th>解法</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="id">1-1</td>
+        <td>毒波：直線引導覆蓋舞馬人</td>
+        <td>舞馬人只出現在四角數字點，開局固定①點。開局固定點名承傷 2 次震地期間會讀條毒波，T 把紅色直線壓上①點；馬回場後第二、三次連續震地中途的毒波會<strong>隨機點名一人</strong>，被點者負責把直線引到舞馬人當前標點。</td>
+      </tr>
+      <tr>
+        <td class="id">1-2</td>
+        <td>成功卸勢 4 次馬的連續跳躍</td>
+        <td>在「追逐階段讀條」「回到場中讀條」「回場後第一次毒液讀條（點名全員小紅圈）」三個階段中<strong>任選其一</strong>完成 4 次卸勢即可，不用每段都拚。</td>
+      </tr>
+      <tr>
+        <td class="id">1-3</td>
+        <td>震地：直線範圍內只能一人</td>
+        <td>震地分「固定點名承傷 2 次」與「點名全員共 5 次」。回場後有 3 輪點名全員的連續震地（轉圈 AOE 後 / 大黃圈後 / 緊接第二輪之後）；第三輪期間夾一個毒波讀條——<span class="text-red">快氣竭時不要卸勢</span>，改停手、防禦或吐火。建議在第三輪的第一個點名時處理毒波。全程各自散開，直線不重疊。</td>
+      </tr>
+      <tr>
+        <td class="id">2-1</td>
+        <td>迷宮：卸勢魯莽衝鋒</td>
+        <td>馬進迷宮後<strong>堵住所有綠色箭頭路線</strong>，逼出「魯莽衝鋒」紅色直線讀條 AOE。注意<span class="text-red">只計入距離馬最近那個人的卸勢</span>——排最會卸的人站最前。</td>
+      </tr>
+      <tr>
+        <td class="id">2-2</td>
+        <td>迷宮期間觸發草藥花</td>
+        <td>迷宮期間場上陸續刷 4 朵花（極小機率 6 朵），上下半場各 2–3 朵；<strong>在受到持續 AOE 期間碰到花</strong>即可（治療效果要實際觸發，滿血碰花不算）。</td>
+      </tr>
+      <tr>
+        <td class="id">2-3</td>
+        <td>60 秒內結束趕馬 + 草藥治療觸發</td>
+        <td>馬起點固定在迷宮四角之一，盡量 <strong>3–4 次圍堵</strong>讓馬回場；分 2 人去上下半場撿草藥；用右上角副本剩餘時間監控 60 秒。若每次都在 60 秒內但天賦沒過，多半是草藥治療效果沒觸發——保險做法：追逐讀條期間<strong>不卸勢不奶</strong>，人群未滿血時一人碰第一朵花；之後轉圈 AOE 時交替觸發第 2–4 朵（上半場負責 1、3 花，下半場負責 2、4 花）。</td>
+      </tr>
+    </tbody>
+  </table>
+
+</section>
+
+<!-- ============== BOSS 2 馮如之 ============== -->
+<section id="boss2">
+  <div class="section-header">
+    <div class="num">— 首 領 之 貳 —</div>
+    <h2>馮 如 之</h2>
+    <p class="lead">赤龍堂堂主，在封丘村擂台上演「比武招親」。核心資源是<strong>繡球</strong>（仇恨綁定）與<strong>太極</strong>（所有反彈機制的鑰匙）。DPS 夠快、繡球找回及時可直接碾過；<span class="text-red">拖久了 BOSS 狂暴</span>，進入 90 秒盾與三連團滅機制。</p>
+    <p class="lead">應對思路：<strong>繡球不落地、太極省著用、狂暴三連（飛龍在天 → 赤龍斷水 → 潛龍在淵）背熟站位</strong>。</p>
+  </div>
+
+  <div class="move-card danger-low" id="move-biwu">
+    <div class="header">
+      <div class="move-num">1</div>
+      <div class="move-name">比武招親（擊飛）</div>
+      <div class="danger-tag low">回台</div>
+    </div>
+    <div class="body">
+      <div class="text-side">
+        <h4>機制描述</h4>
+        <p>多數技能會把玩家<strong>打飛出擂台</strong>。</p>
+
+        <h4>應對方法</h4>
+        <ul>
+          <li>用<strong>三段跳 / 凌雲踏</strong>儘快回到台中央</li>
+          <li>持球者可用<strong>百鬼</strong>直接躲掉擊飛（黃圈）</li>
+        </ul>
+      </div>
+      <div class="visual-side">
+        <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+          <rect x="70" y="60" width="180" height="110" fill="rgba(212,166,104,0.08)" stroke="#D4A668" stroke-width="2"/>
+          <text x="160" y="120" text-anchor="middle" fill="#D4A668" font-size="12">擂台</text>
+          <circle cx="290" cy="40" r="6" fill="#FFE600"/>
+          <path d="M 282 48 Q 240 80 200 100" fill="none" stroke="#39FF14" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#arrF1)"/>
+          <defs><marker id="arrF1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#39FF14"/></marker></defs>
+          <text x="285" y="25" text-anchor="middle" fill="#FFE600" font-size="10">被打飛</text>
+          <text x="255" y="95" text-anchor="middle" fill="#39FF14" font-size="10">凌雲踏回台</text>
+        </svg>
+        <p class="visual-caption">被打飛立刻位移回台，別在台下耗時間</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="move-card danger-mid" id="move-junzi">
+    <div class="header">
+      <div class="move-num">2</div>
+      <div class="move-name">君子好球（繡球仇恨）</div>
+      <div class="danger-tag mid">核心資源</div>
+    </div>
+    <div class="body">
+      <div class="text-side">
+        <h4>機制描述</h4>
+        <p>BOSS <strong>優先攻擊持繡球的玩家</strong>。繡球被擊飛會掉在柱子邊；長時間沒人持球，球會<strong>隨機轉移</strong>給一人。</p>
+
+        <h4>應對方法</h4>
+        <ul>
+          <li>承傷持球，把 BOSS 拉向固定一側</li>
+          <li>球掉落<strong>立刻二段跳去撿回</strong>——找球時間直接決定會不會進狂暴</li>
+        </ul>
+      </div>
+      <div class="visual-side">
+        <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+          <rect x="120" y="70" width="60" height="55" fill="#FF0050" opacity="0.25" stroke="#FF0050" stroke-width="2"/>
+          <text x="150" y="102" text-anchor="middle" fill="#FF0050" font-size="12" font-weight="bold">馮如之</text>
+          <circle cx="255" cy="100" r="7" fill="#00E5FF"/>
+          <circle cx="270" cy="88" r="6" fill="#FF00C8"/>
+          <text x="262" y="130" text-anchor="middle" fill="#00E5FF" font-size="10">承傷持球</text>
+          <path d="M 182 97 L 243 99" stroke="#FF0050" stroke-width="2" marker-end="url(#arrF2)"/>
+          <defs><marker id="arrF2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#FF0050"/></marker></defs>
+          <text x="150" y="180" text-anchor="middle" fill="#B5A88E" font-size="11">球掉柱邊 → 二段跳秒撿</text>
+          <text x="150" y="202" text-anchor="middle" fill="#FF0050" font-size="11">不撿會隨機轉移持有者</text>
+        </svg>
+        <p class="visual-caption">仇恨跟著繡球走，掉球就秒撿</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="move-card danger-mid" id="move-tangzhu">
+    <div class="header">
+      <div class="move-num">3</div>
+      <div class="move-name">堂主亦好球</div>
+      <div class="danger-tag mid">三人紅圈卸勢</div>
+    </div>
+    <div class="body">
+      <div class="text-side">
+        <h4>機制描述</h4>
+        <p>紅圈點名，需要 <strong>3 人同時在圈內卸勢</strong>；失敗則高傷覆蓋全場。</p>
+
+        <h4>應對方法</h4>
+        <ul>
+          <li>看到紅圈，就近 3 人進圈同時按 E</li>
+          <li>偶爾出現<strong>不需三人</strong>的紅圈：點中持球者就自己單獨卸勢；點中其他人，全隊離球遠一點即可</li>
+        </ul>
+      </div>
+      <div class="visual-side">
+        <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="160" cy="110" r="55" fill="rgba(255,0,80,0.12)" stroke="#FF0050" stroke-width="2.5"/>
+          <circle cx="140" cy="95" r="6" fill="#39FF14"/>
+          <circle cx="180" cy="100" r="6" fill="#39FF14"/>
+          <circle cx="160" cy="135" r="6" fill="#39FF14"/>
+          <text x="160" y="35" text-anchor="middle" fill="#FF0050" font-size="12">紅圈</text>
+          <text x="160" y="195" text-anchor="middle" fill="#39FF14" font-size="12">3 人同圈 · 同時卸勢</text>
+        </svg>
+        <p class="visual-caption">三人進圈同步按 E</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="move-card danger-mid" id="move-qunlong">
+    <div class="header">
+      <div class="move-num">4</div>
+      <div class="move-name">群龍舞首（爆竹）</div>
+      <div class="danger-tag mid">太極反彈</div>
+    </div>
+    <div class="body">
+      <div class="text-side">
+        <h4>機制描述</h4>
+        <p>繡球被擊飛 2 次後，柱子上出現<strong>小怪扔炮仗</strong>。</p>
+
+        <h4>應對方法</h4>
+        <ul>
+          <li>按<strong>太極</strong>瞄準小怪把爆竹扔回去（操作同道主扔老鼠）</li>
+          <li><span class="text-red">階段快結束就別再扔</span>——太極進 CD 會卡到後面的飛龍在天</li>
+        </ul>
+      </div>
+      <div class="visual-side">
+        <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+          <rect x="60" y="40" width="16" height="70" fill="rgba(212,166,104,0.3)" stroke="#D4A668" stroke-width="1.5"/>
+          <circle cx="68" cy="32" r="8" fill="rgba(255,0,80,0.4)" stroke="#FF0050" stroke-width="1.5"/>
+          <text x="68" y="130" text-anchor="middle" fill="#D4A668" font-size="10">柱上小怪</text>
+          <circle cx="220" cy="120" r="7" fill="#39FF14"/>
+          <text x="220" y="148" text-anchor="middle" fill="#39FF14" font-size="10">太極反彈</text>
+          <path d="M 80 45 Q 150 70 210 112" fill="none" stroke="#FF0050" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arrF3)"/>
+          <path d="M 208 108 Q 150 55 84 36" fill="none" stroke="#00E5FF" stroke-width="2" marker-end="url(#arrF4)"/>
+          <defs>
+            <marker id="arrF3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#FF0050"/></marker>
+            <marker id="arrF4" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#00E5FF"/></marker>
+          </defs>
+          <text x="160" y="195" text-anchor="middle" fill="#B5A88E" font-size="11">尾聲留太極，別空 CD</text>
+        </svg>
+        <p class="visual-caption">太極把爆竹丟回柱上小怪</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="move-card danger-high" id="move-feilong">
+    <div class="header">
+      <div class="move-num">5</div>
+      <div class="move-name">飛龍在天（狂暴後）</div>
+      <div class="danger-tag high">團滅機制 · 全員太極</div>
+    </div>
+    <div class="body">
+      <div class="text-side">
+        <h4>機制描述</h4>
+        <p>狂暴後 BOSS 上天並附帶 <strong>90 秒盾</strong>（主要靠卸勢打碎）。先是 5 人分散防禦各自的<span style="color:#FFE600">單人黃圈</span> → 集合卸勢紅圈 → BOSS 上天放<strong>水波 / 劍氣</strong>。</p>
+
+        <h4>應對方法</h4>
+        <ul>
+          <li><strong>5 人分散站位</strong>，各站對應柱子下的黃圈中</li>
+          <li>按<strong>太極</strong>、準心瞄 BOSS，把水波 / 劍氣反彈回去</li>
+          <li><span class="text-red">任一人失誤＝團滅</span>；判定寬鬆，第一道水波出現就可以提前按</li>
+        </ul>
+      </div>
+      <div class="visual-side">
+        <svg viewBox="0 0 360 260" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="180" cy="55" r="18" fill="rgba(255,0,80,0.3)" stroke="#FF0050" stroke-width="2"/>
+          <text x="180" y="60" text-anchor="middle" fill="#FF0050" font-size="11">BOSS上天</text>
+          <g fill="#39FF14">
+            <circle cx="60" cy="180" r="7"/><circle cx="120" cy="205" r="7"/><circle cx="180" cy="215" r="7"/><circle cx="240" cy="205" r="7"/><circle cx="300" cy="180" r="7"/>
+          </g>
+          <g stroke="#00E5FF" stroke-width="1.5" stroke-dasharray="4 3">
+            <line x1="168" y1="66" x2="66" y2="172"/><line x1="174" y1="70" x2="124" y2="197"/><line x1="180" y1="73" x2="180" y2="206"/><line x1="186" y1="70" x2="236" y2="197"/><line x1="192" y1="66" x2="294" y2="172"/>
+          </g>
+          <text x="180" y="245" text-anchor="middle" fill="#39FF14" font-size="12">5 人各守一柱黃圈 · 太極反彈</text>
+        </svg>
+        <p class="visual-caption">一人一圈一太極，缺一不可</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="move-card danger-high" id="move-chilong">
+    <div class="header">
+      <div class="move-num">6</div>
+      <div class="move-name">赤龍斷水</div>
+      <div class="danger-tag high">金圈 → 大紅圈救人</div>
+    </div>
+    <div class="body">
+      <div class="text-side">
+        <h4>機制描述</h4>
+        <p>5 人被點名<span style="color:#FFE600">金圈</span>；<strong>最後一個被擊中的人</strong>會被壓制並生成<span class="text-red">大紅圈</span>。</p>
+
+        <h4>應對方法</h4>
+        <ul>
+          <li>金圈階段全員<strong>先分散</strong></li>
+          <li>大紅圈出現後，其他人<strong>過去協力卸勢救人</strong>——沒人卸勢幾乎必團滅</li>
+        </ul>
+      </div>
+      <div class="visual-side">
+        <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+          <g>
+            <circle cx="55" cy="55" r="12" fill="none" stroke="#FFE600" stroke-width="2"/>
+            <circle cx="140" cy="40" r="12" fill="none" stroke="#FFE600" stroke-width="2"/>
+            <circle cx="230" cy="55" r="12" fill="none" stroke="#FFE600" stroke-width="2"/>
+            <circle cx="280" cy="120" r="12" fill="none" stroke="#FFE600" stroke-width="2"/>
+          </g>
+          <circle cx="120" cy="150" r="38" fill="rgba(255,0,80,0.15)" stroke="#FF0050" stroke-width="2.5"/>
+          <circle cx="120" cy="150" r="6" fill="#FFE600"/>
+          <text x="120" y="115" text-anchor="middle" fill="#FF0050" font-size="11">最後被擊中者 · 大紅圈</text>
+          <path d="M 220 160 L 165 155" stroke="#39FF14" stroke-width="2" marker-end="url(#arrF5)"/>
+          <defs><marker id="arrF5" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#39FF14"/></marker></defs>
+          <text x="245" y="180" text-anchor="middle" fill="#39FF14" font-size="11">全隊來卸勢救</text>
+        </svg>
+        <p class="visual-caption">金圈散開，大紅圈全隊回頭救</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="move-card danger-high" id="move-qianlong">
+    <div class="header">
+      <div class="move-num">7</div>
+      <div class="move-name">潛龍在淵</div>
+      <div class="danger-tag high">跳柱 → 下柱卸勢</div>
+    </div>
+    <div class="body">
+      <div class="text-side">
+        <h4>機制描述</h4>
+        <p>大範圍金圈團滅 AOE，之後緊接紅光。</p>
+
+        <h4>應對方法</h4>
+        <ul>
+          <li><strong>分散跳上不同柱子</strong>躲 AOE——多人擠同柱會把隊友擠下去</li>
+          <li>AOE 結束<strong>立即下柱</strong>，全隊協力卸勢紅光，慢了會被秒</li>
+        </ul>
+      </div>
+      <div class="visual-side">
+        <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="150" width="320" height="70" fill="rgba(255,0,80,0.15)"/>
+          <text x="160" y="195" text-anchor="middle" fill="#FF0050" font-size="11">地面 AOE ✗</text>
+          <g>
+            <rect x="40" y="70" width="16" height="80" fill="rgba(212,166,104,0.3)" stroke="#D4A668" stroke-width="1.5"/>
+            <rect x="110" y="60" width="16" height="90" fill="rgba(212,166,104,0.3)" stroke="#D4A668" stroke-width="1.5"/>
+            <rect x="190" y="60" width="16" height="90" fill="rgba(212,166,104,0.3)" stroke="#D4A668" stroke-width="1.5"/>
+            <rect x="264" y="70" width="16" height="80" fill="rgba(212,166,104,0.3)" stroke="#D4A668" stroke-width="1.5"/>
+          </g>
+          <g fill="#39FF14">
+            <circle cx="48" cy="60" r="6"/><circle cx="118" cy="50" r="6"/><circle cx="198" cy="50" r="6"/><circle cx="272" cy="60" r="6"/>
+          </g>
+          <text x="160" y="30" text-anchor="middle" fill="#39FF14" font-size="11">一人一柱 · AOE 完立刻下來卸紅光</text>
+        </svg>
+        <p class="visual-caption">分柱躲 AOE，下柱同步卸勢</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-card" style="margin-top:40px;">
+    <h3 style="font-family: var(--font-display); color: var(--ink-dark); font-size: 1.2rem; margin-bottom: 12px;">逃課打法（卡掉狂暴 · 同時解天賦 2-3）</h3>
+    <p style="color: var(--ink-mid); line-height: 1.9;">
+      核心是「<strong>保留小怪維持逃課條件＋精準逃兩次黃光</strong>」，全程約 8 分鐘：<br>
+      ① 全員<span class="text-red">禁吹簫</span>，保留左側三隻小怪（只控血、不擊殺）<br>
+      ② 承傷拿繡球，把馮如之往<strong>右邊</strong>拉，其餘人輸出<br>
+      ③ 紅光三人卸勢防拋飛；<strong>第一次黃光</strong>用點穴或百鬼逃——逃不掉沒關係，及時搶回繡球即可<br>
+      ④ <strong>第二次黃光</strong>（小怪黃光結束、BOSS 跳台柱後那次）<span class="text-red">必須逃掉</span>，用百鬼或流星墜火提高成功率；失敗建議直接重開<br>
+      ⑤ 扔爆竹，但<strong>保留一隻小怪不扔</strong>；多餘爆竹丟台下，奶盯緊奶量<br>
+      如此狂暴機制被卡掉，通關即解鎖<strong>天賦 2-3</strong>。
+    </p>
+  </div>
+
+  <!-- 馮如之 天賦 -->
+  <div class="section-header" style="margin-top:56px;">
+    <div class="num">— 天 賦 之 貳 —</div>
+    <h2>馮如之 · 首領天賦解法</h2>
+    <p class="lead">需要特別安排的為 1-1 至 2-3 共 6 項；3-1 至 3-3 正常通關即可完成。</p>
+  </div>
+
+  <table class="talent-table">
+    <thead>
+      <tr><th style="width:64px;">編號</th><th style="width:30%;">條件</th><th>解法</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="id">1-1 ～ 2-2</td>
+        <td><span style="color:#FFE600">待驗證</span></td>
+        <td>具體條件文字來源不足，待影片確認後補上（參考：佐助愛吃魚《一分鐘教完！馮如之全首領天賦》）。</td>
+      </tr>
+      <tr>
+        <td class="id">2-3</td>
+        <td>與狂暴機制相關</td>
+        <td>採用上方<strong>逃課打法</strong>卡掉狂暴後通關，即直接解鎖。正攻流也可解，但逃課是最穩路線。</td>
+      </tr>
+    </tbody>
+  </table>
+
+</section>
+
+</main>
+
+
+<div class="footer-brand">
+  <img class="wordmark" src="data:image/png;base64,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" alt="不夜京">
+  <div class="society-tag">燕雲十六聲 · 不夜京社</div>
+  <div class="society-sub">— 夜讀古籍 · 同道相聚 —</div>
+</div>
+
+<footer>
+  <div class="ornament">○ ◇ ○</div>
+  <div class="meta">攻略整理 · 飛霞卷</div>
+  <div class="meta">國際服 2.0「不見山」· 2026/7/23 起</div>
+</footer>
+
+<script>
+  // 滾動高亮當前章節
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav.topbar a');
+
+  function updateActiveNav() {
+    let current = '';
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= 100 && rect.bottom >= 100) {
+        current = section.id;
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.style.color = '';
+      if (link.getAttribute('href') === '#' + current) {
+        link.style.color = 'var(--gold-main)';
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveNav);
+  updateActiveNav();
+</script>
+
+</body>
+</html>
