@@ -892,7 +892,7 @@
   <div class="section-header">
     <div class="num">— 首 領 之 壹 —</div>
     <h2>迷 驛 舟</h2>
-    <p class="lead">沙海巨船 BOSS，分兩個性質完全不同的階段：<strong>一階段打迷驛舟本體</strong>（腳部火焰＋小怪破盾循環）；<strong>二階段反過來保護迷驛舟</strong>，與它並肩對抗心魔「吞天吐蕃力王」——<span class="text-red">迷驛舟死亡＝直接團滅</span>。</p>
+    <p class="lead">沙海巨船 BOSS，分兩個性質完全不同的階段：<strong>一階段打迷驛舟本體</strong>（腳部火焰＋小怪破盾循環）；<strong>二階段反過來保護迷驛舟</strong>，與它並肩對抗心魔「沙魔啟舟」——<span class="text-red">迷驛舟消失＝直接團滅</span>。</p>
     <p class="lead">應對思路：一階段<strong>統一集火同一隻腳、出火就換腳</strong>；二階段<strong>左右分隊清怪點月亮、沙嘯全員上樓頂</strong>。</p>
   </div>
 
@@ -1010,55 +1010,87 @@
     </div>
   </div>
 
-  <div class="move-card danger-high" id="move-yueliang">
+  <div class="move-card danger-high" id="move-shamo">
     <div class="header">
       <div class="move-num">4</div>
-      <div class="move-name">月亮寶箱（二階段核心）</div>
-      <div class="danger-tag high">破盾 · 保護迷驛舟</div>
+      <div class="move-name">沙魔啟舟（二階段核心）</div>
+      <div class="danger-tag high">月影 · 保護迷驛舟</div>
     </div>
     <div class="body">
       <div class="text-side">
         <h4>機制描述</h4>
-        <p>二階段與迷驛舟並肩打心魔<strong>「吞天吐蕃力王」</strong>。心魔初始<span class="text-red">免傷</span>；場上會出現<strong>月亮寶箱</strong>（一輪 3 個、周圍有守衛），點亮寶箱可給迷驛舟<strong>充能回血</strong>並破心魔免傷盾，使其變成可受擊的「吐蕃力王」。</p>
+        <p>二階段開始，撿滿 <strong>10 個月亮</strong>後開啟。此時要並肩打另一個心魔<strong>「沙魔啟舟」</strong>——<span class="text-red">迷驛舟消失＝團滅</span>。心魔初始<span class="text-red">免傷</span>；場上出現<strong>三處月影</strong>，擊敗月影並激活對應月亮，可使心魔變小、變成可受擊狀態。</p>
 
         <h4>應對方法</h4>
         <ul>
-          <li>全隊分<strong>左隊 / 右隊</strong>：左隊 AOE 清地面小怪；右隊上塔樓清怪、用<strong>弩箭</strong>處理船上的鳥（焚鴉）</li>
-          <li>小怪打死後<strong>點月亮</strong>；3 個月亮全點亮 → 心魔虛弱，全隊集火輸出</li>
-          <li>心魔回復免傷態後，再找下一輪寶箱，循環</li>
+          <li>全隊分<strong>三隊</strong>，面向心魔各打<strong>左 / 中 / 右</strong>一處月影；<span class="text-red">左隊需去射弩</span></li>
+          <li>三處月影全部擊敗並<strong>激活月亮</strong> → 心魔變小，全隊集火輸出</li>
+          <li>心魔透過「吞天之沙」再度變大後，重新分三隊打月影，循環</li>
           <li><span class="text-red">左隊禁吹簫</span>：小怪會從高台掉下去反而難打；右隊注意塔樓毒層數</li>
         </ul>
 
         <div class="callout warn" style="margin-top:16px;">
           <div class="tag">團滅點</div>
-          3 個月亮沒點齊就無法讓心魔虛弱，拖久了迷驛舟血量撐不住 → 團滅。<strong>迷驛舟死亡＝團滅</strong>，全程留意它的血條。
+          月影沒清完就無法讓心魔虛弱，拖久了迷驛舟撐不住 → 團滅。<strong>迷驛舟消失＝團滅</strong>，全程留意它的血條。
         </div>
       </div>
       <div class="visual-side">
         <svg viewBox="0 0 360 260" xmlns="http://www.w3.org/2000/svg">
           <rect x="140" y="30" width="80" height="50" fill="#FF0050" opacity="0.25" stroke="#FF0050" stroke-width="2"/>
-          <text x="180" y="60" text-anchor="middle" fill="#FF0050" font-size="12" font-weight="bold">吞天吐蕃力王</text>
-          <text x="180" y="95" text-anchor="middle" fill="#FF0050" font-size="11">免傷盾</text>
-          <rect x="140" y="115" width="80" height="35" fill="#00E5FF" opacity="0.15" stroke="#00E5FF" stroke-width="1.5"/>
-          <text x="180" y="137" text-anchor="middle" fill="#00E5FF" font-size="12">迷驛舟(保護)</text>
-          <circle cx="60" cy="200" r="13" fill="rgba(212,166,104,0.3)" stroke="#D4A668" stroke-width="2"/>
-          <text x="60" y="205" text-anchor="middle" fill="#D4A668" font-size="11">月</text>
-          <circle cx="180" cy="215" r="13" fill="rgba(212,166,104,0.3)" stroke="#D4A668" stroke-width="2"/>
-          <text x="180" y="220" text-anchor="middle" fill="#D4A668" font-size="11">月</text>
-          <circle cx="300" cy="200" r="13" fill="rgba(212,166,104,0.3)" stroke="#D4A668" stroke-width="2"/>
-          <text x="300" y="205" text-anchor="middle" fill="#D4A668" font-size="11">月</text>
-          <text x="60" y="240" text-anchor="middle" fill="#39FF14" font-size="11">左隊清怪</text>
-          <text x="300" y="240" text-anchor="middle" fill="#39FF14" font-size="11">右隊塔樓+弩</text>
-          <text x="180" y="248" text-anchor="middle" fill="#B5A88E" font-size="11">3 月全亮 → 心魔虛弱</text>
+          <text x="180" y="55" text-anchor="middle" fill="#FF0050" font-size="12" font-weight="bold">沙魔啟舟</text>
+          <text x="180" y="72" text-anchor="middle" fill="#FF0050" font-size="11">免傷 → 打月影變小</text>
+          <rect x="140" y="105" width="80" height="30" fill="#00E5FF" opacity="0.15" stroke="#00E5FF" stroke-width="1.5"/>
+          <text x="180" y="124" text-anchor="middle" fill="#00E5FF" font-size="12">迷驛舟(保護)</text>
+          <circle cx="60" cy="195" r="15" fill="rgba(191,0,255,0.25)" stroke="#BF00FF" stroke-width="2"/>
+          <text x="60" y="199" text-anchor="middle" fill="#BF00FF" font-size="11">月影</text>
+          <circle cx="180" cy="205" r="15" fill="rgba(191,0,255,0.25)" stroke="#BF00FF" stroke-width="2"/>
+          <text x="180" y="209" text-anchor="middle" fill="#BF00FF" font-size="11">月影</text>
+          <circle cx="300" cy="195" r="15" fill="rgba(191,0,255,0.25)" stroke="#BF00FF" stroke-width="2"/>
+          <text x="300" y="199" text-anchor="middle" fill="#BF00FF" font-size="11">月影</text>
+          <text x="60" y="232" text-anchor="middle" fill="#39FF14" font-size="11">左隊(射弩)</text>
+          <text x="180" y="238" text-anchor="middle" fill="#39FF14" font-size="11">中隊</text>
+          <text x="300" y="232" text-anchor="middle" fill="#39FF14" font-size="11">右隊</text>
+          <text x="180" y="253" text-anchor="middle" fill="#B5A88E" font-size="11">三月影全清 → 心魔虛弱</text>
         </svg>
-        <p class="visual-caption">一輪 3 個月亮寶箱，清守衛 → 點亮 → 集火心魔</p>
+        <p class="visual-caption">分三隊打左中右月影、激活月亮使心魔變小</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="move-card danger-mid" id="move-jingtian">
+    <div class="header">
+      <div class="move-num">5</div>
+      <div class="move-name">惊天骇浪</div>
+      <div class="danger-tag mid">三次衝擊波</div>
+    </div>
+    <div class="body">
+      <div class="text-side">
+        <h4>機制描述</h4>
+        <p>心魔戰期間釋放<strong>三次衝擊波</strong>。</p>
+
+        <h4>應對方法</h4>
+        <ul>
+          <li>每次衝擊波<strong>跳躍規避</strong>即可</li>
+          <li><span class="text-red">後續幾次不會再有預警</span>，看 BOSS 動作自己抓節奏連跳</li>
+        </ul>
+      </div>
+      <div class="visual-side">
+        <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+          <rect x="130" y="90" width="60" height="45" fill="#FF0050" opacity="0.25" stroke="#FF0050" stroke-width="2"/>
+          <text x="160" y="118" text-anchor="middle" fill="#FF0050" font-size="12" font-weight="bold">心魔</text>
+          <circle cx="160" cy="112" r="45" fill="none" stroke="#FF0050" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <circle cx="160" cy="112" r="72" fill="none" stroke="#FF0050" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.6"/>
+          <circle cx="160" cy="112" r="98" fill="none" stroke="#FF0050" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.35"/>
+          <text x="160" y="205" text-anchor="middle" fill="#39FF14" font-size="12">三波衝擊 · 各跳一次（後段無提示）</text>
+        </svg>
+        <p class="visual-caption">三次衝擊波連續跳躍規避</p>
       </div>
     </div>
   </div>
 
   <div class="move-card danger-mid" id="move-shadu">
     <div class="header">
-      <div class="move-num">5</div>
+      <div class="move-num">6</div>
       <div class="move-name">沙毒 / 焚鴉</div>
       <div class="danger-tag mid">層數管理</div>
     </div>
@@ -1093,7 +1125,7 @@
 
   <div class="move-card danger-high" id="move-shaxiao">
     <div class="header">
-      <div class="move-num">6</div>
+      <div class="move-num">7</div>
       <div class="move-name">沙嘯</div>
       <div class="danger-tag high">全場 AOE · 上高處</div>
     </div>
@@ -1132,7 +1164,7 @@
 
   <div class="move-card danger-mid" id="move-xiaza">
     <div class="header">
-      <div class="move-num">7</div>
+      <div class="move-num">8</div>
       <div class="move-name">下砸 / 吸人</div>
       <div class="danger-tag mid">位移應對</div>
     </div>
@@ -1219,14 +1251,9 @@
 <section id="boss2">
   <div class="section-header">
     <div class="num">— 首 領 之 貳 —</div>
-    <h2>把 戲 團</h2>
-    <p class="lead">雜耍戲班型 BOSS 戰，核心圍繞三件事：<strong>煙霧尖刺 → 雲台 → 破盾</strong>的循環、鑽<strong>火圈</strong>拿增傷、以及<strong>花球</strong>救人。台上另有小 BOSS（諸葛哈 / 慶輕輕）需要分隊處理。</p>
-    <p class="lead">建議分兩隊：一隊負責台上小 BOSS，一隊負責大 BOSS；有煙霧雲台時<strong>不要貪傷害、優先踩雲</strong>。</p>
-  </div>
-
-  <div class="callout warn" style="margin-bottom:28px;">
-    <div class="tag">待驗證</div>
-    文字來源對本戰敵人命名不一致（「缺口袋」「諸葛哈」「慶輕輕」的對應關係互相矛盾）。以下暫以「大 BOSS / 台上小 BOSS」描述，實際名稱待影片與遊戲內確認後替換。
+    <h2>缺 口 袋 把 戲 團</h2>
+    <p class="lead">雜耍戲班型 BOSS 戰，核心圍繞三件事：<strong>煙霧尖刺 → 雲台 → 破盾</strong>的循環、鑽<strong>火圈</strong>拿增傷、以及<strong>花球</strong>救人。台上有兩個小 BOSS：<strong>諸葛哈</strong>（會噴火）與<strong>慶輕輕</strong>（彈彈彈破盾）。</p>
+    <p class="lead">分兩隊：<strong>一隊打諸葛哈、一隊打慶輕輕</strong>；有煙霧雲台時<strong>不要貪傷害、優先踩雲</strong>。</p>
   </div>
 
   <div class="move-card danger-high" id="move-yanwu">
@@ -1352,6 +1379,7 @@
 
         <h4>應對方法</h4>
         <ul>
+          <li>手部巨大化時會丟<strong>三個花球（兩假一真）</strong>，可用<strong>噴火標記真球</strong>再集火</li>
           <li>其他人<strong>集火打破關人的花球</strong>，拖太久會炸團</li>
           <li>多花球階段：<strong>只打關人的那個</strong>，全團集合、不要被其他球炸到</li>
         </ul>
@@ -1383,10 +1411,45 @@
     <p class="lead">需要特別安排的為 1-1 至 2-3 共 6 項；3-1 至 3-3 正常通關即可完成。</p>
   </div>
 
-  <div class="callout warn">
-    <div class="tag">待驗證</div>
-    把戲團 6 項天賦的<strong>具體條件文字來源不足</strong>，僅確認兩點：①鑽火圈與天賦掛鉤 ②忽略台上小 BOSS 的速通打法無法解鎖對應天賦。合理推測條件集中在「鑽火圈」「雲台 / 台上小 BOSS 處理」「花球處理」三類機制。待影片確認後補上完整 6 項表格。
-  </div>
+  <table class="talent-table">
+    <thead>
+      <tr><th style="width:64px;">編號</th><th style="width:30%;">條件</th><th>解法</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="id">1-1</td>
+        <td>自身獲得 2 次火圈增益</td>
+        <td>火圈開始移動後鑽過去即得增益（buff 為火焰環繞圖示），累積 2 次。跟 1-3 一起做，指揮提前報火圈方位。</td>
+      </tr>
+      <tr>
+        <td class="id">1-2</td>
+        <td>自身煙霧繚繞層數 ≤4</td>
+        <td>煙霧層數過高時別硬站煙霧區；被點名放尖刺後快速離開，控制自身層數不超過 4。</td>
+      </tr>
+      <tr>
+        <td class="id">1-3</td>
+        <td>全隊火圈傷害 &lt;10 次 + 獲 20 次增益</td>
+        <td>進場在 4 個方位標點，變球、落生針後就是火圈，指揮提前看方位預告；同一個圈可多人跳，按隊伍順序提前排。正常速度 3 輪火圈、10 人最高拿 30 個增益、容錯 10。每次跳完沒吃到增益的人回報，累計失誤 &gt;10 就重開；吃滿 20+ 即完成。</td>
+      </tr>
+      <tr>
+        <td class="id">2-1</td>
+        <td>踩掉 2 個煙霧雲（以最後接觸者計數）</td>
+        <td>煙霧雲移動慢、接觸會疊 debuff。安排 1 人專門追蹤，等隊友遠離後再踩，確保自己是最後接觸者；踩完第一個等約 10 秒再踩第二個。</td>
+      </tr>
+      <tr>
+        <td class="id">2-2</td>
+        <td>用煙霧刺打斷慶輕輕「彈彈」</td>
+        <td>慶輕輕原地轉圈蓄力（身上粉紅光效）時，場地生成煙霧刺（黑色尖刺）。被點名者拾取煙霧刺，在蓄力結束前擲向慶輕輕打斷技能。近戰站技能範圍邊緣方便快速拾取投擲。</td>
+      </tr>
+      <tr>
+        <td class="id">2-3</td>
+        <td>煙霧旋風吸收煙霧 ≤3</td>
+        <td>旋風會主動追逐煙霧雲、每吸一個變大。旋風生成後派人限制其移動，同時其他人快速踩掉場上煙霧雲、不讓它吸到。旋風存在約 20 秒，控住即可達標。</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="color: var(--ink-light); font-size: 0.82rem; margin-top: 14px; line-height: 1.7;">＊把戲團 1-1、1-2、2-1、2-2、2-3 五項的完成條件目前僅單一文字來源，機制名詞與上方招式卡一致、內部自洽，但實際數值與判定<strong>建議進本再確認一次</strong>；1-3 另有 17173 一圖流獨立佐證。</p>
 
 </section>
 
