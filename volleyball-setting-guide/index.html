@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>排球舉球技術體系深度研究報告</title>
+<style>
+  :root{
+    --ink:#1a2632;          /* 主文字 深板岩藍 */
+    --ink-soft:#3f5163;     /* 次要文字 */
+    --muted:#6a7b8c;        /* 註解 */
+    --line:#dfe5ec;         /* 分隔線 */
+    --paper:#f5f7fa;        /* 頁面底 */
+    --card:#ffffff;         /* 卡片底 */
+    --accent:#1f6f8b;       /* 主色 力學藍 */
+    --accent-2:#2a9d8f;     /* 輔色 青綠(下肢/發力) */
+    --accent-3:#c76b3f;     /* 強調 陶橙(警示/重點) */
+    --accent-4:#5b6ea8;     /* 靛藍(戰術) */
+    --tint:#eaf1f4;         /* 主色淡底 */
+    --tint-2:#e7f2f0;       /* 青綠淡底 */
+    --tint-3:#f7ece5;       /* 陶橙淡底 */
+
+    --fs-h1:38px;
+    --fs-h2:27px;
+    --fs-h3:21px;
+    --fs-h4:18px;           /* 卡片/子區塊標題,仍大於內文 16px */
+    --fs-body:16px;
+    --fs-small:14px;
+
+    --maxw:860px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    font-size:var(--fs-body);
+    line-height:1.85;
+    letter-spacing:.01em;
+  }
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px 120px;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:64px 22px 40px;
+  }
+  .kicker{
+    display:inline-block;
+    font-size:var(--fs-small);
+    font-weight:700;
+    color:var(--accent);
+    letter-spacing:.06em;
+    padding:6px 14px;
+    background:var(--tint);
+    border-radius:100px;
+    margin-bottom:22px;
+  }
+  h1{
+    font-size:var(--fs-h1);
+    line-height:1.28;
+    margin:0 0 18px;
+    font-weight:800;
+    letter-spacing:.005em;
+  }
+  h1 .thin{color:var(--accent);}
+  .lede{
+    font-size:18px;
+    color:var(--ink-soft);
+    max-width:640px;
+    margin:0 0 8px;
+  }
+  .hero-meta{
+    margin-top:26px;
+    padding-top:22px;
+    border-top:1px solid var(--line);
+    display:flex;
+    flex-wrap:wrap;
+    gap:22px 40px;
+    font-size:var(--fs-small);
+    color:var(--muted);
+  }
+  .hero-meta b{color:var(--ink);font-weight:700;display:block;font-size:15px;margin-bottom:2px;}
+
+  /* 動力鏈視覺母題 */
+  .chain{
+    display:flex;align-items:center;gap:7px;flex-wrap:wrap;
+    margin:30px 0 4px;
+  }
+  .chain span{
+    font-size:13px;font-weight:600;color:var(--accent);
+    background:var(--tint);padding:5px 11px;border-radius:6px;
+  }
+  .chain span:nth-child(n+5){color:var(--accent-2);background:var(--tint-2);}
+  .chain .arw{background:none;color:var(--muted);padding:0 1px;font-weight:400;}
+
+  /* ---------- 區塊 ---------- */
+  section{margin-top:52px;}
+  h2{
+    font-size:var(--fs-h2);
+    font-weight:800;
+    line-height:1.35;
+    margin:0 0 6px;
+    padding-left:16px;
+    border-left:6px solid var(--accent);
+  }
+  .sec-tag{
+    font-size:var(--fs-small);
+    color:var(--muted);
+    padding-left:22px;
+    margin-bottom:26px;
+    display:block;
+  }
+  h3{
+    font-size:var(--fs-h3);
+    font-weight:750;
+    margin:38px 0 12px;
+    color:var(--ink);
+  }
+  h4{
+    font-size:var(--fs-h4);
+    font-weight:700;
+    margin:22px 0 8px;
+    color:var(--accent);
+  }
+  p{margin:0 0 15px;}
+  strong{font-weight:700;color:var(--ink);}
+  a{color:var(--accent);}
+
+  /* ---------- 卡片:左側粗色帶 ---------- */
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:7px solid var(--accent);
+    border-radius:10px;
+    padding:22px 26px;
+    margin:20px 0;
+    box-shadow:0 1px 3px rgba(26,38,50,.04);
+  }
+  .card > :first-child{margin-top:0;}
+  .card > :last-child{margin-bottom:0;}
+  .card .card-title{
+    font-size:var(--fs-h4);
+    font-weight:700;
+    margin:0 0 12px;
+    color:var(--ink);
+  }
+  .card.green{border-left-color:var(--accent-2);}
+  .card.green .card-title{color:var(--accent-2);}
+  .card.orange{border-left-color:var(--accent-3);}
+  .card.orange .card-title{color:var(--accent-3);}
+  .card.indigo{border-left-color:var(--accent-4);}
+  .card.indigo .card-title{color:var(--accent-4);}
+  .card.tint{background:var(--tint);border-color:#d5e2e8;}
+  .card.tint-green{background:var(--tint-2);border-color:#cfe6e1;}
+  .card.tint-orange{background:var(--tint-3);border-color:#ead8cb;}
+
+  /* TL;DR 三點 */
+  .tldr{margin:24px 0 8px;}
+  .tldr .card{margin:14px 0;}
+
+  /* Key findings 編號 */
+  ol.findings{list-style:none;counter-reset:kf;padding:0;margin:8px 0;}
+  ol.findings > li{
+    counter-increment:kf;
+    position:relative;
+    padding:16px 20px 16px 62px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:9px;
+    margin-bottom:12px;
+  }
+  ol.findings > li::before{
+    content:counter(kf,decimal-leading-zero);
+    position:absolute;left:20px;top:16px;
+    font-size:var(--fs-h4);
+    font-weight:800;
+    color:var(--accent);
+    font-variant-numeric:tabular-nums;
+  }
+
+  ul{margin:6px 0 15px;padding-left:22px;}
+  li{margin-bottom:8px;}
+  ul ul{margin:6px 0;}
+
+  /* 事實 / 判斷 標記 */
+  .tag{
+    display:inline-block;
+    font-size:12.5px;
+    font-weight:700;
+    padding:2px 9px;
+    border-radius:5px;
+    margin-right:6px;
+    vertical-align:1px;
+    letter-spacing:.02em;
+  }
+  .tag-fact{background:var(--tint);color:var(--accent);}
+  .tag-judge{background:var(--tint-3);color:var(--accent-3);}
+  .tag-econ{background:#ecedf5;color:var(--accent-4);}
+
+  /* ---------- 表格 ---------- */
+  .table-scroll{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;}
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:15px;
+    background:var(--card);
+    min-width:560px;
+  }
+  th{
+    background:var(--accent);
+    color:#fff;
+    text-align:left;
+    padding:12px 15px;
+    font-weight:700;
+    font-size:15px;
+  }
+  td{
+    padding:12px 15px;
+    border-top:1px solid var(--line);
+    vertical-align:top;
+    color:var(--ink-soft);
+  }
+  tbody tr:nth-child(even) td{background:#fafbfc;}
+  td strong{color:var(--ink);}
+
+  /* ---------- 12週路徑 ---------- */
+  .phase{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:7px solid var(--accent-2);
+    border-radius:10px;
+    padding:20px 24px;
+    margin:16px 0;
+  }
+  .phase .ph-head{
+    display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;
+    margin-bottom:10px;
+  }
+  .phase .ph-week{
+    font-size:var(--fs-small);font-weight:700;color:#fff;
+    background:var(--accent-2);padding:4px 12px;border-radius:6px;
+    white-space:nowrap;
+  }
+  .phase .ph-title{font-size:var(--fs-h4);font-weight:700;color:var(--ink);}
+  .gate{
+    margin-top:12px;padding:10px 14px;
+    background:var(--tint-2);border-radius:7px;
+    font-size:14.5px;color:var(--ink-soft);
+  }
+  .gate b{color:var(--accent-2);}
+
+  /* ---------- 來源 ---------- */
+  .sources{font-size:14px;color:var(--ink-soft);line-height:1.7;}
+  .sources li{margin-bottom:10px;}
+
+  /* footer */
+  .foot{
+    margin-top:60px;padding-top:24px;
+    border-top:1px solid var(--line);
+    font-size:13px;color:var(--muted);
+  }
+
+  /* 目錄 */
+  .toc{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:20px 26px;
+    margin:34px 0 0;
+  }
+  .toc .card-title{font-size:var(--fs-h4);font-weight:700;margin:0 0 12px;}
+  .toc ol{margin:0;padding-left:20px;}
+  .toc a{text-decoration:none;color:var(--ink-soft);font-weight:500;}
+  .toc a:hover{color:var(--accent);}
+  .toc li{margin-bottom:6px;}
+
+  @media (max-width:600px){
+    :root{--fs-h1:29px;--fs-h2:23px;--fs-h3:19px;--fs-h4:17px;}
+    .hero{padding:44px 20px 30px;}
+    .card{padding:18px 18px;}
+    .phase{padding:17px 18px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <span class="kicker">深度研究報告 · 專職舉球員發展</span>
+  <h1>排球舉球技術體系:<br>以<span class="thin">「到位穩定性」</span>為核心的發展指南</h1>
+  <p class="lede">從生物力學、發力機制到系統性訓練與戰術決策——為系隊等級、以專職舉球(setter)為方向的球員,拆解「每一球都舉到位」背後的可訓練變因。</p>
+
+  <div class="chain" aria-label="動力鏈:力量由下肢傳至指尖">
+    <span>腳踝</span><span class="arw">→</span><span>膝</span><span class="arw">→</span><span>髖</span><span class="arw">→</span><span>軀幹</span><span class="arw">→</span><span>肩</span><span class="arw">→</span><span>肘</span><span class="arw">→</span><span>腕</span><span class="arw">→</span><span>指</span>
+  </div>
+  <p style="font-size:13px;color:var(--muted);margin:4px 0 0;">動力鏈:力量由下肢(藍)向上肢(綠)、由近端向遠端依序傳遞——這是「用全身舉球」與「只用手臂舉球」的分野。</p>
+
+  <div class="hero-meta">
+    <div><b>對象</b>系隊等級 · 專職舉球方向</div>
+    <div><b>核心目標</b>提升舉球到位穩定性</div>
+    <div><b>實證基礎</b>Cabarkapa 2022 · Ozawa 2019/2025 · JVA 教本</div>
+  </div>
+
+  <nav class="toc">
+    <p class="card-title">內容導覽</p>
+    <ol>
+      <li><a href="#tldr">摘要與核心發現</a></li>
+      <li><a href="#bio">一、關鍵發力機制(生物力學)</a></li>
+      <li><a href="#diag">二、到位率差的常見原因與自我檢測</a></li>
+      <li><a href="#train">三、系統性訓練方法(基礎 → 進階)</a></li>
+      <li><a href="#tactic">四、戰術與決策層面</a></li>
+      <li><a href="#errors">五、常見錯誤與修正對照表</a></li>
+      <li><a href="#plan">建議:12 週分階段執行路徑</a></li>
+      <li><a href="#caveats">研究限制與注意事項</a></li>
+      <li><a href="#sources">核心來源清單</a></li>
+    </ol>
+  </nav>
+</header>
+
+<div class="wrap">
+
+<!-- ============ TL;DR ============ -->
+<section id="tldr" style="margin-top:46px;">
+  <h2>摘要與核心發現</h2>
+  <span class="sec-tag">TL;DR — 三個最該記住的觀念</span>
+
+  <div class="tldr">
+    <div class="card">
+      <p class="card-title">① 到位不穩,多半不是「手的問題」</p>
+      <p style="margin:0;">運動科學(Cabarkapa 等人 2022 力板研究)與各大教練體系(USA Volleyball、日本排球協會 JVA、Gold Medal Squared)一致指向:<strong>下肢與腳步的一致性,是決定每球是否到位的最大變因</strong>。手只是「把已經對準的力放出去」的末端環節——先做好「腳先到、身體正對目標、接觸點固定」這三件事。</p>
+    </div>
+    <div class="card green">
+      <p class="card-title">② 發力靠「彈簧」而非「投擲」</p>
+      <p style="margin:0;">Ozawa 等人(2019, <em>Sports Biomechanics</em>)以肌電圖(EMG)證實:高水準舉球員靠手腕屈肌的<strong>伸展-收縮循環(SSC)</strong>儲存並釋放彈性能,而非用力「推」。JVA 官方教本亦明文把托球定義為「把手當彈簧」「適度固定、什麼都不做」,並反對「拿住→丟出」的教法。</p>
+    </div>
+    <div class="card orange">
+      <p class="card-title">③ 改善路徑是可量化的</p>
+      <p style="margin:0;">先用固定式定點(呼拉圈/籃框)在<strong>無移動</strong>下建立 90%+ 的到位基準,再逐步加入移動、判斷與節奏;以「連續到位數」「每 10 球到位率」記錄。配合<strong>區塊練習 → 隨機練習</strong>的動作學習週期,是最有效率的進步方式。</p>
+    </div>
+  </div>
+
+  <h3>Key Findings|六項核心發現</h3>
+  <ol class="findings">
+    <li><strong>動力鏈由下而上、由近而遠依序傳遞</strong>(腳踝→膝→髖→軀幹→肩→肘→腕→指)。舉球雖是精細動作,但長球與到位穩定性都依賴下肢蹬地提供的地面反作用力,手臂與手腕負責方向與微調。</li>
+    <li><strong>「熟練 vs 不熟練」的力學差異已被量化</strong>:Cabarkapa(2022)以 600 次舉球的力板研究發現,熟練舉球員準備期的膝、肩、踝彎曲「較小」(動作更精簡),但峰值力量、發力率(RFD)與垂直跳顯著較高。穩定性來自「下肢有效發力 + 上肢精簡」,而非「蹲很低、用手臂大幅出力」。</li>
+    <li><strong>手腕是彈簧,不是引擎</strong>:Ozawa(2019)證實熟練組在拉引期手腕屈肌離心收縮顯著較高(SSC);不熟練組因無法在手腕儲能,只好用三頭肌(肘伸展)代償——推期三頭肌活動 31% vs 熟練組 16%(p=0.009)。</li>
+    <li><strong>長球靠腿、短球靠手</strong>:Ozawa(2025)以 3m/6m/9m 目標證實——手臂肌肉活動在 6m 後飽和不再增,而腿部動作在三個距離間皆有顯著差異,顯示腿部補充了給球的力量。</li>
+    <li><strong>到位率差可對應到具體環節</strong>:腳步不及時、身體未正對目標、接觸點漂移、雙手不對稱、下肢未參與、判斷過晚——每一項都有對應的自我檢測法。</li>
+    <li><strong>舉球員的價值不只在「手」</strong>:USA Volleyball 官方文件明列選才順序為「運動能力與觸球 &gt; 溝通與領導 &gt; 心理韌性 &gt; 比賽理解 &gt; 身體條件」,並將「把球變得更好」與「送給手感好的攻擊手」列為指導原則。</li>
+  </ol>
+</section>
+
+<!-- ============ 一、生物力學 ============ -->
+<section id="bio">
+  <h2>一、關鍵發力機制(Biomechanics)</h2>
+  <span class="sec-tag">力量如何由下肢傳到指尖</span>
+
+  <h3>1.1 動力鏈:力量的傳遞順序</h3>
+  <p>舉球與殺球共用一個底層原理——<strong>動力鏈(kinetic chain)</strong>:力量由大肌群向小肌群、由近端向遠端依序加速傳遞(腳踝→膝→髖→軀幹→肩→肘→腕→指)。這是一種「投擲式(throw-like)」動作模式,各關節依序伸展,而非同時發力。</p>
+
+  <div class="card">
+    <p class="card-title"><span class="tag tag-fact">事實</span>依序傳遞的量化證據</p>
+    <p style="margin:0;">Ozawa 等人(2019)在熟練組觀察到肘關節角速度峰值出現在動作 60–80% 時間點、手腕峰值約在 90%,呈現由近到遠的時間差(即動力鏈);不熟練組的肘角速度則持續增加到最後,沒有形成鏈式傳遞。這是「用整個身體舉球」與「只用手臂舉球」在數據上的分野。</p>
+  </div>
+
+  <div class="card indigo">
+    <p class="card-title"><span class="tag tag-econ">經濟學類比</span>把訓練資源投在「上游」</p>
+    <p style="margin:0;">可把動力鏈想成一條「上游→下游」供應鏈。下肢是上游原料,若上游(腳步、蹬地)供給不穩,末端(手指微調)再怎麼努力也只是在做庫存調節、<strong>邊際報酬遞減</strong>。把訓練資源投在「上游」(腳步到位、身體朝向)的邊際報酬,遠高於一味打磨手型。</p>
+  </div>
+
+  <h3>1.2 準備姿勢與下肢:穩定性的根基</h3>
+  <p>Cabarkapa 等人(2022)用 1000 Hz 力板 + 高速影像分析 20 名球員、每人 30 次共 600 次舉球,依到位率分為熟練(≥60%)與不熟練(&lt;60%)兩組,關鍵發現:</p>
+  <ul>
+    <li>熟練組在準備期的<strong>膝彎曲較小(118.9° vs 114.5°)、肩彎曲較小(117.4° vs 126.8°)、踝背屈較小</strong>——動作更精簡、不過度下蹲。</li>
+    <li>熟練組的<strong>峰值向心力(2231 N vs 1697 N)、衝量(201.5 vs 152.8 N·s)、發力率(12,250 vs 6,028 N/s)、垂直跳(15.9 vs 10.4 cm)全部顯著較高</strong>(p&lt;0.05)。</li>
+    <li>不同目標(前/中/後排)與不同進入方式之間,力學參數<strong>沒有顯著差異</strong>。</li>
+  </ul>
+  <div class="card orange">
+    <p class="card-title"><span class="tag tag-judge">判斷</span>顛覆初學者直覺</p>
+    <p style="margin:0;">穩定的舉球員不是「蹲更低、手抬更高、用更多力氣去喬」,而是「用精簡的下肢動作快速到位、然後有效率地把地面反作用力透過身體傳出去」。研究者亦指出,不熟練組「過度強調蹲低、且把手肘抬得離地更高」反而損害了舉球表現。</p>
+  </div>
+
+  <h3>1.3 手型、手指與手腕:接觸點與「彈簧」機制</h3>
+  <h4>手型(有依據 + 教練共識)</h4>
+  <ul>
+    <li>雙手在觸球「之前」就成形,呈「籃子/球形」包住球(Jim Stone:“shaped to the ball – like a basket”)。</li>
+    <li>拇指與食指形成三角窗(triangle;日本稱「おにぎり」飯糰形),置於額頭前上方。</li>
+    <li>接觸點是<strong>指腹到指節、拇指+前兩指受最大力,無名指與小指受力較小</strong>;絕不用手掌。</li>
+    <li>接觸位置在<strong>額頭上方、身體中線、約前額前方數公分</strong>;日本教練慣用線索為「額前約 4–5 公分」(屬教學慣例,非同儕審查)。</li>
+  </ul>
+
+  <h4>手腕與手指的「彈簧/剛性」機制(核心)</h4>
+  <div class="card">
+    <p class="card-title"><span class="tag tag-fact">事實</span>手腕屈肌 SSC 是熟練與否的分野</p>
+    <p>Ozawa(2019)證實:手指在觸球瞬間被球的動量「壓」成背屈,肌腱儲存彈性能,再回彈把球送出。原文結論:「要發展有效率、純熟的托球,重要的是手腕屈肌在拉引期蓄積彈性能,再於推期釋放。」</p>
+    <p style="margin:0;"><strong>JVA 官方教本</strong>明文列出托球兩大動作原理:①「把手當彈簧」、②「利用地面反作用力把球送出」;並強調發力是「一方向(只想著伸展)」,手指與手腕的反折是被球造成的「被動」結果,口訣為「適度固定、什麼都不做」。JVA 教本明白反對「『拿住→丟出』只要加快就會變成正確傳球」的教法。<span style="color:var(--muted);font-size:14px;">(教本頁碼係經 JVA 認證教練二手引用,宜核對紙本。)</span></p>
+  </div>
+  <div class="card orange">
+    <p class="card-title"><span class="tag tag-judge">判斷</span>教學矛盾的取捨:被動彈簧優於主動 snap</p>
+    <p style="margin:0;">許多(尤其中/英文)教學強調「手腕主動 snap」發力,這與 JVA 教本 + Ozawa 實證的「被動彈簧、一方向」模型存在張力。對追求「穩定到位」的系隊舉球員,<strong>應以「彈簧/被動回彈 + 固定手型」為主框架</strong>——主動 snap 容易造成出力不一致與旋轉(spin),是到位率不穩的常見來源。</p>
+  </div>
+
+  <h3>1.4 肘、肩的角色與伸展時機</h3>
+  <ul>
+    <li><strong>肘關節</strong>:準備時微彎,接觸後隨動力鏈依序伸展指向目標。過度用肘推球是「代償」訊號(Ozawa 2019:不熟練組推期三頭肌活動幾乎是熟練組兩倍),代表下肢與手腕彈簧沒發揮。</li>
+    <li><strong>肩關節</strong>:Cabarkapa(2022)發現後排球(back set)在觸球瞬間的肩伸展角度顯著大於中間與前排球——這是背舉需要更多肩後伸的力學證據。</li>
+  </ul>
+
+  <h3>1.5 長距離 vs 短距離舉球的發力差異</h3>
+  <div class="card">
+    <p class="card-title"><span class="tag tag-fact">事實</span>距離越長,越需要腿</p>
+    <p style="margin:0;">Ozawa(2025):手臂肌肉活動 3m→6m 增加、6m→9m 飽和不再增;腿部動作在 3/6/9m 間皆有顯著差異。結論:「距離越長,不只需要手臂、更需要腿。」</p>
+  </div>
+  <div class="card orange">
+    <p class="card-title"><span class="tag tag-judge">判斷 / 教練慣例</span>短球靠手腕、長球靠蹬地</p>
+    <p style="margin:0;">短球(快攻、背快)以手腕彈簧與精準微調為主,身體移動極小、接觸快;長球(調整二傳到 4 號位、後排攻 pipe)必須蹬地、用下肢與軀幹把力量灌進去,follow-through 更完整。系隊舉球員最常見的長球失誤(球下不到底線/太低),幾乎都是「只用手臂、沒用腿」。</p>
+  </div>
+</section>
+
+<!-- ============ 二、診斷 ============ -->
+<section id="diag">
+  <h2>二、到位率差的常見原因診斷</h2>
+  <span class="sec-tag">六大原因 + 對應自我檢測方法</span>
+
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>原因</th><th>機制</th><th>自我檢測方法</th></tr></thead>
+    <tbody>
+      <tr><td><strong>腳步到位不及時</strong></td><td>手已舉起才在追球,接觸點不固定</td><td>錄影檢查:觸球時雙腳是否已「停穩、staggered、左前右後」</td></tr>
+      <tr><td><strong>身體未正對目標</strong></td><td>球會往身體朝向跑;側向出力→球飄向網</td><td>拍正面:觸球瞬間腳尖、髖、肩是否都指向左前目標</td></tr>
+      <tr><td><strong>接觸點漂移</strong></td><td>忽高忽低、忽前忽後→力學不一致</td><td>對牆連續舉,要求每球都在「額前同一個窗口」</td></tr>
+      <tr><td><strong>雙手不對稱發力</strong></td><td>一手主導→球旋轉、方向偏</td><td>看球的旋轉:乾淨到位≈幾乎無旋轉;旋轉大代表雙手不同步或動用手掌</td></tr>
+      <tr><td><strong>下肢未參與(純手臂)</strong></td><td>長球下不到位、力量來源不穩</td><td>檢查長球是否只靠手肘「頂」;要求先蹬地再出手</td></tr>
+      <tr><td><strong>判斷/節奏過晚</strong></td><td>太晚到定點→無準備時間</td><td>要求在傳球者「手臂觸球前」就已讀出球路並啟動</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="card indigo">
+    <p class="card-title"><span class="tag tag-econ">經濟學類比</span>把「旋轉量」當成零成本的品質訊號</p>
+    <p style="margin:0;">球出手後的「旋轉量」是一個幾乎零成本、即時的品質<strong>訊號(signaling)</strong>——就像市場中的可信訊號,旋轉透露了雙手是否同步、是否動用手掌。訓練時把「無旋轉」當成單一可觀測指標來自我回饋,CP 值極高。<span style="color:var(--muted);font-size:14px;">(注意:此為自我診斷訊號,非規則要求——見文末限制第 5 點。)</span></p>
+  </div>
+</section>
+
+<!-- ============ 三、訓練 ============ -->
+<section id="train">
+  <h2>三、系統性訓練方法</h2>
+  <span class="sec-tag">從基礎觸感到專職舉球員進階技術</span>
+
+  <h3>3.1 手型與觸球感(基礎)</h3>
+  <ul>
+    <li><strong>對牆舉球</strong>:距牆 1–2 公尺連續舉;目標是無旋轉、同一接觸點。April Chapple 建議舉球員在團隊練習「之外」每週額外 500–1000 次觸球。</li>
+    <li><strong>躺姿/坐姿自我舉球</strong>:排除下肢與移動變因,單練手型與彈簧回彈;要求球垂直上下、無旋轉。</li>
+    <li><strong>近距離慢推(partner slow-push)</strong>:同伴把球「慢慢壓進」手中,建立正確手腕角度與 soft hands。</li>
+    <li><strong>單手觸球</strong>:練手指剛性與對稱感。</li>
+  </ul>
+
+  <h3>3.2 腳步訓練</h3>
+  <ul>
+    <li><strong>無球腳步</strong>:從防守位置 release 到網前,plant left / lead right to target。</li>
+    <li><strong>左-右收步 + 定點</strong>:面向來球、步伐左-右結束、重心由左腳轉到右腳、右腳結束時身體正對左前目標;右腳略轉離網以免球過網。</li>
+    <li><strong>移動後舉球</strong>:教練拋往不同落點(近、遠、身後),要求先用腳到位再舉;進階用單腳/pivot 處理難球。</li>
+  </ul>
+
+  <h3>3.3 到位精準度(定點訓練)</h3>
+  <ul>
+    <li><strong>呼拉圈/籃框目標</strong>:對固定目標舉,由近到遠、由大到小。目標是「連續 10 顆穿過圈」,並記錄「花幾次達成」,每次挑戰降低次數。</li>
+    <li><strong>可被接住不移動的球才算「好球」</strong>:初階以「同伴不移動腳就能接到」為到位標準。</li>
+    <li><strong>移動目標</strong>:同伴沿網移動,舉球員預判並送到位,模擬真實攻擊節奏。</li>
+  </ul>
+
+  <h3>3.4 穩定性/一致性的量化方法</h3>
+  <div class="card tint">
+    <ul style="margin:0;">
+      <li><strong>記錄「連續到位數」與「每 10 球到位率」</strong>:如計分般寫下「1 0 0 1 1 …」,即時看到趨勢。</li>
+      <li><strong>設定「連續 X 顆正確」為目標</strong>而非「總共 X 顆」——強迫穩定性而非單次成功。</li>
+      <li><strong>訓練量</strong>:精英團隊練習外每週 500–1000 次觸球;系隊等級可從每週 3 次、每次 200–300 次高品質觸球起步。</li>
+      <li><strong>週期(動作學習依據)</strong>:初學用<strong>區塊練習</strong>建立正確模式;穩定後轉向<strong>隨機練習</strong>。研究一致顯示:區塊練習「當下表現」較好,但隨機練習在「保留與遷移」(比賽中用得出來)顯著較優。</li>
+    </ul>
+  </div>
+
+  <h3>3.5 專職舉球員進階技術</h3>
+  <div class="card">
+    <p class="card-title">背舉(back set)</p>
+    <p style="margin:0;">手型不變,只是手掌角度變平、把球往後上方「抬」;follow-through 仍要完成。力學上需更大肩後伸(Cabarkapa 2022)。關鍵是<strong>「同一個窗口」</strong>——正舉與背舉在額前同一位置觸球,才能隱藏方向(camouflage)。</p>
+  </div>
+  <div class="card">
+    <p class="card-title">跳舉(jump set)</p>
+    <p style="margin:0;">先能穩定地面舉球再練;把它拆成「跳」與「舉」兩個動作。優點:加快進攻節奏、接觸點更高、更難被讀。<strong>Palao &amp; Ahrabi-Fard(2014)證實:贏球隊比輸球隊更頻繁且更有效率地使用跳舉</strong>,帶來更高的 side-out 成功率與更多攻擊得分。</p>
+  </div>
+  <div class="card">
+    <p class="card-title">二次攻擊 / 吊球(setter dump)</p>
+    <p style="margin:0;">前排舉球員以單手把第二球攻擊過網。John Dunning 的四字訣:<strong>jump, show, extend, dump</strong>(跳、佯裝、伸展、攻)。避免用手肘當槓桿「灌」,易被判持球。</p>
+  </div>
+  <div class="card">
+    <p class="card-title">快攻節奏(tempo)配合</p>
+    <p style="margin:0;">第一節奏(快球,攻擊手在球離手前已起跳)、第二節奏(go/shoot)、第三節奏(高球,out-of-system)。關鍵教學:<strong>把「方向」與「速度」分開</strong>——手臂角度決定方向、手腕與手指回彈決定節奏;練習時要求「同一位置、三種速度」與「同一速度、三個位置」。</p>
+  </div>
+  <div class="card">
+    <p class="card-title">隱蔽性 / 假動作</p>
+    <p style="margin:0;">同一觸球窗口、穩定的手速(consistent hand speed)創造可預測的己方節奏、卻讓對方攔網難以判讀。中間攔網員主要讀「舉球員的髖與肩朝向」,因此<strong>隱藏髖肩朝向是隱蔽性的核心</strong>。</p>
+  </div>
+
+  <h3>3.6 肌力與體能</h3>
+  <ul>
+    <li><strong>手指/手腕/前臂</strong>:指伏地挺身、腕彎舉、握力球/網球擠壓、加重排球觸球;每週 2–3 次,由輕到重。目的是提升手腕彈簧的剛性與抗疲勞。</li>
+    <li><strong>下肢爆發力</strong>:Cabarkapa(2022)顯示 RFD 與垂直跳是熟練舉球員的顯著特徵→深蹲、跳箱、奧林匹克舉變化式、落地-回跳(drop jump,直接對應手腕 SSC 的下肢版)。</li>
+    <li><strong>核心穩定</strong>:維持觸球瞬間身體不晃、確保動力鏈不漏力。</li>
+  </ul>
+</section>
+
+<!-- ============ 四、戰術 ============ -->
+<section id="tactic">
+  <h2>四、戰術與決策層面</h2>
+  <span class="sec-tag">技術穩定後的下一個瓶頸</span>
+
+  <div class="card indigo">
+    <p class="card-title">配球決策的層級</p>
+    <p style="margin:0;">先評估「傳球品質」,再讀「對方中間攔網」,再考慮「己方手感好的攻擊手」。菜鳥舉球員最大問題是「發球前就決定要給誰」、完全無視對方防守佈局;把球送進對方雙人攔網,再好的手也是浪費。</p>
+  </div>
+  <div class="card indigo">
+    <p class="card-title">讀攔網</p>
+    <p style="margin:0;">中間攔網分「commit(賭邊)」與「read(先中立再反應)」;舉球員要利用其傾向——用同一窗口與假動作逼中間讀晚、製造 1-on-1。以「讀進度(read progressions)」依序判斷該給哪邊。</p>
+  </div>
+  <div class="card indigo">
+    <p class="card-title">與攻擊手溝通 · 餵給手感好的攻擊手</p>
+    <p style="margin:0;">發球前用手勢/暗號告知每位攻擊手節奏;建立每位攻擊手的 timing 與窗口共識;混亂後立刻「next-ball focus」不責備。USA Volleyball 明列指導原則:排球是得分不是雨露均霑,某攻擊手手感火燙就一直餵,直到對方證明能守下來。</p>
+  </div>
+  <div class="card indigo">
+    <p class="card-title">領導角色</p>
+    <p style="margin:0;">USA Volleyball 稱舉球員是「場上的教練 / 場上隊長」,是教練與全隊的即時傳聲筒,需情緒穩定、願意承擔責任;「setter 怎麼走,球隊就怎麼走」。但領導可以分擔——舉球員未必是唯一領袖。</p>
+  </div>
+</section>
+
+<!-- ============ 五、錯誤對照 ============ -->
+<section id="errors">
+  <h2>五、常見錯誤與修正對照表</h2>
+  <span class="sec-tag">症狀 → 修正方向</span>
+
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>常見錯誤</th><th>症狀</th><th>修正方式</th></tr></thead>
+    <tbody>
+      <tr><td>追球時手已高舉</td><td>接觸點不固定、來不及調整</td><td>先面向球、手在中立位,腳到定點才舉手</td></tr>
+      <tr><td>手抬太低(低於額頭)</td><td>出球低平、易被判持球、方向差</td><td>手在額前、拇指近髮際線</td></tr>
+      <tr><td>Follow-through 不指向目標</td><td>方向飄、到位率低</td><td>出手後「凍結」手指指向目標;背舉手掌朝上朝後</td></tr>
+      <tr><td>雙腳併攏、只用上身</td><td>髖/手易旋轉、無力量</td><td>強制左-右重心轉移,右腳結束</td></tr>
+      <tr><td>過度下蹲、手肘抬太高</td><td>動作冗長、力學不一致</td><td>精簡準備姿勢(Cabarkapa 依據)</td></tr>
+      <tr><td>用手掌/接觸太久</td><td>持球、旋轉</td><td>指腹快速觸球、無旋轉為指標</td></tr>
+      <tr><td>純手腕主動 snap</td><td>出力不穩、旋轉多</td><td>改「全身彈簧 + 被動回彈」框架</td></tr>
+      <tr><td>長球下不到位</td><td>只用手臂</td><td>蹬地、下肢發力、完整 follow-through</td></tr>
+      <tr><td>背舉貼網</td><td>身體想留正對前排</td><td>網前約 60 公分貼膠帶,背舉時髖留在線後</td></tr>
+      <tr><td>發球前就決定配球</td><td>送進雙人攔網</td><td>觸球前讀對方中間攔網再決定</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- ============ 12週路徑 ============ -->
+<section id="plan">
+  <h2>建議:12 週分階段執行路徑</h2>
+  <span class="sec-tag">每階段附「升級門檻」——達標才進下一階</span>
+
+  <div class="phase">
+    <div class="ph-head"><span class="ph-week">第 0–2 週</span><span class="ph-title">建立基準與診斷</span></div>
+    <ul style="margin:0;">
+      <li>錄影自己 30 顆定點舉球(正面 + 側面),用對照表逐項打勾找出前三大問題。</li>
+      <li>建立記錄表:每 10 球到位率、球的旋轉量(0/輕/重)、連續到位數。</li>
+    </ul>
+    <div class="gate"><b>基準門檻:</b>無移動、完美傳球下,定點(呼拉圈)到位率若 &lt; 80%,先別練移動與節奏,回到手型與接觸點。</div>
+  </div>
+
+  <div class="phase">
+    <div class="ph-head"><span class="ph-week">第 2–6 週</span><span class="ph-title">手型 + 下肢彈簧(區塊練習)</span></div>
+    <ul style="margin:0;">
+      <li>每日:對牆/躺姿無旋轉舉球 200 顆;partner slow-push 建立被動回彈手感。</li>
+      <li>導入下肢:drop jump、深蹲跳,連結「地面反作用力」概念。</li>
+      <li>手腕/手指肌力每週 3 次。</li>
+    </ul>
+    <div class="gate"><b>升級門檻:</b>定點到位率穩定 ≥ 90% 且球幾乎無旋轉 → 進入移動練習。</div>
+  </div>
+
+  <div class="phase">
+    <div class="ph-head"><span class="ph-week">第 6–12 週</span><span class="ph-title">腳步 + 移動到位(序列練習)</span></div>
+    <ul style="margin:0;">
+      <li>左-右腳步 + pivot;教練拋不同落點,先腳到再舉。</li>
+      <li>呼拉圈由近到遠、由大到小;長球強制蹬地。</li>
+    </ul>
+    <div class="gate"><b>升級門檻:</b>移動後(近距離變化球)到位率 ≥ 80% → 加入判斷與節奏。</div>
+  </div>
+
+  <div class="phase">
+    <div class="ph-head"><span class="ph-week">第 3 個月後</span><span class="ph-title">隨機練習 + 進階技術 + 決策</span></div>
+    <ul style="margin:0;">
+      <li>隨機交錯:不同落點/方向/節奏;out-of-system 高球。</li>
+      <li>進階技術依序:背舉(同窗口)→ 跳舉(拆解跳與舉)→ setter dump → 快攻 tempo(方向/速度分離練習)。</li>
+      <li>決策:讀中間攔網 drill、餵手感好的攻擊手、發球前不預設配球。</li>
+    </ul>
+  </div>
+
+  <div class="card tint-orange" style="margin-top:22px;">
+    <p class="card-title" style="color:var(--accent-3);">會改變上述建議的門檻 / 指標</p>
+    <ul style="margin:0;">
+      <li>定點到位率已 ≥ 95% 但「移動後」暴跌 → 問題在腳步/判斷,加重腳步與讀傳球平台。</li>
+      <li>長球持續下不到位 → 問題在下肢與 follow-through(Ozawa 2025 依據)。</li>
+      <li>常被判持球/旋轉大 → 回到手型與「被動彈簧」,減少主動 snap。</li>
+      <li>技術已穩但比賽仍常送進雙人攔網 → 瓶頸已從「技術」轉到「決策/讀攔網」,重心移到戰術訓練。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 限制 ============ -->
+<section id="caveats">
+  <h2>研究限制與注意事項</h2>
+  <span class="sec-tag">Caveats — 讀這份報告時該保留的地方</span>
+
+  <div class="card tint">
+    <ol style="margin:0;padding-left:20px;">
+      <li style="margin-bottom:10px;"><strong>舉球是排球中「被研究最少」的技能</strong>。多數文獻只做下肢/軀幹,手指因「太小太複雜」常被排除在量測外(Ozawa 2019 未直接量測手指,SSC 在手指的角色屬推論)。</li>
+      <li style="margin-bottom:10px;"><strong>實驗室 ≠ 比賽</strong>。Cabarkapa(2022)在無觀眾、無對手的實驗室進行,未納入「舉球節奏」變因;受試者為 recreationally active 女性而非精英。</li>
+      <li style="margin-bottom:10px;"><strong>樣本量小</strong>。Ozawa(2019)n=20、(2025)n=12,皆男性右利手;JVA 教本頁碼係二手來源,宜核對紙本。</li>
+      <li style="margin-bottom:10px;"><strong>教學體系存在真實分歧</strong>。「主動手腕 snap」vs「被動彈簧」、「蹲低用力」vs「精簡下肢」皆是可引用的教學張力。本報告在有實證處採實證,無實證處明確標為「判斷」。</li>
+      <li style="margin-bottom:10px;"><strong>規則脈絡影響技術選擇</strong>。近年 NCAA 對二觸判罰放寬、室內幾乎不再吹旋轉;但沙灘與部分層級仍嚴格。「無旋轉」在此主要作為「雙手同步」的自我診斷訊號,非規則要求——仍應確認你所處聯賽的判罰尺度。</li>
+      <li style="margin:0;"><strong>已排除內容農場</strong>。優先採用同儕審查期刊、官方教材(FIVB、USA Volleyball、JVA)與知名教練體系;部分數字(日本教練「額前 4–5cm」線索、每週觸球量)來自教練實務來源而非同儕審查,已於文中標示。</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 來源 ============ -->
+<section id="sources">
+  <h2>核心來源清單</h2>
+  <span class="sec-tag">供查證</span>
+
+  <ul class="sources">
+    <li>Cabarkapa DV, Cabarkapa D, Fry AC, Whiting SM, Downey GG. "Kinetic and Kinematic Characteristics of Setting Motions in Female Volleyball Players." <em>Biomechanics</em> 2022, 2(4):538–546. doi:10.3390/biomechanics2040042</li>
+    <li>Ozawa Y, Uchiyama S, Ogawara K, Kanosue K, Yamada H. "Biomechanical analysis of volleyball overhead pass." <em>Sports Biomechanics</em> 2021, 20(7):844–857(線上 2019). doi:10.1080/14763141.2019.1609072;PMID 31066350</li>
+    <li>Ozawa Y, Yamada H, Ozawa S, Vogt T, Kanosue K. "Biomechanical analysis of distance adjustment in volleyball overhead pass." <em>Sports Biomechanics</em> 2025, 24(2):440–457. doi:10.1080/14763141.2022.2125427;PMID 36205520</li>
+    <li>Palao JM, Ahrabi-Fard I. "Effect of jump set usage on side-out phase in women's college volleyball." <em>J. Sport and Human Performance</em> 2014, 2(3):1–10</li>
+    <li>日本バレーボール協会編《コーチングバレーボール(基礎編)》大修館書店(動作原理:p.123, p.143;二手引用待核)</li>
+    <li>USA Volleyball,〈Recipe for a Setter〉(Peggy Kane-Hopton);FIVB Coaches' Manual;Gold Medal Squared「Attack Names &amp; Set Calls」;The Art of Coaching(Jim Stone、John Dunning、Diane Flick-Williams、Mike Sealy);JVA〈Setting Drills to Train Proper Technique〉</li>
+  </ul>
+
+  <div class="foot">
+    本報告區分「有明確依據的事實」(標 <span class="tag tag-fact" style="margin:0 2px;">事實</span>,附來源)與「基於推理/教練經驗的判斷」(標 <span class="tag tag-judge" style="margin:0 2px;">判斷</span>)。經濟學類比(標 <span class="tag tag-econ" style="margin:0 2px;">經濟學類比</span>)僅為理解輔助,非排球專業結論。實務應用前,建議依所處聯賽規則與自身錄影診斷調整。
+  </div>
+</section>
+
+</div>
+</body>
+</html>
