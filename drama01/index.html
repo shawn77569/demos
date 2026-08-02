@@ -3,468 +3,616 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>《自己人》總劇本（舞台劇版）</title>
+<title>《自己人》總劇本（Discord 語音讀劇版）</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --paper:#FBFAF6;      /* 紙白底 */
-  --ink:#26221C;        /* 墨黑內文 */
-  --felt:#1E5B44;       /* 賭桌絨綠：場次與結構 */
-  --seal:#A8322A;       /* 硃砂紅：角色名 */
-  --brass:#8A6B2F;      /* 黃銅：旁白 */
-  --mute:#7A7468;       /* 舞台指示灰 */
-  --card:#F3F0E8;       /* 卡片底 */
-  --hair:#E2DDD1;
-}
+:root{--paper:#FBFAF6;--ink:#26221C;--felt:#1E5B44;--seal:#A8322A;--brass:#8A6B2F;--mute:#7A7468;--card:#F3F0E8;--hair:#E2DDD1;}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{
-  background:var(--paper);
-  color:var(--ink);
-  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
-  font-size:17px;
-  line-height:1.95;
-  padding:48px 20px 96px;
-}
+body{background:var(--paper);color:var(--ink);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;font-size:17px;line-height:1.95;padding:48px 20px 96px;}
 .page{max-width:720px;margin:0 auto;}
-
-/* 劇名區 */
 .masthead{border-left:10px solid var(--felt);padding:6px 0 6px 24px;margin-bottom:14px;}
-h1{
-  font-family:"Noto Serif TC",serif;font-weight:900;
-  font-size:40px;line-height:1.3;letter-spacing:.06em;
-}
+h1{font-family:"Noto Serif TC",serif;font-weight:900;font-size:40px;line-height:1.3;letter-spacing:.06em;}
 .masthead .tag{font-size:18px;color:var(--felt);font-weight:700;margin-top:2px;}
-.lede{margin:22px 0 10px;color:var(--ink);}
+.lede{margin:22px 0 10px;}
 .lede p{margin-bottom:10px;}
-
-/* 登場人物 */
-h2{
-  font-family:"Noto Serif TC",serif;font-weight:900;font-size:26px;
-  color:var(--felt);margin:56px 0 18px;
-  padding-left:20px;border-left:10px solid var(--felt);line-height:1.5;
-}
+h2{font-family:"Noto Serif TC",serif;font-weight:900;font-size:26px;color:var(--felt);margin:56px 0 18px;padding-left:20px;border-left:10px solid var(--felt);line-height:1.5;}
+h3{font-family:"Noto Serif TC",serif;font-weight:900;font-size:20px;color:var(--felt);margin:34px 0 12px;line-height:1.5;}
 .cast{background:var(--card);border-left:10px solid var(--brass);padding:20px 24px;border-radius:0 8px 8px 0;}
 .cast p{margin:4px 0;}
 .cast b{color:var(--seal);font-weight:700;margin-right:.6em;}
-
-/* 台詞 */
 .line{margin:0 0 14px;padding-left:5.2em;text-indent:-5.2em;}
-.who{
-  display:inline-block;min-width:4.6em;margin-right:.6em;
-  color:var(--seal);font-weight:700;text-indent:0;
-}
+.line.cont{text-indent:0;}
+.who{display:inline-block;min-width:4.6em;margin-right:.6em;color:var(--seal);font-weight:700;text-indent:0;}
 .line.nar .who{color:var(--brass);}
-.line .cue{color:var(--mute);}
-
-/* 舞台指示 */
-.dir{
-  margin:18px 0;color:var(--mute);font-size:15.5px;
-  padding-left:1.2em;border-left:3px solid var(--hair);line-height:1.8;
-}
-
-/* 幕間獨白卡 */
-.mono{
-  background:var(--card);border-left:10px solid var(--seal);
-  border-radius:0 8px 8px 0;padding:22px 26px;margin:30px 0;
-}
-.mono .mname{
-  font-family:"Noto Serif TC",serif;font-weight:900;
-  font-size:20px;color:var(--seal);margin-bottom:10px;line-height:1.5;
-}
+.cue{color:var(--mute);}
+.dir{margin:18px 0;color:var(--mute);font-size:15.5px;padding-left:1.2em;border-left:3px solid var(--hair);line-height:1.8;}
+.mono{background:var(--card);border-left:10px solid var(--seal);border-radius:0 8px 8px 0;padding:22px 26px;margin:30px 0;}
+.mono .mname{font-family:"Noto Serif TC",serif;font-weight:900;font-size:20px;color:var(--seal);margin-bottom:10px;line-height:1.5;}
 .mono.brasscard{border-left-color:var(--brass);}
 .mono.brasscard .mname{color:var(--brass);}
 .mono p{margin-bottom:10px;}
 .mono p:last-child{margin-bottom:0;}
-.mono .cue{color:var(--mute);}
-
-hr{border:0;border-top:1px solid var(--hair);margin:48px 0;}
-
-@media (max-width:520px){
-  body{font-size:16.5px;padding:32px 14px 72px;}
-  h1{font-size:32px;}
-  h2{font-size:23px;}
-  .line{padding-left:0;text-indent:0;}
-  .who{display:block;min-width:0;margin-bottom:2px;}
-}
-@media print{
-  body{padding:0;font-size:12.5pt;}
-  .mono{break-inside:avoid;}
-}
+.mono .mdir{color:var(--mute);font-size:15.5px;margin-bottom:10px;}
+@media (max-width:520px){body{font-size:16.5px;padding:32px 14px 72px;}h1{font-size:32px;}h2{font-size:23px;}.line{padding-left:0;text-indent:0;}.who{display:block;min-width:0;margin-bottom:2px;}}
+@media print{body{padding:0;font-size:12.5pt;}.mono{break-inside:avoid;}}
 </style>
 </head>
 <body>
 <div class="page">
-
-<div class="masthead">
-  <h1>自己人</h1>
-  <div class="tag">舞台劇總劇本・一間賭場的最後一夜</div>
-</div>
-
+<div class="masthead"><h1>自己人</h1>
+<div class="tag">Discord 語音讀劇修訂版・一間賭場的最後一夜</div></div>
 <div class="lede">
-  <p>八個角色，一個旁白，共九人。本劇在 Discord 語音演出，是一齣廣播劇：全部台詞照本宣讀，表演都在聲音裡，場景轉換用停頓和音效交代。素讀約六十分鐘，加上停頓與情緒節奏，演出全長約八十五到九十五分鐘。</p>
-  <p>閱讀方式：<span style="color:var(--seal);font-weight:700">紅字</span>是角色名，<span style="color:var(--brass);font-weight:700">褐字</span>是旁白與旁白客串的聲音，灰色縮排段是舞台與音效指示，台詞裡的（括號）是語氣提示。「陳董」與「醉客」由旁白客串配音。所有髒話照唸，不消音。</p>
+<p>八個角色、一名旁白，共九人。</p>
+<p>本劇以 Discord 語音演出。角色的情緒、位置變化與場景轉換，必須透過台詞、呼吸、腳步、桌椅、杯盤、門鎖、紙張與環境音呈現。演員不必朗讀「聲音提示」。</p>
+<p>「陳董」與「醉客」由旁白客串配音。髒話照讀，不消音。</p>
 </div>
-
 <h2>登場人物</h2>
 <div class="cast">
-  <p><b>文姐</b>場主，四十多歲。把場子當成命的女人。</p>
-  <p><b>秀秀</b>帳房，三十歲上下。信仰數字，被迫用數字說謊。</p>
-  <p><b>Nana</b>紅牌公關，三十歲上下。全場人緣最好、祕密最深的人。</p>
-  <p><b>小春</b>新來的端茶妹，二十歲。傻傻的富二代，什麼都不知道。</p>
-  <p><b>董伯</b>金主，七十三歲。今晚來要的不是錢，是一句實話。</p>
-  <p><b>阿豹</b>圍事，三十九歲。對錢最無辜，背著最重的一條命債。</p>
-  <p><b>Jerry</b>業務，三十五歲上下。真兇。把「週轉」講成信仰的騙子。</p>
-  <p><b>Kevin</b>董伯的姪子，三十歲。留美會計，傲慢、聰明、犀利。</p>
-  <p><b>旁白</b>說書人，兼客串配音與音效。詳細人物設定另見人物設定檔。</p>
+<p><b>文姐</b>場主，四十多歲。把場子當成命，越危險越冷靜。</p>
+<p><b>秀秀</b>帳房，三十歲上下。相信數字，卻已經替文姐與自己做了假帳。</p>
+<p><b>Nana</b>紅牌公關，三十歲上下。全場人緣最好，也是警方的線人。</p>
+<p><b>小春</b>新來的端茶妹，二十歲。家境富裕，沒有接觸過這個世界。</p>
+<p><b>董伯</b>金主，七十三歲。今晚要確認的不是金額，而是誰願意主動說出實話。</p>
+<p><b>阿豹</b>圍事，三十九歲。沒有拿場子的錢，卻把一名欠債客人打到下半身癱瘓。</p>
+<p><b>Jerry</b>業務，三十五歲上下。這個月拿走最多錢的人，總相信下個月可以補回去。</p>
+<p><b>Kevin</b>董伯的姪子，三十歲。留美會計，已經準備接手場子。</p>
+<p><b>旁白</b>說書人，兼任陳董、醉客與部分環境聲音的提示。</p>
 </div>
-
 <h2>序場</h2>
-
-<p class="line nar"><span class="who">旁白</span>一九九〇年代，台北，華西街。觀光客在前面那條街吃蛇肉、拍照。後面這條巷子沒有招牌，沒有燈，只有一扇鐵門。鐵門裡面，是一間開了十五年的場子。天九、牌九、百家樂，一個晚上過手四百萬。經營這間場子的人姓文，大家叫她文姐。場子背後的金主，大家叫他董伯。<span class="cue">（停頓）</span>這個故事發生在一個星期五。故事開始的前一個禮拜，有一個二十歲的女孩子在打工廣告上面挑工作。她家很有錢，有錢到她這輩子沒有看過帳單。她挑了薪水最高的那一個，因為她跟她媽賭氣，說她可以自己賺錢。<span class="cue">（停頓）</span>命運這種東西，開起玩笑來，比誰都準時。</p>
-
-<p class="dir">△ 小春開麥，一個人對觀眾講話。</p>
-
-<div class="mono">
-  <div class="mname">小春・獨白</div>
-  <p>大家好！我叫小春，吳小春！今天是我人生第一天上班！超緊張的！我跟你們說，我本來是不用打工的啦，我家是開建材行的，就是那種……嗯……賣建材的！可是我爸幾個月前出了意外，現在還在醫院，下半身……醫生說要看復健。<span class="cue">（頓一下）</span>我媽說是喝酒跌倒。可是我爸喝酒從來不會跌倒欸，他都是用滾的。<span class="cue">（自己笑出來，又收住）</span>反正，家裡最近氣氛很低，我媽整天掛電話講一些我聽不懂的事情，我就說，好啊，你們都不理我，我自己去賺錢！我挑了薪水最高的工作！端茶！一個月三萬八！<span class="cue">（很認真）</span>欸不是，三萬八到底是很多還是很少？我真的不知道欸。</p>
+<p class="dir">【環境音】夜裡的華西街。遠處有人叫賣，機車從巷口經過。數秒後，鐵門拉開，再緩慢關上。</p>
+<p class="line nar"><span class="who">旁白</span>一九九〇年代，台北，華西街。觀光客在前面的街上吃蛇肉、拍照片。後面這條巷子沒有招牌，只有一扇鐵門。鐵門裡面，是一間開了十五年的地下賭場。天九、牌九、百家樂，一個晚上可以經手四百萬。</p>
+<p class="line nar cont">經營場子的人姓文，大家叫她文姐。場子背後的金主，大家叫他董伯。</p>
+<p class="line nar cont">這個故事發生在一個星期五。故事開始的前一個星期，一名二十歲的女孩在報紙上找工作。她家裡很有錢，從來不需要知道水電費是多少。她和母親賭氣，決定證明自己可以賺錢，於是挑了薪水最高的工作。</p>
+<p class="line nar cont">她不知道，那扇鐵門後面，有人認識她父親，也有人正在害怕見到她。</p>
+<p class="dir">【停頓兩秒】</p>
+<div class="mono"><div class="mname">小春・獨白</div>
+<p>大家好！我叫吳小春。今天是我人生第一天上班，超緊張的！我本來不用打工，我家是開建材行的，就是賣水泥、鋼筋、磁磚那些東西。其實我也不太懂，反正我爸會懂。</p>
+<p>我爸上個月出了意外，現在還在醫院。醫生說，下半身能不能恢復，要看復健。我媽說他喝醉跌倒，可是我爸喝醉從來不會跌倒，他都扶著牆慢慢走，走到房間才整個倒下去。</p>
+<p>家裡最近很安靜。我媽一直打電話，又不肯告訴我在處理什麼。我一生氣就說，好啊，你們都不理我，我自己去賺錢。</p>
+<p>我挑到一個端茶的工作，一個月三萬八。三萬八到底算多還是算少？我真的不知道。不過第一天上班，不能遲到。吳小春，加油！</p>
+<p class="mdir">【音效】她拍了兩下自己的臉，深呼吸。鐵門打開。</p>
 </div>
-
 <h2>第一場〈規矩〉</h2>
-
-<p class="dir">△ 傍晚，開場前的場子。擦桌子、洗牌、杯盤的聲音。</p>
-
+<p class="dir">【環境音】傍晚。有人擦桌、洗牌、排列玻璃杯。收音中要有籌碼相碰的聲音。</p>
 <p class="line"><span class="who">文姐</span>新來的，過來。</p>
-<p class="line"><span class="who">小春</span>是！文姐好！我叫小春，請多多指教！哇，妳的西裝好挺喔，哪裡訂做的？我爸的西裝都皺皺的——</p>
-<p class="line"><span class="who">文姐</span>這裡的規矩只有三條。第一，客人的話，聽進去，不要記得。第二，桌上的錢，看得到，不要看。第三——</p>
-<p class="line"><span class="who">阿豹</span>第三，有事，喊我。</p>
-<p class="line"><span class="who">小春</span><span class="cue">（轉頭，仰頭）</span>哇！這位大哥好高！</p>
-<p class="line"><span class="who">阿豹</span>叫我豹哥。妹妹，妳貴姓？</p>
-<p class="line"><span class="who">小春</span>我姓吳！吳小春！口天吳！</p>
-<p class="line"><span class="who">阿豹</span><span class="cue">（停了一拍）</span>……姓吳。</p>
-<p class="line"><span class="who">小春</span>對啊。豹哥你怎麼了？臉色好像不太好，要不要喝水？</p>
-<p class="line"><span class="who">阿豹</span><span class="cue">（別開視線）</span>沒事。去忙。</p>
-
-<p class="dir">△ 阿豹走到一邊。這一拍靠聲音演：那句「……姓吳」的停頓要停得夠久，久到聽的人都注意到。</p>
-
-<p class="line"><span class="who">Nana</span>小春過來，姐姐教妳。客人贏錢的時候，妳離他近一點，他會給小費；客人輸錢的時候，妳離他遠一點，他會找人出氣。</p>
-<p class="line"><span class="who">小春</span>那客人不贏不輸的時候呢？</p>
-<p class="line"><span class="who">Nana</span><span class="cue">（笑）</span>傻孩子，這裡沒有不贏不輸的客人。</p>
-<p class="line"><span class="who">小春</span>喔——像我爸說的，做生意沒有不賺不賠的，只有還沒被抓到的！</p>
-<p class="line"><span class="who">Nana</span><span class="cue">（愣了一下，笑出來）</span>……妳爸是個人才。</p>
-<p class="line"><span class="who">Jerry</span><span class="cue">（大聲進場）</span>姐！姐！天大的好消息！今天晚上，三桌，全滿！我新拉來那個科技業的陳董，下午先派人來換了八十萬的碼！八十萬！開胃而已！</p>
-<p class="line"><span class="who">文姐</span>Jerry。陳董的碼，是現金換的，還是掛帳？</p>
-<p class="line"><span class="who">Jerry</span>姐！妳放心！陳董這種等級的，先掛著是給他面子，錢跑不掉的啦！</p>
-<p class="line"><span class="who">文姐</span>我只跟你講一次。在我的場子裡，規矩比錢大。</p>
-<p class="line"><span class="who">Jerry</span>懂！我什麼不懂，就是懂規矩！<span class="cue">（看到小春）</span>欸？新來的？妹妹妳好，我是 Jerry，這個場子一半的錢是我拉進來的。</p>
-<p class="line"><span class="who">小春</span>哇，Jerry 哥好厲害！啊——我想起來了！我上禮拜有看過你欸，就是我來面試那天，在後巷——</p>
-<p class="line"><span class="who">秀秀</span><span class="cue">（抱著帳本穿過，打斷）</span>小春，茶水間在後面，跟我來，熱水器有點難開。</p>
-<p class="line"><span class="who">小春</span>喔好！秀秀姐等等我！</p>
-
-<p class="dir">△ 兩人下。Jerry 慢了半秒才接話。這半秒的空拍，只有聽的人聽得出來。</p>
-
-<p class="line"><span class="who">Jerry</span><span class="cue">（走到阿豹旁邊，壓低）</span>豹哥。晚上人多，你多罩一點。<span class="cue">（拍拍他的肩膀，更低）</span>上個月那件事，處理好了嗎？那筆錢……都送到了？</p>
-<p class="line"><span class="who">阿豹</span><span class="cue">（很久）</span>……送到了。</p>
-<p class="line"><span class="who">Jerry</span>送到就好。大家兄弟。</p>
-<p class="line"><span class="who">文姐</span><span class="cue">（對全場）</span>都動起來。今天晚上，讓客人輸得開開心心。</p>
-
+<p class="line"><span class="who">小春</span>是！文姐好，我叫吳小春，請多多指教。哇，妳的西裝好挺，是訂做的嗎？我爸的西裝每次坐車都會皺——</p>
+<p class="line"><span class="who">文姐</span>這裡有三條規矩。第一，客人的話可以聽，離開桌邊以後就忘掉。第二，桌上的錢可以看，手不要碰。第三——</p>
+<p class="dir">【音效】沉重的腳步靠近，一箱酒被放到地上。</p>
+<p class="line"><span class="who">阿豹</span>有事就叫我。</p>
+<p class="line"><span class="who">小春</span>哇，這位大哥的聲音好近。你是不是很高？</p>
+<p class="line"><span class="who">阿豹</span>叫我豹哥。妹妹，妳姓什麼？</p>
+<p class="line"><span class="who">小春</span>我姓吳，口天吳。吳小春。</p>
+<p class="dir">【停頓兩秒。阿豹手裡的玻璃瓶輕輕碰到箱子。】</p>
+<p class="line"><span class="who">阿豹</span>……姓吳。</p>
+<p class="line"><span class="who">小春</span>對啊。豹哥，你是不是不舒服？你的呼吸突然變得很重。要不要先喝水？</p>
+<p class="line"><span class="who">阿豹</span>不用。那箱杯子很重，妳不要搬。去跟 Nana 學。</p>
+<p class="dir">【音效】阿豹把箱子移走，腳步離開。</p>
+<p class="line"><span class="who">Nana</span>小春，過來。姐姐先教妳。客人贏錢的時候，妳靠近一點，他高興了會給小費。客人輸錢的時候，妳離遠一點，他可能會找人發脾氣。</p>
+<p class="line"><span class="who">小春</span>那客人沒有贏，也沒有輸的時候呢？</p>
+<p class="line"><span class="who">Nana</span>這裡沒有這種客人。還沒離開以前，輸贏都還沒有結束。</p>
+<p class="line"><span class="who">小春</span>喔。跟我爸做生意很像。他常說，款項沒有進公司帳戶以前，都不算收到錢。</p>
+<p class="line"><span class="who">Nana</span>妳爸聽起來很會做生意。</p>
+<p class="dir">【音效】鐵門快速打開，Jerry 邊走邊說話，手裡甩著一串車鑰匙。</p>
+<p class="line"><span class="who">Jerry</span>姐！好消息！今天晚上三桌全滿。我新找來的科技公司陳董，下午先叫人換了八十萬籌碼。八十萬只是第一筆，他今晚至少還會再換一次。</p>
+<p class="line"><span class="who">文姐</span>現金已經到了，還是先記帳？</p>
+<p class="line"><span class="who">Jerry</span>先記帳。這種客人願意來，先讓他玩是給他面子。錢不會跑。</p>
+<p class="line"><span class="who">文姐</span>Jerry，我只說一次。沒有收到現金，就是沒有收到。場子的規矩不能因為客人有錢就改。</p>
+<p class="line"><span class="who">Jerry</span>懂。我最懂規矩。規矩就是讓大家都能賺錢，對不對？</p>
+<p class="line"><span class="who">文姐</span>不對。</p>
+<p class="dir">【短暫停頓。Nana 忍住笑。】</p>
+<p class="line"><span class="who">Jerry</span>好，姐說不對就不對。欸，新來的？妹妹妳好，我是 Jerry。這個場子一半的新客人，都是我帶來的。</p>
+<p class="line"><span class="who">小春</span>Jerry 哥好厲害。啊，我想起來了！上星期三我來面試，在後巷看過你。你那時候——</p>
+<p class="dir">【音效】帳本用力闔上。</p>
+<p class="line"><span class="who">秀秀</span>小春，茶水間在後面。熱水器點火的時候會發出很大的聲音，我帶妳去。</p>
+<p class="line"><span class="who">小春</span>好！秀秀姐等等我。</p>
+<p class="dir">【音效】兩人的腳步離開，茶水間的門關上。</p>
+<p class="dir">【停頓一秒。】</p>
+<p class="line"><span class="who">Jerry</span>豹哥。晚上人多，你注意一下後門。</p>
+<p class="dir">【Jerry 壓低聲音。】</p>
+<p class="line cont">上個月那件事，和解金送到了嗎？</p>
+<p class="line"><span class="who">阿豹</span>送到了。</p>
+<p class="line"><span class="who">Jerry</span>那就好。借據還在我那裡，我會把借據收好。大家都是自己人。</p>
+<p class="dir">【阿豹沒有回答。手指關節發出一聲輕響。】</p>
+<p class="line"><span class="who">文姐</span>都準備好。今天客人來這裡花錢，至少要讓他們離開的時候還願意再來。</p>
 <h2>第二場〈好日子〉</h2>
-
-<p class="line nar"><span class="who">旁白</span>晚上九點，開場。晚上十點，三桌全滿。晚上十一點，科技業的陳董，親自駕到。</p>
-
-<p class="line nar"><span class="who">陳董</span><span class="cue">（旁白配音，豪爽）</span>文姐！久仰久仰！Jerry 說你們這裡是全台北最公道的場子！</p>
-<p class="line"><span class="who">文姐</span>陳董，公道是我們這裡唯一的規矩。你贏，錢當場點給你；你輸，我們也讓你輸得心服口服。</p>
-<p class="line nar"><span class="who">陳董</span>哈哈哈好！我就喜歡這種話！小姐！酒！</p>
-<p class="line"><span class="who">Nana</span>來了來了，陳董，第一杯我陪你。慢慢喝啦，牌桌又不會跑。會跑的，是運氣。</p>
-<p class="line nar"><span class="who">陳董</span>這位小姐會講話！Jerry！你們這裡連倒酒的都會講話！</p>
-<p class="line"><span class="who">Jerry</span>陳董，我跟你說，這裡最不值錢的就是話，最值錢的是——<span class="cue">（壓低，神祕）</span>手氣。你今天印堂發亮，我看八圈之內，必有大牌。</p>
-<p class="line"><span class="who">小春</span><span class="cue">（端茶經過，很大聲）</span>Jerry 哥你也會看面相喔？幫我看幫我看！</p>
-<p class="line"><span class="who">Jerry</span><span class="cue">（不耐煩揮手）</span>去去去，大人講話。</p>
-<p class="line"><span class="who">小春</span>喔。<span class="cue">（對 Nana 小聲）</span>Nana 姐，印堂是哪裡？</p>
-
-<p class="dir">△ 骰盅、吆喝。突然一聲杯子砸地。</p>
-
-<p class="line nar"><span class="who">醉客</span><span class="cue">（旁白配音，含糊咆哮）</span>出老千！恁爸看到了！那張牌——恁爸六十萬就這樣沒了？幹恁娘我跟你們拚——</p>
-<p class="line"><span class="who">阿豹</span><span class="cue">（起身，不快不慢）</span>這位大哥。<span class="cue">（一隻手按住對方肩膀的聲音）</span>你的手，先放下來。</p>
-<p class="line nar"><span class="who">醉客</span>你哪位？你知道恁爸是誰——</p>
-<p class="line"><span class="who">阿豹</span><span class="cue">（很平靜）</span>我不知道你是誰。但是我知道你現在有兩條路。第一條，我陪你出去吹吹風，酒醒了，明天你還是客人。第二條——<span class="cue">（停頓）</span>沒有第二條。走吧。</p>
-<p class="line nar"><span class="who">醉客</span><span class="cue">（氣勢弱掉）</span>……吹風就吹風。</p>
-
-<p class="dir">△ 兩人下。桌邊恢復熱鬧。</p>
-
-<p class="line nar"><span class="who">陳董</span><span class="cue">（讚嘆）</span>文姐，你們這個圍事，有分寸！現在有分寸的人不多了！</p>
-<p class="line"><span class="who">文姐</span><span class="cue">（看著阿豹的背影）</span>……他跟了我二十二年。分寸兩個字，他比誰都懂。</p>
-<p class="line"><span class="who">小春</span><span class="cue">（對 Nana，崇拜）</span>豹哥好帥喔！都不用打人欸！</p>
-<p class="line"><span class="who">Nana</span><span class="cue">（笑容淡了一點）</span>傻孩子。不用打人，是因為大家都知道他打過。</p>
-
-<p class="line nar"><span class="who">旁白</span>那個晚上陳董輸了六十幾萬，笑得比贏的人還大聲，走的時候還預約了下禮拜。凌晨一點，場子的氣氛好得像過年。<span class="cue">（停頓）</span>好日子就是這樣，到了最後一天，它不會提醒你。</p>
-
+<p class="dir">【環境音】賭場正式營業。三桌同時進行，骰盅、籌碼、洗牌、杯盤與人聲交錯。聲音熱鬧，但角色台詞必須清楚。</p>
+<p class="line nar"><span class="who">旁白</span>晚上九點，第一桌坐滿。十點，第二桌加椅子。十一點，Jerry 帶來的陳董親自到了。</p>
+<p class="dir">【音效】鐵門打開。數人進場，Jerry 高聲招呼。</p>
+<p class="line nar"><span class="who">陳董</span>文姐，久仰！Jerry 說，妳這裡是全台北最公道的場子。</p>
+<p class="line"><span class="who">文姐</span>陳董，這裡不保證客人贏，只保證輸贏都照規矩算。您贏，現金當場點清；您輸，帳也當場確認。</p>
+<p class="line nar"><span class="who">陳董</span>好！我喜歡講清楚的人。小姐，先開酒！</p>
+<p class="line"><span class="who">Nana</span>酒來了。第一杯我陪陳董。您慢慢喝，牌桌不會離開，喝太快的人反而容易算錯牌。</p>
+<p class="line nar"><span class="who">陳董</span>這位小姐會照顧客人。Jerry，你們連倒酒的人都比你可靠。</p>
+<p class="line"><span class="who">Jerry</span>陳董，我靠的是判斷。你今天氣色很好，八圈之內一定有大牌。</p>
+<p class="line"><span class="who">小春</span>Jerry 哥，你會看面相？那你也幫我看一下。我今天會不會拿到很多小費？</p>
+<p class="line"><span class="who">Jerry</span>妹妹，先去補冰塊。大人正在談事情。</p>
+<p class="line"><span class="who">小春</span>喔。Nana 姐，印堂是哪裡？</p>
+<p class="line"><span class="who">Nana</span>等妳領到第一筆小費，我再告訴妳。</p>
+<p class="dir">【另一桌傳來爭執。】</p>
+<p class="line nar"><span class="who">客人甲（可由旁白簡短客串）</span>等一下，這一局我應該拿十八萬，怎麼只有十七萬八？</p>
+<p class="dir">【音效】秀秀迅速翻帳、按計算機。</p>
+<p class="line"><span class="who">秀秀</span>不是十八萬。上一局您少押兩千，這一局本金是四萬八，三倍是十四萬四，加回本金四萬八，總共十九萬二。剛才桌面少放了一萬四。小春，把旁邊那疊一萬元籌碼拿過來。</p>
+<p class="line"><span class="who">小春</span>這疊嗎？</p>
+<p class="line"><span class="who">秀秀</span>對。一萬四，不是一萬二。</p>
+<p class="line nar"><span class="who">客人甲</span>喔，對。是我記錯。秀秀，妳這腦袋真厲害。</p>
+<p class="line"><span class="who">秀秀</span>帳算對就好。</p>
+<p class="dir">【音效】小春把籌碼放下。</p>
+<p class="line"><span class="who">小春</span>秀秀姐，妳剛才連看都沒有多看就知道少多少。</p>
+<p class="line"><span class="who">秀秀</span>因為我看過了。妳先學會把杯子放穩，不要讓冰塊掉進籌碼盤。</p>
+<p class="line"><span class="who">小春</span>收到。</p>
+<p class="dir">【另一側，阿豹開門讓一名年老客人離開。】</p>
+<p class="line nar"><span class="who">老客人（旁白客串一句）</span>阿豹，幫我叫車。我今天喝多了，不想讓我太太知道。</p>
+<p class="line"><span class="who">阿豹</span>車已經在巷口。你回家以前先把領帶拆掉，太太會聞到酒味，不會只看領帶。</p>
+<p class="line nar"><span class="who">老客人</span>你不要那麼了解我。下星期見。</p>
+<p class="line"><span class="who">阿豹</span>慢走。</p>
+<p class="line"><span class="who">小春</span>豹哥，你連客人的太太會不會生氣都知道喔？</p>
+<p class="line"><span class="who">阿豹</span>他每星期都說最後一次。說了七年。</p>
+<p class="line"><span class="who">Nana</span>這裡很多人都很會說「最後一次」。</p>
+<p class="dir">【陳董大笑，籌碼推出。】</p>
+<p class="line nar"><span class="who">陳董</span>再換五十萬！Jerry，你說得對，我今天真的有手氣。</p>
+<p class="line"><span class="who">Jerry</span>我從來不會看錯人。小春，快去跟秀秀拿籌碼。陳董這一桌不能停。</p>
+<p class="line"><span class="who">文姐</span>先收現金。</p>
+<p class="line nar"><span class="who">陳董</span>文姐，妳還怕我跑掉？</p>
+<p class="line"><span class="who">文姐</span>不是怕您跑。是這裡每一位客人都照同一個規矩。規矩相同，才叫公道。</p>
+<p class="dir">【停頓一秒。陳董拍桌大笑。】</p>
+<p class="line nar"><span class="who">陳董</span>好！Jerry，把皮箱拿來。五十萬，現在點。</p>
+<p class="dir">【音效】皮箱扣環打開，鈔票點數機開始運轉。</p>
+<p class="line nar"><span class="who">旁白</span>午夜十二點半，三桌都在下注。文姐在桌與桌之間走動，沒有提高音量，所有人卻知道該做什麼。秀秀核對每一筆籌碼，Nana 記得每位客人的酒，小春第一次拿到小費，數了三遍。Jerry 說了二十七次「我保證」，沒有一次說完以後立刻出事。</p>
+<p class="line nar cont">直到凌晨十二點五十分，一只玻璃杯摔在地上。</p>
+<p class="dir">【音效】玻璃碎裂。桌面被撞動。</p>
+<p class="line nar"><span class="who">醉客</span>出老千！我看到了！那張牌不對！我六十萬就這樣沒了？幹，我跟你們拚——</p>
+<p class="dir">【音效】椅子往後倒，阿豹的腳步靠近。一隻手重重按住桌面。</p>
+<p class="line"><span class="who">阿豹</span>這位大哥。你的手先放開。</p>
+<p class="line nar"><span class="who">醉客</span>你是誰？你知不知道我是誰？</p>
+<p class="line"><span class="who">阿豹</span>我不知道，也不需要知道。現在有一個做法：我陪你去巷口吹風。酒醒以後，明天你還是客人。你不願意出去，我就請你出去。選一個。</p>
+<p class="line nar"><span class="who">醉客</span>……我自己走。</p>
+<p class="line"><span class="who">阿豹</span>好。慢慢走，地上有玻璃。</p>
+<p class="dir">【音效】兩人的腳步離開。Nana 立刻拍手，把其他客人的注意力拉回桌面。</p>
+<p class="line"><span class="who">Nana</span>沒事，杯子碎了而已。陳董，剛才那一局還沒有開牌，您要不要親自開？</p>
+<p class="line nar"><span class="who">陳董</span>當然要。文姐，妳這個圍事處理事情有分寸。現在懂得控制力道的人不多。</p>
+<p class="line"><span class="who">文姐</span>阿豹十七歲就跟著我。場子裡什麼時候該動手，什麼時候不能動手，他知道。</p>
+<p class="line"><span class="who">小春</span>豹哥剛才好帥，真的沒有打人。</p>
+<p class="line"><span class="who">Nana</span>因為其他人知道，他以前打過人。</p>
+<p class="dir">【短暫停頓。遠處再度傳來下注聲。】</p>
+<p class="line nar"><span class="who">旁白</span>陳董那一晚輸了六十多萬，離開時還預約下個星期。凌晨一點半，最後一桌暫停換牌。文姐讓人把華西街口的鹹粥、炸豆腐和滷味送進來。</p>
+<p class="dir">【環境音】紙袋打開、免洗筷拆開，眾人短暫坐在同一張桌旁。背景客人聲稍遠。</p>
+<p class="line"><span class="who">文姐</span>十分鐘。吃完再開桌。湯不要靠近牌。</p>
+<p class="line"><span class="who">小春</span>還有員工餐喔？我以為地下賭場都不吃飯。</p>
+<p class="line"><span class="who">Jerry</span>妹妹，電影看太多。地下賭場的人也會餓，而且特別容易餓。因為每個人都在動腦。</p>
+<p class="line"><span class="who">秀秀</span>你今晚只有嘴在動。</p>
+<p class="line"><span class="who">Nana</span>秀秀今天心情不錯，居然會開玩笑。</p>
+<p class="line"><span class="who">阿豹</span>小春，這碗不要拿。很燙。</p>
+<p class="dir">【音效】阿豹把碗移到自己面前，又把另一碗放到小春面前。</p>
+<p class="line"><span class="who">小春</span>謝謝豹哥。你人真的很好欸。</p>
+<p class="dir">【阿豹的筷子停在碗邊，發出很輕的一聲。】</p>
+<p class="line"><span class="who">Jerry</span>好人不能當飯吃。像我這種能帶客人進來的，才可以讓大家有飯吃。</p>
+<p class="line"><span class="who">文姐</span>陳董的五十萬如果不是我要求他拿出現金，你今晚帶進來的只有一張欠款單。</p>
+<p class="line"><span class="who">Jerry</span>姐，欠款單也是生意的開始。</p>
+<p class="line"><span class="who">秀秀</span>也可能是損失的開始。</p>
+<p class="line"><span class="who">Nana</span>好啦。今天三桌都滿，陳董下星期還會來，小春也沒有把湯倒進籌碼盤。這已經算順利了。</p>
+<p class="line"><span class="who">小春</span>我今天拿到兩千六百塊小費！我可以請大家喝飲料。</p>
+<p class="line"><span class="who">文姐</span>先收好。第一筆自己賺的錢，不要第一天就花掉。</p>
+<p class="line"><span class="who">小春</span>文姐，妳是不是也把第一筆錢留到現在？</p>
+<p class="dir">【停頓一秒。】</p>
+<p class="line"><span class="who">文姐</span>不記得了。吃飯。</p>
+<p class="line nar"><span class="who">旁白</span>那是場子最後一次，所有人坐在同一張桌旁吃東西。當時沒有人知道。好日子結束的時候，通常不會有人提醒。</p>
 <h2>第三場〈茶水間〉</h2>
-
-<p class="dir">△ 深夜，茶水間。水滾的聲音。秀秀對著一本帳出神。小春在旁邊洗杯子，哼歌。</p>
-
-<p class="line"><span class="who">Nana</span><span class="cue">（進來）</span>秀秀，躲在這裡喔？外面陳董找妳結碼欸。</p>
-<p class="line"><span class="who">秀秀</span><span class="cue">（回神）</span>……叫 Jerry 處理。</p>
-<p class="line"><span class="who">Nana</span><span class="cue">（看她一眼，對小春）</span>小春，杯子洗好先拿出去，外面缺。</p>
-<p class="line"><span class="who">小春</span>好！<span class="cue">（下）</span></p>
-<p class="line"><span class="who">Nana</span><span class="cue">（坐下）</span>好了，人走了。妳這個月對這本帳，對到第幾遍了？</p>
-<p class="line"><span class="who">秀秀</span><span class="cue">（勉強笑）</span>第三遍。職業病。</p>
-<p class="line"><span class="who">Nana</span>秀秀。我們認識五年。妳騙客人，我看不出來。妳騙我？秀秀，五年了，妳自己講，妳騙得過我嗎？</p>
-<p class="line"><span class="who">秀秀</span><span class="cue">（很久）</span>……Nana，我問妳喔。如果有一件事，講出來會害到別人，不講會害到自己，妳會怎麼辦？</p>
-<p class="line"><span class="who">Nana</span><span class="cue">（心裡一沉，臉上不動）</span>……看那個「別人」是誰。是我認識的人嗎？</p>
-<p class="line"><span class="who">秀秀</span><span class="cue">（笑了一下，把帳本闔上）</span>沒事。我亂問的。帳還沒對完，我先過去了。<span class="cue">（下）</span></p>
-<p class="line"><span class="who">Nana</span><span class="cue">（一個人，對著空氣，很輕）</span>……幹。這間場子裡，怎麼每一個人心裡都有一件「講出來會害到人」的事。<span class="cue">（頓）</span>包括我。</p>
-
-<p class="dir">△ 場景切換：文姐這邊，電話中。</p>
-
-<p class="line"><span class="who">文姐</span>董伯，我文的。跟您請安，順便報一下這個月的數字。</p>
-<p class="line"><span class="who">董伯</span><span class="cue">（畫外音）</span>數字妳留到月底再講。我問妳——妳最近，睡得好嗎？</p>
-<p class="line"><span class="who">文姐</span><span class="cue">（一秒的停頓）</span>……睡得好。場子平安，我就睡得好。</p>
-<p class="line"><span class="who">董伯</span><span class="cue">（輕輕地）</span>平安就好。平安，最貴。<span class="cue">（停頓）</span>對了。我姪子從美國回來了，唸會計的。他說改天想去妳的場子看看，學一點東西。</p>
-<p class="line"><span class="who">文姐</span><span class="cue">（握緊話筒）</span>……歡迎。董伯的人，就是我的人。</p>
-<p class="line"><span class="who">董伯</span>好。妳去忙。<span class="cue">（掛斷音）</span></p>
-<p class="line"><span class="who">文姐</span><span class="cue">（拿著話筒，很久）</span>……學一點東西。<span class="cue">（放下話筒）</span>學什麼東西。</p>
-
-<p class="dir">△ 全員靜音三秒，換場。</p>
-
+<p class="dir">【環境音】凌晨兩點。茶水間的熱水器運轉，杯子在水槽裡輕碰。外面的賭局聲已經少了一桌。</p>
+<p class="line"><span class="who">小春</span><span class="cue">（哼歌）</span>秀秀姐，這個杯子洗到會反光了，可以嗎？</p>
+<p class="line"><span class="who">秀秀</span>杯口還有口紅。再洗一次。</p>
+<p class="line"><span class="who">小春</span>好嚴格喔。妳對帳也會一直檢查嗎？</p>
+<p class="line"><span class="who">秀秀</span>帳有錯，錢就會少。杯子沒洗乾淨，客人會抱怨。都是工作。</p>
+<p class="dir">【音效】Nana 推門進來。</p>
+<p class="line"><span class="who">Nana</span>秀秀，妳躲在這裡？陳董要結算籌碼。</p>
+<p class="line"><span class="who">秀秀</span>叫 Jerry 先陪他。我等一下出去。</p>
+<p class="line"><span class="who">Nana</span>小春，外面缺乾淨杯子。妳先拿這一盤出去。</p>
+<p class="line"><span class="who">小春</span>好。這次真的洗乾淨了喔。</p>
+<p class="dir">【音效】小春端著杯盤離開，門關上。</p>
+<p class="line"><span class="who">Nana</span>好了，只剩我們。妳這個月把帳核對幾次了？</p>
+<p class="line"><span class="who">秀秀</span>第四次。</p>
+<p class="line"><span class="who">Nana</span>剛才明明說第三次。</p>
+<p class="line"><span class="who">秀秀</span>那是剛才。</p>
+<p class="line"><span class="who">Nana</span>秀秀，我們認識五年。妳對客人說場子一定安全，我看不出真假。妳對我說沒事，我聽得出來。</p>
+<p class="dir">【秀秀翻了兩頁帳，停住。】</p>
+<p class="line"><span class="who">秀秀</span>Nana，我問妳。如果一件事說出來，會害到一個對妳很好的人；不說，最後可能害到自己。妳會怎麼做？</p>
+<p class="line"><span class="who">Nana</span>先確認那個人對妳好，是因為真的在意妳，還是因為需要妳替她做事。</p>
+<p class="line"><span class="who">秀秀</span>有差嗎？</p>
+<p class="line"><span class="who">Nana</span>有。有些人需要妳，也真的在意妳。問題是，兩件事放在一起，很難分清楚。</p>
+<p class="line"><span class="who">秀秀</span>……那妳呢？妳有沒有一件事，說出來會讓我們都完蛋？</p>
+<p class="dir">【Nana 手中的湯匙碰到杯沿。】</p>
+<p class="line"><span class="who">Nana</span>這間場子裡，誰沒有？</p>
+<p class="line"><span class="who">秀秀</span>也是。</p>
+<p class="dir">【秀秀闔上帳本。】</p>
+<p class="line"><span class="who">秀秀</span>我先出去。陳董如果又多算自己的錢，我不想讓 Jerry 幫他算。</p>
+<p class="dir">【音效】秀秀離開。</p>
+<p class="line"><span class="who">Nana</span><span class="cue">（獨自，很輕）</span>每個人都在等別人先說。等到最後，通常只剩警察會問。</p>
+<p class="dir">【場景轉換音】電話鈴響。文姐接起電話，外面的聲音降低。</p>
+<p class="line"><span class="who">文姐</span>董伯，我是文的。跟您請安，也報一下這個月的數字。</p>
+<p class="line"><span class="who">董伯（電話聲）</span>數字月底再說。我先問妳，最近睡得好嗎？</p>
+<p class="line"><span class="who">文姐</span>睡得好。場子沒有出事，我就睡得好。</p>
+<p class="line"><span class="who">董伯</span>沒有出事就好。對了，我姪子從美國回來，念會計。他想去場子看看，也學一下你們怎麼做事。</p>
+<p class="dir">【文姐的呼吸停了一拍。】</p>
+<p class="line"><span class="who">文姐</span>歡迎。董伯安排的人，我都會照顧。</p>
+<p class="line"><span class="who">董伯</span>好。妳去忙。</p>
+<p class="dir">【音效】電話掛斷。文姐仍握著話筒，電話發出空線聲。數秒後，她才放下。</p>
+<p class="line"><span class="who">秀秀</span><span class="cue">（從門外靠近）</span>姐？</p>
+<p class="line"><span class="who">文姐</span>妳都聽到了？</p>
+<p class="line"><span class="who">秀秀</span>Kevin 要來？</p>
+<p class="line"><span class="who">文姐</span>他說來學。</p>
+<p class="line"><span class="who">秀秀</span>前年過年，董伯在樓上跟人說的那句話，妳還記得嗎？</p>
+<p class="dir">【停頓兩秒。】</p>
+<p class="line"><span class="who">文姐</span>他說，場子是他的，我只是替他管理。</p>
+<p class="line"><span class="who">秀秀</span>姐，也許他只是對外面的人這樣說。</p>
+<p class="line"><span class="who">文姐</span>十五年。我以為我把一間漏水的鐵皮屋做成現在這樣，至少可以換到一句「我們的場子」。結果沒有。</p>
+<p class="line"><span class="who">秀秀</span>所以妳才開始拿錢。</p>
+<p class="line"><span class="who">文姐</span>我不是因為一句話拿錢。那句話只是讓我知道，這裡永遠不會真正屬於我。</p>
+<p class="line"><span class="who">秀秀</span>第三個抽屜已經有三百萬。再多放，風險會變大。</p>
+<p class="line"><span class="who">文姐</span>再一個月。我原本只差一個月。</p>
+<p class="dir">【遠處有人喊秀秀結算。】</p>
+<p class="line"><span class="who">秀秀</span>姐，這個月的缺口不只有我們的八十萬。</p>
+<p class="line"><span class="who">文姐</span>我知道。先把今晚結束。</p>
+<p class="line"><span class="who">秀秀</span>今晚可能不會照原本的方式結束。</p>
+<p class="dir">【外面鐵門傳來一次沉重的敲門聲。】</p>
 <h2>幕間獨白一</h2>
-
-<p class="dir">△ 董伯獨白，像坐在車上。</p>
-
-<div class="mono">
-  <div class="mname">董伯・獨白</div>
-  <p>我七十三歲了。我這輩子送走過的人，比你們認識的人還多。我很少出門，年紀大了，看什麼都慢，只有一樣東西我看得比誰都快：數字。十五年前我把場子交給文的，她沒有讓我失望過。十五年，一百八十個月，每個月的數字我都記得。<span class="cue">（停頓）</span>你們以為我今晚是為了錢。錢，我的人上個月就查清楚了。文的每個月抽五十萬，抽了半年。<span class="cue">（喝一口茶）</span>我沒有生氣。她做十五年，抽這一點，講難聽一點，是我虧待她在先。還有一件事我也知道了。我一個遠房親戚，開建材行的，上個月被人打到躺進醫院。動手的人，是場子裡的。<span class="cue">（停頓）</span>我今晚只想知道兩件事：動手的人，敢不敢自己認；文的，敢不敢跟我講實話。<span class="cue">（茶杯放下的聲音）</span>實話，是這一行最後一樣值錢的東西。</p>
+<p class="dir">【環境音】汽車行駛。方向燈規律作響。董伯坐在後座，保溫杯蓋被旋開。</p>
+<div class="mono"><div class="mname">董伯・獨白</div>
+<p>我七十三歲了。這一行做久了，錢少多少，通常不是最難查的事。最難查的是，誰拿了錢、誰替別人隱瞞，又有誰開始對自己人說謊。</p>
+<p>十五年前，我把場子交給文的。那時候裡面會漏水，客人一多，廁所還會堵住。她沒有讓我失望。十五年，一百八十個月，每個月的數字我都看過。</p>
+<p>文的半年來，每個月拿五十萬。總共三百萬，放在帳房第三個抽屜。這件事，我的人上個月就查清楚了。我沒有因為錢生氣。她替我做十五年，沒有股份，也沒有自己的名字。她想替自己留一筆錢，這件事可以談。</p>
+<p>可是她沒有跟我談這件事。</p>
+<p>還有一件事。上個月，開建材行的吳董被人打到下半身不能動。吳董是我的遠房親戚。動手的人，是阿豹。</p>
+<p>我今晚不是去第一次知道這些事。我是去聽他們自己說。</p>
+<p>Kevin 會不會接手，也不是今晚以前就完全決定。文的願意說實話，場子還有其他安排。她不肯說出實話，Kevin 就有位置。</p>
+<p class="mdir">【董伯喝一口水，旋緊杯蓋。】</p>
+<p>人做錯事以後，最容易做的就是解釋。主動承認自己做錯什麼，才難。</p>
 </div>
-
 <h2>第四場〈短少〉</h2>
-
-<p class="dir">△ 凌晨兩點半。收桌的聲音。鐵門被推開。</p>
-
-<p class="line nar"><span class="who">旁白</span>凌晨兩點四十分，董伯的車停在巷口。他十五年來只在過年出現。今天不是過年。跟在他後面進來的年輕人，場子裡沒有人見過。</p>
-
-<p class="line"><span class="who">文姐</span><span class="cue">（愣住）</span>董伯？您這個時間——您打一通電話，我自己過去就好了。</p>
-<p class="line"><span class="who">董伯</span>坐啦。大家都給我坐下。今天沒有外人，我們自己人，講自己人的話。<span class="cue">（看了年輕人一眼）</span>這是 Kevin，我姪子。美國唸書回來的。以後，你們會常常看到他。</p>
-<p class="line"><span class="who">Kevin</span><span class="cue">（環顧四周，慢條斯理）</span>……原來現金流是從這種地方出來的。Interesting。</p>
-<p class="line"><span class="who">阿豹</span><span class="cue">（低聲）</span>幹，這誰？</p>
-<p class="line"><span class="who">Jerry</span>董伯您能親自過來是我們的福氣啦！我跟您報告，這個月人氣旺到不行，我上禮拜才拉進來三個新的——</p>
-<p class="line"><span class="who">董伯</span><span class="cue">（打斷）</span>我知道。人氣很旺。所以我才想不通。</p>
-
-<p class="dir">△ 全場安靜。董伯把茶杯放回桌上，這個聲音要收進麥克風。</p>
-
-<p class="line"><span class="who">董伯</span>這個月的抽頭，少了三成。</p>
-<p class="line"><span class="who">阿豹</span><span class="cue">（爆炸）</span>三成？恁娘咧三成是多少錢你知不知道？誰？哪一個不要命的敢動場子的錢？恁爸現在就去把他的手剁下來！</p>
-<p class="line"><span class="who">文姐</span>阿豹。坐下。</p>
-<p class="line"><span class="who">阿豹</span>坐三小啦幹！錢是在我們自己的場子裡不見的欸！這是在打董伯的臉，也是在打你的臉！</p>
-<p class="line"><span class="who">Kevin</span><span class="cue">（翻資料，頭也不抬）</span>三百萬。精確一點，三百零二萬四千。這位先生，剁手之前，建議先搞清楚要剁誰的。</p>
-<p class="line"><span class="who">阿豹</span>你他媽哪位？</p>
-<p class="line"><span class="who">Kevin</span>剛剛介紹過了。專心一點。</p>
-<p class="line"><span class="who">秀秀</span>豹哥，你先聽我講。帳上有一部分是客人的賒帳，錢還沒有收回來，數字本來就會比較難看——</p>
+<p class="dir">【環境音】凌晨兩點四十分。最後一桌收牌，籌碼被倒回盒中。鐵門外傳來兩下敲門聲。</p>
+<p class="line nar"><span class="who">旁白</span>董伯十五年來，只有過年會到場子。這一天不是過年。他進門時，身後跟著一名穿西裝的年輕男人。那名年輕男人手裡有一個資料夾。</p>
+<p class="dir">【音效】門鎖打開，鐵門拉動。眾人原本的說話聲逐漸停止。</p>
+<p class="line"><span class="who">文姐</span>董伯？這麼晚了，您打一通電話，我可以過去見您。</p>
+<p class="line"><span class="who">董伯</span>都坐下。今天沒有外人，自己人的事情就在這裡講。</p>
+<p class="dir">【音效】董伯拉開椅子坐下，手杖靠在桌邊。</p>
+<p class="line cont">這是 Kevin，我姪子。美國念會計回來。接下來一段時間，他會參與場子的帳務。</p>
+<p class="line"><span class="who">Kevin</span>各位好。這裡跟報表上看起來差很多。</p>
+<p class="line"><span class="who">阿豹</span><span class="cue">（低聲）</span>這個人來做什麼？</p>
+<p class="line"><span class="who">Jerry</span>董伯親自來，是我們的福氣。我先報告一下，這個月客人很多。我上星期才帶進三個新客人，今天陳董又——</p>
+<p class="line"><span class="who">董伯</span>我知道客人很多。所以我才來。</p>
+<p class="dir">【音效】董伯把茶杯放在桌上。杯底碰桌的聲音清楚傳出。</p>
+<p class="line"><span class="who">董伯</span>這個月的抽頭，比平常少了三成。</p>
+<p class="line"><span class="who">阿豹</span>三成？三成是多少錢？誰動場子的錢？讓我查到，我現在就把他的手——</p>
+<p class="line"><span class="who">文姐</span>阿豹，坐下。</p>
+<p class="line"><span class="who">阿豹</span>錢在我們自己的地方不見，這不是小事。</p>
+<p class="line"><span class="who">Kevin</span><span class="cue">（翻開資料夾）</span>不是整數三百萬。精確金額是三百零二萬四千。這位先生，處理人以前，先確認是哪一個人。</p>
+<p class="line"><span class="who">阿豹</span>你他媽叫誰這位先生？</p>
+<p class="line"><span class="who">Kevin</span>剛才已經介紹過名字。Kevin。</p>
+<p class="line"><span class="who">秀秀</span>帳上有客人的欠款還沒有收回，這個月的數字本來就會比平常難看。需要先把已經收到的現金和未收款分開——</p>
 <p class="line"><span class="who">董伯</span>秀秀。</p>
 <p class="line"><span class="who">秀秀</span>……是。</p>
-<p class="line"><span class="who">董伯</span>我七十三歲了。我這輩子聽過最多的一句話，就是「錢還沒有收回來」。</p>
-<p class="line"><span class="who">Nana</span>董伯，夜這麼深了，我去泡壺熱的，大家坐下來慢慢講，好不好？</p>
-<p class="line"><span class="who">董伯</span>不用。今天晚上，沒有人要喝茶。<span class="cue">（轉向文姐）</span>文的。我沒有生氣。我只是想知道，我為什麼要坐在這裡，聽你們解釋我自己的錢去了哪裡。</p>
-<p class="line"><span class="who">Jerry</span>董伯，話不能這樣講啦，搞不好是客人出老千啊！外面的人的問題啊！我明天一早，第一件事就去查——</p>
-<p class="line"><span class="who">文姐</span>Jerry，閉嘴。<span class="cue">（站起來，對全場）</span>今天晚上，這扇門關起來之後，沒有人回家。錢的事情沒有講清楚之前，誰他媽都不要想走出這個門。</p>
-<p class="line"><span class="who">阿豹</span><span class="cue">（鎖門的聲音）</span>門我鎖了。鑰匙在我身上。</p>
-<p class="line"><span class="who">Kevin</span><span class="cue">（輕輕地）</span>很好。省得我叫人。</p>
-
-<p class="dir">△ 全員靜音三秒，換場。</p>
-
+<p class="line"><span class="who">董伯</span>我做這一行五十年，聽過最多的說法，就是錢還沒有收回來。</p>
+<p class="line"><span class="who">Nana</span>董伯，外面冷。我泡一壺熱茶，大家慢慢把帳說清楚，好嗎？</p>
+<p class="line"><span class="who">董伯</span>不用。今天晚上先不喝茶。</p>
+<p class="dir">【董伯朝文姐的方向輕敲桌面一次。】</p>
+<p class="line cont">文的，我沒有要妳立刻賠錢。我只想知道，為什麼我要親自過來，才能聽到這筆缺口。</p>
+<p class="line"><span class="who">Jerry</span>董伯，也可能是客人有問題。有人拿假鈔，有人故意拖欠。我明天一早就去查客人的欠款資料——</p>
+<p class="line"><span class="who">文姐</span>Jerry，閉嘴。</p>
+<p class="dir">【音效】文姐的椅子往後移，她站起來。</p>
+<p class="line cont">今天晚上，這件事沒有說清楚以前，所有人都留在這裡。阿豹，把門鎖上。</p>
+<p class="dir">【音效】阿豹走到鐵門前，門栓扣上，鑰匙落進他的口袋。</p>
+<p class="line"><span class="who">阿豹</span>門鎖了。鑰匙在我這裡。</p>
+<p class="line"><span class="who">Kevin</span>很好。沒有人中途離開，資料比較容易核對。</p>
+<p class="dir">【換場音】牆上時鐘走動的聲音逐漸變清楚。</p>
 <h2>幕間獨白二</h2>
-
-<p class="dir">△ Kevin 獨白。</p>
-
-<div class="mono">
-  <div class="mname">Kevin・獨白</div>
-  <p>你們一定覺得我是來查案的。<span class="cue">（笑一下）</span>我叔叔上個月才叫我核對單據。可是報表這種東西，會講話。兩個月前我就看出來了——現金流不對，缺口每個月在長大。我沒有講。<span class="cue">（停頓）</span>為什麼要講？傷口小的時候提醒他們，他們縫一縫，明天繼續開賭，繼續讓一群連損益表都看不懂的人管四百萬的現金流。我等。等傷口大到蓋不住，大到我叔叔自己下決心把這個爛地方收掉，交給一個看得懂數字的人。<span class="cue">（把資料夾闔上）</span>今天晚上不是查案。今天晚上是交接。他們只是還不知道而已。</p>
+<p class="dir">【音效】資料夾翻頁。</p>
+<div class="mono"><div class="mname">Kevin・獨白</div>
+<p>叔叔上個月才正式叫我核對場子的單據。其實兩個月前，我已經看出現金流不正常。欠款增加，現金減少，幾個支出項目每個月固定出現，卻沒有相對應的單據。</p>
+<p>我沒有提醒文姐。</p>
+<p>提醒她，她會補資料、改流程，場子還是交給原本的人。我等缺口變得足夠明顯，讓叔叔必須考慮換人。</p>
+<p>叔叔沒有承諾把場子交給我。他只說，今晚跟他來，看文姐怎麼回答。</p>
+<p>可是我知道，只要她不肯說實話，這個位置就會空出來。</p>
+<p>我不是來找出第一個犯錯的人。我是來確認，這裡已經沒有任何人適合繼續管理。</p>
+<p class="mdir">【音效】資料夾闔上。</p>
 </div>
-
-<p class="dir">△ 接秀秀獨白。</p>
-
-<div class="mono">
-  <div class="mname">秀秀・獨白</div>
-  <p>我做了八年的帳。八年來我學到一件事：數字不會騙人，但是每一個數字後面，都站著一個會騙人的人。<span class="cue">（停頓）</span>我以前很喜歡對帳，一筆一筆對到平，像把亂掉的房間整理乾淨。現在我半夜對帳的時候，會突然停下來，看著某一個數字很久很久。三百萬。我和文姐拿的，加起來八十萬。剩下那兩百二十萬——我知道帳上的名字是誰。我不能講。我一講，第一個被挖出來的是我自己。<span class="cue">（深呼吸）</span>帳是平的。帳一直都是平的。這句話我最近常常講。講給別人聽，也講給我自己聽。</p>
+<div class="mono"><div class="mname">秀秀・獨白</div>
+<p>我做了八年的帳。帳上的每一筆數字，都應該有單據，也應該能找到去向。</p>
+<p>半年前，文姐要我每個月把五十萬記成設備維修和客戶招待。我答應了。第二個月，我弟弟簽賭欠了一百五十萬，跪在我家門口。我開始在文姐的五十萬旁邊，多做一筆三十萬的假支出。</p>
+<p>我連續拿了五個月，剛好一百五十萬，全部拿去還我弟弟的債。第三個抽屜裡只有文姐的三百萬，我自己的錢早就離開場子。</p>
+<p>這個月的缺口是三百零二萬四千。文姐五十萬，我三十萬，剩下的兩百二十二萬四千，都經過 Jerry 的欠款帳。</p>
+<p>我知道答案。可是答案說出口，第一個需要承認做假帳的人，就是我。</p>
+<p class="mdir">【深呼吸。】</p>
+<p>我以前覺得，只要帳面最後能對上，事情就算處理完。現在我知道，假帳可以對上，事情不會因此消失。</p>
 </div>
-
 <h2>第五場〈休庭〉</h2>
-
-<p class="line nar"><span class="who">旁白</span>凌晨三點。董伯說，抽根菸，休息十分鐘。<span class="cue">（停頓）</span>十分鐘。夠人講很多不能在桌上講的話。</p>
-
-<p class="dir">△ 帳房角落。文姐把秀秀拉進來，關門聲。</p>
-
-<p class="line"><span class="who">文姐</span><span class="cue">（壓到最低）</span>秀秀。聽我講，不要問。今天晚上，不管誰講什麼，第三個抽屜不能開。誰要對帳，妳就拖。底單不在、要客人簽名、影本會冤枉人，什麼理由都好。</p>
-<p class="line"><span class="who">秀秀</span>姐——那不是重點。姐，妳聽我講，缺口不是我們的八十萬撐出來的，我從賒帳看得出來，是——</p>
-<p class="line"><span class="who">文姐</span><span class="cue">（打斷）</span>我知道是誰。<span class="cue">（停頓）</span>我今晚會把他交出去。但是順序不能亂：先有別人，才沒有我們。懂嗎？</p>
-<p class="line"><span class="who">秀秀</span><span class="cue">（看著她，很久）</span>……姐。我們以前不是這種人。</p>
-<p class="line"><span class="who">文姐</span><span class="cue">（開門前，停住）</span>以前？<span class="cue">（很輕）</span>秀秀，「以前」是有錢人才用得起的東西。</p>
-
-<p class="dir">△ 場景切換：後巷，打火機的聲音。</p>
-
-<p class="line"><span class="who">Jerry</span>豹哥，借個火。<span class="cue">（點菸）</span>裡面那個西裝的，來者不善喔。</p>
-<p class="line"><span class="who">阿豹</span><span class="cue">（不看他）</span>你少跟我裝熟。</p>
-<p class="line"><span class="who">Jerry</span><span class="cue">（笑）</span>欸，怎麼這樣講話。大家兄弟欸。<span class="cue">（吐煙）</span>我跟你說，等一下進去，不管那個西裝的問什麼，你幫我講兩句話。就講，Jerry 拉客拉得很辛苦，賒帳都是為了場子——</p>
-<p class="line"><span class="who">阿豹</span><span class="cue">（轉頭瞪他）</span>為了場子？幹你娘，錢是不是你拿的？</p>
-<p class="line"><span class="who">Jerry</span><span class="cue">（不慌，慢慢地）</span>豹哥。你先想清楚一件事。<span class="cue">（停頓）</span>我進去了，八十萬的借據就在我抽屜。警察順著借據查，查到的不是錢——是一個躺在醫院、下半身不會動的人。<span class="cue">（湊近）</span>到時候你跟我，一人一間，隔壁牢房，天天見面。大家兄弟，多好。</p>
-<p class="line"><span class="who">阿豹</span><span class="cue">（拳頭捏到響）</span>……幹。</p>
-<p class="line"><span class="who">Jerry</span><span class="cue">（拍拍他的臉頰）</span>乖。進去了，嘴巴放聰明一點。</p>
-
-<p class="dir">△ 場景切換：主桌邊，董伯獨自坐著，Nana 端茶過來。</p>
-
-<p class="line"><span class="who">Nana</span>董伯，外面風大，喝口熱的。</p>
-<p class="line"><span class="who">董伯</span><span class="cue">（接過，不喝）</span>妳叫 Nana？做幾年了？</p>
-<p class="line"><span class="who">Nana</span>五年了，董伯。</p>
-<p class="line"><span class="who">董伯</span>五年。<span class="cue">（看著她）</span>五年的公關，眼睛不會像妳這麼利。倒酒的看客人的手，妳看人的眼睛。<span class="cue">（停頓）</span>妳以前做什麼的？</p>
-<p class="line"><span class="who">Nana</span><span class="cue">（笑得很穩）</span>看眼睛才知道客人想喝什麼啊，董伯。這行做久了，都嘛這樣。</p>
-<p class="line"><span class="who">董伯</span><span class="cue">（喝了一口茶，很慢）</span>……嗯。這行做久了。<span class="cue">（放下杯子）</span>小姑娘，我七十三歲了。我這輩子看過兩種眼睛特別利的人：一種是想從場子拿走什麼的。一種——是欠了外面什麼的。<span class="cue">（站起來，走前，輕輕地）</span>妳自己知道妳是哪一種就好。</p>
-<p class="line"><span class="who">Nana</span><span class="cue">（一個人，端著茶盤，手在抖）</span>……<span class="cue">（很輕）</span>幹。</p>
-
-<p class="dir">△ 全員靜音三秒，換場。</p>
-
+<p class="line nar"><span class="who">旁白</span>凌晨三點。董伯說，休息十分鐘。十分鐘不夠任何人離開，卻足夠每個人找一個角落，要求別人替自己保密。</p>
+<h3>場景一：帳房</h3>
+<p class="dir">【音效】文姐與秀秀快步進入帳房，門關上。外面的聲音隔著門變得模糊。</p>
+<p class="line"><span class="who">文姐</span><span class="cue">（壓低聲音）</span>秀秀，聽清楚。第三個抽屜不能開。Kevin 要底單，就說底單需要客人簽名；他要影本，就說影本不能證明現金去向。先把時間拖到天亮。</p>
+<p class="line"><span class="who">秀秀</span>姐，第三個抽屜不是主要問題。這個月我們拿的是八十萬，Jerry 拿的是兩百二十二萬四千。</p>
+<p class="line"><span class="who">文姐</span>我知道。</p>
+<p class="line"><span class="who">秀秀</span>妳打算把 Jerry 交出去？</p>
+<p class="line"><span class="who">文姐</span>是。回到桌上，我會先說他的名字。Jerry 的事情處理完，其他帳才有談的空間。</p>
+<p class="line"><span class="who">秀秀</span>其他帳包括我的三十萬，也包括妳的五十萬。</p>
+<p class="line"><span class="who">文姐</span>先保住場子。場子還在，事情才有處理的可能。</p>
+<p class="line"><span class="who">秀秀</span>前年以前，我聽到這句話會相信。</p>
+<p class="line"><span class="who">文姐</span>妳現在不相信？</p>
+<p class="line"><span class="who">秀秀</span>我不知道。姐，妳當初要我做假帳，說只有半年。現在半年到了，Kevin 也坐在外面。場子可能保不住，我們的帳也不會自己消失。</p>
+<p class="line"><span class="who">文姐</span>秀秀，我沒有時間聽妳害怕。</p>
+<p class="line"><span class="who">秀秀</span>我不是只在害怕。我在決定，回到桌上以後要不要把真正的帳本拿出來。</p>
+<p class="dir">【停頓兩秒。】</p>
+<p class="line"><span class="who">文姐</span>妳欠我的。</p>
+<p class="line"><span class="who">秀秀</span>我知道。所以我替妳做了半年假帳。這筆人情已經讓我們兩個都變成現在這樣。</p>
+<p class="dir">【外面有人敲門。】</p>
+<p class="line"><span class="who">文姐</span>帳本留在這裡。</p>
+<p class="line"><span class="who">秀秀</span>我會自己決定要不要交出帳本。</p>
+<p class="dir">【音效】秀秀先開門離開。文姐留在帳房，抽屜鑰匙在她手裡輕響。</p>
+<h3>場景二：後巷</h3>
+<p class="dir">【環境音】鐵門內側的小門打開，巷外有機車聲。Jerry 點了兩次打火機才點著菸。</p>
+<p class="line"><span class="who">Jerry</span>豹哥，借火。裡面那個 Kevin 不是來幫忙的。他想接手。</p>
+<p class="line"><span class="who">阿豹</span>你少跟我套交情。</p>
+<p class="line"><span class="who">Jerry</span>大家做這麼久，當然有交情。等一下回去，不管他問什麼，你幫我說兩句。就說欠款是為了留住客人，我帶客人也很辛苦——</p>
+<p class="line"><span class="who">阿豹</span>錢是不是你拿的？</p>
+<p class="dir">【停頓一秒。Jerry 吐出一口煙。】</p>
+<p class="line"><span class="who">Jerry</span>豹哥，你先想清楚。我進警察局，八十萬借據一定會被查到。借據後面，是吳董躺在醫院的事。</p>
+<p class="line cont">到時候我說出是誰借錢、錢拿去做什麼，你也會被查。你要不要坐牢，不是我決定，是你剛才那句話決定。</p>
+<p class="line"><span class="who">阿豹</span>你拿那件事威脅我？</p>
+<p class="line"><span class="who">Jerry</span>我是在提醒你。我們都需要對方閉嘴。這才叫自己人。</p>
+<p class="dir">【阿豹一拳打在牆上。】</p>
+<p class="line"><span class="who">阿豹</span>你最好祈禱今晚沒有人找到證據。</p>
+<p class="line"><span class="who">Jerry</span>證據不會自己說話。人會。你不要說，我也不說。</p>
+<h3>場景三：主桌</h3>
+<p class="dir">【音效】Nana 把茶盤放到董伯面前。杯碟輕響。</p>
+<p class="line"><span class="who">Nana</span>董伯，您還沒有喝水。至少喝一口。</p>
+<p class="line"><span class="who">董伯</span>妳叫 Nana？</p>
+<p class="line"><span class="who">Nana</span>是。做五年了。</p>
+<p class="line"><span class="who">董伯</span>五年。妳剛才每一次有人提高音量，都會在十秒內找理由讓另一個人離開桌邊。這不是普通公關會注意的事。</p>
+<p class="dir">【Nana 倒茶。茶壺口碰到杯沿一下。】</p>
+<p class="line"><span class="who">Nana</span>場子出事，公關也沒有工作。當然要注意。</p>
+<p class="line"><span class="who">董伯</span>妳以前做什麼？</p>
+<p class="line"><span class="who">Nana</span>酒家、餐廳、會館。都是照顧客人的工作。</p>
+<p class="line"><span class="who">董伯</span>每個星期三下午，也是在照顧客人？</p>
+<p class="dir">【茶碟輕微顫動。】</p>
+<p class="line"><span class="who">Nana</span>去看我母親。安養院星期三下午開放家屬探視。</p>
+<p class="line"><span class="who">董伯</span>我沒有問妳母親。</p>
+<p class="dir">【停頓兩秒。】</p>
+<p class="line"><span class="who">Nana</span>那董伯想問什麼？</p>
+<p class="line"><span class="who">董伯</span>我想知道，今晚如果有人要動手，妳會站在哪一邊。</p>
+<p class="line"><span class="who">Nana</span>我會站在不讓人死的那一邊。</p>
+<p class="line"><span class="who">董伯</span>這個答案聽起來很好。問題是，場子裡每個人都說自己在救人。</p>
+<p class="dir">【董伯拿起杯子，喝一口。】</p>
+<p class="line cont">妳自己知道，妳每星期三見的人是誰就好。</p>
+<p class="dir">【董伯起身，手杖敲地，腳步離開。】</p>
+<p class="line"><span class="who">Nana</span><span class="cue">（等腳步遠去後，低聲）</span>幹。他知道多少？</p>
+<p class="dir">【她把茶盤放回桌上，杯碟仍輕輕顫動。】</p>
 <h2>第六場〈審〉</h2>
-
-<p class="dir">△ 全員圍桌。Kevin 站著，三份文件攤在桌上。</p>
-
-<p class="line"><span class="who">Kevin</span>好，休息夠了。上課。三份文件，都是我整理的，字很大，不識字的我可以唸。<span class="cue">（拿起第一份）</span>本月賒帳總額，是前三個月平均的四倍。經手人欄位，我數過了，八成七寫著同一個名字——Jerry。</p>
-<p class="line"><span class="who">Jerry</span>等等、等等，賒帳多代表生意好啊！這要看你怎麼解讀嘛——你們美國人不是最愛講那個什麼 leverage——</p>
-<p class="line"><span class="who">Kevin</span>Leverage？<span class="cue">（笑）</span>你確定要跟我用這個字？好。那請你解釋，為什麼賒帳的客人七個裡面有五個，帳齡超過六十天，一毛都沒有回收？你的 leverage，是槓桿，還是漏斗？</p>
-<p class="line"><span class="who">Jerry</span>客人有客人的節奏！收錢是帳房的事，我負責把人帶進來——</p>
-<p class="line"><span class="who">Kevin</span>好，帳房。<span class="cue">（轉向秀秀）</span>秀秀小姐。八年資歷。賒帳暴增四倍，妳的月結報告一個字都沒有提。是沒看到，還是不想看到？</p>
-<p class="line"><span class="who">秀秀</span><span class="cue">（很穩）</span>我提過，口頭的，上個月月會。書面為什麼沒寫？賒帳要滿六十天才轉催收，八年來都是這樣做的。要改，可以，白紙黑字發一張通知下來。</p>
-<p class="line"><span class="who">Kevin</span><span class="cue">（盯著她兩秒）</span>……程序講得很熟。程序講得越熟的人，越知道程序的洞在哪裡。<span class="cue">（不追了，轉向文姐）</span>第二份。監視器調閱紀錄。文姐，本月六次，深夜獨自進出帳房，每一次停留超過二十分鐘。</p>
-
-<p class="dir">△ 全場安靜。</p>
-
-<p class="line"><span class="who">文姐</span>我巡我自己的帳房，需要跟誰報備嗎？</p>
-<p class="line"><span class="who">董伯</span><span class="cue">（很慢）</span>不用報備。我只是在想，帳房裡有什麼東西，值得妳半夜一個人，看二十分鐘。</p>
-<p class="line"><span class="who">文姐</span><span class="cue">（頓了一下）</span>數字。我的數字。</p>
-<p class="line"><span class="who">董伯</span><span class="cue">（看著她，很久）</span>……好。妳的數字。</p>
-
-<p class="dir">△ 這個停頓要長到讓人不舒服。</p>
-
-<p class="line"><span class="who">Kevin</span><span class="cue">（翻到夾頁）</span>順便，一個小發現。排班表。Nana 小姐，妳每個禮拜三下午，固定外出兩個小時，五年來風雨無阻。看牙嗎？五年？</p>
-<p class="line"><span class="who">Nana</span><span class="cue">（心跳漏一拍，臉上是笑）</span>看我媽。禮拜三下午是安養院的家屬時間。Kevin 先生要的話，我可以下次幫你跟院長要一張簽到表？</p>
-<p class="line"><span class="who">Kevin</span><span class="cue">（看她一眼）</span>……不用。<span class="cue">（放下）</span>第三份。通話紀錄。這位剁手先生——阿豹是吧——過去兩個禮拜，打給 Jerry 十一通電話。最長的一通，四十分鐘。<span class="cue">（放下文件）</span>兩個大男人，半夜講四十分鐘電話。聊什麼？</p>
-<p class="line"><span class="who">阿豹</span><span class="cue">（沉默）</span></p>
-<p class="line"><span class="who">Jerry</span><span class="cue">（搶著）</span>兄弟之間講講電話這也要查？哈、哈哈……豹哥你說是不是——上個月那件事都處理好了嘛，對不對？那筆錢……都送到了嘛，對不對？</p>
-<p class="line"><span class="who">阿豹</span><span class="cue">（拳頭捏緊，很低）</span>……幹。對。錢的事，慢慢查。慢慢查。</p>
-<p class="line"><span class="who">Nana</span><span class="cue">（插進來）</span>好了啦，大家都是自己人，話講開就好。刀子拿出來，就收不回去了。小春！熱水！</p>
-
-<p class="dir">△ 小春端著茶盤上，氣氛對她毫無作用。</p>
-
-<p class="line"><span class="who">小春</span>來了來了！哇，大家怎麼都不講話，開會喔？我們家開會也是這樣，都我爸一個人講。<span class="cue">（一杯一杯放）</span>董伯的茶、文姐的、Kevin 哥的——Kevin 哥你這套西裝是訂做的吼，跟我爸同一家嗎？——Jerry 哥你的手怎麼在抖？</p>
-<p class="line"><span class="who">Jerry</span><span class="cue">（僵硬地笑）</span>沒有，冷。</p>
-<p class="line"><span class="who">小春</span>騙人，這裡超熱的。<span class="cue">（想到什麼，很開心）</span>啊！Jerry 哥！講到手我一直想跟你講——上禮拜三我來面試那天，在後巷看到你數錢欸！好大一疊喔！你還掉了一沓，我幫你撿的，都是千元的！<span class="cue">（對全場，很興奮）</span>你們這裡薪水用現金發喔？好復古喔！我可不可以也領現金？感覺好酷——</p>
-
-<p class="dir">△ 死寂。</p>
-
-<p class="line"><span class="who">Jerry</span>……小妹妹，妳認錯人了。</p>
-<p class="line"><span class="who">小春</span>沒有啊，就是你啊。你那天穿這件外套，我還記得，因為很好看，我還想說要跟我爸講也買一件——<span class="cue">（看看四周）</span>……怎麼了嗎？我講錯什麼了嗎？</p>
-<p class="line"><span class="who">Kevin</span><span class="cue">（慢慢地，享受地）</span>禮拜三。<span class="cue">（翻文件）</span>本月最大一筆賒帳入帳，禮拜二，六十八萬。<span class="cue">（抬頭）</span>Jerry。後巷。現金。隔天。要不要重新想一個「解讀」給我們聽？</p>
-<p class="line"><span class="who">秀秀</span><span class="cue">（終於開口，聲音很平）</span>Jerry。你上個月經手的賒帳，要不要自己講一個數字給大家聽？</p>
-<p class="line"><span class="who">Jerry</span><span class="cue">（環顧全場，笑容撐不住）</span>……你們，你們現在是在會審我喔？幹，一個端茶的講兩句你們就——</p>
-<p class="line"><span class="who">董伯</span><span class="cue">（敲了兩下桌子）</span>夠了。</p>
-
-<p class="dir">△ 全場安靜。</p>
-
-<p class="line"><span class="who">董伯</span>紀錄唸了，話也講了。我聽了半天，聽到的都是「不是我」。<span class="cue">（站起來）</span>我出去走走。回來之後——我要一個名字。</p>
-
-<p class="dir">△ 全員靜音三秒，換場。</p>
-
+<p class="dir">【環境音】眾人重新坐回主桌。牆上時鐘清楚作響。Kevin 將三份文件依序放在桌上。</p>
+<p class="line"><span class="who">Kevin</span>休息結束。三份資料。第一份，本月欠款明細。</p>
+<p class="line cont">本月欠款總額，是前三個月平均值的四倍。經手人欄位裡，百分之八十七寫著同一個名字：Jerry。</p>
+<p class="line"><span class="who">Jerry</span>欠款多，代表客人願意來。生意擴大，本來就會有風險。你在美國念會計，應該知道 leverage——</p>
+<p class="line"><span class="who">Kevin</span>Leverage 是使用借入資金增加報酬，不是讓七名欠款客人裡有五名超過六十天沒有還錢。五個人，一毛都沒有收回。這不是策略，是沒有收款。</p>
+<p class="line"><span class="who">Jerry</span>收款是帳房的工作。我負責把客人帶進來。</p>
+<p class="line"><span class="who">Kevin</span>好。秀秀小姐，八年帳房。欠款增加四倍，月結報告沒有記錄原因。妳沒有看到，還是刻意沒有寫？</p>
+<p class="line"><span class="who">秀秀</span>我在上個月的月會口頭報告過。場子的規定是欠款滿六十天才列入催收。要改規定，可以發書面通知。規定沒有改以前，我照原本程序做。</p>
+<p class="line"><span class="who">Kevin</span>程序沒有違反，不代表帳務沒有問題。</p>
+<p class="dir">【Kevin 把第二份文件推到桌面中央。】</p>
+<p class="line cont">第二份，帳房門口的監視器調閱紀錄。文姐，本月六次，在凌晨獨自進帳房，每次停留超過二十分鐘。</p>
+<p class="line"><span class="who">文姐</span>我管理自己的帳房，不需要另外申請。</p>
+<p class="line"><span class="who">董伯</span>不需要。我只是想聽妳說，半夜進去做什麼。</p>
+<p class="line"><span class="who">文姐</span>核對帳。</p>
+<p class="line"><span class="who">董伯</span>核對哪一筆？</p>
+<p class="dir">【停頓三秒。】</p>
+<p class="line"><span class="who">文姐</span>場子全部的帳。</p>
+<p class="line"><span class="who">董伯</span>好。</p>
+<p class="dir">【Kevin 翻到下一頁。】</p>
+<p class="line"><span class="who">Kevin</span>同一份排班表還有一件事。Nana 小姐，每星期三下午固定外出兩小時，連續五年。</p>
+<p class="line"><span class="who">Nana</span>去看我母親。星期三是安養院家屬探視時間。</p>
+<p class="line"><span class="who">Kevin</span>五年裡沒有任何一次改時間？</p>
+<p class="line"><span class="who">Nana</span>老人家生活規律。探視時間比場子規律。</p>
+<p class="line"><span class="who">Kevin</span>可以提供紀錄嗎？</p>
+<p class="line"><span class="who">Nana</span>可以。安養院有簽到簿。</p>
+<p class="line"><span class="who">Kevin</span>簽到紀錄先不用提供。</p>
+<p class="dir">【Kevin 放下第二份，拿起第三份。】</p>
+<p class="line cont">第三份，電話紀錄。阿豹，過去兩個星期打給 Jerry 十一次，最長四十分鐘。你們在談什麼？</p>
+<p class="dir">【阿豹沒有回答。椅子發出輕微擠壓聲。】</p>
+<p class="line"><span class="who">Jerry</span>兄弟之間通電話也要查？上個月的事情處理完，我們確認一下錢有沒有送到。豹哥，對不對？八十萬都送到了，對不對？</p>
+<p class="line"><span class="who">阿豹</span>……對。那筆錢送到了。其他帳務慢慢查。</p>
+<p class="line"><span class="who">Nana</span>大家先停一下。文件可以一份一份看，不需要同時把所有事情混在一起。小春，送熱水進來。</p>
+<p class="dir">【音效】小春的腳步靠近，茶盤與杯子輕響。</p>
+<p class="line"><span class="who">小春</span>熱水來了。你們真的在開會喔？我們家公司開會也是這樣，桌上很多紙，最後都我爸一個人說話。</p>
+<p class="line cont">董伯的茶、文姐的水、Kevin 哥的黑咖啡——Kevin 哥，你這套西裝是訂做的嗎？跟我爸常穿的那家好像。</p>
+<p class="dir">【小春走到 Jerry 身邊。杯碟連續輕響。】</p>
+<p class="line cont">Jerry 哥，你的杯子一直在響。你的手在抖嗎？</p>
+<p class="line"><span class="who">Jerry</span>沒有。桌子不平。</p>
+<p class="line"><span class="who">小春</span>桌子沒有晃啊。</p>
+<p class="dir">【她忽然想起來。】</p>
+<p class="line cont">對了，講到手，我一直想跟你說。上星期三我來面試，在後巷看到你數一大疊錢。你還掉了一疊，我幫你撿起來，都是一千塊。</p>
+<p class="line cont">你們的薪水都發現金嗎？我也可以領現金嗎？感覺很像電影。</p>
+<p class="dir">【所有聲音停止。只剩時鐘。】</p>
+<p class="line"><span class="who">Jerry</span>小妹妹，妳認錯人了。</p>
+<p class="line"><span class="who">小春</span>沒有，就是你。你那天也穿這件外套，袖口有一條紅線。我還想問你在哪裡買的。</p>
+<p class="dir">【小春的語氣慢下來。】</p>
+<p class="line cont">怎麼了？我不能講嗎？</p>
+<p class="line"><span class="who">Kevin</span><span class="cue">（翻文件）</span>星期二，本月最大一筆欠款入帳，六十八萬。星期三，Jerry 在後巷拿著大量現金。</p>
+<p class="line cont">Jerry，這筆錢需要一個合理說明。</p>
+<p class="line"><span class="who">秀秀</span>Jerry，你上個月經手的欠款，總共有多少？你自己說。</p>
+<p class="line"><span class="who">Jerry</span>妳現在問我？妳是帳房，數字在妳手裡。妳要說多少都可以。你們因為一個剛來一天的小女孩講幾句，就要把事情算在我頭上？</p>
+<p class="dir">【董伯用指節敲桌兩下。】</p>
+<p class="line"><span class="who">董伯</span>夠了。</p>
+<p class="dir">【停頓兩秒。】</p>
+<p class="line cont">資料已經念完。你們每個人都在解釋，沒有人承認。</p>
+<p class="line cont">我出去走一圈。回來以後，我要聽到名字。不是猜測，是有人願意負責的名字。</p>
+<p class="dir">【音效】董伯拿起手杖，鐵門內側小門打開。腳步離開，門關上。</p>
 <h2>幕間獨白三</h2>
-
-<p class="dir">△ 阿豹獨白，抽菸。</p>
-
-<div class="mono">
-  <div class="mname">阿豹・獨白</div>
-  <p>我十七歲跟文姐。人家問我在哪裡上班，我說我顧一間店。顧了二十二年，沒有讓店裡丟過一塊錢。我的工作很簡單：有人欠錢，我去提醒他；有人鬧事，我請他出去。手段？幹，講手段就難聽了，我們這行叫分寸。二十二年，我的分寸只失手過——<span class="cue">（長長的停頓，菸的聲音）</span>一次。就一次。建材行的吳董，欠六十萬，躲兩個禮拜，嘴又賤。我手重了。他現在躺在醫院，下半身不會動。<span class="cue">（停頓）</span>八十萬和解金，透過中間人送過去，吳家收了，以為是「店家的意思」。他們不知道是誰動的手。<span class="cue">（停頓）</span>今天新來那個妹妹，姓吳。建材行。爸爸出意外。<span class="cue">（把菸掐熄）</span>她倒茶給我的時候會笑。她每笑一次，我就想去死一次。</p>
+<p class="dir">【環境音】後巷。阿豹點菸，吸了一口，許久沒有吐氣。</p>
+<div class="mono"><div class="mname">阿豹・獨白</div>
+<p>我十七歲跟文姐。別人問我做什麼，我說我顧店。顧了二十二年，沒有讓場子少過一塊錢。</p>
+<p>我的工作就是兩件事。有人欠錢，我去找他；有人鬧事，我讓他離開。場子要我控制力道，我一直以為自己做得到。</p>
+<p>上個月，我去找開建材行的吳董。他欠六十萬，兩個星期沒有出面。他喝酒，也罵人。我動手以後沒有停下來。</p>
+<p>他現在躺在醫院，下半身不能動。</p>
+<p>我跟 Jerry 借八十萬，透過中間人送給吳家。吳家以為是場子賠的，不知道動手的人是我。</p>
+<p>今天新來的女孩姓吳。父親開建材行，上個月住院。她替我倒茶，還說我是好人。</p>
+<p class="mdir">【阿豹把菸壓進菸灰缸。】</p>
+<p>她不知道。文姐也不知道。我一直告訴自己，不說是為了保住場子。其實是不敢承認自己做了什麼。我做了連自己都不願意面對的事。</p>
 </div>
-
-<p class="dir">△ 接文姐獨白。</p>
-
-<div class="mono">
-  <div class="mname">文姐・獨白</div>
-  <p>十五年前，這裡是一間會漏水的鐵皮屋。現在你們站的每一塊地板，都是我一塊一塊換上去的。<span class="cue">（停頓）</span>剛剛 Kevin 唸監視器紀錄的時候，董伯看著我。我知道那個眼神。他不是在問錢。他是在問我敢不敢講。<span class="cue">（停頓）</span>五十萬，一個月，抽了六個月。那不是偷。那是我十五年的工錢，是我這種人唯一能替自己準備的退路。你們懂嗎？男人的場子垮了，叫東山再起；女人的場子垮了，叫下場。<span class="cue">（整理衣領）</span>我不會講的。他要的實話太貴了。我付不起。</p>
+<p class="dir">【轉場】帳房裡，文姐打開第三個抽屜。鈔票紙張被輕輕翻動。</p>
+<div class="mono"><div class="mname">文姐・獨白</div>
+<p>十五年前，這裡是一間漏水的鐵皮屋。桌子是二手的，冷氣開半小時就停。現在這裡每一張桌、每一名客人、每一條規矩，都是我留下來的。</p>
+<p>前年過年，我站在樓梯口，聽見董伯對別人說：「場子是我的，文的只是幫我顧。」</p>
+<p>那句話以後，我每個月拿五十萬。六個月，三百萬。都在第三個抽屜。</p>
+<p>我知道董伯已經知道。他今晚問的不是錢，是我敢不敢在他面前承認。</p>
+<p>可是我也知道，只要我承認自己拿錢，他就可以說，這十五年都是他給我的。我不承認自己拿錢，至少還能告訴自己，那三百萬是我替自己留下的工錢。</p>
+<p>Kevin 坐在外面，等我失去位置。秀秀拿著真正的帳本，等我說一句她還能相信的話。</p>
+<p>我原本以為，保住場子就是保住所有人。現在我不知道，場子還剩下什麼可以保。</p>
 </div>
-
 <h2>第七場〈攤牌〉</h2>
-
-<p class="dir">△ 牆上的鐘指到四點。菸灰缸滿了，沒有人去倒。</p>
-
-<p class="line"><span class="who">董伯</span>聊夠了。我七十三歲，我的耐性跟我剩下的時間一樣少。</p>
-<p class="line"><span class="who">文姐</span>董伯，再給我十分鐘。十分鐘，我給您一個人。</p>
-<p class="line"><span class="who">董伯</span>不是妳給我。是你們，每一個人，都要給我一個名字。</p>
-<p class="line"><span class="who">Kevin</span>需要投票嗎？我覺得不用。<span class="cue">（看著 Jerry）</span>在座應該只有一位，禮拜三會在後巷數六十八萬現金。</p>
-<p class="line"><span class="who">Jerry</span><span class="cue">（站起來，最後的嘴炮）</span>好！好好好！你們要名字是不是？我給你們一個名字！<span class="cue">（指著阿豹）</span>阿豹！你們要不要問問阿豹，上個月在後巷把一個客人打到躺進醫院的是誰？打到人家下半身不能動的是誰？跟我借八十萬送和解金封口的又是誰？你們在這裡查我的賒帳，你們知不知道這個場子上個月差一點出人命——</p>
-<p class="line"><span class="who">文姐</span><span class="cue">（愣住）</span>……阿豹？</p>
-<p class="line"><span class="who">Jerry</span>對！問他啊！那個人姓吳！開建材行的！現在還躺在——</p>
-
-<p class="dir">△ 茶盤落地的聲音。小春站在門口。</p>
-
-<p class="line"><span class="who">小春</span><span class="cue">（很小聲）</span>……姓吳？開建材行？</p>
-
-<p class="dir">△ 全場凍結。</p>
-
-<p class="line"><span class="who">小春</span>Jerry 哥。你再講一次。上個月，被打的那個人……姓吳，開建材行。<span class="cue">（一步一步走進來）</span>我爸就是開建材行的。我爸上個月「出意外」。我媽說是喝酒跌倒。可是醫生說那個傷不像跌倒。我媽不讓我問。<span class="cue">（環顧全場，沒有人看她）</span>為什麼都不講話？<span class="cue">（轉向阿豹，聲音開始抖）</span>豹哥。豹哥你看我。你今天下午聽到我姓吳的時候，你的臉——我那時候還想說你是不是不舒服——<span class="cue">（停頓）</span>是你嗎？</p>
-
-<p class="dir">△ 很長的安靜。</p>
-
-<p class="line"><span class="who">阿豹</span><span class="cue">（站起來。把椅子擺正，這個動作要很慢。然後，全劇最低的音量）</span>……是我。</p>
-<p class="line"><span class="who">小春</span><span class="cue">（崩潰前的平靜）</span>為什麼？</p>
-<p class="line"><span class="who">阿豹</span>他欠了場子六十萬，躲了兩個禮拜。我去提醒他。他嘴賤。我手重了。<span class="cue">（停頓）</span>沒有理由。理由都是講給自己聽的。是我把妳爸打成那樣的。</p>
-<p class="line"><span class="who">小春</span><span class="cue">（眼淚下來，聲音還是很輕）</span>……我們家不缺那六十萬。你知道嗎？我爸的公司一年做好幾億。他就是愛玩牌。六十萬他可能只是忘記了。<span class="cue">（停頓）</span>你們為了一筆他忘記的錢，把他打到不能走路。</p>
-<p class="line"><span class="who">阿豹</span><span class="cue">（承受著，沒有辯解）</span>……對。</p>
-<p class="line"><span class="who">文姐</span><span class="cue">（第一次聽到全部，聲音啞掉）</span>阿豹……你為什麼不跟我講？二十二年，你什麼事不跟我講？</p>
-<p class="line"><span class="who">阿豹</span><span class="cue">（不看她）</span>妳的場子十五年沒出過事。我不能讓它出在我手上。<span class="cue">（面向董伯，跪下去的聲音）</span>董伯。吳董是您的親戚，我剛剛才知道。這件事您要怎麼處置我，我都收。</p>
-<p class="line"><span class="who">董伯</span><span class="cue">（很久很久）</span>……你早知道我知道？</p>
-<p class="line"><span class="who">阿豹</span><span class="cue">（抬頭）</span>……您知道？</p>
-<p class="line"><span class="who">董伯</span>我上個月就知道了。我在等你自己講。<span class="cue">（喝一口茶）</span>你等到今天，是被人逼著講的。<span class="cue">（視線移向 Jerry）</span>而且是被這個東西逼的。</p>
-<p class="line"><span class="who">Jerry</span>董伯，我——</p>
-<p class="line"><span class="who">董伯</span><span class="cue">（不看他）</span>Jerry。三百萬裡面，你的兩百二十萬。外面錢莊的四百萬。後巷的六十八萬。我的人下午就查完了。我坐在這裡一整晚，是想看你有沒有種自己講。<span class="cue">（停頓）</span>你沒有。你不但沒有，你還拿別人的命債墊背。</p>
-<p class="line"><span class="who">Nana</span><span class="cue">（跪著撿茶杯碎片，抬頭，抓住唯一的空隙）</span>董伯。殺人是一秒鐘的事。讓他把錢吐出來、把罪扛下去，才是十年的事。您要哪一種？</p>
-<p class="line"><span class="who">董伯</span><span class="cue">（看了 Nana 很久）</span>……妳這雙眼睛。<span class="cue">（沒有再說下去。站起來）</span>今晚的事，總要有人扛。Jerry——天亮，警察會來。場子這十五年掛得上號的帳，你一個人，全部扛下去。你在裡面一天，錢莊就動不了你一天。這是我最後給你的「面子」。</p>
-<p class="line"><span class="who">Jerry</span><span class="cue">（腿軟）</span>董伯——我下個月就補回來，我每次都補回來，你問秀秀，帳、帳都是平的——</p>
-<p class="line"><span class="who">秀秀</span><span class="cue">（看著他，一個字一個字）</span>帳，從來就沒有平過。</p>
-<p class="line"><span class="who">董伯</span><span class="cue">（轉向阿豹）</span>阿豹。起來。你的手，留著。<span class="cue">（阿豹抬頭）</span>你明天親自去吳家。當著吳董的面，把今天跟小春講的話，一個字不漏，再講一次。他要告，你去坐牢；他要打，你站好給他打。剩下的，他們吳家自己決定。這是你的刑——比剁手長，比剁手痛。</p>
-<p class="line"><span class="who">阿豹</span><span class="cue">（很久）</span>……是。</p>
-<p class="line"><span class="who">董伯</span><span class="cue">（最後轉向文姐。全場最安靜的一刻）</span>文的。</p>
-<p class="line"><span class="who">文姐</span>……董伯。</p>
-<p class="line"><span class="who">董伯</span>妳半夜一個人在帳房看的那些「數字」。<span class="cue">（停頓）</span>現在。要不要講給我聽？</p>
-
-<p class="dir">△ 很長的沉默。文姐張了嘴。沒有聲音出來。</p>
-
-<p class="line"><span class="who">董伯</span><span class="cue">（點點頭，像老了十歲）</span>……我等了一晚。<span class="cue">（拿起外套）</span>場子，從明天起，Kevin 接。文的，妳交接完，就休息吧。妳累了。十五年，我看得出來。妳真的累了。</p>
-<p class="line"><span class="who">文姐</span><span class="cue">（這句話出口時她自己都知道太遲了）</span>董伯——五十萬，一個月，六個月，三百萬，都在帳房第三個抽屜，鑰匙在我——</p>
-<p class="line"><span class="who">董伯</span><span class="cue">（背對著她，停下。沒有回頭）</span>……太遲了，文的。錢，我從來沒有跟妳計較過。<span class="cue">（停頓）</span>我要的是妳看著我的眼睛講。妳剛剛，有一整個晚上。</p>
-
-<p class="dir">△ 鐵門打開的聲音。</p>
-
+<p class="dir">【環境音】凌晨四點。時鐘報時四下。菸灰缸被人碰到，裡面的菸蒂落在桌面。</p>
+<p class="dir">【音效】董伯回到主桌，手杖靠回原位。</p>
+<p class="line"><span class="who">董伯</span>時間到了。文的，先說。</p>
+<p class="dir">【停頓兩秒。】</p>
+<p class="line"><span class="who">文姐</span>Jerry。</p>
+<p class="dir">【Jerry 的椅子猛然往後。】</p>
+<p class="line"><span class="who">Jerry</span>姐，妳在說什麼？</p>
+<p class="line"><span class="who">文姐</span>這個月的欠款都經過你。小春看見你拿現金。秀秀也查到你的名字。場子的錢，最大一部分在你手上。</p>
+<p class="line"><span class="who">Jerry</span>最大一部分？所以還有別人的部分。妳現在先說我，是要把剩下的藏起來？</p>
+<p class="line"><span class="who">Kevin</span>你可以先回答自己的兩百二十二萬四千。</p>
+<p class="line"><span class="who">Jerry</span>好。你們要名字，我也有名字。</p>
+<p class="dir">【Jerry 指向阿豹，手指敲在桌面。】</p>
+<p class="line cont">阿豹。上個月在後巷把客人打到住院的人，是阿豹。那個人下半身不能動。阿豹跟我借八十萬，透過中間人送和解金。你們現在查欠款，怎麼不先問場子差點打死人的事？</p>
+<p class="line"><span class="who">文姐</span>阿豹，他說的是什麼？</p>
+<p class="line"><span class="who">Jerry</span>那個人姓吳，開建材行。現在還在醫院——</p>
+<p class="dir">【音效】茶盤摔落。杯子碎裂，熱水潑在地面。</p>
+<p class="line"><span class="who">小春</span><span class="cue">（很輕）</span>姓吳？開建材行？</p>
+<p class="dir">【沒有人回答。小春的鞋踩過碎片旁邊，緩慢靠近。】</p>
+<p class="line cont">Jerry 哥，你再說一次。上個月被打的人，姓吳，開建材行。</p>
+<p class="line cont">我爸姓吳，也開建材行。他上個月住院。我媽說他喝酒跌倒，可是醫生說，那個傷不像跌倒。</p>
+<p class="dir">【她轉向阿豹。】</p>
+<p class="line cont">豹哥，你回答我。今天我說自己姓吳，你突然不說話。你還不讓我搬重的東西，吃飯的時候又把不燙的粥給我。</p>
+<p class="line cont">是你嗎？</p>
+<p class="dir">【長時間安靜。阿豹的椅子慢慢往後移。他起身後，先把椅子推回桌下。】</p>
+<p class="line"><span class="who">阿豹</span><span class="cue">（全劇最低音量）</span>是我。</p>
+<p class="line"><span class="who">小春</span>為什麼？</p>
+<p class="line"><span class="who">阿豹</span>妳爸欠場子六十萬，兩個星期沒有出面。我去找他。他喝了酒，罵我。我先打了一拳，後來沒有停手。</p>
+<p class="line cont">沒有可以讓這件事變得合理的原因。是我把妳爸打成現在這樣。</p>
+<p class="line"><span class="who">小春</span><span class="cue">（努力維持平穩）</span>我爸欠六十萬，是他有錯。他愛賭、躲債、罵人，也都是他的錯。</p>
+<p class="line cont">可是你們可以找他還錢，可以告他，可以讓他負責。你們不能因為六十萬，拿走他走路的能力。</p>
+<p class="dir">【她開始喘不過氣。Nana 靠近，但小春立刻出聲。】</p>
+<p class="line cont">Nana 姐，先不要碰我。</p>
+<p class="dir">【Nana 停下。】</p>
+<p class="line"><span class="who">阿豹</span>對不起。</p>
+<p class="line"><span class="who">小春</span>我現在不要聽這句。</p>
+<p class="dir">【停頓。】</p>
+<p class="line"><span class="who">文姐</span>阿豹，二十二年。這種事為什麼沒有告訴我？</p>
+<p class="line"><span class="who">阿豹</span>場子十五年沒有出過這麼嚴重的事。我不敢讓事情發生在我手上以後，還要妳替我處理。</p>
+<p class="dir">【阿豹走到董伯面前，膝蓋落地。】</p>
+<p class="line cont">董伯。吳董是您的親戚，這件事要報警、要我坐牢，我都接受。</p>
+<p class="line"><span class="who">董伯</span>我上個月就知道。</p>
+<p class="line"><span class="who">阿豹</span><span class="cue">（抬高音量一點）</span>您知道？</p>
+<p class="line"><span class="who">董伯</span>我在等你主動說。你沒有說。現在是 Jerry 為了保住自己，替你說出來。</p>
+<p class="dir">【董伯轉向 Jerry。】</p>
+<p class="line cont">Jerry。三百零二萬四千裡，兩百二十二萬四千經過你的帳。外面地下錢莊的債超過四百萬。後巷的六十八萬，我的人今天下午已經找到來源。</p>
+<p class="line cont">我坐在這裡，是要看你會不會自己承認拿錢。你沒有承認。你還用阿豹打傷人的事，要求他替你隱瞞。</p>
+<p class="line"><span class="who">Jerry</span>董伯，我不是要拿走。我只是先用。我下個月有兩個客人會還錢，我可以把缺口補回去——</p>
+<p class="line"><span class="who">文姐</span>你每一次都說下個月。</p>
+<p class="line"><span class="who">Jerry</span>姐，妳也拿了。妳剛才先說我的名字，不代表妳乾淨。</p>
+<p class="dir">【音效】秀秀把一本厚帳本放到桌上，又把一把小鑰匙放在帳本旁。</p>
+<p class="line"><span class="who">秀秀</span>這是真正的帳本。</p>
+<p class="dir">【文姐迅速出聲。】</p>
+<p class="line"><span class="who">文姐</span>秀秀。</p>
+<p class="line"><span class="who">秀秀</span>我這個月拿三十萬。過去五個月，一共一百五十萬，拿去還我弟弟的簽賭債。假支出是我做的。</p>
+<p class="line cont">Jerry 這個月拿兩百二十二萬四千。剩下五十萬，帳上寫成設備維修，實際上沒有這筆支出。</p>
+<p class="line cont">第三個抽屜裡有三百萬，這把是抽屜的備用鑰匙。</p>
+<p class="dir">【長時間安靜。】</p>
+<p class="line"><span class="who">文姐</span>妳答應過我。</p>
+<p class="line"><span class="who">秀秀</span>我也答應過自己，帳要能說明錢去了哪裡。我已經違反五個月。今晚不能再繼續。</p>
+<p class="line"><span class="who">Kevin</span>所以本月三百零二萬四千，現在全部有去向了。</p>
+<p class="line"><span class="who">董伯</span>Kevin，先不要說話。</p>
+<p class="dir">【董伯朝文姐的方向慢慢推動茶杯。】</p>
+<p class="line"><span class="who">董伯</span>文的。秀秀已經說了她的部分。現在輪到妳。</p>
+<p class="line"><span class="who">文姐</span>您已經知道，還需要我說什麼？</p>
+<p class="line"><span class="who">董伯</span>我要聽妳自己說。</p>
+<p class="line"><span class="who">文姐</span>您要實話，可是這十五年，場子要做的髒事，從來不是您親口交代。阿豹替場子追債，Jerry 替場子找客人，秀秀替場子做帳，我替您把這裡顧好。每個月的錢到了，您只看數字。</p>
+<p class="line cont">現在數字少了，您才坐進來，問誰不乾淨。</p>
+<p class="line"><span class="who">董伯</span>我沒有說自己乾淨。這個場子是我的，阿豹打人、Jerry 拿錢、妳做假帳，我都有責任。</p>
+<p class="line cont">但是責任是我的，不代表妳不需要回答。</p>
+<p class="line cont">前年過年，我說「場子是我的，妳只是替我管理」。妳聽到了，對不對？</p>
+<p class="dir">【文姐沒有回答。呼吸明顯加重。】</p>
+<p class="line"><span class="who">董伯</span>我那句話傷了妳。我可以承認自己說錯話。妳開始拿錢，拿錢的事也可以談。可是妳有六個月，也有今晚一整夜，可以跟我說。</p>
+<p class="line cont">現在，我再問一次。那五十萬，是什麼？</p>
+<p class="dir">【文姐吸氣，第一次沒有說出聲音。她再吸一次。】</p>
+<p class="line"><span class="who">文姐</span>……是我拿的。</p>
+<p class="line cont">每個月五十萬，六個月，三百萬。都在第三個抽屜。</p>
+<p class="line cont">我準備離開以後自己開一個地方。我沒有打算把錢還回去。我認為那是我十五年的工錢。</p>
+<p class="dir">【停頓三秒。】</p>
+<p class="line"><span class="who">董伯</span>這句話，如果妳在我進門時說，事情還可以談。</p>
+<p class="line"><span class="who">文姐</span>所以還是太遲。</p>
+<p class="line"><span class="who">董伯</span>是。</p>
+<p class="dir">【文姐發出一聲很短的笑，沒有喜悅。】</p>
+<p class="line"><span class="who">文姐</span>至少這一次，答案是您親口說的。</p>
+<p class="line"><span class="who">董伯</span>場子從今天起停止營業。Kevin 暫時接手文件和剩餘資金，配合後續調查。不是讓他繼續開賭。</p>
+<p class="line cont">文的，妳把資料交接完，就離開。十五年已經結束了。</p>
+<p class="line"><span class="who">Kevin</span>叔叔，原本不是說——</p>
+<p class="line"><span class="who">董伯</span>我說暫時處理文件。沒有說場子屬於你。</p>
+<p class="dir">【Kevin 把話吞回去。】</p>
+<p class="line"><span class="who">董伯</span>阿豹，站起來。</p>
+<p class="dir">【阿豹起身。】</p>
+<p class="line cont">你的事情，由吳家和警察決定。明天你親自去醫院，把剛才的話對吳董再說一次。他要提告，你接受調查；他要見你，你站在他面前。不能再透過中間人，也不能再用錢代替承認。</p>
+<p class="line"><span class="who">阿豹</span>是。</p>
+<p class="line"><span class="who">董伯</span>Jerry，天亮以後，阿豹把你送到警察局。場子十五年的非法帳務，你知道多少就說多少。你在裡面，地下錢莊暫時碰不到你。這是我最後一次替你安排後路。</p>
+<p class="line"><span class="who">Jerry</span>董伯，我真的可以把缺口補回去。秀秀，妳知道我以前也補過那些缺口——</p>
+<p class="line"><span class="who">秀秀</span>以前的帳也沒有真的平。只是有人把缺口移到下一個月。</p>
+<p class="dir">【Nana 跪下撿碎杯。瓷片碰撞。】</p>
+<p class="line"><span class="who">Nana</span>董伯，今晚先不要再讓任何人動手。警察處理 Jerry，吳家的事情讓吳家決定，至少不會再多一個人住院。</p>
+<p class="line"><span class="who">董伯</span>妳一直在等警察，對不對？</p>
+<p class="dir">【Nana 停止撿碎片。】</p>
+<p class="line"><span class="who">Nana</span>我一直在等一個能讓所有人活著離開的方法。</p>
+<p class="dir">【遠方傳來警笛。起初很小，逐漸靠近。】</p>
+<p class="line"><span class="who">董伯</span><span class="cue">（第一次出現明顯疑惑）</span>這麼早？</p>
+<p class="dir">【Nana 沒有回答。】</p>
+<p class="line nar"><span class="who">旁白</span>警笛比董伯原本安排的時間更早出現在巷口。場子裡沒有人知道，是誰通知了警察。</p>
+<p class="dir">【音效】鐵門外傳來用力敲門聲。</p>
+<p class="line nar"><span class="who">警察聲音（旁白客串）</span>警察！裡面的人不要動！開門！</p>
+<p class="dir">【長時間停頓。】</p>
+<p class="line"><span class="who">文姐</span>阿豹，開門。</p>
+<p class="dir">【音效】阿豹從口袋拿出鑰匙。門鎖一層一層打開。</p>
 <h2>終場</h2>
-
-<p class="dir">△ Jerry 獨白，像站在門邊等人來帶。</p>
-
-<div class="mono">
-  <div class="mname">Jerry・獨白</div>
-  <p>我跟你們講一個做生意的道理：這個世界上沒有肥羊，只有還沒遇到我的人。<span class="cue">（笑，笑不太出來）</span>一開始是兩萬。然後二十萬。然後六十八萬。然後，兩百二十萬。我每一次拿的時候都跟自己說，下個月就補回來。我這輩子，每一次，都是這樣跟自己說的。<span class="cue">（停頓）</span>你們知道騙子最成功的作品是什麼嗎？<span class="cue">（指指自己的腦袋）</span>是這裡面那個，聽了十五年、還在點頭的傻子。<span class="cue">（外面警笛聲，遠遠的）</span>……來了。幹。<span class="cue">（整理衣領，恢復一點嘴炮的樣子）</span>欸，我跟你們講，裡面我也吃得開啦。裡面的人——也是還沒遇到我而已。</p>
+<p class="dir">【環境音】警察在外面交談，聲音模糊。Jerry 站在門邊，整理衣領。</p>
+<div class="mono"><div class="mname">Jerry・獨白</div>
+<p>我做生意有一個習慣。我先拿一點，等下一筆錢進來，再把前面的缺口補上。</p>
+<p>一開始兩萬。後來二十萬。六十八萬。最後兩百二十二萬四千。</p>
+<p>每一次拿錢，我都告訴自己，下個月一定有客人還款。只要下一筆夠大，前面的缺口就會消失。</p>
+<p>其實沒有消失。只是我不看。</p>
+<p class="mdir">【外面警察再次敲門。】</p>
+<p>騙人最麻煩的地方，不是要記得自己說過什麼。是說久了以後，連自己也開始相信。</p>
+<p class="mdir">【他深呼吸，恢復平常較快的語氣。】</p>
+<p>不過裡面也有人要做生意。我進去以後，總會找到辦法。七年很久，認識的人多一點，時間比較快。</p>
+<p class="mdir">【音效】Jerry 被帶走，手銬扣上。鐵門暫時關閉。</p>
 </div>
-
-<p class="dir">△ Jerry 下。警笛聲近了又遠。</p>
-
-<p class="line nar"><span class="who">旁白</span>那天早上七點，警察帶走了 Jerry。他頂下十五年份的帳，判了七年。聽說他在裡面組了一個互助會，會員很多。<span class="cue">（停頓）</span>第二天下午，阿豹去了吳家。他在病床前把話講完，低著頭站了四十分鐘。吳董沒有告他，也沒有打他，只講了一句話：「你以後每個禮拜，推我去復健。」<span class="cue">（停頓）</span>他推了六年。從輪椅推到助行器，從助行器推到拐杖。復健室的護士都以為他們是兄弟。<span class="cue">（停頓）</span>小春辭職了，回去唸書。她後來跟同學說，她打過一份工，在一間很奇怪的店，那裡的人都對她很好。她每次講到這裡就不講了。有些事情，她其實沒有那麼傻。<span class="cue">（停頓）</span>秀秀把弟弟的債還完，去了一間會計事務所。她現在對的帳，每一筆都是真的。她說很無聊。她說，無聊真好。<span class="cue">（停頓）</span>Kevin 接手場子的那個下午，警察上門查封。文件效期、資金來源，每一項都辦得漂漂亮亮。他接手的，是一間貼著封條的空屋。報表很乾淨。報表上，什麼都沒有了。<span class="cue">（停頓）</span>董伯隔年冬天過世。出殯那天，來的人比他想的少。文姐站在最後面，從頭到尾，沒有人敢跟她講話。她現在每天傍晚都會走過華西街。她沒有再走進那條巷子。</p>
-
-<p class="dir">△ Nana 壓軸獨白，拿著一杯酒。</p>
-
-<div class="mono brasscard">
-  <div class="mname">Nana・壓軸獨白</div>
-  <p>現在，只剩你們了。<span class="cue">（喝一口）</span>你們一定想問：警察怎麼那麼剛好，天一亮就到？<span class="cue">（笑）</span>三年前我弟弟被抓，一個姓陳的人跟我說：每個禮拜三下午，陪我喝一杯咖啡，聊聊場子，你弟弟的案子就會處理得漂亮。我喝了三年。<span class="cue">（停頓）</span>那天晚上董伯一坐下來，我就發了訊號。不是為了抓誰。是因為我知道那種晚上會怎麼結束——我看過。見血的結束。我發訊號，是要讓「查案」趕在「處刑」前面到。<span class="cue">（喝完）</span>我救不了場子。我只能救人命。<span class="cue">（停頓）</span>董伯那天晚上問我是哪一種眼睛。想從場子拿走什麼的，還是欠了外面什麼的。<span class="cue">（笑）</span>董伯，兩種都是。我拿走了場子的命，還了我弟弟的命。<span class="cue">（停頓）</span>我弟弟去年出獄了。我現在在南部一間海產店倒酒，老闆娘人很好，客人很吵。沒有祕密的日子——<span class="cue">（笑）</span>幹，還真他媽不習慣。</p>
+<p class="line nar"><span class="who">旁白</span>那天早上，警方帶走 Jerry，也查封了場子。Jerry 承認經手非法賭場帳務與侵占款項，判刑七年。聽說他在監獄裡組了一個互助會，專門教人怎麼跟家裡借錢。會員很多，借到錢的人很少。</p>
+<p class="line nar cont">第二天下午，阿豹去了醫院。他在吳董病床前把事情說完，沒有要求原諒。吳董沒有打他，也沒有立刻提告，只要求他每星期陪同復健，直到吳董不再需要。</p>
+<p class="line nar cont">阿豹去了六年。吳董從輪椅改用助行器，再改用拐杖。六年裡，吳董從來沒有叫過阿豹一聲朋友。復健室的護士以為兩人是兄弟，他們也沒有解釋。</p>
+<p class="line nar cont">小春辭去工作，回學校讀書。她很久沒有再見阿豹。有人問起第一份工作，她只說，那是一間沒有招牌的店，裡面的人對她很好，也做過很壞的事。說到這裡，她通常就停止回答。</p>
+<p class="line nar cont">秀秀交出全部帳本，承認做假帳與拿走一百五十萬。她後來在案件中獲得較輕處分，離開以後進了一間會計事務所。她說新的工作很無聊。她也說，無聊表示每一筆錢都有正常去向。</p>
+<p class="line nar cont">Kevin 接手文件的當天下午，警方貼上封條。他把資料分類得很整齊，卻沒有得到一間可以繼續經營的場子。董伯沒有再交給他新的賭場。</p>
+<p class="line nar cont">董伯隔年冬天過世。出殯那天，來的人比十五年前少。文姐站在隊伍最後面，沒有走到靈前。她後來常在傍晚經過華西街，但沒有再走進那條巷子。</p>
+<p class="dir">【停頓兩秒。杯中倒酒聲。】</p>
+<div class="mono brasscard"><div class="mname">Nana・壓軸獨白</div>
+<p>警察為什麼能那麼早到？</p>
+<p>三年前，我弟弟涉入詐騙被抓。一名姓陳的警察告訴我，每星期三下午跟他見面，提供場子的消息，我弟弟的案件就能有比較好的處理結果。</p>
+<p>我見了他三年。大部分時間，我只說客人很多、沒有打架、沒有槍。上星期，他告訴我，上面要求具體結果，不想再等。</p>
+<p>那天晚上，董伯坐下以後，我用呼叫器發出約定的訊號。我不知道警方什麼時候會來，只知道必須讓警方在有人被殺以前進門。</p>
+<p>我不是為了抓 Jerry，也不是為了幫 Kevin。我知道董伯帶人來查帳，阿豹又鎖上門。這種情況繼續下去，很容易有人動手。</p>
+<p>我沒有保住場子。我只讓那一晚沒有再多一個人受傷。</p>
+<p>董伯問我會站在哪一邊。我當時沒有完整回答。我站在我弟弟那一邊，也站在不希望阿豹殺死 Jerry 的那一邊。</p>
+<p>我弟弟後來出獄了。我現在在南部一間海產店工作，還是替客人倒酒。老闆娘說我很會看氣氛。</p>
+<p>沒有秘密的日子，一開始真的很不習慣。</p>
+<p class="mdir">【她喝完杯中的酒，把杯子放下。】</p>
+<p>現在比較習慣了。</p>
+<p class="mdir">【遠處傳來鐵門被拆除、金屬拖過地面的聲音。】</p>
 </div>
-
-<p class="dir">△ 遠處，鐵門拉下的聲音，很長。</p>
-
-<p class="line nar"><span class="who">旁白</span>華西街後面那條巷子，現在是一間停車場。偶爾有觀光客走錯路進去，會覺得那個地方安靜得有點奇怪。<span class="cue">（停頓）</span>就這樣。一間場子，十五年，三百萬，八個人。錢，後來都算清楚了。<span class="cue">（停頓）</span>人，沒有。</p>
-
-<p class="dir">△ 靜音三秒。劇終。</p>
-
+<p class="line nar"><span class="who">旁白</span>華西街後面那條巷子，後來改成停車場。偶爾有觀光客走錯路，會停一下，覺得那裡比旁邊安靜。</p>
+<p class="line nar cont">一間場子，十五年，八個人。錢的去向，最後都有紀錄。</p>
+<p class="line nar cont">人做過的事，沒有辦法全部結算。</p>
+<p class="dir">【靜音三秒。劇終。】</p>
 </div>
 </body>
 </html>
